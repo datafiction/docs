@@ -1,0 +1,68 @@
+site_name: Data Fiction
+
+
+theme:
+  name: 'material'
+  highlightjs: true
+  hljs_languages: []
+  include_homepage_in_sidebar: true
+  prev_next_buttons_location: bottom
+  navigation_depth: 4
+  titles_only: false
+  sticky_navigation: true
+  collapse_navigation: true
+ 
+ 
+  
+      
+markdown_extensions:
+  - codehilite:
+      linenums: false
+      guess_lang: false
+      use_pygments: true
+      noclasses: true
+      pygments_style: manni
+
+
+nav:
+- Home: index.md
+- Why Codes?: WhyCodes.md
+
+- Deep Learning:
+  - Neural Network : UnderConstruction.md
+  - Convolutional Neural Network: UnderConstruction.md
+  - Long Short Term Memory Network: UnderConstruction.md
+  - Recurrent Neural Network: UnderConstruction.md
+  - GAN: UnderConstruction.md
+  
+
+  
+- Rinforcement Learning:
+  - Introduction : UnderConstruction.md
+  - Lattice Model: UnderConstruction.md
+  - Driving Cab: UnderConstruction.md
+  - Policy and Framework: UnderConstruction.md
+  - DeepQ network : UnderConstruction.md
+  
+  
+
+- BigData and App:
+  - Hadoop: UnderConstruction.md
+  - Spark: UnderConstruction.md
+  - Neo4j: UnderConstruction.md
+  - MongoDB: UnderConstruction.md
+  - Node and Express: UnderConstruction.md
+  
+  
+- Blockchain:
+  - Introduction: UnderConstruction.md
+  - Bitcoin: UnderConstruction.md
+  - Etherum : UnderConstruction.md
+  
+  
+- References: References/ref.md
+ 
+ 
+ 
+ 
+ 
