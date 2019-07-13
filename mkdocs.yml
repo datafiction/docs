@@ -1,8 +1,14 @@
 site_name: Data Fiction
 
+extra_javascript: 
+    - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+
+markdown_extensions:
+    - mdx_math
+
 
 theme:
-  name: 'material'
+  name: 'rtd-dropdown'
   highlightjs: true
   hljs_languages: []
   include_homepage_in_sidebar: true
@@ -28,37 +34,33 @@ nav:
 - Home: index.md
 - Why Codes?: WhyCodes.md
 
-- Deep Learning:
-  - Neural Network : UnderConstruction.md
-  - Convolutional Neural Network: UnderConstruction.md
-  - Long Short Term Memory Network: UnderConstruction.md
-  - Recurrent Neural Network: UnderConstruction.md
-  - GAN: UnderConstruction.md
-  
 
+- Machine Learning:
+  - Boston Housing: ml/boston_housing/boston_housing.md
+  - Customer Clustering : ml/Customer_segments/customer_segments.md
+  - Finding Donors: ml/finding_donors/finding_donors.md
+  - Vehicle Detection: ml/vehicle-detection/CARND-Project-5.md
+  - Perceptron : ml/perceptron/dlnd-your-first-neural-network.md
+
+
+- Deep Learning CNN:
+  - NMIST : dl/NMIST/NMIST.md
+  - CIFT10: dl/CIFRT10/CIFR10.md
+  - Traffic Sign Detection : dl/traffic-sign/Traffic_Sign_Classifier.md
+  - Language Translator: dl/translator/dlnd_language_translation.md
+  
+  
+- Deep Learning RNN:
+  - Vanila LSTM: dl/Vanila/1.Vanila-LSTM.md
+  - Stacked LSTM: dl/stacked/2.Stacked-LSTM.md
+  - Bidirectional LSTM: dl/bidirectional/5. BiDirectional-LSTM.md
+  - Recurrent Neural Network: dl/rnn/RNN_project.md
   
 - Rinforcement Learning:
-  - Introduction : UnderConstruction.md
-  - Lattice Model: UnderConstruction.md
-  - Driving Cab: UnderConstruction.md
-  - Policy and Framework: UnderConstruction.md
-  - DeepQ network : UnderConstruction.md
-  
-  
+  - SmartCab : rl/smartcab/smartcab.md
 
-- BigData and App:
-  - Hadoop: UnderConstruction.md
-  - Spark: UnderConstruction.md
-  - Neo4j: UnderConstruction.md
-  - MongoDB: UnderConstruction.md
-  - Node and Express: UnderConstruction.md
-  
-  
-- Blockchain:
-  - Introduction: UnderConstruction.md
-  - Bitcoin: UnderConstruction.md
-  - Etherum : UnderConstruction.md
-  
+- GAN:
+  - Face Generation: dl/gan/dlnd_face_generation.md
   
 - References: References/ref.md
  

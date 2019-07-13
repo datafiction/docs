@@ -1,7 +1,27 @@
-# teachme
-Teach Me
+## Welcome to GitHub Pages
 
-### Transfer
+1. 
 ```
-scp -i key.pem -r bitnami@X.X.X.X:/home/bitnami/codes .
+pip install --upgrade pip
+```
+2. 
+```
+pip install mkdocs
+```
+3. 
+```
+pip install mkdocs-rtd-dropdown
+```
+4. 
+```
+mkdocs new my-project
+cd my-project
+```
+5. 
+```
+mkdocs serve
+```
+6. GitHub Deploy
+```
+mkdocs gh-deploy
 ```

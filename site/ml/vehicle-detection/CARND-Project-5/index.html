@@ -1,0 +1,2263 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>Vehicle Detection - Data Fiction</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Vehicle Detection";
+    var mkdocs_page_input_path = "ml/vehicle-detection/CARND-Project-5.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> Data Fiction</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="tocbase current">
+    
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../..">Home</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../WhyCodes/">Why Codes?</a>
+  </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Machine Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../boston_housing/boston_housing/">Boston Housing</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Customer_segments/customer_segments/">Customer Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../finding_donors/finding_donors/">Finding Donors</a>
+  </li>
+        
+          
+
+
+  
+    
+    <li class="navtree toctree-l2 page current">
+      <a class="current" href="./">
+        Vehicle Detection
+          <span class="toctree-expand"></span>
+      </a>
+    </li>
+    
+      
+
+  <li class="toctree-l2 current with-children">
+    <a href="#udacity-self-driving-car-nanodegree">
+      Udacity Self-Driving Car Nanodegree
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2 current">
+    <ul class="subnav-l2 current">
+    
+      
+          
+
+  <li class="toctree-l3 current with-children">
+    <a href="#carnd-vehicle-detection">
+      CarND-Vehicle-Detection
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3 current">
+    <ul class="subnav-l3 current">
+    
+      
+          
+
+  <li class="toctree-l4 current with-children">
+    <a href="#the-goals-steps-of-this-project-are-the-following">
+      The goals / steps of this project are the following:
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4 current">
+    <ul class="subnav-l4 current">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#imports">Imports</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l4">
+    <a href="#manual-vehicle-detection">
+      Manual Vehicle Detection
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#drawing-rectangles-over-an-image">Drawing rectangles over an image</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#templet-matching">Templet Matching</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#application-over-a-sample-image">Application over a sample image</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#getting-familiar-with-data">Getting familiar with Data</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l4">
+    <a href="#feature-extraction">
+      Feature Extraction
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#application-of-some-feature-extraction-techniques">Application of some feature extraction techniques</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#exploration-of-different-chanals-for-hist-feature-vecture">Exploration of different chanals for hist feature vecture</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#plot-of-concateneted-hist-feature-vector">Plot of concateneted hist feature vector</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#exploring-bin_spatial-feature-vectors">Exploring bin_spatial feature vectors</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#exploration-of-color-spaces">Exploration of color spaces</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#3-d-plot-of-color-space">3-D plot of color space</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#exploring-3d-color-space">Exploring 3D color space</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#hog-feature-visualizations">Hog feature visualizations</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#application-of-feature-normalization">Application of feature Normalization</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l4">
+    <a href="#classifier">
+      Classifier
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#extraction-of-all-required-features">Extraction of all required features</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#stacking-all-feature-to-single-vector">Stacking all feature to single vector</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#train-and-test-split">Train and test split</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#training-linear-svc">Training Linear SVC</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l5">
+    <a href="#saving-model-for-later-use">
+      Saving model for later use
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l5">
+    <ul class="subnav-l5 toc-hidden">
+    
+      
+        <li class="toctree-l6">
+          <a class="toctree-l7" href="#applying-classifier-to-an-image">Applying classifier to an image</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l4">
+    <a href="#utilities">
+      Utilities
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+          
+
+  <li class="toctree-l5 current with-children">
+    <a href="#sliding-window">
+      Sliding window
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l5 current">
+    <ul class="subnav-l5 current">
+    
+      
+        <li class="toctree-l6">
+          <a class="toctree-l7" href="#multi-scale-window">Multi scale window</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l4">
+    <a href="#vehicle-detecton-pipeline">
+      Vehicle Detecton Pipeline
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#application-of-sliding-window-search">Application of sliding window search</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#parameter-setting">Parameter setting</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l4">
+    <a href="#video-detector">
+      Video Detector
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#both-lane-and-vehicle-detection">Both lane and vehicle detection</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+
+  
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../perceptron/dlnd-your-first-neural-network/">Perceptron</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Deep Learning CNN</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/NMIST/NMIST/">NMIST</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/CIFRT10/CIFR10/">CIFT10</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/traffic-sign/Traffic_Sign_Classifier/">Traffic Sign Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/translator/dlnd_language_translation/">Language Translator</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Deep Learning RNN</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/Vanila/1.Vanila-LSTM/">Vanila LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/stacked/2.Stacked-LSTM/">Stacked LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/bidirectional/5. BiDirectional-LSTM/">Bidirectional LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/rnn/RNN_project/">Recurrent Neural Network</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Rinforcement Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../rl/smartcab/smartcab/">SmartCab</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">GAN</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/gan/dlnd_face_generation/">Face Generation</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../References/ref.md">References</a>
+  </li>
+    
+  </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">Data Fiction</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Machine Learning &raquo;</li>
+        
+      
+    
+    <li>Vehicle Detection</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="udacity-self-driving-car-nanodegree">Udacity Self-Driving Car Nanodegree</h1>
+<hr />
+<h2 id="carnd-vehicle-detection">CarND-Vehicle-Detection</h2>
+<hr />
+<p><img alt="a" src="https://camo.githubusercontent.com/5b9aa393f43d7bb9cc6277140465f5625f2dae7c/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f756461636974792d7364632f6769746875622f736869656c642d6361726e642e737667" /></p>
+<h3 id="the-goals-steps-of-this-project-are-the-following">The goals / steps of this project are the following:</h3>
+<ol>
+<li>
+<p><strong><em>Perform a Histogram of Oriented Gradients (HOG) feature extraction on a labeled training set of images and train a classifier Linear SVM classifier</em></strong></p>
+</li>
+<li>
+<p><strong><em>Optionally, you can also apply a color transform and append binned color features, as well as histograms of color, to your HOG feature vector.</em></strong></p>
+</li>
+<li>
+<p><strong><em>Note: for those first two steps don't forget to normalize your features and randomize a selection for training and testing.</em></strong></p>
+</li>
+<li>
+<p><strong><em>Implement a sliding-window technique and use your trained classifier to search for vehicles in images.
+    Run your pipeline on a video stream (start with the test_video.mp4 and later implement on full project_video.mp4) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.</em></strong></p>
+</li>
+<li>
+<p><strong><em>Estimate a bounding box for vehicles detected.</em></strong></p>
+</li>
+</ol>
+<h4 id="imports">Imports</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.image</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">mpimg</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">cv2</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">glob</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">skimage.feature</span> <span style="color: #006699; font-weight: bold">import</span> hog
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.preprocessing</span> <span style="color: #006699; font-weight: bold">import</span> StandardScaler
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.cross_validation</span> <span style="color: #006699; font-weight: bold">import</span> train_test_split
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">time</span> 
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.svm</span> <span style="color: #006699; font-weight: bold">import</span> LinearSVC
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.image</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">mpimg</span>
+<span style="color: #0099FF; font-style: italic">#import seaborn as sns</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">mpl_toolkits.mplot3d</span> <span style="color: #006699; font-weight: bold">import</span> Axes3D
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">scipy.ndimage.measurements</span> <span style="color: #006699; font-weight: bold">import</span> label
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">pickle</span>
+<span style="color: #555555">%</span>matplotlib inline
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">scipy.ndimage.measurements</span> <span style="color: #006699; font-weight: bold">import</span> label
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">collections</span> <span style="color: #006699; font-weight: bold">import</span> deque
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">moviepy.editor</span> <span style="color: #006699; font-weight: bold">import</span> VideoFileClip
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">IPython.display</span> <span style="color: #006699; font-weight: bold">import</span> HTML
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">warnings</span>
+
+<span style="color: #006699; font-weight: bold">with</span> warnings<span style="color: #555555">.</span>catch_warnings():
+    warnings<span style="color: #555555">.</span>filterwarnings(<span style="color: #CC3300">&quot;ignore&quot;</span>,category<span style="color: #555555">=</span><span style="color: #CC0000; font-weight: bold">DeprecationWarning</span>)
+</pre></div>
+
+
+<hr />
+<h3 id="manual-vehicle-detection">Manual Vehicle Detection</h3>
+<h5 id="drawing-rectangles-over-an-image">Drawing rectangles over an image</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>image <span style="color: #555555">=</span> mpimg<span style="color: #555555">.</span>imread(<span style="color: #CC3300">&#39;car.jpg&#39;</span>)
+
+<span style="color: #0099FF; font-style: italic"># Define a function that takes an image, a list of bounding boxes, </span>
+<span style="color: #0099FF; font-style: italic"># and optional color tuple and line thickness as inputs</span>
+<span style="color: #0099FF; font-style: italic"># then draws boxes in that color on the output</span>
+
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">draw_boxes</span>(img, bboxes, color<span style="color: #555555">=</span>(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">0</span>, <span style="color: #FF6600">255</span>), thick<span style="color: #555555">=</span><span style="color: #FF6600">6</span>):
+    <span style="color: #0099FF; font-style: italic"># Make a copy of the image</span>
+    draw_img <span style="color: #555555">=</span> np<span style="color: #555555">.</span>copy(img)
+    <span style="color: #0099FF; font-style: italic"># Iterate through the bounding boxes</span>
+    <span style="color: #006699; font-weight: bold">for</span> bbox <span style="color: #000000; font-weight: bold">in</span> bboxes:
+        <span style="color: #0099FF; font-style: italic"># Draw a rectangle given bbox coordinates</span>
+        cv2<span style="color: #555555">.</span>rectangle(draw_img, bbox[<span style="color: #FF6600">0</span>], bbox[<span style="color: #FF6600">1</span>], color, thick)
+    <span style="color: #0099FF; font-style: italic"># Return the image copy with boxes drawn</span>
+    <span style="color: #006699; font-weight: bold">return</span> draw_img
+
+<span style="color: #0099FF; font-style: italic"># Here are the bounding boxes I used</span>
+bboxes <span style="color: #555555">=</span> [((<span style="color: #FF6600">275</span>, <span style="color: #FF6600">572</span>), (<span style="color: #FF6600">380</span>, <span style="color: #FF6600">510</span>)), ((<span style="color: #FF6600">488</span>, <span style="color: #FF6600">563</span>), (<span style="color: #FF6600">549</span>, <span style="color: #FF6600">518</span>)), ((<span style="color: #FF6600">554</span>, <span style="color: #FF6600">543</span>), (<span style="color: #FF6600">582</span>, <span style="color: #FF6600">522</span>)), 
+          ((<span style="color: #FF6600">601</span>, <span style="color: #FF6600">555</span>), (<span style="color: #FF6600">646</span>, <span style="color: #FF6600">522</span>)), ((<span style="color: #FF6600">657</span>, <span style="color: #FF6600">545</span>), (<span style="color: #FF6600">685</span>, <span style="color: #FF6600">517</span>)), ((<span style="color: #FF6600">849</span>, <span style="color: #FF6600">678</span>), (<span style="color: #FF6600">1135</span>, <span style="color: #FF6600">512</span>))]
+
+
+result <span style="color: #555555">=</span> draw_boxes(image, bboxes)
+plt<span style="color: #555555">.</span>imshow(result)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&amp;lt;matplotlib.image.AxesImage at 0x11d760908&amp;gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_10_1.png" /></p>
+<h5 id="templet-matching">Templet Matching</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Here is your draw_boxes function from the previous exercise</span>
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">draw_boxes</span>(img, bboxes, color<span style="color: #555555">=</span>(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">0</span>, <span style="color: #FF6600">255</span>), thick<span style="color: #555555">=</span><span style="color: #FF6600">6</span>):
+    <span style="color: #0099FF; font-style: italic"># Make a copy of the image</span>
+    imcopy <span style="color: #555555">=</span> np<span style="color: #555555">.</span>copy(img)
+    <span style="color: #0099FF; font-style: italic"># Iterate through the bounding boxes</span>
+    <span style="color: #006699; font-weight: bold">for</span> bbox <span style="color: #000000; font-weight: bold">in</span> bboxes:
+        <span style="color: #0099FF; font-style: italic"># Draw a rectangle given bbox coordinates</span>
+        cv2<span style="color: #555555">.</span>rectangle(imcopy, bbox[<span style="color: #FF6600">0</span>], bbox[<span style="color: #FF6600">1</span>], color, thick)
+    <span style="color: #0099FF; font-style: italic"># Return the image copy with boxes drawn</span>
+    <span style="color: #006699; font-weight: bold">return</span> imcopy
+
+
+<span style="color: #0099FF; font-style: italic"># Define a function to search for template matches</span>
+<span style="color: #0099FF; font-style: italic"># and return a list of bounding boxes</span>
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">find_matches</span>(img, template_list):
+    <span style="color: #0099FF; font-style: italic"># Define an empty list to take bbox coords</span>
+    bbox_list <span style="color: #555555">=</span> []
+    <span style="color: #0099FF; font-style: italic"># Define matching method</span>
+    <span style="color: #0099FF; font-style: italic"># Other options include: cv2.TM_CCORR_NORMED&#39;, &#39;cv2.TM_CCOEFF&#39;, &#39;cv2.TM_CCORR&#39;,</span>
+    <span style="color: #0099FF; font-style: italic">#         &#39;cv2.TM_SQDIFF&#39;, &#39;cv2.TM_SQDIFF_NORMED&#39;</span>
+    method <span style="color: #555555">=</span> cv2<span style="color: #555555">.</span>TM_CCOEFF_NORMED
+    <span style="color: #0099FF; font-style: italic"># Iterate through template list</span>
+    <span style="color: #006699; font-weight: bold">for</span> temp <span style="color: #000000; font-weight: bold">in</span> template_list:
+        <span style="color: #0099FF; font-style: italic"># Read in templates one by one</span>
+        tmp <span style="color: #555555">=</span> mpimg<span style="color: #555555">.</span>imread(temp)
+        <span style="color: #0099FF; font-style: italic"># Use cv2.matchTemplate() to search the image</span>
+        result <span style="color: #555555">=</span> cv2<span style="color: #555555">.</span>matchTemplate(img, tmp, method)
+        <span style="color: #0099FF; font-style: italic"># Use cv2.minMaxLoc() to extract the location of the best match</span>
+        min_val, max_val, min_loc, max_loc <span style="color: #555555">=</span> cv2<span style="color: #555555">.</span>minMaxLoc(result)
+        <span style="color: #0099FF; font-style: italic"># Determine a bounding box for the match</span>
+        w, h <span style="color: #555555">=</span> (tmp<span style="color: #555555">.</span>shape[<span style="color: #FF6600">1</span>], tmp<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>])
+        <span style="color: #006699; font-weight: bold">if</span> method <span style="color: #000000; font-weight: bold">in</span> [cv2<span style="color: #555555">.</span>TM_SQDIFF, cv2<span style="color: #555555">.</span>TM_SQDIFF_NORMED]:
+            top_left <span style="color: #555555">=</span> min_loc
+        <span style="color: #006699; font-weight: bold">else</span>:
+            top_left <span style="color: #555555">=</span> max_loc
+        bottom_right <span style="color: #555555">=</span> (top_left[<span style="color: #FF6600">0</span>] <span style="color: #555555">+</span> w, top_left[<span style="color: #FF6600">1</span>] <span style="color: #555555">+</span> h)
+        <span style="color: #0099FF; font-style: italic"># Append bbox position to list</span>
+        bbox_list<span style="color: #555555">.</span>append((top_left, bottom_right))
+        <span style="color: #0099FF; font-style: italic"># Return the list of bounding boxes</span>
+
+    <span style="color: #006699; font-weight: bold">return</span> bbox_list
+</pre></div>
+
+
+<h4 id="application-over-a-sample-image">Application over a sample image</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>image <span style="color: #555555">=</span> mpimg<span style="color: #555555">.</span>imread(<span style="color: #CC3300">&#39;car.jpg&#39;</span>)
+<span style="color: #0099FF; font-style: italic">#image = mpimg.imread(&#39;temp-matching-example-2.jpg&#39;)</span>
+templist <span style="color: #555555">=</span> [<span style="color: #CC3300">&#39;cutouts/cutout1.jpg&#39;</span>, <span style="color: #CC3300">&#39;cutouts/cutout2.jpg&#39;</span>, <span style="color: #CC3300">&#39;cutouts/cutout3.jpg&#39;</span>,
+            <span style="color: #CC3300">&#39;cutouts/cutout4.jpg&#39;</span>, <span style="color: #CC3300">&#39;cutouts/cutout5.jpg&#39;</span>, <span style="color: #CC3300">&#39;cutouts/cutout6.jpg&#39;</span>]
+bboxes <span style="color: #555555">=</span> find_matches(image, templist)
+result <span style="color: #555555">=</span> draw_boxes(image, bboxes)
+plt<span style="color: #555555">.</span>imshow(result)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&amp;lt;matplotlib.image.AxesImage at 0x11e16a978&amp;gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_14_1.png" /></p>
+<hr />
+<h3 id="getting-familiar-with-data">Getting familiar with Data</h3>
+<hr />
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Read in our vehicles and non-vehicles</span>
+cars <span style="color: #555555">=</span> glob<span style="color: #555555">.</span>glob(<span style="color: #CC3300">&#39;data/vehicles/**/*.png&#39;</span>)
+notcars <span style="color: #555555">=</span> glob<span style="color: #555555">.</span>glob(<span style="color: #CC3300">&#39;data/non-vehicles/**/*.png&#39;</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Define a function to return some characteristics of the dataset </span>
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">data_look</span>(car_list, notcar_list):
+    data_dict <span style="color: #555555">=</span> {}
+    <span style="color: #0099FF; font-style: italic"># Define a key in data_dict &quot;n_cars&quot; and store the number of car images</span>
+    data_dict[<span style="color: #CC3300">&quot;n_cars&quot;</span>] <span style="color: #555555">=</span> <span style="color: #336666">len</span>(car_list)
+    <span style="color: #0099FF; font-style: italic"># Define a key &quot;n_notcars&quot; and store the number of notcar images</span>
+    data_dict[<span style="color: #CC3300">&quot;n_notcars&quot;</span>] <span style="color: #555555">=</span> <span style="color: #336666">len</span>(notcar_list)
+    <span style="color: #0099FF; font-style: italic"># Read in a test image, either car or notcar</span>
+    example_img <span style="color: #555555">=</span> mpimg<span style="color: #555555">.</span>imread(car_list[<span style="color: #FF6600">0</span>])
+    <span style="color: #0099FF; font-style: italic"># Define a key &quot;image_shape&quot; and store the test image shape 3-tuple</span>
+    data_dict[<span style="color: #CC3300">&quot;image_shape&quot;</span>] <span style="color: #555555">=</span> example_img<span style="color: #555555">.</span>shape
+    <span style="color: #0099FF; font-style: italic"># Define a key &quot;data_type&quot; and store the data type of the test image.</span>
+    data_dict[<span style="color: #CC3300">&quot;data_type&quot;</span>] <span style="color: #555555">=</span> example_img<span style="color: #555555">.</span>dtype
+    <span style="color: #0099FF; font-style: italic"># Return data_dict</span>
+    <span style="color: #006699; font-weight: bold">return</span> data_dict
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>data_info <span style="color: #555555">=</span> data_look(cars, notcars)
+
+<span style="color: #006699; font-weight: bold">print</span>(<span style="color: #CC3300">&#39;Your function returned a count of&#39;</span>, 
+      data_info[<span style="color: #CC3300">&quot;n_cars&quot;</span>], <span style="color: #CC3300">&#39; cars and&#39;</span>, 
+      data_info[<span style="color: #CC3300">&quot;n_notcars&quot;</span>], <span style="color: #CC3300">&#39; non-cars&#39;</span>)
+<span style="color: #006699; font-weight: bold">print</span>(<span style="color: #CC3300">&#39;of size: &#39;</span>,data_info[<span style="color: #CC3300">&quot;image_shape&quot;</span>], <span style="color: #CC3300">&#39; and data type:&#39;</span>, 
+      data_info[<span style="color: #CC3300">&quot;data_type&quot;</span>])
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Your function returned a count of 8792  cars and 8968  non-cars
+of size:  (64, 64, 3)  and data type: float32
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>fig <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">10</span>,<span style="color: #FF6600">10</span>))
+count <span style="color: #555555">=</span> <span style="color: #FF6600">1</span>
+<span style="color: #006699; font-weight: bold">for</span> k <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span> (<span style="color: #FF6600">12</span>):
+    <span style="color: #0099FF; font-style: italic"># Generate a random index to look at a car image</span>
+    <span style="color: #006699; font-weight: bold">if</span> k<span style="color: #555555">%</span><span style="color: #FF6600">2</span> <span style="color: #555555">==</span><span style="color: #FF6600">0</span>:
+        ind <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randint(<span style="color: #FF6600">0</span>, <span style="color: #336666">len</span>(cars))
+        Img <span style="color: #555555">=</span> mpimg<span style="color: #555555">.</span>imread(cars[ind])
+        <span style="color: #0099FF; font-style: italic">#fig-1</span>
+        fig<span style="color: #555555">.</span>add_subplot(<span style="color: #FF6600">3</span>,<span style="color: #FF6600">4</span>,count)
+        plt<span style="color: #555555">.</span>imshow(Img)
+        plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Car&#39;</span>)
+        count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+    <span style="color: #006699; font-weight: bold">else</span>:
+        ind <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randint(<span style="color: #FF6600">0</span>, <span style="color: #336666">len</span>(notcars))
+        Img <span style="color: #555555">=</span> mpimg<span style="color: #555555">.</span>imread(notcars[ind])
+        <span style="color: #0099FF; font-style: italic">#fig-1</span>
+        fig<span style="color: #555555">.</span>add_subplot(<span style="color: #FF6600">3</span>,<span style="color: #FF6600">4</span>,count)
+        plt<span style="color: #555555">.</span>imshow(Img)
+        plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;NotCar &#39;</span>)
+        count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+</pre></div>
+
+
+<p><img alt="png" src="../output_21_0.png" /></p>
+<hr />
+<h3 id="feature-extraction">Feature Extraction</h3>
+<hr />
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">class</span> <span style="color: #00AA88; font-weight: bold">FeatureExtraction</span>(<span style="color: #336666">object</span>):
+
+
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">__init__</span>(<span style="color: #336666">self</span>,hist_bins,hist_bins_range,spatial_size,\
+                 orient,pix_per_cell,cell_per_block):
+
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>hist_bins <span style="color: #555555">=</span> hist_bins <span style="color: #0099FF; font-style: italic"># hist_bins=32</span>
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>hist_bins_range<span style="color: #555555">=</span> hist_bins_range <span style="color: #0099FF; font-style: italic"># hist_bins_range = (0, 256)</span>
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>spatial_size<span style="color: #555555">=</span>spatial_size <span style="color: #0099FF; font-style: italic"># spatial_size=(32, 32)</span>
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>orient <span style="color: #555555">=</span> orient <span style="color: #0099FF; font-style: italic"># orient=9</span>
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>pix_per_cell <span style="color: #555555">=</span> pix_per_cell <span style="color: #0099FF; font-style: italic"># pix_per_cell=8</span>
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>cell_per_block <span style="color: #555555">=</span> cell_per_block <span style="color: #0099FF; font-style: italic"># cell_per_block=2</span>
+
+
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">bin_spatial</span>(<span style="color: #336666">self</span>,img):
+        <span style="color: #0099FF; font-style: italic"># Use cv2.resize().ravel() to create the feature vector</span>
+        features <span style="color: #555555">=</span> cv2<span style="color: #555555">.</span>resize(img, <span style="color: #336666">self</span><span style="color: #555555">.</span>spatial_size)<span style="color: #555555">.</span>ravel() 
+        <span style="color: #0099FF; font-style: italic"># Return the feature vector</span>
+        <span style="color: #006699; font-weight: bold">return</span> features
+
+
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">convert_color</span>(<span style="color: #336666">self</span>,img, cspace):
+        <span style="color: #006699; font-weight: bold">if</span> cspace <span style="color: #555555">==</span> <span style="color: #CC3300">&#39;BGR&#39;</span>:
+            <span style="color: #006699; font-weight: bold">return</span> cv2<span style="color: #555555">.</span>cvtColor(img, cv2<span style="color: #555555">.</span>COLOR_RGB2BGR)
+        <span style="color: #006699; font-weight: bold">if</span> cspace <span style="color: #555555">==</span> <span style="color: #CC3300">&#39;YCrCb&#39;</span>:
+            <span style="color: #006699; font-weight: bold">return</span> cv2<span style="color: #555555">.</span>cvtColor(img, cv2<span style="color: #555555">.</span>COLOR_RGB2YCrCb)
+        <span style="color: #006699; font-weight: bold">if</span> cspace <span style="color: #555555">==</span> <span style="color: #CC3300">&#39;HSV&#39;</span>:
+            <span style="color: #006699; font-weight: bold">return</span> cv2<span style="color: #555555">.</span>cvtColor(img, cv2<span style="color: #555555">.</span>COLOR_RGB2HSV)
+        <span style="color: #006699; font-weight: bold">if</span> cspace <span style="color: #555555">==</span> <span style="color: #CC3300">&#39;LUV&#39;</span>:
+            <span style="color: #006699; font-weight: bold">return</span> cv2<span style="color: #555555">.</span>cvtColor(img, cv2<span style="color: #555555">.</span>COLOR_RGB2LUV)
+        <span style="color: #006699; font-weight: bold">if</span> cspace <span style="color: #555555">==</span> <span style="color: #CC3300">&#39;HLS&#39;</span>:
+            <span style="color: #006699; font-weight: bold">return</span> cv2<span style="color: #555555">.</span>cvtColor(img, cv2<span style="color: #555555">.</span>COLOR_RGB2HLS)
+        <span style="color: #006699; font-weight: bold">if</span> cspace <span style="color: #555555">==</span> <span style="color: #CC3300">&#39;YUV&#39;</span>:
+            <span style="color: #006699; font-weight: bold">return</span> cv2<span style="color: #555555">.</span>cvtColor(img, cv2<span style="color: #555555">.</span>COLOR_RGB2YUV)
+
+
+    <span style="color: #CC3300; font-style: italic">&#39;&#39;&#39;Define a function to compute color histogram features &#39;&#39;&#39;</span> 
+
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">color_hist</span>(<span style="color: #336666">self</span>,img,plot_info<span style="color: #555555">=</span><span style="color: #336666">False</span>):
+        <span style="color: #0099FF; font-style: italic"># Compute the histogram of the color channels separately</span>
+        ch1_hist <span style="color: #555555">=</span> np<span style="color: #555555">.</span>histogram(img[:,:,<span style="color: #FF6600">0</span>],
+                                     bins<span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>hist_bins,
+                                     <span style="color: #336666">range</span><span style="color: #555555">=</span><span style="color: #336666">self</span><span style="color: #555555">.</span>hist_bins_range)
+
+        ch2_hist <span style="color: #555555">=</span> np<span style="color: #555555">.</span>histogram(img[:,:,<span style="color: #FF6600">1</span>],
+                                     bins<span style="color: #555555">=</span><span style="color: #336666">self</span><span style="color: #555555">.</span>hist_bins,
+                                     <span style="color: #336666">range</span><span style="color: #555555">=</span><span style="color: #336666">self</span><span style="color: #555555">.</span>hist_bins_range)
+
+        ch3_hist <span style="color: #555555">=</span> np<span style="color: #555555">.</span>histogram(img[:,:,<span style="color: #FF6600">2</span>],
+                                     bins<span style="color: #555555">=</span><span style="color: #336666">self</span><span style="color: #555555">.</span>hist_bins,
+                                     <span style="color: #336666">range</span><span style="color: #555555">=</span><span style="color: #336666">self</span><span style="color: #555555">.</span>hist_bins_range)
+        bin_edges <span style="color: #555555">=</span> ch1_hist[<span style="color: #FF6600">1</span>]
+        bin_centers <span style="color: #555555">=</span> (bin_edges[<span style="color: #FF6600">1</span>:]  <span style="color: #555555">+</span> bin_edges[<span style="color: #FF6600">0</span>:<span style="color: #336666">len</span>(bin_edges)<span style="color: #555555">-</span><span style="color: #FF6600">1</span>])<span style="color: #555555">/</span><span style="color: #FF6600">2</span>
+
+        <span style="color: #0099FF; font-style: italic"># Concatenate the histograms into a single feature vector</span>
+        hist_features <span style="color: #555555">=</span> np<span style="color: #555555">.</span>concatenate((ch1_hist[<span style="color: #FF6600">0</span>], ch2_hist[<span style="color: #FF6600">0</span>], ch3_hist[<span style="color: #FF6600">0</span>]))
+
+        <span style="color: #0099FF; font-style: italic"># Return the individual histograms, bin_centers and feature vector</span>
+        <span style="color: #006699; font-weight: bold">if</span> plot_info:
+            <span style="color: #006699; font-weight: bold">return</span>  ch1_hist,ch2_hist,ch3_hist, bin_centers, hist_features
+        <span style="color: #006699; font-weight: bold">else</span>:
+            <span style="color: #006699; font-weight: bold">return</span> hist_features
+
+
+
+
+    <span style="color: #CC3300; font-style: italic">&#39;&#39;&#39; Define a function to extract features from a list of images</span>
+<span style="color: #CC3300; font-style: italic">        Have this function call bin_spatial() and color_hist()&#39;&#39;&#39;</span>
+
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">extract_color_features</span>(<span style="color: #336666">self</span>,imgs, cspace<span style="color: #555555">=</span><span style="color: #CC3300">&#39;RGB&#39;</span>):
+
+        <span style="color: #0099FF; font-style: italic"># Create a list to append feature vectors to</span>
+        features <span style="color: #555555">=</span> []
+        <span style="color: #0099FF; font-style: italic"># Iterate through the list of images</span>
+        <span style="color: #006699; font-weight: bold">for</span> <span style="color: #336666">file</span> <span style="color: #000000; font-weight: bold">in</span> imgs:
+            <span style="color: #0099FF; font-style: italic"># Read in each one by one</span>
+            image <span style="color: #555555">=</span> mpimg<span style="color: #555555">.</span>imread(<span style="color: #336666">file</span>)
+            <span style="color: #0099FF; font-style: italic"># apply color conversion if other than &#39;RGB&#39;</span>
+            <span style="color: #006699; font-weight: bold">if</span> cspace <span style="color: #555555">!=</span> <span style="color: #CC3300">&#39;RGB&#39;</span>:
+                feature_image <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>convert_color(image,cspace)
+            <span style="color: #006699; font-weight: bold">else</span>: feature_image <span style="color: #555555">=</span> np<span style="color: #555555">.</span>copy(image)   
+
+
+            <span style="color: #0099FF; font-style: italic"># Apply bin_spatial() to get spatial color features</span>
+            spatial_features <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>bin_spatial(feature_image)
+
+            <span style="color: #0099FF; font-style: italic"># Apply color_hist() also with a color space option now</span>
+            hist_features <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>color_hist(feature_image)
+
+            <span style="color: #0099FF; font-style: italic"># Append the new feature vector to the features list</span>
+            features<span style="color: #555555">.</span>append(np<span style="color: #555555">.</span>hstack((spatial_features, hist_features)))
+
+
+        <span style="color: #0099FF; font-style: italic"># Return list of feature vectors</span>
+        <span style="color: #006699; font-weight: bold">return</span> features 
+
+
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">get_hog_features</span>(<span style="color: #336666">self</span>,img,vis,feature_vec):
+        <span style="color: #006699; font-weight: bold">if</span> vis <span style="color: #555555">==</span> <span style="color: #336666">True</span>:
+            features, hog_image <span style="color: #555555">=</span> hog(img,
+                                  orientations<span style="color: #555555">=</span><span style="color: #336666">self</span><span style="color: #555555">.</span>orient,
+                                  pixels_per_cell<span style="color: #555555">=</span>(<span style="color: #336666">self</span><span style="color: #555555">.</span>pix_per_cell, <span style="color: #336666">self</span><span style="color: #555555">.</span>pix_per_cell),
+                                  cells_per_block<span style="color: #555555">=</span>(<span style="color: #336666">self</span><span style="color: #555555">.</span>cell_per_block, <span style="color: #336666">self</span><span style="color: #555555">.</span>cell_per_block),
+                                  transform_sqrt<span style="color: #555555">=</span><span style="color: #336666">False</span>,
+                                  visualise<span style="color: #555555">=</span><span style="color: #336666">True</span>,
+                                  feature_vector<span style="color: #555555">=</span>feature_vec)
+
+            <span style="color: #006699; font-weight: bold">return</span> features, hog_image
+        <span style="color: #006699; font-weight: bold">else</span>:      
+            features <span style="color: #555555">=</span> hog(img,
+                       orientations<span style="color: #555555">=</span><span style="color: #336666">self</span><span style="color: #555555">.</span>orient,
+                       pixels_per_cell<span style="color: #555555">=</span>(<span style="color: #336666">self</span><span style="color: #555555">.</span>pix_per_cell, <span style="color: #336666">self</span><span style="color: #555555">.</span>pix_per_cell),
+                       cells_per_block<span style="color: #555555">=</span>(<span style="color: #336666">self</span><span style="color: #555555">.</span>cell_per_block, <span style="color: #336666">self</span><span style="color: #555555">.</span>cell_per_block),
+                       transform_sqrt<span style="color: #555555">=</span><span style="color: #336666">False</span>,
+                       visualise<span style="color: #555555">=</span><span style="color: #336666">False</span>,
+                       feature_vector<span style="color: #555555">=</span>feature_vec)
+
+            <span style="color: #006699; font-weight: bold">return</span> features 
+
+
+
+    <span style="color: #CC3300; font-style: italic">&#39;&#39;&#39; Define a function to extract features from a list of images</span>
+<span style="color: #CC3300; font-style: italic">        Have this function call bin_spatial() and color_hist()&#39;&#39;&#39;</span>
+
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">extract_hog_features</span>(<span style="color: #336666">self</span>,imgs, cspace<span style="color: #555555">=</span><span style="color: #CC3300">&#39;RGB&#39;</span>, hog_channel<span style="color: #555555">=</span><span style="color: #FF6600">0</span>):
+        <span style="color: #0099FF; font-style: italic"># Create a list to append feature vectors to</span>
+        features <span style="color: #555555">=</span> []
+        <span style="color: #0099FF; font-style: italic"># Iterate through the list of images</span>
+        <span style="color: #006699; font-weight: bold">for</span> <span style="color: #336666">file</span> <span style="color: #000000; font-weight: bold">in</span> imgs:
+            <span style="color: #0099FF; font-style: italic"># Read in each one by one</span>
+            image <span style="color: #555555">=</span> mpimg<span style="color: #555555">.</span>imread(<span style="color: #336666">file</span>)
+            <span style="color: #0099FF; font-style: italic"># apply color conversion if other than &#39;RGB&#39;</span>
+            <span style="color: #006699; font-weight: bold">if</span> cspace <span style="color: #555555">!=</span> <span style="color: #CC3300">&#39;RGB&#39;</span>:
+                feature_image <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>convert_color(image,cspace)
+            <span style="color: #006699; font-weight: bold">else</span>: feature_image <span style="color: #555555">=</span> np<span style="color: #555555">.</span>copy(image)      
+
+            <span style="color: #0099FF; font-style: italic"># Call get_hog_features() with vis=False, feature_vec=True</span>
+            <span style="color: #006699; font-weight: bold">if</span> hog_channel <span style="color: #555555">==</span> <span style="color: #CC3300">&#39;ALL&#39;</span>:
+                hog_features <span style="color: #555555">=</span> []
+                <span style="color: #006699; font-weight: bold">for</span> channel <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(feature_image<span style="color: #555555">.</span>shape[<span style="color: #FF6600">2</span>]):
+                    hog_features<span style="color: #555555">.</span>append(<span style="color: #336666">self</span><span style="color: #555555">.</span>get_hog_features(feature_image[:,:,channel],
+                                                              vis<span style="color: #555555">=</span><span style="color: #336666">False</span>, 
+                                                              feature_vec<span style="color: #555555">=</span><span style="color: #336666">True</span>))
+                hog_features <span style="color: #555555">=</span> np<span style="color: #555555">.</span>ravel(hog_features)        
+            <span style="color: #006699; font-weight: bold">else</span>:
+                hog_features <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>get_hog_features(feature_image[:,:,hog_channel],
+                                                     vis<span style="color: #555555">=</span><span style="color: #336666">False</span>,
+                                                     feature_vec<span style="color: #555555">=</span><span style="color: #336666">True</span>)
+
+            <span style="color: #0099FF; font-style: italic"># Append the new feature vector to the features list</span>
+            features<span style="color: #555555">.</span>append(hog_features)
+        <span style="color: #0099FF; font-style: italic"># Return list of feature vectors</span>
+        <span style="color: #006699; font-weight: bold">return</span> features
+</pre></div>
+
+
+<h4 id="application-of-some-feature-extraction-techniques">Application of some feature extraction techniques</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>colorspace <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;RGB&#39;</span> <span style="color: #0099FF; font-style: italic"># Can be RGB, HSV, LUV, HLS, YUV, YCrCb</span>
+orient <span style="color: #555555">=</span> <span style="color: #FF6600">9</span>
+pix_per_cell <span style="color: #555555">=</span> <span style="color: #FF6600">8</span>
+cell_per_block <span style="color: #555555">=</span> <span style="color: #FF6600">2</span>
+hog_channel <span style="color: #555555">=</span> <span style="color: #CC3300">&quot;ALL&quot;</span> <span style="color: #0099FF; font-style: italic"># Can be 0, 1, 2, or &quot;ALL&quot;</span>
+hist_bins <span style="color: #555555">=</span> <span style="color: #FF6600">32</span>
+hist_bins_range <span style="color: #555555">=</span> (<span style="color: #FF6600">0</span>,<span style="color: #FF6600">256</span>)
+spatial_size <span style="color: #555555">=</span> (<span style="color: #FF6600">32</span>,<span style="color: #FF6600">32</span>)
+
+FE <span style="color: #555555">=</span> FeatureExtraction(hist_bins <span style="color: #555555">=</span> hist_bins,\
+                            hist_bins_range <span style="color: #555555">=</span>  hist_bins_range,\
+                            spatial_size <span style="color: #555555">=</span> spatial_size,\
+                            orient <span style="color: #555555">=</span> orient,\
+                            pix_per_cell <span style="color: #555555">=</span>  pix_per_cell,\
+                            cell_per_block <span style="color: #555555">=</span>  cell_per_block)
+</pre></div>
+
+
+<h4 id="exploration-of-different-chanals-for-hist-feature-vecture">Exploration of different chanals for hist feature vecture</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>fig <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">14</span>,<span style="color: #FF6600">22</span>))
+
+count <span style="color: #555555">=</span> <span style="color: #FF6600">1</span>
+n1,n2 <span style="color: #555555">=</span> <span style="color: #FF6600">6</span>,<span style="color: #FF6600">4</span>
+<span style="color: #006699; font-weight: bold">for</span> k <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(<span style="color: #FF6600">6</span>):
+
+    <span style="color: #006699; font-weight: bold">if</span> k<span style="color: #555555">%</span><span style="color: #FF6600">2</span> <span style="color: #555555">==</span><span style="color: #FF6600">0</span>:
+        ind <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randint(<span style="color: #FF6600">0</span>, <span style="color: #336666">len</span>(cars))
+        Img <span style="color: #555555">=</span> cv2<span style="color: #555555">.</span>imread(cars[ind])
+
+    <span style="color: #006699; font-weight: bold">else</span>:
+        ind <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randint(<span style="color: #FF6600">0</span>, <span style="color: #336666">len</span>(notcars))
+        Img <span style="color: #555555">=</span> cv2<span style="color: #555555">.</span>imread(notcars[ind])
+
+
+    Img <span style="color: #555555">=</span> cv2<span style="color: #555555">.</span>cvtColor(Img, cv2<span style="color: #555555">.</span>COLOR_BGR2RGB)
+
+    ch1_hist,ch2_hist,ch3_hist, bincen, hist_features\
+         <span style="color: #555555">=</span> FE<span style="color: #555555">.</span>color_hist(Img,plot_info<span style="color: #555555">=</span><span style="color: #336666">True</span>)
+
+
+    <span style="color: #0099FF; font-style: italic">#fig-1</span>
+    fig<span style="color: #555555">.</span>add_subplot(n1,n2,count)
+    plt<span style="color: #555555">.</span>imshow(Img)
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39; Example Image&#39;</span>, fontsize<span style="color: #555555">=</span><span style="color: #FF6600">10</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+
+    <span style="color: #0099FF; font-style: italic">#fig-2</span>
+    fig<span style="color: #555555">.</span>add_subplot(n1,n2,count)
+    plt<span style="color: #555555">.</span>bar(bincen,ch1_hist[<span style="color: #FF6600">0</span>])
+    plt<span style="color: #555555">.</span>xlim(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">256</span>)
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;R Histogram&#39;</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+
+    <span style="color: #0099FF; font-style: italic">#fig-3</span>
+    fig<span style="color: #555555">.</span>add_subplot(n1,n2,count)
+    plt<span style="color: #555555">.</span>bar(bincen,ch2_hist[<span style="color: #FF6600">0</span>])
+    plt<span style="color: #555555">.</span>xlim(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">256</span>)
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;G Histogram&#39;</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+
+    <span style="color: #0099FF; font-style: italic">#fig-4</span>
+    fig<span style="color: #555555">.</span>add_subplot(n1,n2,count)
+    plt<span style="color: #555555">.</span>bar(bincen,ch3_hist[<span style="color: #FF6600">0</span>])
+    plt<span style="color: #555555">.</span>xlim(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">256</span>)
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;B Histogram&#39;</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>  
+</pre></div>
+
+
+<p><img alt="png" src="../output_29_0.png" /></p>
+<h4 id="plot-of-concateneted-hist-feature-vector">Plot of concateneted hist feature vector</h4>
+<hr />
+<h4 id="exploring-bin_spatial-feature-vectors">Exploring bin_spatial feature vectors</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>fig <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">16</span>,<span style="color: #FF6600">20</span>))
+
+count <span style="color: #555555">=</span> <span style="color: #FF6600">1</span>
+n1,n2 <span style="color: #555555">=</span> <span style="color: #FF6600">6</span>,<span style="color: #FF6600">2</span>
+<span style="color: #006699; font-weight: bold">for</span> k <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(<span style="color: #FF6600">6</span>):
+
+    <span style="color: #006699; font-weight: bold">if</span> k<span style="color: #555555">%</span><span style="color: #FF6600">2</span> <span style="color: #555555">==</span><span style="color: #FF6600">0</span>:
+        ind <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randint(<span style="color: #FF6600">0</span>, <span style="color: #336666">len</span>(cars))
+        Img <span style="color: #555555">=</span> cv2<span style="color: #555555">.</span>imread(cars[ind])
+
+    <span style="color: #006699; font-weight: bold">else</span>:
+        ind <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randint(<span style="color: #FF6600">0</span>, <span style="color: #336666">len</span>(notcars))
+        Img <span style="color: #555555">=</span> cv2<span style="color: #555555">.</span>imread(notcars[ind])
+
+
+    Img <span style="color: #555555">=</span> cv2<span style="color: #555555">.</span>cvtColor(Img, cv2<span style="color: #555555">.</span>COLOR_BGR2RGB)
+
+    features <span style="color: #555555">=</span> FE<span style="color: #555555">.</span>bin_spatial(Img)
+
+
+    <span style="color: #0099FF; font-style: italic">#fig-1</span>
+    fig<span style="color: #555555">.</span>add_subplot(n1,n2,count)
+    plt<span style="color: #555555">.</span>imshow(Img)
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;vehicle Image&#39;</span>, fontsize<span style="color: #555555">=</span><span style="color: #FF6600">8</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+
+
+    <span style="color: #0099FF; font-style: italic">#fig-5</span>
+    fig<span style="color: #555555">.</span>add_subplot(<span style="color: #FF6600">6</span>,<span style="color: #FF6600">2</span>,count)
+    plt<span style="color: #555555">.</span>hist(features,bins<span style="color: #555555">=</span><span style="color: #FF6600">255</span>)
+    plt<span style="color: #555555">.</span>xlim(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">256</span>)
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;spatial_feature&#39;</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span> 
+</pre></div>
+
+
+<p><img alt="png" src="../output_33_0.png" /></p>
+<hr />
+<h4 id="exploration-of-color-spaces">Exploration of color spaces</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Img <span style="color: #555555">=</span> cv2<span style="color: #555555">.</span>imread(<span style="color: #CC3300">&quot;000275.png&quot;</span>)
+Img <span style="color: #555555">=</span> cv2<span style="color: #555555">.</span>cvtColor(Img, cv2<span style="color: #555555">.</span>COLOR_BGR2RGB)
+
+count <span style="color: #555555">=</span> <span style="color: #FF6600">1</span>
+n1,n2 <span style="color: #555555">=</span> <span style="color: #FF6600">3</span>,<span style="color: #FF6600">2</span>
+convs <span style="color: #555555">=</span> [<span style="color: #CC3300">&#39;BGR&#39;</span>,<span style="color: #CC3300">&#39;HSV&#39;</span>,<span style="color: #CC3300">&#39;LUV&#39;</span>,<span style="color: #CC3300">&#39;HLS&#39;</span>,<span style="color: #CC3300">&#39;YUV&#39;</span>,<span style="color: #CC3300">&#39;YCrCb&#39;</span>]
+
+fig <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">14</span>,<span style="color: #FF6600">10</span>))  
+
+<span style="color: #006699; font-weight: bold">for</span>  conv <span style="color: #000000; font-weight: bold">in</span> convs: 
+    Img2 <span style="color: #555555">=</span> FE<span style="color: #555555">.</span>convert_color(Img, conv)
+
+    <span style="color: #0099FF; font-style: italic">#fig-1</span>
+    fig<span style="color: #555555">.</span>add_subplot(n1,n2,count)
+    plt<span style="color: #555555">.</span>imshow(Img2)
+    plt<span style="color: #555555">.</span>title(conv, fontsize<span style="color: #555555">=</span><span style="color: #FF6600">15</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>    
+</pre></div>
+
+
+<p><img alt="png" src="../output_36_0.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Img <span style="color: #555555">=</span> cv2<span style="color: #555555">.</span>imread(<span style="color: #CC3300">&quot;000275.png&quot;</span>)
+Img <span style="color: #555555">=</span> cv2<span style="color: #555555">.</span>cvtColor(Img, cv2<span style="color: #555555">.</span>COLOR_BGR2RGB)
+
+count <span style="color: #555555">=</span> <span style="color: #FF6600">1</span>
+n1,n2 <span style="color: #555555">=</span> <span style="color: #FF6600">6</span>,<span style="color: #FF6600">4</span>
+convs <span style="color: #555555">=</span> [<span style="color: #CC3300">&#39;BGR&#39;</span>,<span style="color: #CC3300">&#39;HSV&#39;</span>,<span style="color: #CC3300">&#39;LUV&#39;</span>,<span style="color: #CC3300">&#39;HLS&#39;</span>,<span style="color: #CC3300">&#39;YUV&#39;</span>,<span style="color: #CC3300">&#39;YCrCb&#39;</span>]
+
+fig <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">16</span>,<span style="color: #FF6600">22</span>))  
+
+<span style="color: #006699; font-weight: bold">for</span>  conv <span style="color: #000000; font-weight: bold">in</span> convs: 
+    Img <span style="color: #555555">=</span> FE<span style="color: #555555">.</span>convert_color(Img, conv)
+
+    ch1_hist,ch2_hist,ch3_hist, bincen, hist_features\
+         <span style="color: #555555">=</span> FE<span style="color: #555555">.</span>color_hist(Img,plot_info<span style="color: #555555">=</span><span style="color: #336666">True</span>)
+
+    <span style="color: #0099FF; font-style: italic">#fig-1</span>
+    fig<span style="color: #555555">.</span>add_subplot(n1,n2,count)
+    plt<span style="color: #555555">.</span>imshow(Img)
+    plt<span style="color: #555555">.</span>title(conv<span style="color: #555555">+</span><span style="color: #CC3300">&#39; Example Image&#39;</span>, fontsize<span style="color: #555555">=</span><span style="color: #FF6600">10</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+
+    <span style="color: #0099FF; font-style: italic">#fig-2</span>
+    fig<span style="color: #555555">.</span>add_subplot(n1,n2,count)
+    plt<span style="color: #555555">.</span>bar(bincen,ch1_hist[<span style="color: #FF6600">0</span>])
+    plt<span style="color: #555555">.</span>xlim(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">256</span>)
+    plt<span style="color: #555555">.</span>title(conv[<span style="color: #FF6600">0</span>]<span style="color: #555555">+</span><span style="color: #CC3300">&#39; Histogram&#39;</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+
+    <span style="color: #0099FF; font-style: italic">#fig-3</span>
+    fig<span style="color: #555555">.</span>add_subplot(n1,n2,count)
+    plt<span style="color: #555555">.</span>bar(bincen,ch2_hist[<span style="color: #FF6600">0</span>])
+    plt<span style="color: #555555">.</span>xlim(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">256</span>)
+    plt<span style="color: #555555">.</span>title(conv[<span style="color: #FF6600">1</span>]<span style="color: #555555">+</span><span style="color: #CC3300">&#39; Histogram&#39;</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+
+    <span style="color: #0099FF; font-style: italic">#fig-4</span>
+    fig<span style="color: #555555">.</span>add_subplot(n1,n2,count)
+    plt<span style="color: #555555">.</span>bar(bincen,ch3_hist[<span style="color: #FF6600">0</span>])
+    plt<span style="color: #555555">.</span>xlim(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">256</span>)
+    plt<span style="color: #555555">.</span>title(conv[<span style="color: #FF6600">2</span>]<span style="color: #555555">+</span><span style="color: #CC3300">&#39; Histogram&#39;</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>  
+</pre></div>
+
+
+<p><img alt="png" src="../output_37_0.png" /></p>
+<hr />
+<h4 id="3-d-plot-of-color-space">3-D plot of color space</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">plot3d</span>(pixels, colors_rgb,
+        axis_labels<span style="color: #555555">=</span><span style="color: #336666">list</span>(<span style="color: #CC3300">&quot;RGB&quot;</span>), axis_limits<span style="color: #555555">=</span>[(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">255</span>), (<span style="color: #FF6600">0</span>, <span style="color: #FF6600">255</span>), (<span style="color: #FF6600">0</span>, <span style="color: #FF6600">255</span>)]):
+
+    <span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;Plot pixels in 3D.&quot;&quot;&quot;</span>
+
+    <span style="color: #0099FF; font-style: italic"># Create figure and 3D axes</span>
+    fig <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">6</span>, <span style="color: #FF6600">6</span>))
+    ax <span style="color: #555555">=</span> Axes3D(fig)
+
+    <span style="color: #0099FF; font-style: italic"># Set axis limits</span>
+    ax<span style="color: #555555">.</span>set_xlim(<span style="color: #555555">*</span>axis_limits[<span style="color: #FF6600">0</span>])
+    ax<span style="color: #555555">.</span>set_ylim(<span style="color: #555555">*</span>axis_limits[<span style="color: #FF6600">1</span>])
+    ax<span style="color: #555555">.</span>set_zlim(<span style="color: #555555">*</span>axis_limits[<span style="color: #FF6600">2</span>])
+
+    <span style="color: #0099FF; font-style: italic"># Set axis labels and sizes</span>
+    ax<span style="color: #555555">.</span>tick_params(axis<span style="color: #555555">=</span><span style="color: #CC3300">&#39;both&#39;</span>, which<span style="color: #555555">=</span><span style="color: #CC3300">&#39;major&#39;</span>, labelsize<span style="color: #555555">=</span><span style="color: #FF6600">14</span>, pad<span style="color: #555555">=</span><span style="color: #FF6600">8</span>)
+    ax<span style="color: #555555">.</span>set_xlabel(axis_labels[<span style="color: #FF6600">0</span>], fontsize<span style="color: #555555">=</span><span style="color: #FF6600">16</span>, labelpad<span style="color: #555555">=</span><span style="color: #FF6600">16</span>)
+    ax<span style="color: #555555">.</span>set_ylabel(axis_labels[<span style="color: #FF6600">1</span>], fontsize<span style="color: #555555">=</span><span style="color: #FF6600">16</span>, labelpad<span style="color: #555555">=</span><span style="color: #FF6600">16</span>)
+    ax<span style="color: #555555">.</span>set_zlabel(axis_labels[<span style="color: #FF6600">2</span>], fontsize<span style="color: #555555">=</span><span style="color: #FF6600">16</span>, labelpad<span style="color: #555555">=</span><span style="color: #FF6600">16</span>)
+
+    <span style="color: #0099FF; font-style: italic"># Plot pixel values with colors given in colors_rgb</span>
+    ax<span style="color: #555555">.</span>scatter(
+        pixels[:, :, <span style="color: #FF6600">0</span>]<span style="color: #555555">.</span>ravel(),
+        pixels[:, :, <span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>ravel(),
+        pixels[:, :, <span style="color: #FF6600">2</span>]<span style="color: #555555">.</span>ravel(),
+        c<span style="color: #555555">=</span>colors_rgb<span style="color: #555555">.</span>reshape((<span style="color: #555555">-</span><span style="color: #FF6600">1</span>, <span style="color: #FF6600">3</span>)), edgecolors<span style="color: #555555">=</span><span style="color: #CC3300">&#39;none&#39;</span>)
+
+    <span style="color: #006699; font-weight: bold">return</span> ax  <span style="color: #0099FF; font-style: italic"># return Axes3D object for further manipulation</span>
+</pre></div>
+
+
+<h4 id="exploring-3d-color-space">Exploring 3D color space</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Img <span style="color: #555555">=</span> cv2<span style="color: #555555">.</span>imread(<span style="color: #CC3300">&quot;000275.png&quot;</span>)
+scale <span style="color: #555555">=</span> <span style="color: #336666">max</span>(Img<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>], Img<span style="color: #555555">.</span>shape[<span style="color: #FF6600">1</span>], <span style="color: #FF6600">64</span>) <span style="color: #555555">/</span> <span style="color: #FF6600">64</span>  <span style="color: #0099FF; font-style: italic"># at most 64 rows and columns</span>
+Img <span style="color: #555555">=</span> cv2<span style="color: #555555">.</span>resize(Img, (np<span style="color: #555555">.</span>int(Img<span style="color: #555555">.</span>shape[<span style="color: #FF6600">1</span>] <span style="color: #555555">/</span> scale),\
+                             np<span style="color: #555555">.</span>int(Img<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>] <span style="color: #555555">/</span> scale)),\
+                             interpolation<span style="color: #555555">=</span>cv2<span style="color: #555555">.</span>INTER_NEAREST)
+
+Img_RGB <span style="color: #555555">=</span> cv2<span style="color: #555555">.</span>cvtColor(Img, cv2<span style="color: #555555">.</span>COLOR_BGR2RGB)
+img_small_rgb <span style="color: #555555">=</span> Img_RGB <span style="color: #555555">/</span> <span style="color: #FF6600">255.</span>
+
+convs <span style="color: #555555">=</span> [<span style="color: #CC3300">&#39;BGR&#39;</span>,<span style="color: #CC3300">&#39;HSV&#39;</span>,<span style="color: #CC3300">&#39;LUV&#39;</span>,<span style="color: #CC3300">&#39;HLS&#39;</span>,<span style="color: #CC3300">&#39;YUV&#39;</span>,<span style="color: #CC3300">&#39;YCrCb&#39;</span>]
+
+<span style="color: #006699; font-weight: bold">for</span>  conv <span style="color: #000000; font-weight: bold">in</span> convs:
+
+    Img2 <span style="color: #555555">=</span> FE<span style="color: #555555">.</span>convert_color(Img, conv)
+
+    <span style="color: #0099FF; font-style: italic">#fig-1</span>
+    plot3d(Img2, img_small_rgb,axis_labels<span style="color: #555555">=</span><span style="color: #336666">list</span>(conv))
+    plt<span style="color: #555555">.</span>title(conv, fontsize<span style="color: #555555">=</span><span style="color: #FF6600">15</span>)
+    plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_42_0.png" /></p>
+<p><img alt="png" src="../output_42_1.png" /></p>
+<p><img alt="png" src="../output_42_2.png" /></p>
+<p><img alt="png" src="../output_42_3.png" /></p>
+<p><img alt="png" src="../output_42_4.png" /></p>
+<p><img alt="png" src="../output_42_5.png" /></p>
+<hr />
+<h4 id="hog-feature-visualizations">Hog feature visualizations</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>fig <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">10</span>,<span style="color: #FF6600">10</span>))
+
+count <span style="color: #555555">=</span> <span style="color: #FF6600">1</span>
+<span style="color: #006699; font-weight: bold">for</span> k <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span> (<span style="color: #FF6600">6</span>):
+
+    <span style="color: #0099FF; font-style: italic"># Generate a random index to look at a car image</span>
+    <span style="color: #006699; font-weight: bold">if</span> k<span style="color: #555555">%</span><span style="color: #FF6600">2</span> <span style="color: #555555">==</span><span style="color: #FF6600">0</span>:
+        ind <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randint(<span style="color: #FF6600">0</span>, <span style="color: #336666">len</span>(cars))
+        Img <span style="color: #555555">=</span> mpimg<span style="color: #555555">.</span>imread(cars[ind])
+    <span style="color: #006699; font-weight: bold">else</span>:
+
+        ind <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randint(<span style="color: #FF6600">0</span>, <span style="color: #336666">len</span>(notcars))
+        Img <span style="color: #555555">=</span> mpimg<span style="color: #555555">.</span>imread(notcars[ind])
+
+    gray <span style="color: #555555">=</span> cv2<span style="color: #555555">.</span>cvtColor(Img, cv2<span style="color: #555555">.</span>COLOR_RGB2GRAY)
+
+    features, hog_image <span style="color: #555555">=</span> FE<span style="color: #555555">.</span>get_hog_features(gray,vis<span style="color: #555555">=</span><span style="color: #336666">True</span>, feature_vec<span style="color: #555555">=</span><span style="color: #336666">True</span>)
+
+
+    <span style="color: #0099FF; font-style: italic">#fig-1</span>
+    fig<span style="color: #555555">.</span>add_subplot(<span style="color: #FF6600">3</span>,<span style="color: #FF6600">4</span>,count)
+    plt<span style="color: #555555">.</span>imshow(Img)
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Example Image&#39;</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+
+
+    <span style="color: #0099FF; font-style: italic">#fig-1</span>
+    fig<span style="color: #555555">.</span>add_subplot(<span style="color: #FF6600">3</span>,<span style="color: #FF6600">4</span>,count)
+    plt<span style="color: #555555">.</span>imshow(hog_image,cmap<span style="color: #555555">=</span><span style="color: #CC3300">&#39;gray&#39;</span>)
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;HOG Visualization&#39;</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+</pre></div>
+
+
+<p><img alt="png" src="../output_45_0.png" /></p>
+<hr />
+<h3 id="application-of-feature-normalization">Application of feature Normalization</h3>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>X_car <span style="color: #555555">=</span> FE<span style="color: #555555">.</span>extract_color_features(cars,cspace<span style="color: #555555">=</span>colorspace)
+X_notcar <span style="color: #555555">=</span> FE<span style="color: #555555">.</span>extract_color_features(notcars, cspace<span style="color: #555555">=</span>colorspace)
+X <span style="color: #555555">=</span> np<span style="color: #555555">.</span>vstack((X_car,X_notcar))<span style="color: #555555">.</span>astype(np<span style="color: #555555">.</span>float64) 
+X_scaler <span style="color: #555555">=</span> StandardScaler()<span style="color: #555555">.</span>fit(X)
+<span style="color: #0099FF; font-style: italic"># Apply the scaler to X</span>
+scaled_X <span style="color: #555555">=</span> X_scaler<span style="color: #555555">.</span>transform(X)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>fig <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">14</span>,<span style="color: #FF6600">10</span>))
+count <span style="color: #555555">=</span> <span style="color: #FF6600">1</span>
+<span style="color: #006699; font-weight: bold">for</span> k <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span> (<span style="color: #FF6600">1</span>,<span style="color: #FF6600">5</span>):
+    <span style="color: #0099FF; font-style: italic"># Generate a random index to look at a car image</span>
+    <span style="color: #006699; font-weight: bold">if</span> k<span style="color: #555555">%</span><span style="color: #FF6600">2</span> <span style="color: #555555">==</span><span style="color: #FF6600">0</span>:
+        ind <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randint(<span style="color: #FF6600">0</span>, <span style="color: #336666">len</span>(cars))
+        Img <span style="color: #555555">=</span> mpimg<span style="color: #555555">.</span>imread(cars[ind])
+
+    <span style="color: #006699; font-weight: bold">else</span>:
+        ind <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randint(<span style="color: #FF6600">0</span>, <span style="color: #336666">len</span>(notcars))
+        Img <span style="color: #555555">=</span> mpimg<span style="color: #555555">.</span>imread(notcars[ind])
+
+    plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">4</span>,<span style="color: #FF6600">3</span>,count)
+    plt<span style="color: #555555">.</span>imshow(Img)
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Original Image&#39;</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+
+    plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">4</span>,<span style="color: #FF6600">3</span>,count)
+    plt<span style="color: #555555">.</span>plot(X[ind])
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Raw Features&#39;</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+
+    plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">4</span>,<span style="color: #FF6600">3</span>,count)
+    plt<span style="color: #555555">.</span>plot(scaled_X[ind])
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Normalized Features&#39;</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+
+    fig<span style="color: #555555">.</span>tight_layout()
+</pre></div>
+
+
+<p><img alt="png" src="../output_49_0.png" /></p>
+<hr />
+<h3 id="classifier">Classifier</h3>
+<h4 id="extraction-of-all-required-features">Extraction of all required features</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Reduce the sample size because HOG features are slow to compute</span>
+<span style="color: #0099FF; font-style: italic"># The quiz evaluator times out after 13s of CPU time</span>
+<span style="color: #0099FF; font-style: italic">#sample_size = 500</span>
+<span style="color: #0099FF; font-style: italic">#cars = cars[0:sample_size]</span>
+<span style="color: #0099FF; font-style: italic">#notcars = notcars[0:sample_size]</span>
+
+
+
+<span style="color: #0099FF; font-style: italic">### TODO: Tweak these parameters and see how the results change.</span>
+colorspace <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;YCrCb&#39;</span>  <span style="color: #0099FF; font-style: italic">#&#39;RGB&#39; # Can be RGB, HSV, LUV, HLS, YUV, YCrCb</span>
+orient <span style="color: #555555">=</span> <span style="color: #FF6600">9</span>
+pix_per_cell <span style="color: #555555">=</span> <span style="color: #FF6600">8</span>
+cell_per_block <span style="color: #555555">=</span> <span style="color: #FF6600">2</span>
+hog_channel <span style="color: #555555">=</span> <span style="color: #CC3300">&quot;ALL&quot;</span> <span style="color: #0099FF; font-style: italic"># Can be 0, 1, 2, or &quot;ALL&quot;</span>
+hist_bins <span style="color: #555555">=</span> <span style="color: #FF6600">32</span>
+hist_bins_range <span style="color: #555555">=</span> (<span style="color: #FF6600">0</span>,<span style="color: #FF6600">256</span>)
+spatial_size <span style="color: #555555">=</span> (<span style="color: #FF6600">32</span>,<span style="color: #FF6600">32</span>)
+
+
+
+
+t<span style="color: #555555">=</span>time<span style="color: #555555">.</span>time()
+
+FE <span style="color: #555555">=</span> FeatureExtraction(hist_bins <span style="color: #555555">=</span> hist_bins,\
+                            hist_bins_range <span style="color: #555555">=</span>  hist_bins_range,\
+                            spatial_size <span style="color: #555555">=</span> spatial_size,\
+                            orient <span style="color: #555555">=</span> orient,\
+                            pix_per_cell <span style="color: #555555">=</span>  pix_per_cell,\
+                            cell_per_block <span style="color: #555555">=</span>  cell_per_block)
+
+
+color_car_features <span style="color: #555555">=</span> FE<span style="color: #555555">.</span>extract_color_features(cars,
+                                               cspace<span style="color: #555555">=</span>colorspace)
+color_notcar_features <span style="color: #555555">=</span> FE<span style="color: #555555">.</span>extract_color_features(notcars,
+                                                cspace<span style="color: #555555">=</span>colorspace)
+
+hog_car_features <span style="color: #555555">=</span> FE<span style="color: #555555">.</span>extract_hog_features(cars,
+                                    cspace<span style="color: #555555">=</span>colorspace,
+                                    hog_channel<span style="color: #555555">=</span>hog_channel)
+
+hog_notcar_features <span style="color: #555555">=</span> FE<span style="color: #555555">.</span>extract_hog_features(notcars,
+                                       cspace<span style="color: #555555">=</span>colorspace,
+                                       hog_channel<span style="color: #555555">=</span>hog_channel)
+
+t2 <span style="color: #555555">=</span> time<span style="color: #555555">.</span>time()
+
+<span style="color: #006699; font-weight: bold">print</span>(<span style="color: #336666">round</span>(t2<span style="color: #555555">-</span>t, <span style="color: #FF6600">2</span>), <span style="color: #CC3300">&#39;Seconds to extract HOG features...&#39;</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>232.56 Seconds to extract HOG features...
+</pre></div>
+
+
+<h4 id="stacking-all-feature-to-single-vector">Stacking all feature to single vector</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Create an array stack of feature vectors</span>
+X_car <span style="color: #555555">=</span> np<span style="color: #555555">.</span>hstack((color_car_features,hog_car_features))<span style="color: #555555">.</span>astype(np<span style="color: #555555">.</span>float64)
+X_notcar <span style="color: #555555">=</span> np<span style="color: #555555">.</span>hstack((color_notcar_features, hog_notcar_features))<span style="color: #555555">.</span>astype(np<span style="color: #555555">.</span>float64) 
+X <span style="color: #555555">=</span> np<span style="color: #555555">.</span>vstack((X_car,X_notcar))<span style="color: #555555">.</span>astype(np<span style="color: #555555">.</span>float64) 
+
+X_scaler <span style="color: #555555">=</span> StandardScaler()<span style="color: #555555">.</span>fit(X)
+
+<span style="color: #0099FF; font-style: italic"># Apply the scaler to X</span>
+scaled_X <span style="color: #555555">=</span> X_scaler<span style="color: #555555">.</span>transform(X)
+
+<span style="color: #0099FF; font-style: italic"># Define the labels vector</span>
+y <span style="color: #555555">=</span> np<span style="color: #555555">.</span>hstack((np<span style="color: #555555">.</span>ones(<span style="color: #336666">len</span>(hog_car_features)), np<span style="color: #555555">.</span>zeros(<span style="color: #336666">len</span>(hog_notcar_features))))
+</pre></div>
+
+
+<h4 id="train-and-test-split">Train and test split</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.utils</span> <span style="color: #006699; font-weight: bold">import</span> shuffle
+
+scaled_X, y <span style="color: #555555">=</span> shuffle(scaled_X, y )
+
+<span style="color: #0099FF; font-style: italic"># Split up data into randomized training and test sets</span>
+rand_state <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randint(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">100</span>)
+X_train, X_test, y_train, y_test <span style="color: #555555">=</span> train_test_split(
+    scaled_X, y, test_size<span style="color: #555555">=</span><span style="color: #FF6600">0.2</span>, random_state<span style="color: #555555">=</span>rand_state)
+
+<span style="color: #006699; font-weight: bold">print</span>(<span style="color: #CC3300">&#39;Using:&#39;</span>,orient,<span style="color: #CC3300">&#39;orientations&#39;</span>,pix_per_cell,
+    <span style="color: #CC3300">&#39;pixels per cell and&#39;</span>, cell_per_block,<span style="color: #CC3300">&#39;cells per block&#39;</span>)
+<span style="color: #006699; font-weight: bold">print</span>(<span style="color: #CC3300">&#39;Feature vector length:&#39;</span>, <span style="color: #336666">len</span>(X_train[<span style="color: #FF6600">0</span>]))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Using: 9 orientations 8 pixels per cell and 2 cells per block
+Feature vector length: 8460
+</pre></div>
+
+
+<h4 id="training-linear-svc">Training Linear SVC</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Use a linear SVC </span>
+svc <span style="color: #555555">=</span> LinearSVC()
+<span style="color: #0099FF; font-style: italic"># Check the training time for the SVC</span>
+
+
+t<span style="color: #555555">=</span>time<span style="color: #555555">.</span>time()
+svc<span style="color: #555555">.</span>fit(X_train, y_train)
+t2 <span style="color: #555555">=</span> time<span style="color: #555555">.</span>time()
+<span style="color: #006699; font-weight: bold">print</span>(<span style="color: #336666">round</span>(t2<span style="color: #555555">-</span>t, <span style="color: #FF6600">2</span>), <span style="color: #CC3300">&#39;Seconds to train SVC...&#39;</span>)
+<span style="color: #0099FF; font-style: italic"># Check the score of the SVC</span>
+<span style="color: #006699; font-weight: bold">print</span>(<span style="color: #CC3300">&#39;Test Accuracy of SVC = &#39;</span>, <span style="color: #336666">round</span>(svc<span style="color: #555555">.</span>score(X_test, y_test), <span style="color: #FF6600">4</span>))
+<span style="color: #0099FF; font-style: italic"># Check the prediction time for a single sample</span>
+t<span style="color: #555555">=</span>time<span style="color: #555555">.</span>time()
+
+
+n_predict <span style="color: #555555">=</span> <span style="color: #FF6600">10</span>
+<span style="color: #006699; font-weight: bold">print</span>(<span style="color: #CC3300">&#39;My SVC predicts: &#39;</span>, svc<span style="color: #555555">.</span>predict(X_test[<span style="color: #FF6600">0</span>:n_predict]))
+<span style="color: #006699; font-weight: bold">print</span>(<span style="color: #CC3300">&#39;For these&#39;</span>,n_predict, <span style="color: #CC3300">&#39;labels: &#39;</span>, y_test[<span style="color: #FF6600">0</span>:n_predict])
+t2 <span style="color: #555555">=</span> time<span style="color: #555555">.</span>time()
+<span style="color: #006699; font-weight: bold">print</span>(<span style="color: #336666">round</span>(t2<span style="color: #555555">-</span>t, <span style="color: #FF6600">5</span>), <span style="color: #CC3300">&#39;Seconds to predict&#39;</span>, n_predict,<span style="color: #CC3300">&#39;labels with SVC&#39;</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>392.39 Seconds to train SVC...
+Test Accuracy of SVC =  0.9904
+My SVC predicts:  [ 1.  0.  0.  0.  0.  1.  0.  0.  1.  0.]
+For these 10 labels:  [ 1.  0.  0.  0.  0.  1.  0.  0.  1.  0.]
+2.42908 Seconds to predict 10 labels with SVC
+</pre></div>
+
+
+<h4 id="saving-model-for-later-use">Saving model for later use</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">pickle</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">pickle</span>
+dist_pickle <span style="color: #555555">=</span> {}
+dist_pickle[<span style="color: #CC3300">&quot;svc&quot;</span>] <span style="color: #555555">=</span> svc 
+dist_pickle[<span style="color: #CC3300">&quot;scaler&quot;</span>] <span style="color: #555555">=</span> X_scaler
+dist_pickle[<span style="color: #CC3300">&quot;orient&quot;</span>] <span style="color: #555555">=</span> orient 
+dist_pickle[<span style="color: #CC3300">&quot;pix_per_cell&quot;</span>]<span style="color: #555555">=</span> pix_per_cell 
+dist_pickle[<span style="color: #CC3300">&quot;cell_per_block&quot;</span>]<span style="color: #555555">=</span> cell_per_block 
+dist_pickle[<span style="color: #CC3300">&quot;spatial_size&quot;</span>]<span style="color: #555555">=</span> spatial_size 
+dist_pickle[<span style="color: #CC3300">&quot;hist_bins&quot;</span>]<span style="color: #555555">=</span> hist_bins 
+
+<span style="color: #006699; font-weight: bold">with</span> <span style="color: #336666">open</span>(<span style="color: #CC3300">&#39;svc_pickle.p&#39;</span>, mode<span style="color: #555555">=</span><span style="color: #CC3300">&#39;wb&#39;</span>) <span style="color: #006699; font-weight: bold">as</span> f:
+    pickle<span style="color: #555555">.</span>dump(dist_pickle, f)
+</pre></div>
+
+
+<hr />
+<h5 id="applying-classifier-to-an-image">Applying classifier to an image</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">find_cars</span>(img, ystart, ystop, scale, svc,\
+              X_scaler, color_space, orient,\
+              pix_per_cell, cell_per_block,\
+              hog_channel,spatial_size, hist_bins):
+
+
+
+
+    FE <span style="color: #555555">=</span> FeatureExtraction(hist_bins <span style="color: #555555">=</span> hist_bins,\
+                            hist_bins_range <span style="color: #555555">=</span>  hist_bins_range,\
+                            spatial_size <span style="color: #555555">=</span> spatial_size,\
+                            orient <span style="color: #555555">=</span> orient,\
+                            pix_per_cell <span style="color: #555555">=</span>  pix_per_cell,\
+                            cell_per_block <span style="color: #555555">=</span>  cell_per_block)
+
+
+    draw_img <span style="color: #555555">=</span> np<span style="color: #555555">.</span>copy(img)
+    img <span style="color: #555555">=</span> img<span style="color: #555555">.</span>astype(np<span style="color: #555555">.</span>float32) <span style="color: #555555">/</span> <span style="color: #FF6600">255</span>
+
+    img_tosearch <span style="color: #555555">=</span> img[ystart:ystop, :, :]
+    ctrans_tosearch <span style="color: #555555">=</span> FE<span style="color: #555555">.</span>convert_color(img_tosearch, color_space)
+    <span style="color: #006699; font-weight: bold">if</span> scale <span style="color: #555555">!=</span> <span style="color: #FF6600">1</span>:
+        imshape <span style="color: #555555">=</span> ctrans_tosearch<span style="color: #555555">.</span>shape
+        ctrans_tosearch <span style="color: #555555">=</span> cv2<span style="color: #555555">.</span>resize(ctrans_tosearch,\
+                        (np<span style="color: #555555">.</span>int(imshape[<span style="color: #FF6600">1</span>] <span style="color: #555555">/</span> scale), np<span style="color: #555555">.</span>int(imshape[<span style="color: #FF6600">0</span>] <span style="color: #555555">/</span> scale)))
+
+    ch1 <span style="color: #555555">=</span> ctrans_tosearch[:, :, <span style="color: #FF6600">0</span>]
+    ch2 <span style="color: #555555">=</span> ctrans_tosearch[:, :, <span style="color: #FF6600">1</span>]
+    ch3 <span style="color: #555555">=</span> ctrans_tosearch[:, :, <span style="color: #FF6600">2</span>]
+
+    <span style="color: #0099FF; font-style: italic"># Define blocks and steps as above</span>
+    nxblocks <span style="color: #555555">=</span> (ch1<span style="color: #555555">.</span>shape[<span style="color: #FF6600">1</span>] <span style="color: #555555">//</span> pix_per_cell) <span style="color: #555555">-</span> <span style="color: #FF6600">1</span>
+    nyblocks <span style="color: #555555">=</span> (ch1<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>] <span style="color: #555555">//</span> pix_per_cell) <span style="color: #555555">-</span> <span style="color: #FF6600">1</span>
+    nfeat_per_block <span style="color: #555555">=</span> orient <span style="color: #555555">*</span> cell_per_block <span style="color: #555555">**</span> <span style="color: #FF6600">2</span>
+    <span style="color: #0099FF; font-style: italic"># 64 was the orginal sampling rate, with 8 cells and 8 pix per cell</span>
+    window <span style="color: #555555">=</span> <span style="color: #FF6600">64</span>
+    nblocks_per_window <span style="color: #555555">=</span> (window <span style="color: #555555">//</span> pix_per_cell) <span style="color: #555555">-</span> <span style="color: #FF6600">1</span>
+    cells_per_step <span style="color: #555555">=</span> <span style="color: #FF6600">2</span>  <span style="color: #0099FF; font-style: italic"># Instead of overlap, define how many cells to step</span>
+    nxsteps <span style="color: #555555">=</span> (nxblocks <span style="color: #555555">-</span> nblocks_per_window) <span style="color: #555555">//</span> cells_per_step
+    nysteps <span style="color: #555555">=</span> (nyblocks <span style="color: #555555">-</span> nblocks_per_window) <span style="color: #555555">//</span> cells_per_step
+
+    <span style="color: #0099FF; font-style: italic"># Compute individual channel HOG features for the entire image</span>
+    <span style="color: #006699; font-weight: bold">if</span> hog_channel <span style="color: #555555">==</span> <span style="color: #CC3300">&#39;ALL&#39;</span>:
+        hog1 <span style="color: #555555">=</span> FE<span style="color: #555555">.</span>get_hog_features(ch1,vis <span style="color: #555555">=</span> <span style="color: #336666">False</span>, feature_vec<span style="color: #555555">=</span><span style="color: #336666">False</span>)
+        hog2 <span style="color: #555555">=</span> FE<span style="color: #555555">.</span>get_hog_features(ch2,vis <span style="color: #555555">=</span> <span style="color: #336666">False</span>, feature_vec<span style="color: #555555">=</span><span style="color: #336666">False</span>)
+        hog3 <span style="color: #555555">=</span> FE<span style="color: #555555">.</span>get_hog_features(ch3,vis <span style="color: #555555">=</span> <span style="color: #336666">False</span>, feature_vec<span style="color: #555555">=</span><span style="color: #336666">False</span>)
+    <span style="color: #006699; font-weight: bold">else</span>:
+        hog1 <span style="color: #555555">=</span> FE<span style="color: #555555">.</span>get_hog_features(hog_channel,vis <span style="color: #555555">=</span><span style="color: #336666">False</span>, feature_vec<span style="color: #555555">=</span><span style="color: #336666">False</span>)
+
+    <span style="color: #006699; font-weight: bold">for</span> xb <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(nxsteps):
+        <span style="color: #006699; font-weight: bold">for</span> yb <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(nysteps):
+            ypos <span style="color: #555555">=</span> yb <span style="color: #555555">*</span> cells_per_step
+            xpos <span style="color: #555555">=</span> xb <span style="color: #555555">*</span> cells_per_step
+            <span style="color: #0099FF; font-style: italic"># Extract HOG for this patch</span>
+
+            <span style="color: #006699; font-weight: bold">if</span> hog_channel <span style="color: #555555">==</span> <span style="color: #CC3300">&#39;ALL&#39;</span>:
+                hog_feat1 <span style="color: #555555">=</span> hog1[ypos:ypos <span style="color: #555555">+</span> nblocks_per_window,\
+                                 xpos:xpos <span style="color: #555555">+</span> nblocks_per_window]<span style="color: #555555">.</span>ravel()
+                hog_feat2 <span style="color: #555555">=</span> hog2[ypos:ypos <span style="color: #555555">+</span> nblocks_per_window,\
+                                 xpos:xpos <span style="color: #555555">+</span> nblocks_per_window]<span style="color: #555555">.</span>ravel()
+                hog_feat3 <span style="color: #555555">=</span> hog3[ypos:ypos <span style="color: #555555">+</span> nblocks_per_window,\
+                                 xpos:xpos <span style="color: #555555">+</span> nblocks_per_window]<span style="color: #555555">.</span>ravel()
+
+                hog_features <span style="color: #555555">=</span> np<span style="color: #555555">.</span>hstack((hog_feat1, hog_feat2, hog_feat3))
+            <span style="color: #006699; font-weight: bold">else</span>:
+                hog_features <span style="color: #555555">=</span> hog1[ypos:ypos <span style="color: #555555">+</span> nblocks_per_window,\
+                                    xpos:xpos <span style="color: #555555">+</span> nblocks_per_window]<span style="color: #555555">.</span>ravel()
+
+            xleft <span style="color: #555555">=</span> xpos <span style="color: #555555">*</span> pix_per_cell
+            ytop <span style="color: #555555">=</span> ypos <span style="color: #555555">*</span> pix_per_cell
+
+            <span style="color: #0099FF; font-style: italic"># Extract the image patch</span>
+            subimg <span style="color: #555555">=</span> cv2<span style="color: #555555">.</span>resize(ctrans_tosearch[ytop:ytop <span style="color: #555555">+</span>\
+                                window, xleft:xleft <span style="color: #555555">+</span> window], (<span style="color: #FF6600">64</span>, <span style="color: #FF6600">64</span>))
+
+            <span style="color: #0099FF; font-style: italic"># Get color features</span>
+            spatial_features <span style="color: #555555">=</span> FE<span style="color: #555555">.</span>bin_spatial(subimg)
+            hist_features <span style="color: #555555">=</span> FE<span style="color: #555555">.</span>color_hist(subimg)
+
+            <span style="color: #0099FF; font-style: italic"># Scale features and make a prediction</span>
+            test_features <span style="color: #555555">=</span> X_scaler<span style="color: #555555">.</span>transform(
+                np<span style="color: #555555">.</span>hstack((spatial_features, hist_features, hog_features))<span style="color: #555555">.</span>reshape(<span style="color: #FF6600">1</span>, <span style="color: #555555">-</span><span style="color: #FF6600">1</span>))
+            <span style="color: #0099FF; font-style: italic"># test_features = X_scaler.transform(np.hstack((shape_feat, hist_feat)).reshape(1, -1))</span>
+            test_prediction <span style="color: #555555">=</span> svc<span style="color: #555555">.</span>predict(test_features)
+
+            <span style="color: #006699; font-weight: bold">if</span> test_prediction <span style="color: #555555">==</span> <span style="color: #FF6600">1</span>:
+                xbox_left <span style="color: #555555">=</span> np<span style="color: #555555">.</span>int(xleft <span style="color: #555555">*</span> scale)
+                ytop_draw <span style="color: #555555">=</span> np<span style="color: #555555">.</span>int(ytop <span style="color: #555555">*</span> scale)
+                win_draw <span style="color: #555555">=</span> np<span style="color: #555555">.</span>int(window <span style="color: #555555">*</span> scale)
+                cv2<span style="color: #555555">.</span>rectangle(draw_img, (xbox_left, ytop_draw <span style="color: #555555">+</span> ystart),
+                              (xbox_left <span style="color: #555555">+</span> win_draw, ytop_draw <span style="color: #555555">+</span> win_draw <span style="color: #555555">+</span> ystart), (<span style="color: #FF6600">0</span>, <span style="color: #FF6600">0</span>, <span style="color: #FF6600">255</span>), <span style="color: #FF6600">6</span>)
+
+    <span style="color: #006699; font-weight: bold">return</span> draw_img
+</pre></div>
+
+
+<hr />
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>directory <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;test_images/*.jpg&#39;</span>
+globDir <span style="color: #555555">=</span> glob<span style="color: #555555">.</span>glob(directory)
+fig <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">16</span>,<span style="color: #FF6600">14</span>))
+
+n1 <span style="color: #555555">=</span> <span style="color: #FF6600">4</span>
+n2 <span style="color: #555555">=</span> <span style="color: #FF6600">4</span>
+color_space<span style="color: #555555">=</span><span style="color: #CC3300">&#39;YCrCb&#39;</span>
+ystart <span style="color: #555555">=</span> <span style="color: #FF6600">400</span>
+ystop <span style="color: #555555">=</span> <span style="color: #FF6600">656</span>
+scale <span style="color: #555555">=</span> <span style="color: #FF6600">1.5</span>
+
+count <span style="color: #555555">=</span> <span style="color: #FF6600">1</span>
+<span style="color: #006699; font-weight: bold">for</span> k,img <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>(globDir):
+    Img <span style="color: #555555">=</span> mpimg<span style="color: #555555">.</span>imread(img)
+
+    out_img <span style="color: #555555">=</span> find_cars(Img, ystart, ystop, scale,\
+                    svc, X_scaler, color_space,\
+                    orient, pix_per_cell, cell_per_block,\
+                    hog_channel, spatial_size, hist_bins)
+
+    <span style="color: #0099FF; font-style: italic">#fig-1</span>
+    fig<span style="color: #555555">.</span>add_subplot(n1,n2,count)
+    plt<span style="color: #555555">.</span>imshow(Img)
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Original Image&#39;</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+
+
+     <span style="color: #0099FF; font-style: italic">#fig-2</span>
+    fig<span style="color: #555555">.</span>add_subplot(n1,n2,count)
+    plt<span style="color: #555555">.</span>imshow(out_img)
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Box-image&#39;</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+</pre></div>
+
+
+<p><img alt="png" src="../output_66_0.png" /></p>
+<h3 id="utilities">Utilities</h3>
+<h4 id="sliding-window">Sliding window</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">slide_window</span>(img, x_start_stop<span style="color: #555555">=</span>[<span style="color: #336666">None</span>, <span style="color: #336666">None</span>],\
+                      y_start_stop<span style="color: #555555">=</span>[<span style="color: #336666">None</span>, <span style="color: #336666">None</span>],\
+                      xy_window<span style="color: #555555">=</span>(<span style="color: #FF6600">64</span>, <span style="color: #FF6600">64</span>),\
+                      xy_overlap<span style="color: #555555">=</span>(<span style="color: #FF6600">0.5</span>, <span style="color: #FF6600">0.5</span>)):
+
+
+    <span style="color: #0099FF; font-style: italic"># If x and/or y start/stop positions not defined, set to image size</span>
+    <span style="color: #006699; font-weight: bold">if</span> x_start_stop[<span style="color: #FF6600">0</span>] <span style="color: #555555">==</span> <span style="color: #336666">None</span>:
+        x_start_stop[<span style="color: #FF6600">0</span>] <span style="color: #555555">=</span> <span style="color: #FF6600">0</span>
+    <span style="color: #006699; font-weight: bold">if</span> x_start_stop[<span style="color: #FF6600">1</span>] <span style="color: #555555">==</span> <span style="color: #336666">None</span>:
+        x_start_stop[<span style="color: #FF6600">1</span>] <span style="color: #555555">=</span> img<span style="color: #555555">.</span>shape[<span style="color: #FF6600">1</span>]
+    <span style="color: #006699; font-weight: bold">if</span> y_start_stop[<span style="color: #FF6600">0</span>] <span style="color: #555555">==</span> <span style="color: #336666">None</span>:
+        y_start_stop[<span style="color: #FF6600">0</span>] <span style="color: #555555">=</span> <span style="color: #FF6600">0</span>
+    <span style="color: #006699; font-weight: bold">if</span> y_start_stop[<span style="color: #FF6600">1</span>] <span style="color: #555555">==</span> <span style="color: #336666">None</span>:
+        y_start_stop[<span style="color: #FF6600">1</span>] <span style="color: #555555">=</span> img<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>]
+
+    <span style="color: #0099FF; font-style: italic"># Compute the span of the region to be searched    </span>
+    xspan <span style="color: #555555">=</span> x_start_stop[<span style="color: #FF6600">1</span>] <span style="color: #555555">-</span> x_start_stop[<span style="color: #FF6600">0</span>]
+    yspan <span style="color: #555555">=</span> y_start_stop[<span style="color: #FF6600">1</span>] <span style="color: #555555">-</span> y_start_stop[<span style="color: #FF6600">0</span>]
+
+    <span style="color: #0099FF; font-style: italic"># Compute the number of pixels per step in x/y</span>
+    nx_pix_per_step <span style="color: #555555">=</span> np<span style="color: #555555">.</span>int(xy_window[<span style="color: #FF6600">0</span>]<span style="color: #555555">*</span>(<span style="color: #FF6600">1</span> <span style="color: #555555">-</span> xy_overlap[<span style="color: #FF6600">0</span>]))
+    ny_pix_per_step <span style="color: #555555">=</span> np<span style="color: #555555">.</span>int(xy_window[<span style="color: #FF6600">1</span>]<span style="color: #555555">*</span>(<span style="color: #FF6600">1</span> <span style="color: #555555">-</span> xy_overlap[<span style="color: #FF6600">1</span>]))
+
+    <span style="color: #0099FF; font-style: italic"># Compute the number of windows in x/y</span>
+    nx_buffer <span style="color: #555555">=</span> np<span style="color: #555555">.</span>int(xy_window[<span style="color: #FF6600">0</span>]<span style="color: #555555">*</span>(xy_overlap[<span style="color: #FF6600">0</span>]))
+    ny_buffer <span style="color: #555555">=</span> np<span style="color: #555555">.</span>int(xy_window[<span style="color: #FF6600">1</span>]<span style="color: #555555">*</span>(xy_overlap[<span style="color: #FF6600">1</span>]))
+    nx_windows <span style="color: #555555">=</span> np<span style="color: #555555">.</span>int((xspan<span style="color: #555555">-</span>nx_buffer)<span style="color: #555555">/</span>nx_pix_per_step) 
+    ny_windows <span style="color: #555555">=</span> np<span style="color: #555555">.</span>int((yspan<span style="color: #555555">-</span>ny_buffer)<span style="color: #555555">/</span>ny_pix_per_step) 
+
+    <span style="color: #0099FF; font-style: italic"># Initialize a list to append window positions to</span>
+    window_list <span style="color: #555555">=</span> []
+    <span style="color: #0099FF; font-style: italic"># Loop through finding x and y window positions</span>
+    <span style="color: #0099FF; font-style: italic"># Note: you could vectorize this step, but in practice</span>
+    <span style="color: #0099FF; font-style: italic"># you&#39;ll be considering windows one by one with your</span>
+    <span style="color: #0099FF; font-style: italic"># classifier, so looping makes sense</span>
+    <span style="color: #006699; font-weight: bold">for</span> ys <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(ny_windows):
+        <span style="color: #006699; font-weight: bold">for</span> xs <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(nx_windows):
+            <span style="color: #0099FF; font-style: italic"># Calculate window position</span>
+            startx <span style="color: #555555">=</span> xs<span style="color: #555555">*</span>nx_pix_per_step <span style="color: #555555">+</span> x_start_stop[<span style="color: #FF6600">0</span>]
+            endx <span style="color: #555555">=</span> startx <span style="color: #555555">+</span> xy_window[<span style="color: #FF6600">0</span>]
+            starty <span style="color: #555555">=</span> ys<span style="color: #555555">*</span>ny_pix_per_step <span style="color: #555555">+</span> y_start_stop[<span style="color: #FF6600">0</span>]
+            endy <span style="color: #555555">=</span> starty <span style="color: #555555">+</span> xy_window[<span style="color: #FF6600">1</span>]
+            <span style="color: #0099FF; font-style: italic"># Append window position to list</span>
+            window_list<span style="color: #555555">.</span>append(((startx, starty), (endx, endy)))
+    <span style="color: #0099FF; font-style: italic"># Return the list of windows</span>
+    <span style="color: #006699; font-weight: bold">return</span> window_list
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>image <span style="color: #555555">=</span> mpimg<span style="color: #555555">.</span>imread(<span style="color: #CC3300">&#39;car.jpg&#39;</span>)
+windows <span style="color: #555555">=</span> slide_window(image, x_start_stop<span style="color: #555555">=</span>[<span style="color: #336666">None</span>, <span style="color: #336666">None</span>], y_start_stop<span style="color: #555555">=</span>[<span style="color: #336666">None</span>, <span style="color: #336666">None</span>], 
+                    xy_window<span style="color: #555555">=</span>(<span style="color: #FF6600">128</span>, <span style="color: #FF6600">128</span>), xy_overlap<span style="color: #555555">=</span>(<span style="color: #FF6600">0.5</span>, <span style="color: #FF6600">0.5</span>))
+
+window_img <span style="color: #555555">=</span> draw_boxes(image, windows, color<span style="color: #555555">=</span>(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">0</span>, <span style="color: #FF6600">255</span>), thick<span style="color: #555555">=</span><span style="color: #FF6600">6</span>)                    
+plt<span style="color: #555555">.</span>imshow(window_img)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&amp;lt;matplotlib.image.AxesImage at 0x1239f9a58&amp;gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_70_1.png" /></p>
+<hr />
+<h5 id="multi-scale-window">Multi scale window</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">draw_multi_scale_windows</span>(img, ystart, ystop, scale):
+    draw_img <span style="color: #555555">=</span> np<span style="color: #555555">.</span>copy(img)
+    img <span style="color: #555555">=</span> img<span style="color: #555555">.</span>astype(np<span style="color: #555555">.</span>float32) <span style="color: #555555">/</span> <span style="color: #FF6600">255</span>
+
+    img_tosearch <span style="color: #555555">=</span> img[ystart:ystop, :, :]
+    imshape <span style="color: #555555">=</span> img_tosearch<span style="color: #555555">.</span>shape
+
+    img_tosearch <span style="color: #555555">=</span> cv2<span style="color: #555555">.</span>resize(img_tosearch,\
+                              (np<span style="color: #555555">.</span>int(imshape[<span style="color: #FF6600">1</span>] <span style="color: #555555">/</span> scale),\
+                               np<span style="color: #555555">.</span>int(imshape[<span style="color: #FF6600">0</span>] <span style="color: #555555">/</span> scale)))
+
+    <span style="color: #0099FF; font-style: italic"># Define blocks and steps as above</span>
+    nxblocks <span style="color: #555555">=</span> (img_tosearch<span style="color: #555555">.</span>shape[<span style="color: #FF6600">1</span>] <span style="color: #555555">//</span> pix_per_cell) <span style="color: #555555">-</span> <span style="color: #FF6600">1</span>
+    nyblocks <span style="color: #555555">=</span> (img_tosearch<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>] <span style="color: #555555">//</span> pix_per_cell) <span style="color: #555555">-</span> <span style="color: #FF6600">1</span>
+    nfeat_per_block <span style="color: #555555">=</span> orient <span style="color: #555555">*</span> cell_per_block <span style="color: #555555">**</span> <span style="color: #FF6600">2</span>
+
+    window <span style="color: #555555">=</span> <span style="color: #FF6600">64</span>
+    nblocks_per_window <span style="color: #555555">=</span> (window <span style="color: #555555">//</span> pix_per_cell) <span style="color: #555555">-</span> <span style="color: #FF6600">1</span>
+    cells_per_step <span style="color: #555555">=</span> <span style="color: #FF6600">2</span>  <span style="color: #0099FF; font-style: italic"># Instead of overlap, define how many cells to step</span>
+    nxsteps <span style="color: #555555">=</span> (nxblocks <span style="color: #555555">-</span> nblocks_per_window) <span style="color: #555555">//</span> cells_per_step
+    nysteps <span style="color: #555555">=</span> (nyblocks <span style="color: #555555">-</span> nblocks_per_window) <span style="color: #555555">//</span> cells_per_step
+
+    rect_start <span style="color: #555555">=</span> <span style="color: #336666">None</span>
+    rect_end <span style="color: #555555">=</span> <span style="color: #336666">None</span>
+    <span style="color: #006699; font-weight: bold">for</span> xb <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(nxsteps<span style="color: #555555">+</span><span style="color: #FF6600">1</span>):
+        <span style="color: #006699; font-weight: bold">for</span> yb <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(nysteps<span style="color: #555555">+</span><span style="color: #FF6600">1</span>):
+            ypos <span style="color: #555555">=</span> yb <span style="color: #555555">*</span> cells_per_step
+            xpos <span style="color: #555555">=</span> xb <span style="color: #555555">*</span> cells_per_step
+
+            xleft <span style="color: #555555">=</span> xpos <span style="color: #555555">*</span> pix_per_cell
+            ytop <span style="color: #555555">=</span> ypos <span style="color: #555555">*</span> pix_per_cell
+
+            xbox_left <span style="color: #555555">=</span> np<span style="color: #555555">.</span>int(xleft <span style="color: #555555">*</span> scale)
+            ytop_draw <span style="color: #555555">=</span> np<span style="color: #555555">.</span>int(ytop <span style="color: #555555">*</span> scale)
+            win_draw <span style="color: #555555">=</span> np<span style="color: #555555">.</span>int(window <span style="color: #555555">*</span> scale)
+            rect_start <span style="color: #555555">=</span> (xbox_left, ytop_draw <span style="color: #555555">+</span> ystart)
+            rect_end <span style="color: #555555">=</span> (xbox_left <span style="color: #555555">+</span> win_draw, ytop_draw <span style="color: #555555">+</span> win_draw <span style="color: #555555">+</span> ystart)
+            cv2<span style="color: #555555">.</span>rectangle(draw_img, rect_start, rect_end, (<span style="color: #FF6600">0</span>, <span style="color: #FF6600">0</span>, <span style="color: #FF6600">255</span>), <span style="color: #FF6600">6</span>)
+
+    cv2<span style="color: #555555">.</span>rectangle(draw_img, rect_start, rect_end, (<span style="color: #FF6600">255</span>, <span style="color: #FF6600">0</span>, <span style="color: #FF6600">0</span>), <span style="color: #FF6600">6</span>)
+
+    <span style="color: #006699; font-weight: bold">return</span> draw_img
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>img <span style="color: #555555">=</span> mpimg<span style="color: #555555">.</span>imread(<span style="color: #CC3300">&#39;test_images/test6.jpg&#39;</span>)
+
+plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">15</span>,<span style="color: #FF6600">10</span>))
+subpltcount<span style="color: #555555">=</span><span style="color: #FF6600">1</span>
+<span style="color: #006699; font-weight: bold">for</span> (ystart, ystop, scale) <span style="color: #000000; font-weight: bold">in</span> [(<span style="color: #FF6600">360</span>, <span style="color: #FF6600">560</span>, <span style="color: #FF6600">1.5</span>), (<span style="color: #FF6600">400</span>, <span style="color: #FF6600">600</span>, <span style="color: #FF6600">1.8</span>), (<span style="color: #FF6600">440</span>, <span style="color: #FF6600">700</span>, <span style="color: #FF6600">2.5</span>)]:
+
+    plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">1</span>,<span style="color: #FF6600">3</span>,subpltcount)
+    plt<span style="color: #555555">.</span>imshow(draw_multi_scale_windows(img, ystart, ystop, scale))
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Scale </span><span style="color: #AA0000">%s</span><span style="color: #CC3300">&#39;</span><span style="color: #555555">%</span>subpltcount)
+    plt<span style="color: #555555">.</span>xticks([])
+    plt<span style="color: #555555">.</span>yticks([])
+    subpltcount <span style="color: #555555">+=</span><span style="color: #FF6600">1</span>
+</pre></div>
+
+
+<p><img alt="png" src="../output_74_0.png" /></p>
+<hr />
+<h3 id="vehicle-detecton-pipeline">Vehicle Detecton Pipeline</h3>
+<hr />
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">class</span> <span style="color: #00AA88; font-weight: bold">DetectVehicle</span>(<span style="color: #336666">object</span>):
+
+
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">__init__</span>(<span style="color: #336666">self</span>,param_dict):
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>param_dict <span style="color: #555555">=</span> param_dict
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>svc <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>param_dict[<span style="color: #CC3300">&#39;svc&#39;</span>] 
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>X_scalar <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>param_dict[<span style="color: #CC3300">&#39;X_scalar&#39;</span>]
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>orient <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>param_dict[<span style="color: #CC3300">&#39;orient&#39;</span>]
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>pix_per_cell <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>param_dict[<span style="color: #CC3300">&#39;pix_per_cell&#39;</span>] 
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>cell_per_block <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>param_dict[<span style="color: #CC3300">&#39;cell_per_block&#39;</span>]
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>hist_bins <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>param_dict[<span style="color: #CC3300">&#39;hist_bins&#39;</span>] 
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>spatial_size <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>param_dict[<span style="color: #CC3300">&#39;spatial_size&#39;</span>] 
+
+
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>FE <span style="color: #555555">=</span> FeatureExtraction(hist_bins <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>hist_bins,\
+                            hist_bins_range <span style="color: #555555">=</span>  (<span style="color: #FF6600">0</span>,<span style="color: #FF6600">256</span>),\
+                            spatial_size <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>spatial_size,\
+                            orient <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>orient,\
+                            pix_per_cell <span style="color: #555555">=</span>  <span style="color: #336666">self</span><span style="color: #555555">.</span>pix_per_cell,\
+                            cell_per_block <span style="color: #555555">=</span>  <span style="color: #336666">self</span><span style="color: #555555">.</span>cell_per_block)
+
+
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>threshold <span style="color: #555555">=</span> <span style="color: #FF6600">1.0</span>
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>heatmap <span style="color: #555555">=</span> <span style="color: #336666">None</span>
+
+        <span style="color: #0099FF; font-style: italic"># Heat Image for the Last Three Frames</span>
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>heat_images <span style="color: #555555">=</span> deque(maxlen<span style="color: #555555">=</span><span style="color: #FF6600">3</span>)
+
+        <span style="color: #0099FF; font-style: italic"># Current Frame Count</span>
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>frame_count <span style="color: #555555">=</span> <span style="color: #FF6600">0</span>
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>full_frame_processing_interval <span style="color: #555555">=</span> <span style="color: #FF6600">4</span>
+
+        <span style="color: #0099FF; font-style: italic"># Xstart</span>
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>xstart <span style="color: #555555">=</span> <span style="color: #FF6600">600</span>
+
+
+        <span style="color: #0099FF; font-style: italic"># Various Scales</span>
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>ystart_ystop_scale <span style="color: #555555">=</span> [(<span style="color: #FF6600">360</span>, <span style="color: #FF6600">560</span>, <span style="color: #FF6600">1.5</span>), (<span style="color: #FF6600">400</span>, <span style="color: #FF6600">600</span>, <span style="color: #FF6600">1.8</span>), (<span style="color: #FF6600">440</span>, <span style="color: #FF6600">700</span>, <span style="color: #FF6600">2.5</span>)]
+
+
+        <span style="color: #0099FF; font-style: italic"># Kernal For Dilation</span>
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>kernel <span style="color: #555555">=</span> np<span style="color: #555555">.</span>ones((<span style="color: #FF6600">50</span>, <span style="color: #FF6600">50</span>))
+
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>image <span style="color: #555555">=</span> <span style="color: #336666">None</span>
+
+
+
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">find_cars</span>(<span style="color: #336666">self</span>,image,vid<span style="color: #555555">=</span><span style="color: #336666">True</span>,vis<span style="color: #555555">=</span><span style="color: #336666">False</span>):
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>image <span style="color: #555555">=</span> image
+        box_list <span style="color: #555555">=</span> []
+        draw_img <span style="color: #555555">=</span> np<span style="color: #555555">.</span>copy(<span style="color: #336666">self</span><span style="color: #555555">.</span>image)
+        img <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>image<span style="color: #555555">.</span>astype(np<span style="color: #555555">.</span>float32)<span style="color: #555555">/</span><span style="color: #FF6600">255</span>
+
+        <span style="color: #006699; font-weight: bold">if</span> vid: <span style="color: #0099FF; font-style: italic"># video</span>
+
+            <span style="color: #006699; font-weight: bold">if</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>frame_count <span style="color: #555555">%</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>full_frame_processing_interval <span style="color: #555555">==</span> <span style="color: #FF6600">0</span>:
+                mask <span style="color: #555555">=</span> np<span style="color: #555555">.</span>ones_like(img[:, :, <span style="color: #FF6600">0</span>])
+            <span style="color: #006699; font-weight: bold">else</span>:
+                mask <span style="color: #555555">=</span> np<span style="color: #555555">.</span>sum(np<span style="color: #555555">.</span>array(<span style="color: #336666">self</span><span style="color: #555555">.</span>heat_images), axis<span style="color: #555555">=</span><span style="color: #FF6600">0</span>)
+                mask[(mask <span style="color: #555555">&gt;</span> <span style="color: #FF6600">0</span>)] <span style="color: #555555">=</span> <span style="color: #FF6600">1</span>
+                mask <span style="color: #555555">=</span> cv2<span style="color: #555555">.</span>dilate(mask, <span style="color: #336666">self</span><span style="color: #555555">.</span>kernel, iterations<span style="color: #555555">=</span><span style="color: #FF6600">1</span>)
+
+            <span style="color: #336666">self</span><span style="color: #555555">.</span>frame_count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+
+            <span style="color: #006699; font-weight: bold">for</span> (<span style="color: #336666">self</span><span style="color: #555555">.</span>ystart, <span style="color: #336666">self</span><span style="color: #555555">.</span>ystop, <span style="color: #336666">self</span><span style="color: #555555">.</span>scale) <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>ystart_ystop_scale:
+
+                nonzero <span style="color: #555555">=</span> mask<span style="color: #555555">.</span>nonzero()
+                nonzeroy <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array(nonzero[<span style="color: #FF6600">0</span>])
+                nonzerox <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array(nonzero[<span style="color: #FF6600">1</span>])
+
+                <span style="color: #006699; font-weight: bold">if</span> <span style="color: #336666">len</span>(nonzeroy) <span style="color: #555555">!=</span> <span style="color: #FF6600">0</span>:
+                    <span style="color: #336666">self</span><span style="color: #555555">.</span>ystart <span style="color: #555555">=</span> <span style="color: #336666">max</span>(np<span style="color: #555555">.</span>min(nonzeroy), <span style="color: #336666">self</span><span style="color: #555555">.</span>ystart)
+                    <span style="color: #336666">self</span><span style="color: #555555">.</span>ystop <span style="color: #555555">=</span> <span style="color: #336666">min</span>(np<span style="color: #555555">.</span>max(nonzeroy), <span style="color: #336666">self</span><span style="color: #555555">.</span>ystop)
+                <span style="color: #006699; font-weight: bold">if</span> <span style="color: #336666">len</span>(nonzeroy) <span style="color: #555555">!=</span> <span style="color: #FF6600">0</span>:
+                    x_start <span style="color: #555555">=</span> <span style="color: #336666">max</span>(np<span style="color: #555555">.</span>min(nonzerox), <span style="color: #336666">self</span><span style="color: #555555">.</span>xstart)
+                    x_stop <span style="color: #555555">=</span> np<span style="color: #555555">.</span>max(nonzerox)
+                <span style="color: #006699; font-weight: bold">else</span>:
+                    <span style="color: #006699; font-weight: bold">continue</span>
+
+                <span style="color: #006699; font-weight: bold">if</span> x_stop <span style="color: #555555">&lt;=</span> x_start <span style="color: #000000; font-weight: bold">or</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>ystop <span style="color: #555555">&lt;=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>ystart:
+                    <span style="color: #006699; font-weight: bold">continue</span>
+
+                ibox_list <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>window_search(img)  
+                <span style="color: #006699; font-weight: bold">for</span> k <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(<span style="color: #336666">len</span>(ibox_list)):
+                    box_list<span style="color: #555555">.</span>append(ibox_list[k])
+
+            <span style="color: #0099FF; font-style: italic"># Add heat to each box in box list</span>
+            <span style="color: #336666">self</span><span style="color: #555555">.</span>add_heat_and_threshold(draw_img, box_list)
+            <span style="color: #0099FF; font-style: italic"># Find final boxes from heatmap using label function</span>
+            labels <span style="color: #555555">=</span> label(<span style="color: #336666">self</span><span style="color: #555555">.</span>heatmap)
+            draw_img <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>draw_labeled_bboxes(draw_img, labels)  
+
+            <span style="color: #006699; font-weight: bold">return</span> draw_img
+
+
+        <span style="color: #006699; font-weight: bold">else</span>: <span style="color: #0099FF; font-style: italic"># picture</span>
+
+            <span style="color: #006699; font-weight: bold">for</span> (<span style="color: #336666">self</span><span style="color: #555555">.</span>ystart, <span style="color: #336666">self</span><span style="color: #555555">.</span>ystop, <span style="color: #336666">self</span><span style="color: #555555">.</span>scale) <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>ystart_ystop_scale:
+                ibox_list <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>window_search(img)  
+
+                <span style="color: #006699; font-weight: bold">for</span> k <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(<span style="color: #336666">len</span>(ibox_list)):
+                    box_list<span style="color: #555555">.</span>append(ibox_list[k])
+
+            <span style="color: #006699; font-weight: bold">if</span> vis: <span style="color: #0099FF; font-style: italic"># visualize picture with all boaxes found</span>
+                <span style="color: #006699; font-weight: bold">return</span> box_list
+
+            <span style="color: #006699; font-weight: bold">else</span>: <span style="color: #0099FF; font-style: italic"># visualize only threshold boxes  </span>
+                draw_image <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>window_search(img)
+                <span style="color: #0099FF; font-style: italic"># Add heat to each box in box list</span>
+                <span style="color: #336666">self</span><span style="color: #555555">.</span>add_heat_and_threshold(draw_img, box_list)
+                <span style="color: #0099FF; font-style: italic"># Find final boxes from heatmap using label function</span>
+                labels <span style="color: #555555">=</span> label(<span style="color: #336666">self</span><span style="color: #555555">.</span>heatmap)
+                draw_img <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>draw_labeled_bboxes(draw_img, labels)  
+
+                <span style="color: #006699; font-weight: bold">return</span> [draw_img,<span style="color: #336666">self</span><span style="color: #555555">.</span>heatmap] 
+
+
+
+
+
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">window_search</span>(<span style="color: #336666">self</span>,img):
+
+            box_list <span style="color: #555555">=</span> []
+            img_tosearch <span style="color: #555555">=</span> img[<span style="color: #336666">self</span><span style="color: #555555">.</span>ystart:<span style="color: #336666">self</span><span style="color: #555555">.</span>ystop,:,:]
+            ctrans_tosearch <span style="color: #555555">=</span> FE<span style="color: #555555">.</span>convert_color(img_tosearch, cspace<span style="color: #555555">=</span><span style="color: #CC3300">&#39;YCrCb&#39;</span>)
+
+            <span style="color: #006699; font-weight: bold">if</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>scale <span style="color: #555555">!=</span> <span style="color: #FF6600">1</span>:
+                imshape <span style="color: #555555">=</span> ctrans_tosearch<span style="color: #555555">.</span>shape
+                ctrans_tosearch <span style="color: #555555">=</span> cv2<span style="color: #555555">.</span>resize(ctrans_tosearch,
+                                     (np<span style="color: #555555">.</span>int(imshape[<span style="color: #FF6600">1</span>]<span style="color: #555555">/</span><span style="color: #336666">self</span><span style="color: #555555">.</span>scale),
+                                      np<span style="color: #555555">.</span>int(imshape[<span style="color: #FF6600">0</span>]<span style="color: #555555">/</span><span style="color: #336666">self</span><span style="color: #555555">.</span>scale)))
+
+            ch1 <span style="color: #555555">=</span> ctrans_tosearch[:,:,<span style="color: #FF6600">0</span>]
+            ch2 <span style="color: #555555">=</span> ctrans_tosearch[:,:,<span style="color: #FF6600">1</span>]
+            ch3 <span style="color: #555555">=</span> ctrans_tosearch[:,:,<span style="color: #FF6600">2</span>]
+
+
+            <span style="color: #0099FF; font-style: italic"># Define blocks and steps as above</span>
+            nxblocks <span style="color: #555555">=</span> (ch1<span style="color: #555555">.</span>shape[<span style="color: #FF6600">1</span>] <span style="color: #555555">//</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>pix_per_cell) <span style="color: #555555">-</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>cell_per_block <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>
+            nyblocks <span style="color: #555555">=</span> (ch1<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>] <span style="color: #555555">//</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>pix_per_cell) <span style="color: #555555">-</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>cell_per_block <span style="color: #555555">+</span> <span style="color: #FF6600">1</span> 
+            nfeat_per_block <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>orient<span style="color: #555555">*</span><span style="color: #336666">self</span><span style="color: #555555">.</span>cell_per_block<span style="color: #555555">**</span><span style="color: #FF6600">2</span>
+
+            <span style="color: #0099FF; font-style: italic"># 64 was the orginal sampling rate, with 8 cells and 8 pix per cell</span>
+            window <span style="color: #555555">=</span> <span style="color: #FF6600">64</span>
+            nblocks_per_window <span style="color: #555555">=</span> (window <span style="color: #555555">//</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>pix_per_cell) <span style="color: #555555">-</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>cell_per_block <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>
+            cells_per_step <span style="color: #555555">=</span> <span style="color: #FF6600">2</span>  <span style="color: #0099FF; font-style: italic"># Instead of overlap, define how many cells to step</span>
+            nxsteps <span style="color: #555555">=</span> (nxblocks <span style="color: #555555">-</span> nblocks_per_window) <span style="color: #555555">//</span> cells_per_step
+            nysteps <span style="color: #555555">=</span> (nyblocks <span style="color: #555555">-</span> nblocks_per_window) <span style="color: #555555">//</span> cells_per_step
+
+            <span style="color: #0099FF; font-style: italic"># Compute individual channel HOG features for the entire image</span>
+
+            hog1 <span style="color: #555555">=</span> FE<span style="color: #555555">.</span>get_hog_features(ch1,vis<span style="color: #555555">=</span><span style="color: #336666">False</span>,feature_vec <span style="color: #555555">=</span> <span style="color: #336666">False</span>)
+            hog2 <span style="color: #555555">=</span> FE<span style="color: #555555">.</span>get_hog_features(ch2,vis<span style="color: #555555">=</span><span style="color: #336666">False</span>,feature_vec <span style="color: #555555">=</span> <span style="color: #336666">False</span>)
+            hog3 <span style="color: #555555">=</span> FE<span style="color: #555555">.</span>get_hog_features(ch3,vis<span style="color: #555555">=</span><span style="color: #336666">False</span>,feature_vec <span style="color: #555555">=</span> <span style="color: #336666">False</span>)
+
+
+            <span style="color: #006699; font-weight: bold">for</span> xb <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(nxsteps):
+                <span style="color: #006699; font-weight: bold">for</span> yb <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(nysteps):
+                    ypos <span style="color: #555555">=</span> yb<span style="color: #555555">*</span>cells_per_step
+                    xpos <span style="color: #555555">=</span> xb<span style="color: #555555">*</span>cells_per_step
+                    <span style="color: #0099FF; font-style: italic"># Extract HOG for this patch</span>
+                    hog_feat1 <span style="color: #555555">=</span> hog1[ypos:ypos<span style="color: #555555">+</span>nblocks_per_window,
+                             xpos:xpos<span style="color: #555555">+</span>nblocks_per_window]<span style="color: #555555">.</span>ravel() 
+                    hog_feat2 <span style="color: #555555">=</span> hog2[ypos:ypos<span style="color: #555555">+</span>nblocks_per_window,
+                             xpos:xpos<span style="color: #555555">+</span>nblocks_per_window]<span style="color: #555555">.</span>ravel() 
+                    hog_feat3 <span style="color: #555555">=</span> hog3[ypos:ypos<span style="color: #555555">+</span>nblocks_per_window,
+                             xpos:xpos<span style="color: #555555">+</span>nblocks_per_window]<span style="color: #555555">.</span>ravel() 
+
+                    hog_features <span style="color: #555555">=</span> np<span style="color: #555555">.</span>hstack((hog_feat1, hog_feat2, hog_feat3))
+
+                    xleft <span style="color: #555555">=</span> xpos<span style="color: #555555">*</span><span style="color: #336666">self</span><span style="color: #555555">.</span>pix_per_cell
+                    ytop <span style="color: #555555">=</span> ypos<span style="color: #555555">*</span><span style="color: #336666">self</span><span style="color: #555555">.</span>pix_per_cell
+
+                    <span style="color: #0099FF; font-style: italic"># Extract the image patch</span>
+                    subimg <span style="color: #555555">=</span> cv2<span style="color: #555555">.</span>resize(ctrans_tosearch[ytop:ytop<span style="color: #555555">+</span>window,\
+                                                    xleft:xleft<span style="color: #555555">+</span>window], (<span style="color: #FF6600">64</span>,<span style="color: #FF6600">64</span>))
+
+                    <span style="color: #0099FF; font-style: italic"># Get color features</span>
+                    spatial_features <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>FE<span style="color: #555555">.</span>bin_spatial(subimg)
+                    hist_features <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>FE<span style="color: #555555">.</span>color_hist(subimg)
+
+                    color_features <span style="color: #555555">=</span> np<span style="color: #555555">.</span>hstack((spatial_features, hist_features))
+
+                    X <span style="color: #555555">=</span> np<span style="color: #555555">.</span>hstack((color_features,hog_features))<span style="color: #555555">.</span>reshape(<span style="color: #FF6600">1</span>, <span style="color: #555555">-</span><span style="color: #FF6600">1</span>)
+
+                    test_features <span style="color: #555555">=</span> X_scaler<span style="color: #555555">.</span>transform(X) 
+
+                    test_prediction <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>svc<span style="color: #555555">.</span>predict(test_features)
+
+
+                    <span style="color: #006699; font-weight: bold">if</span> test_prediction <span style="color: #555555">==</span> <span style="color: #FF6600">1</span>:
+
+                        xbox_left <span style="color: #555555">=</span> np<span style="color: #555555">.</span>int(xleft<span style="color: #555555">*</span><span style="color: #336666">self</span><span style="color: #555555">.</span>scale)
+                        ytop_draw <span style="color: #555555">=</span> np<span style="color: #555555">.</span>int(ytop<span style="color: #555555">*</span><span style="color: #336666">self</span><span style="color: #555555">.</span>scale)
+                        win_draw <span style="color: #555555">=</span> np<span style="color: #555555">.</span>int(window<span style="color: #555555">*</span><span style="color: #336666">self</span><span style="color: #555555">.</span>scale)
+
+                        box_list<span style="color: #555555">.</span>append(((xbox_left, ytop_draw <span style="color: #555555">+</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>ystart),\
+                                     (xbox_left <span style="color: #555555">+</span> win_draw, ytop_draw <span style="color: #555555">+</span> \
+                                      win_draw <span style="color: #555555">+</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>ystart)))
+
+
+
+            <span style="color: #006699; font-weight: bold">return</span> box_list
+
+
+
+
+
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">add_heat_and_threshold</span>(<span style="color: #336666">self</span>,draw_img, bbox_list):
+        <span style="color: #0099FF; font-style: italic"># Iterate through list of bboxes</span>
+        h_map <span style="color: #555555">=</span> np<span style="color: #555555">.</span>zeros_like(draw_img[:,:,<span style="color: #FF6600">0</span>])<span style="color: #555555">.</span>astype(np<span style="color: #555555">.</span>float)
+
+        <span style="color: #006699; font-weight: bold">for</span> box <span style="color: #000000; font-weight: bold">in</span> bbox_list:
+            <span style="color: #0099FF; font-style: italic"># Add += 1 for all pixels inside each bbox</span>
+            <span style="color: #0099FF; font-style: italic"># Assuming each &quot;box&quot; takes the form ((x1, y1), (x2, y2))</span>
+            h_map[box[<span style="color: #FF6600">0</span>][<span style="color: #FF6600">1</span>]:box[<span style="color: #FF6600">1</span>][<span style="color: #FF6600">1</span>], box[<span style="color: #FF6600">0</span>][<span style="color: #FF6600">0</span>]:box[<span style="color: #FF6600">1</span>][<span style="color: #FF6600">0</span>]] <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>heat_images<span style="color: #555555">.</span>append(h_map)
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>heatmap <span style="color: #555555">=</span> np<span style="color: #555555">.</span>sum(np<span style="color: #555555">.</span>array(<span style="color: #336666">self</span><span style="color: #555555">.</span>heat_images),axis<span style="color: #555555">=</span><span style="color: #FF6600">0</span>)
+        <span style="color: #0099FF; font-style: italic"># Return thresholded map</span>
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>heatmap[<span style="color: #336666">self</span><span style="color: #555555">.</span>heatmap <span style="color: #555555">&lt;=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>threshold] <span style="color: #555555">=</span> <span style="color: #FF6600">0</span>
+        <span style="color: #0099FF; font-style: italic"># Return updated heatmap</span>
+        <span style="color: #006699; font-weight: bold">return</span> 
+
+
+
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">draw_labeled_bboxes</span>(<span style="color: #336666">self</span>,img, labels):
+        <span style="color: #0099FF; font-style: italic"># Iterate through all detected cars</span>
+        <span style="color: #006699; font-weight: bold">for</span> car_number <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(<span style="color: #FF6600">1</span>, labels[<span style="color: #FF6600">1</span>]<span style="color: #555555">+</span><span style="color: #FF6600">1</span>):
+            <span style="color: #0099FF; font-style: italic"># Find pixels with each car_number label value</span>
+            nonzero <span style="color: #555555">=</span> (labels[<span style="color: #FF6600">0</span>] <span style="color: #555555">==</span> car_number)<span style="color: #555555">.</span>nonzero()
+            <span style="color: #0099FF; font-style: italic"># Identify x and y values of those pixels</span>
+            nonzeroy <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array(nonzero[<span style="color: #FF6600">0</span>])
+            nonzerox <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array(nonzero[<span style="color: #FF6600">1</span>])
+            <span style="color: #0099FF; font-style: italic"># Define a bounding box based on min/max x and y</span>
+            bbox <span style="color: #555555">=</span> ((np<span style="color: #555555">.</span>min(nonzerox), np<span style="color: #555555">.</span>min(nonzeroy)),\
+                    (np<span style="color: #555555">.</span>max(nonzerox), np<span style="color: #555555">.</span>max(nonzeroy)))
+            <span style="color: #0099FF; font-style: italic"># Draw the box on the image</span>
+            cv2<span style="color: #555555">.</span>rectangle(img, bbox[<span style="color: #FF6600">0</span>], bbox[<span style="color: #FF6600">1</span>], (<span style="color: #FF6600">0</span>,<span style="color: #FF6600">0</span>,<span style="color: #FF6600">255</span>), <span style="color: #FF6600">6</span>)
+        <span style="color: #0099FF; font-style: italic"># Return the image</span>
+        <span style="color: #006699; font-weight: bold">return</span> img
+</pre></div>
+
+
+<h5 id="application-of-sliding-window-search">Application of sliding window search</h5>
+<h5 id="parameter-setting">Parameter setting</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>dist_pickle <span style="color: #555555">=</span> pickle<span style="color: #555555">.</span>load( <span style="color: #336666">open</span>(<span style="color: #CC3300">&quot;svc_pickle.p&quot;</span>, <span style="color: #CC3300">&quot;rb&quot;</span> ) )
+param_dict <span style="color: #555555">=</span> {}
+
+param_dict[<span style="color: #CC3300">&#39;ystart&#39;</span>]  <span style="color: #555555">=</span> <span style="color: #FF6600">400</span>
+param_dict[<span style="color: #CC3300">&#39;ystop&#39;</span>]  <span style="color: #555555">=</span> <span style="color: #FF6600">656</span>
+param_dict[<span style="color: #CC3300">&#39;scale&#39;</span>] <span style="color: #555555">=</span> <span style="color: #FF6600">1.5</span>
+param_dict[<span style="color: #CC3300">&#39;svc&#39;</span>]  <span style="color: #555555">=</span>  dist_pickle[<span style="color: #CC3300">&quot;svc&quot;</span>]
+param_dict[<span style="color: #CC3300">&#39;X_scalar&#39;</span>] <span style="color: #555555">=</span> dist_pickle[<span style="color: #CC3300">&quot;scaler&quot;</span>]
+param_dict[<span style="color: #CC3300">&#39;orient&#39;</span>] <span style="color: #555555">=</span> dist_pickle[<span style="color: #CC3300">&quot;orient&quot;</span>]
+param_dict[<span style="color: #CC3300">&#39;pix_per_cell&#39;</span>] <span style="color: #555555">=</span> dist_pickle[<span style="color: #CC3300">&quot;pix_per_cell&quot;</span>]
+param_dict[<span style="color: #CC3300">&#39;cell_per_block&#39;</span>]  <span style="color: #555555">=</span> dist_pickle[<span style="color: #CC3300">&quot;cell_per_block&quot;</span>]
+param_dict[<span style="color: #CC3300">&#39;spatial_size&#39;</span>] <span style="color: #555555">=</span> (<span style="color: #FF6600">32</span>,<span style="color: #FF6600">32</span>)
+param_dict[<span style="color: #CC3300">&#39;hist_bins&#39;</span>] <span style="color: #555555">=</span> <span style="color: #FF6600">32</span>
+</pre></div>
+
+
+<hr />
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>directory <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;test_images/*.jpg&#39;</span>
+globDir <span style="color: #555555">=</span> glob<span style="color: #555555">.</span>glob(directory)
+fig <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">18</span>,<span style="color: #FF6600">24</span>))
+DV <span style="color: #555555">=</span> DetectVehicle(param_dict)
+n1 <span style="color: #555555">=</span> <span style="color: #FF6600">8</span>
+n2 <span style="color: #555555">=</span> <span style="color: #FF6600">4</span>
+
+count <span style="color: #555555">=</span> <span style="color: #FF6600">1</span>
+<span style="color: #006699; font-weight: bold">for</span> k,img <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>(globDir):
+    Img <span style="color: #555555">=</span> mpimg<span style="color: #555555">.</span>imread(img)
+    boxes <span style="color: #555555">=</span> DV<span style="color: #555555">.</span>find_cars(Img,vid<span style="color: #555555">=</span><span style="color: #336666">False</span>,vis<span style="color: #555555">=</span><span style="color: #336666">True</span>)
+    [draw_img_,heatmap] <span style="color: #555555">=</span> DV<span style="color: #555555">.</span>find_cars(Img,vid<span style="color: #555555">=</span><span style="color: #336666">False</span>,vis<span style="color: #555555">=</span><span style="color: #336666">False</span>)
+
+    <span style="color: #0099FF; font-style: italic">#fig-1</span>
+    fig<span style="color: #555555">.</span>add_subplot(n1,n2,count)
+    plt<span style="color: #555555">.</span>imshow(Img)
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Original Image&#39;</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+
+    <span style="color: #0099FF; font-style: italic">#fig-2</span>
+    fig<span style="color: #555555">.</span>add_subplot(n1,n2,count)
+    box_Img <span style="color: #555555">=</span> draw_boxes(Img, boxes)
+    plt<span style="color: #555555">.</span>imshow(box_Img)
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;boxes-image&#39;</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+
+    <span style="color: #0099FF; font-style: italic">#fig-3</span>
+    fig<span style="color: #555555">.</span>add_subplot(n1,n2,count)
+    plt<span style="color: #555555">.</span>imshow(DV<span style="color: #555555">.</span>heat_images[<span style="color: #FF6600">0</span>])
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Heatmap-sample-1&#39;</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+
+
+     <span style="color: #0099FF; font-style: italic">#fig-5</span>
+    fig<span style="color: #555555">.</span>add_subplot(n1,n2,count)
+    plt<span style="color: #555555">.</span>imshow(DV<span style="color: #555555">.</span>heatmap)
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Heatmap-threshold&#39;</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+</pre></div>
+
+
+<p><img alt="png" src="../output_83_0.png" /></p>
+<hr />
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>directory <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;test_images/*.jpg&#39;</span>
+globDir <span style="color: #555555">=</span> glob<span style="color: #555555">.</span>glob(directory)
+fig <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">14</span>,<span style="color: #FF6600">24</span>))
+DV <span style="color: #555555">=</span> DetectVehicle(param_dict)
+
+count <span style="color: #555555">=</span> <span style="color: #FF6600">1</span>
+<span style="color: #006699; font-weight: bold">for</span> k,img <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>(globDir):
+    Img <span style="color: #555555">=</span> mpimg<span style="color: #555555">.</span>imread(img)
+    [draw_img,heatmap] <span style="color: #555555">=</span> DV<span style="color: #555555">.</span>find_cars(Img,vid<span style="color: #555555">=</span><span style="color: #336666">False</span>,vis<span style="color: #555555">=</span><span style="color: #336666">False</span>)
+
+    <span style="color: #0099FF; font-style: italic">#fig-1</span>
+    fig<span style="color: #555555">.</span>add_subplot(<span style="color: #FF6600">8</span>,<span style="color: #FF6600">3</span>,count)
+    plt<span style="color: #555555">.</span>imshow(Img)
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Original Image&#39;</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+
+    <span style="color: #0099FF; font-style: italic">#fig-2</span>
+    fig<span style="color: #555555">.</span>add_subplot(<span style="color: #FF6600">8</span>,<span style="color: #FF6600">3</span>,count)
+    plt<span style="color: #555555">.</span>imshow(heatmap)
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;threshold-Heatmap&#39;</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+
+    <span style="color: #0099FF; font-style: italic">#fig-3</span>
+    fig<span style="color: #555555">.</span>add_subplot(<span style="color: #FF6600">8</span>,<span style="color: #FF6600">3</span>,count)
+    plt<span style="color: #555555">.</span>imshow(draw_img)
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Vehicle Detection&#39;</span>)
+    count <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+</pre></div>
+
+
+<p><img alt="png" src="../output_85_0.png" /></p>
+<hr />
+<hr />
+<h3 id="video-detector">Video Detector</h3>
+<hr />
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>dist_pickle <span style="color: #555555">=</span> pickle<span style="color: #555555">.</span>load( <span style="color: #336666">open</span>(<span style="color: #CC3300">&quot;svc_pickle.p&quot;</span>, <span style="color: #CC3300">&quot;rb&quot;</span> ) )
+param_dict <span style="color: #555555">=</span> {}
+param_dict[<span style="color: #CC3300">&#39;ystart&#39;</span>]  <span style="color: #555555">=</span> <span style="color: #FF6600">400</span>
+param_dict[<span style="color: #CC3300">&#39;ystop&#39;</span>]  <span style="color: #555555">=</span> <span style="color: #FF6600">656</span>
+param_dict[<span style="color: #CC3300">&#39;scale&#39;</span>] <span style="color: #555555">=</span> <span style="color: #FF6600">1.5</span>
+param_dict[<span style="color: #CC3300">&#39;svc&#39;</span>]  <span style="color: #555555">=</span>  dist_pickle[<span style="color: #CC3300">&quot;svc&quot;</span>]
+param_dict[<span style="color: #CC3300">&#39;X_scalar&#39;</span>] <span style="color: #555555">=</span> dist_pickle[<span style="color: #CC3300">&quot;scaler&quot;</span>]
+param_dict[<span style="color: #CC3300">&#39;orient&#39;</span>] <span style="color: #555555">=</span> dist_pickle[<span style="color: #CC3300">&quot;orient&quot;</span>]
+param_dict[<span style="color: #CC3300">&#39;pix_per_cell&#39;</span>] <span style="color: #555555">=</span> dist_pickle[<span style="color: #CC3300">&quot;pix_per_cell&quot;</span>]
+param_dict[<span style="color: #CC3300">&#39;cell_per_block&#39;</span>]  <span style="color: #555555">=</span> dist_pickle[<span style="color: #CC3300">&quot;cell_per_block&quot;</span>]
+param_dict[<span style="color: #CC3300">&#39;spatial_size&#39;</span>] <span style="color: #555555">=</span> (<span style="color: #FF6600">32</span>,<span style="color: #FF6600">32</span>)
+param_dict[<span style="color: #CC3300">&#39;hist_bins&#39;</span>] <span style="color: #555555">=</span> <span style="color: #FF6600">32</span>
+<span style="color: #0099FF; font-style: italic"># Read in image similar to one shown above </span>
+
+DV <span style="color: #555555">=</span> DetectVehicle(param_dict)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>white_output <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;test_video_output.mp4&#39;</span>
+clip <span style="color: #555555">=</span> VideoFileClip(<span style="color: #CC3300">&quot;test_video.mp4&quot;</span>)<span style="color: #0099FF; font-style: italic">#.subclip(t_start=30,t_end=35)</span>
+white_clip <span style="color: #555555">=</span> clip<span style="color: #555555">.</span>fl_image(DV<span style="color: #555555">.</span>find_cars)
+<span style="color: #555555">%</span>time white_clip<span style="color: #555555">.</span>write_videofile(white_output, audio<span style="color: #555555">=</span><span style="color: #336666">False</span>)
+
+HTML(<span style="color: #CC3300">&quot;&quot;&quot;</span>
+<span style="color: #CC3300">&lt;video width=&quot;960&quot; height=&quot;540&quot; controls&gt;</span>
+<span style="color: #CC3300">  &lt;source src=&quot;{0}&quot;&gt;</span>
+<span style="color: #CC3300">&lt;/video&gt;</span>
+<span style="color: #CC3300">&quot;&quot;&quot;</span><span style="color: #555555">.</span>format(white_output))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>[MoviePy] &amp;gt;&amp;gt;&amp;gt;&amp;gt; Building video test_video_output.mp4
+[MoviePy] Writing video test_video_output.mp4
+
+
+ 97%|█████████▋| 38/39 [00:21&amp;lt;00:00,  1.64it/s]
+
+
+[MoviePy] Done.
+[MoviePy] &amp;gt;&amp;gt;&amp;gt;&amp;gt; Video ready: test_video_output.mp4
+
+CPU times: user 19.3 s, sys: 1.79 s, total: 21.1 s
+Wall time: 22.2 s
+</pre></div>
+
+
+<video width="960" height="540" controls>
+  <source src="test_video_output.mp4">
+</video>
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>white_output <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;project_video_output.mp4&#39;</span>
+clip <span style="color: #555555">=</span> VideoFileClip(<span style="color: #CC3300">&quot;project_video.mp4&quot;</span>)<span style="color: #0099FF; font-style: italic">#.subclip(t_start=30,t_end=35)</span>
+white_clip <span style="color: #555555">=</span> clip<span style="color: #555555">.</span>fl_image(DV<span style="color: #555555">.</span>find_cars)
+<span style="color: #555555">%</span>time white_clip<span style="color: #555555">.</span>write_videofile(white_output, audio<span style="color: #555555">=</span><span style="color: #336666">False</span>)
+
+HTML(<span style="color: #CC3300">&quot;&quot;&quot;</span>
+<span style="color: #CC3300">&lt;video width=&quot;960&quot; height=&quot;540&quot; controls&gt;</span>
+<span style="color: #CC3300">  &lt;source src=&quot;{0}&quot;&gt;</span>
+<span style="color: #CC3300">&lt;/video&gt;</span>
+<span style="color: #CC3300">&quot;&quot;&quot;</span><span style="color: #555555">.</span>format(white_output))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>[MoviePy] &amp;gt;&amp;gt;&amp;gt;&amp;gt; Building video project_video_output.mp4
+[MoviePy] Writing video project_video_output.mp4
+
+
+100%|█████████▉| 1260/1261 [10:04&amp;lt;00:00,  1.94it/s]
+
+
+[MoviePy] Done.
+[MoviePy] &amp;gt;&amp;gt;&amp;gt;&amp;gt; Video ready: project_video_output.mp4
+
+CPU times: user 9min 8s, sys: 51.8 s, total: 10min
+Wall time: 10min 5s
+</pre></div>
+
+
+<video width="960" height="540" controls>
+  <source src="project_video_output.mp4">
+</video>
+
+<hr />
+<h4 id="both-lane-and-vehicle-detection">Both lane and vehicle detection</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>white_output <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;project_video2_output.mp4&#39;</span>
+clip <span style="color: #555555">=</span> VideoFileClip(<span style="color: #CC3300">&quot;project_video2.mp4&quot;</span>)<span style="color: #0099FF; font-style: italic">#.subclip(t_start=30,t_end=35)</span>
+white_clip <span style="color: #555555">=</span> clip<span style="color: #555555">.</span>fl_image(DV<span style="color: #555555">.</span>find_cars)
+<span style="color: #555555">%</span>time white_clip<span style="color: #555555">.</span>write_videofile(white_output, audio<span style="color: #555555">=</span><span style="color: #336666">False</span>)
+
+HTML(<span style="color: #CC3300">&quot;&quot;&quot;</span>
+<span style="color: #CC3300">&lt;video width=&quot;960&quot; height=&quot;540&quot; controls&gt;</span>
+<span style="color: #CC3300">  &lt;source src=&quot;{0}&quot;&gt;</span>
+<span style="color: #CC3300">&lt;/video&gt;</span>
+<span style="color: #CC3300">&quot;&quot;&quot;</span><span style="color: #555555">.</span>format(white_output))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>[MoviePy] &amp;gt;&amp;gt;&amp;gt;&amp;gt; Building video project_video2_output.mp4
+[MoviePy] Writing video project_video2_output.mp4
+
+
+100%|█████████▉| 1260/1261 [10:34&amp;lt;00:00,  1.96it/s]
+
+
+[MoviePy] Done.
+[MoviePy] &amp;gt;&amp;gt;&amp;gt;&amp;gt; Video ready: project_video2_output.mp4
+
+CPU times: user 9min 40s, sys: 54.3 s, total: 10min 35s
+Wall time: 10min 34s
+</pre></div>
+
+
+<video width="960" height="540" controls>
+  <source src="project_video2_output.mp4">
+</video>
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>
+</pre></div>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../perceptron/dlnd-your-first-neural-network/" class="btn btn-neutral float-right" title="Perceptron">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../finding_donors/finding_donors/" class="btn btn-neutral" title="Finding Donors"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../finding_donors/finding_donors/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../perceptron/dlnd-your-first-neural-network/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../../search/main.js" defer></script>
+
+</body>
+</html>

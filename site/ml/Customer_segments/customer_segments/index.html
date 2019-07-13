@@ -1,0 +1,3034 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>Customer Clustering - Data Fiction</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Customer Clustering";
+    var mkdocs_page_input_path = "ml/Customer_segments/customer_segments.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> Data Fiction</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="tocbase current">
+    
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../..">Home</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../WhyCodes/">Why Codes?</a>
+  </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Machine Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../boston_housing/boston_housing/">Boston Housing</a>
+  </li>
+        
+          
+
+
+  
+    
+    <li class="navtree toctree-l2 page current">
+      <a class="current" href="./">
+        Customer Clustering
+          <span class="toctree-expand"></span>
+      </a>
+    </li>
+    
+      
+
+  <li class="toctree-l2 current with-children">
+    <a href="#machine-learning-engineer-nanodegree">
+      Machine Learning Engineer Nanodegree
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2 current">
+    <ul class="subnav-l2 current">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#unsupervised-learning">Unsupervised Learning</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#project-creating-customer-segments">Project: Creating Customer Segments</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#getting-started">Getting Started</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#data-exploration">
+      Data Exploration
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#lets-look-how-each-feature-propagates-from-customer-to-customers">Lets look how each feature propagates from customer to customers.</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#lets-look-their-propertion-on-small-section-of-the-data">Lets look their propertion on small section of the data</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l4">
+    <a href="#implementation-selecting-samples">
+      Implementation: Selecting Samples
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#quartile-visualization-of-sample">Quartile Visualization of sample</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-1">Question 1</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#implementation-feature-relevance">Implementation: Feature Relevance</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-2">Question 2</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l4">
+    <a href="#visualize-feature-distributions">
+      Visualize Feature Distributions
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#study-of-variance-covariance-of-the-data">Study of variance covariance of the data</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#plot-of-detergents_paper-with-grocery">plot of Detergents_Paper with Grocery</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-3">Question 3</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#data-preprocessing">
+      Data Preprocessing
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#implementation-feature-scaling">Implementation: Feature Scaling</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#observation">Observation</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l4">
+    <a href="#implementation-outlier-detection">
+      Implementation: Outlier Detection
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#visualization-of-outliers">Visualization of outliers</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-4">Question 4</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#feature-transformation">
+      Feature Transformation
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#implementation-pca">Implementation: PCA</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-5">Question 5</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#observation_1">Observation</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#implementation-dimensionality-reduction">Implementation: Dimensionality Reduction</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#observation_2">Observation</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#visualizing-a-biplot">
+      Visualizing a Biplot
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#observation_3">Observation</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#clustering">
+      Clustering
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-6">Question 6</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#implementation-creating-clusters">Implementation: Creating Clusters</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-7">Question 7</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#cluster-visualization">Cluster Visualization</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l4">
+    <a href="#implementation-data-recovery">
+      Implementation: Data Recovery
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#plot-of-true-center">Plot of true center</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#plot-of-percentile-centers">Plot of Percentile centers</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-8">Question 8</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-9">Question 9</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#conclusion">
+      Conclusion
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-10">Question 10</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-11">Question 11</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#visualizing-underlying-distributions">Visualizing Underlying Distributions</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-12">Question 12</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+
+  
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../finding_donors/finding_donors/">Finding Donors</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../vehicle-detection/CARND-Project-5/">Vehicle Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../perceptron/dlnd-your-first-neural-network/">Perceptron</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Deep Learning CNN</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/NMIST/NMIST/">NMIST</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/CIFRT10/CIFR10/">CIFT10</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/traffic-sign/Traffic_Sign_Classifier/">Traffic Sign Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/translator/dlnd_language_translation/">Language Translator</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Deep Learning RNN</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/Vanila/1.Vanila-LSTM/">Vanila LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/stacked/2.Stacked-LSTM/">Stacked LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/bidirectional/5. BiDirectional-LSTM/">Bidirectional LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/rnn/RNN_project/">Recurrent Neural Network</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Rinforcement Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../rl/smartcab/smartcab/">SmartCab</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">GAN</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/gan/dlnd_face_generation/">Face Generation</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../References/ref.md">References</a>
+  </li>
+    
+  </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">Data Fiction</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Machine Learning &raquo;</li>
+        
+      
+    
+    <li>Customer Clustering</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="machine-learning-engineer-nanodegree">Machine Learning Engineer Nanodegree</h1>
+<h2 id="unsupervised-learning">Unsupervised Learning</h2>
+<h2 id="project-creating-customer-segments">Project: Creating Customer Segments</h2>
+<p>Welcome to the third project of the Machine Learning Engineer Nanodegree! In this notebook, some template code has already been provided for you, and it will be your job to implement the additional functionality necessary to successfully complete this project. Sections that begin with <strong>'Implementation'</strong> in the header indicate that the following block of code will require additional functionality which you must provide. Instructions will be provided for each section and the specifics of the implementation are marked in the code block with a <code>'TODO'</code> statement. Please be sure to read the instructions carefully!</p>
+<p>In addition to implementing code, there will be questions that you must answer which relate to the project and your implementation. Each section where you will answer a question is preceded by a <strong>'Question X'</strong> header. Carefully read each question and provide thorough answers in the following text boxes that begin with <strong>'Answer:'</strong>. Your project submission will be evaluated based on your answers to each of the questions and the implementation you provide.  </p>
+<blockquote>
+<p><strong>Note:</strong> Code and Markdown cells can be executed using the <strong>Shift + Enter</strong> keyboard shortcut. In addition, Markdown cells can be edited by typically double-clicking the cell to enter edit mode.</p>
+</blockquote>
+<h2 id="getting-started">Getting Started</h2>
+<p>In this project, you will analyze a dataset containing data on various customers' annual spending amounts (reported in <em>monetary units</em>) of diverse product categories for internal structure. One goal of this project is to best describe the variation in the different types of customers that a wholesale distributor interacts with. Doing so would equip the distributor with insight into how to best structure their delivery service to meet the needs of each customer.</p>
+<p>The dataset for this project can be found on the <a href="https://archive.ics.uci.edu/ml/datasets/Wholesale+customers">UCI Machine Learning Repository</a>. For the purposes of this project, the features <code>'Channel'</code> and <code>'Region'</code> will be excluded in the analysis — with focus instead on the six product categories recorded for customers.</p>
+<p>Run the code block below to load the wholesale customers dataset, along with a few of the necessary Python libraries required for this project. You will know the dataset loaded successfully if the size of the dataset is reported.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Import libraries necessary for this project</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">pandas</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">pd</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">IPython.display</span> <span style="color: #006699; font-weight: bold">import</span> display <span style="color: #0099FF; font-style: italic"># Allows the use of display() for DataFrames</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #0099FF; font-style: italic"># Import supplementary visualizations code visuals.py</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">visuals</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">vs</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">seaborn</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">sns</span>
+
+<span style="color: #0099FF; font-style: italic"># Pretty display for notebooks</span>
+<span style="color: #555555">%</span>matplotlib inline
+
+<span style="color: #0099FF; font-style: italic"># Load the wholesale customers dataset</span>
+<span style="color: #006699; font-weight: bold">try</span>:
+    data <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>read_csv(<span style="color: #CC3300">&quot;customers.csv&quot;</span>)
+    data<span style="color: #555555">.</span>drop([<span style="color: #CC3300">&#39;Region&#39;</span>, <span style="color: #CC3300">&#39;Channel&#39;</span>], axis <span style="color: #555555">=</span> <span style="color: #FF6600">1</span>, inplace <span style="color: #555555">=</span> <span style="color: #336666">True</span>)
+    <span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;Wholesale customers dataset has {} samples with {} features each.&quot;</span><span style="color: #555555">.</span>format(<span style="color: #555555">*</span>data<span style="color: #555555">.</span>shape))
+<span style="color: #006699; font-weight: bold">except</span>:
+    <span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;Dataset could not be loaded. Is the dataset missing?&quot;</span>) 
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Wholesale customers dataset has 440 samples with 6 features each.
+</pre></div>
+
+
+<hr />
+<h2 id="data-exploration">Data Exploration</h2>
+<p>In this section, you will begin exploring the data through visualizations and code to understand how each feature is related to the others. You will observe a statistical description of the dataset, consider the relevance of each feature, and select a few sample data points from the dataset which you will track through the course of this project.</p>
+<p>Run the code block below to observe a statistical description of the dataset. Note that the dataset is composed of six important product categories: <strong>'Fresh'</strong>, <strong>'Milk'</strong>, <strong>'Grocery'</strong>, <strong>'Frozen'</strong>, <strong>'Detergents_Paper'</strong>, and <strong>'Delicatessen'</strong>. Consider what each category represents in terms of products you could purchase.</p>
+<p><strong><em> Lets see what are the column names and their types</em></strong></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>data<span style="color: #555555">.</span>info()
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&amp;lt;class &#39;pandas.core.frame.DataFrame&#39;&amp;gt;
+RangeIndex: 440 entries, 0 to 439
+Data columns (total 6 columns):
+Fresh               440 non-null int64
+Milk                440 non-null int64
+Grocery             440 non-null int64
+Frozen              440 non-null int64
+Detergents_Paper    440 non-null int64
+Delicatessen        440 non-null int64
+dtypes: int64(6)
+memory usage: 20.7 KB
+</pre></div>
+
+
+<p><strong><em> Head part of the data </em></strong></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>data<span style="color: #555555">.</span>head(<span style="color: #FF6600">5</span>)
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>12669</td>
+      <td>9656</td>
+      <td>7561</td>
+      <td>214</td>
+      <td>2674</td>
+      <td>1338</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7057</td>
+      <td>9810</td>
+      <td>9568</td>
+      <td>1762</td>
+      <td>3293</td>
+      <td>1776</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>6353</td>
+      <td>8808</td>
+      <td>7684</td>
+      <td>2405</td>
+      <td>3516</td>
+      <td>7844</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>13265</td>
+      <td>1196</td>
+      <td>4221</td>
+      <td>6404</td>
+      <td>507</td>
+      <td>1788</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>22615</td>
+      <td>5410</td>
+      <td>7198</td>
+      <td>3915</td>
+      <td>1777</td>
+      <td>5185</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h5 id="lets-look-how-each-feature-propagates-from-customer-to-customers">Lets look how each feature propagates from customer to customers.</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">matplotlib</span> <span style="color: #006699; font-weight: bold">import</span> cm
+test_data <span style="color: #555555">=</span> data<span style="color: #555555">.</span>loc[<span style="color: #FF6600">0</span>:<span style="color: #FF6600">200</span>]
+test_data<span style="color: #555555">.</span>plot(colormap<span style="color: #555555">=</span>cm<span style="color: #555555">.</span>cubehelix,figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">16</span>, <span style="color: #FF6600">12</span>))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0x10de94950&amp;gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_11_1.png" /></p>
+<p>Fresh and grocery are really high demanding items! But this is not the global nature of the data. Detail will be discussed later.</p>
+<h4 id="lets-look-their-propertion-on-small-section-of-the-data">Lets look their propertion on small section of the data</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>test_data <span style="color: #555555">=</span> data<span style="color: #555555">.</span>loc[<span style="color: #FF6600">100</span>:<span style="color: #FF6600">150</span>]
+test_data<span style="color: #555555">.</span>plot<span style="color: #555555">.</span>barh(stacked<span style="color: #555555">=</span><span style="color: #336666">True</span>,figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">16</span>, <span style="color: #FF6600">15</span>) );
+</pre></div>
+
+
+<p><img alt="png" src="../output_14_0.png" /></p>
+<p>Customer at index 125 is really heavy consumer of fresh!</p>
+<p><strong><em>Little bit of statistics of each columns:</em></strong></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Display a description of the dataset</span>
+display(data<span style="color: #555555">.</span>describe())
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>440.000000</td>
+      <td>440.000000</td>
+      <td>440.000000</td>
+      <td>440.000000</td>
+      <td>440.000000</td>
+      <td>440.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>12000.297727</td>
+      <td>5796.265909</td>
+      <td>7951.277273</td>
+      <td>3071.931818</td>
+      <td>2881.493182</td>
+      <td>1524.870455</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>12647.328865</td>
+      <td>7380.377175</td>
+      <td>9503.162829</td>
+      <td>4854.673333</td>
+      <td>4767.854448</td>
+      <td>2820.105937</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>3.000000</td>
+      <td>55.000000</td>
+      <td>3.000000</td>
+      <td>25.000000</td>
+      <td>3.000000</td>
+      <td>3.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>3127.750000</td>
+      <td>1533.000000</td>
+      <td>2153.000000</td>
+      <td>742.250000</td>
+      <td>256.750000</td>
+      <td>408.250000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>8504.000000</td>
+      <td>3627.000000</td>
+      <td>4755.500000</td>
+      <td>1526.000000</td>
+      <td>816.500000</td>
+      <td>965.500000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>16933.750000</td>
+      <td>7190.250000</td>
+      <td>10655.750000</td>
+      <td>3554.250000</td>
+      <td>3922.000000</td>
+      <td>1820.250000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>112151.000000</td>
+      <td>73498.000000</td>
+      <td>92780.000000</td>
+      <td>60869.000000</td>
+      <td>40827.000000</td>
+      <td>47943.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>In general the mean for each feature seems much higher than the median(50%-Quartile), so this data seems somewhat <strong>skewed</strong>. We can visualize them as well in the histogram comming in next blocks.</p>
+<p><strong><em> Histogram for individual data</em></strong></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> (<span style="color: #FF6600">14</span>,<span style="color: #FF6600">14</span>))
+bins <span style="color: #555555">=</span> [<span style="color: #FF6600">100</span>, <span style="color: #FF6600">100</span>, <span style="color: #FF6600">100</span>, <span style="color: #FF6600">100</span>, <span style="color: #FF6600">100</span>, <span style="color: #FF6600">100</span>]
+colors <span style="color: #555555">=</span> sns<span style="color: #555555">.</span>color_palette(<span style="color: #CC3300">&quot;bright&quot;</span>, <span style="color: #FF6600">6</span>) 
+items <span style="color: #555555">=</span> [<span style="color: #CC3300">&#39;Fresh&#39;</span>,<span style="color: #CC3300">&#39;Milk&#39;</span>,<span style="color: #CC3300">&#39;Grocery&#39;</span>,<span style="color: #CC3300">&#39;Frozen&#39;</span>,<span style="color: #CC3300">&#39;Detergents_Paper&#39;</span>,<span style="color: #CC3300">&#39;Delicatessen&#39;</span>]
+ks <span style="color: #555555">=</span> [<span style="color: #FF6600">1</span>,<span style="color: #FF6600">2</span>,<span style="color: #FF6600">3</span>,<span style="color: #FF6600">4</span>,<span style="color: #FF6600">5</span>,<span style="color: #FF6600">6</span>]
+
+<span style="color: #0099FF; font-style: italic"># plot individual histograms</span>
+<span style="color: #006699; font-weight: bold">for</span> color,item,k <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">zip</span>(colors,items,ks):
+    plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">3</span>,<span style="color: #FF6600">2</span>,k)
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&quot;plot of &quot;</span> <span style="color: #555555">+</span> item)
+    sns<span style="color: #555555">.</span>distplot(data[item],bins <span style="color: #555555">=</span> <span style="color: #FF6600">50</span>, kde<span style="color: #555555">=</span><span style="color: #336666">True</span>, color<span style="color: #555555">=</span>color)
+</pre></div>
+
+
+<p><img alt="png" src="../output_20_0.png" /></p>
+<p>Most of these features have peak near zero to 1000. <strong>Grocery</strong> is pretty much flat among them. We can cut a section from each of these plots and compare between them as shown below:</p>
+<p><strong><em> Putting all together</em></strong></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Plot all together</span>
+plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> (<span style="color: #FF6600">14</span>,<span style="color: #FF6600">6</span>))
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&quot;distribution of all items&quot;</span>)
+<span style="color: #006699; font-weight: bold">for</span> ibin,color,item <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">zip</span>(bins,colors,items):
+    sns<span style="color: #555555">.</span>distplot(data[item],bins <span style="color: #555555">=</span> ibin, kde<span style="color: #555555">=</span><span style="color: #336666">True</span>, color<span style="color: #555555">=</span>color)
+plt<span style="color: #555555">.</span>legend([item <span style="color: #006699; font-weight: bold">for</span> item <span style="color: #000000; font-weight: bold">in</span> items])
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&amp;lt;matplotlib.legend.Legend at 0x1051439d0&amp;gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_1.png" /></p>
+<p>Peak of the distribution shifts to the right while moving from feature Lets make it much lear as shown below:</p>
+<p><strong><em> Lets visualize most dynamic part of the data</em></strong></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># view most dynamic part of the data</span>
+plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">14</span>,<span style="color: #FF6600">10</span>))
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&quot;Viewing most dynamic part of the data&quot;</span>)
+<span style="color: #006699; font-weight: bold">for</span> ibin,color,item <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">zip</span>(bins,colors,items):
+    sns<span style="color: #555555">.</span>distplot(data[data[item]<span style="color: #555555">&lt;=</span> <span style="color: #FF6600">5000</span>][item],bins <span style="color: #555555">=</span> ibin, kde<span style="color: #555555">=</span><span style="color: #336666">True</span>, color<span style="color: #555555">=</span>color)
+plt<span style="color: #555555">.</span>legend([item <span style="color: #006699; font-weight: bold">for</span> item <span style="color: #000000; font-weight: bold">in</span> items])
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&amp;lt;matplotlib.legend.Legend at 0x111c56050&amp;gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_26_1.png" /></p>
+<p>Wow! Look at this trend : <strong>Detergent -&gt; Delicatessen-&gt; Fresh-I -&gt; Frozen -&gt; Milk -&gt; Grocery -&gt; Fresh-II</strong> . Fresh has two peak representing two types of purcheser : household(low price) and might be resturents(high price) etc. Data skewed to the right as pridected before.</p>
+<hr />
+<h3 id="implementation-selecting-samples">Implementation: Selecting Samples</h3>
+<p>To get a better understanding of the customers and how their data will transform through the analysis, it would be best to select a few sample data points and explore them in more detail. In the code block below, add <strong>three</strong> indices of your choice to the <code>indices</code> list which will represent the customers to track. It is suggested to try different sets of samples until you obtain customers that vary significantly from one another.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># TODO: Select three indices of your choice you wish to sample from the dataset</span>
+indices <span style="color: #555555">=</span> [<span style="color: #FF6600">12</span>, <span style="color: #FF6600">125</span>, <span style="color: #FF6600">412</span>]
+
+<span style="color: #0099FF; font-style: italic"># Create a DataFrame of the chosen samples</span>
+samples <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>DataFrame(data<span style="color: #555555">.</span>loc[indices], columns <span style="color: #555555">=</span> data<span style="color: #555555">.</span>keys())<span style="color: #555555">.</span>reset_index(drop <span style="color: #555555">=</span> <span style="color: #336666">True</span>)
+<span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;Chosen samples of wholesale customers dataset:&quot;</span>)
+
+display(samples)
+samples<span style="color: #555555">.</span>plot<span style="color: #555555">.</span>barh(stacked<span style="color: #555555">=</span><span style="color: #336666">True</span>,figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">10</span>,<span style="color: #FF6600">2</span>) );
+
+<span style="color: #0099FF; font-style: italic"># show devations of each feature from its mean measured by std</span>
+mean_data <span style="color: #555555">=</span> np<span style="color: #555555">.</span>mean(data)
+std_data <span style="color: #555555">=</span> np<span style="color: #555555">.</span>std(data)
+deviation_samples <span style="color: #555555">=</span> (samples <span style="color: #555555">-</span> mean_data) <span style="color: #555555">/</span> std_data
+
+
+<span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;</span><span style="color: #CC3300; font-weight: bold">\n</span><span style="color: #CC3300">Deviation of chosen samples of wholesale customers dataset in mean+deviation*std:&quot;</span>)
+display(deviation_samples)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Chosen samples of wholesale customers dataset:
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>31714</td>
+      <td>12319</td>
+      <td>11757</td>
+      <td>287</td>
+      <td>3881</td>
+      <td>2931</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>76237</td>
+      <td>3473</td>
+      <td>7102</td>
+      <td>16538</td>
+      <td>778</td>
+      <td>918</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>97</td>
+      <td>3605</td>
+      <td>12400</td>
+      <td>98</td>
+      <td>2970</td>
+      <td>62</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Deviation of chosen samples of wholesale customers dataset in mean+deviation*std:
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.560499</td>
+      <td>0.884800</td>
+      <td>0.400925</td>
+      <td>-0.574313</td>
+      <td>0.209873</td>
+      <td>0.499176</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5.084854</td>
+      <td>-0.315148</td>
+      <td>-0.089470</td>
+      <td>2.776994</td>
+      <td>-0.441685</td>
+      <td>-0.215439</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.942242</td>
+      <td>-0.297242</td>
+      <td>0.468664</td>
+      <td>-0.613289</td>
+      <td>0.018584</td>
+      <td>-0.519319</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p><img alt="png" src="../output_30_4.png" /></p>
+<h4 id="quartile-visualization-of-sample">Quartile Visualization of sample</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> (<span style="color: #FF6600">12</span>,<span style="color: #FF6600">5</span>))
+percentiles <span style="color: #555555">=</span> data<span style="color: #555555">.</span>rank(pct<span style="color: #555555">=</span><span style="color: #336666">True</span>)
+percentiles <span style="color: #555555">=</span> <span style="color: #FF6600">100</span><span style="color: #555555">*</span>percentiles<span style="color: #555555">.</span>round(decimals<span style="color: #555555">=</span><span style="color: #FF6600">3</span>)
+percentiles <span style="color: #555555">=</span> percentiles<span style="color: #555555">.</span>iloc[indices]
+display(percentiles)
+<span style="color: #006699; font-weight: bold">print</span> <span style="color: #CC3300">&quot;Quartile Visualization&quot;</span>
+sns<span style="color: #555555">.</span>heatmap(percentiles, vmin<span style="color: #555555">=</span><span style="color: #FF6600">1</span>, vmax<span style="color: #555555">=</span><span style="color: #FF6600">99</span>, annot<span style="color: #555555">=</span><span style="color: #336666">True</span>)
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>12</th>
+      <td>93.6</td>
+      <td>90.2</td>
+      <td>79.1</td>
+      <td>10.7</td>
+      <td>74.5</td>
+      <td>89.8</td>
+    </tr>
+    <tr>
+      <th>125</th>
+      <td>99.8</td>
+      <td>47.7</td>
+      <td>63.4</td>
+      <td>98.2</td>
+      <td>48.6</td>
+      <td>48.6</td>
+    </tr>
+    <tr>
+      <th>412</th>
+      <td>1.8</td>
+      <td>49.3</td>
+      <td>80.9</td>
+      <td>3.2</td>
+      <td>69.3</td>
+      <td>4.8</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Quartile Visualization
+
+
+
+
+
+&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0x113465150&amp;gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_32_3.png" /></p>
+<hr />
+<h3 id="question-1">Question 1</h3>
+<p>Consider the total purchase cost of each product category and the statistical description of the dataset above for your sample customers.<br />
+<strong>What kind of establishment (customer) could each of the three samples you've chosen represent?</strong><br />
+<strong>Hint:</strong> Examples of establishments include places like markets, cafes, and retailers, among many others. Avoid using names for establishments, such as saying <em>"McDonalds"</em> when describing a sample customer as a restaurant.</p>
+<p><strong>Answer:</strong></p>
+<p>There are three information hiden in samples which are
+(1) Total values: It helps to know typr of wholesale distributer
+(2) Mean value of each category and deviations:  It helps to know types of distributer</p>
+<p>Lets go sample by sample:</p>
+<p><strong>Sample-1:</strong> This customer a heavy consumer of Fresh items, milk and Delicatessen. Spending on Grocery is also above 75th quartile. Frozen is pretty much less and below 25th quartile and mean. It should be <strong>Supermarket</strong>, because all kinds of produces are sold much more than average value except the frozen.</p>
+<p><strong>Sample-2:</strong> This customer is crazy at Fresh. It touched 100th quartile.Second most purchased items are frozens. Grocery is little below the mean value but pretty above the 50th quartile value. Rest of them are below 5oth quartile.This should be <strong>Greengrocery</strong>, be cause the main produce being sold is fresh produce and frozen  while the total amount of produces is below average</p>
+<p><strong>Sample-3:</strong> For this customer, first priority is Grocery which is above 75th quartile range and pretty above mean. Next priority os Detergent paper which is above 50th quartile range and also above the mean. Milk is below mean and median. Rest of the other are blow mean and 25th quartile range. It is <strong>Convenience store</strong>, because the main produce being sold is grocery, while the total amount of produces is below average</p>
+<hr />
+<h3 id="implementation-feature-relevance">Implementation: Feature Relevance</h3>
+<p>One interesting thought to consider is if one (or more) of the six product categories is actually relevant for understanding customer purchasing. That is to say, is it possible to determine whether customers purchasing some amount of one category of products will necessarily purchase some proportional amount of another category of products? We can make this determination quite easily by training a supervised regression learner on a subset of the data with one feature removed, and then score how well that model can predict the removed feature.</p>
+<p>In the code block below, you will need to implement the following:
+ - Assign <code>new_data</code> a copy of the data by removing a feature of your choice using the <code>DataFrame.drop</code> function.
+ - Use <code>sklearn.cross_validation.train_test_split</code> to split the dataset into training and testing sets.
+   - Use the removed feature as your target label. Set a <code>test_size</code> of <code>0.25</code> and set a <code>random_state</code>.
+ - Import a decision tree regressor, set a <code>random_state</code>, and fit the learner to the training data.
+ - Report the prediction score of the testing set using the regressor's <code>score</code> function.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.cross_validation</span> <span style="color: #006699; font-weight: bold">import</span> train_test_split
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.tree</span> <span style="color: #006699; font-weight: bold">import</span> DecisionTreeRegressor
+
+<span style="color: #0099FF; font-style: italic"># TODO: Make a copy of the DataFrame, using the &#39;drop&#39; function to drop the given feature</span>
+new_data <span style="color: #555555">=</span> data<span style="color: #555555">.</span>copy()
+targets <span style="color: #555555">=</span> [<span style="color: #CC3300">&#39;Fresh&#39;</span>, <span style="color: #CC3300">&#39;Milk&#39;</span>, <span style="color: #CC3300">&#39;Grocery&#39;</span>, <span style="color: #CC3300">&#39;Frozen&#39;</span>, <span style="color: #CC3300">&#39;Detergents_Paper&#39;</span>, <span style="color: #CC3300">&#39;Delicatessen&#39;</span>]
+
+<span style="color: #0099FF; font-style: italic"># train and evaluate for each feature</span>
+scores <span style="color: #555555">=</span> {}
+<span style="color: #006699; font-weight: bold">for</span> target_feature <span style="color: #000000; font-weight: bold">in</span> targets:
+    label <span style="color: #555555">=</span> new_data[target_feature]
+    left_features <span style="color: #555555">=</span> new_data<span style="color: #555555">.</span>drop([target_feature], axis<span style="color: #555555">=</span><span style="color: #FF6600">1</span>)
+
+    <span style="color: #0099FF; font-style: italic"># TODO: Split the data into training and testing sets using the given feature as the target</span>
+    X_train, X_test, y_train, y_test <span style="color: #555555">=</span> train_test_split(left_features, label, test_size<span style="color: #555555">=</span><span style="color: #FF6600">0.25</span>, random_state<span style="color: #555555">=</span><span style="color: #FF6600">1</span>)
+
+    <span style="color: #0099FF; font-style: italic"># TODO: Create a decision tree regressor and fit it to the training set</span>
+    regressor <span style="color: #555555">=</span> DecisionTreeRegressor(random_state<span style="color: #555555">=</span><span style="color: #FF6600">1</span>)
+    regressor<span style="color: #555555">.</span>fit(X_train, y_train)
+
+    <span style="color: #0099FF; font-style: italic"># TODO: Report the score of the prediction using the testing set</span>
+    score <span style="color: #555555">=</span> regressor<span style="color: #555555">.</span>score(X_test, y_test)
+    scores[target_feature]<span style="color: #555555">=</span> score
+
+<span style="color: #0099FF; font-style: italic"># display features and scores </span>
+result <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>DataFrame(scores, index<span style="color: #555555">=</span>[<span style="color: #CC3300">&#39;Score&#39;</span>])
+display(result)
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Delicatessen</th>
+      <th>Detergents_Paper</th>
+      <th>Fresh</th>
+      <th>Frozen</th>
+      <th>Grocery</th>
+      <th>Milk</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Score</th>
+      <td>-0.429125</td>
+      <td>0.815241</td>
+      <td>-0.923374</td>
+      <td>-0.649574</td>
+      <td>0.795768</td>
+      <td>0.51585</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> (<span style="color: #FF6600">12</span>,<span style="color: #FF6600">12</span>))
+result<span style="color: #555555">.</span>plot(kind <span style="color: #555555">=</span> <span style="color: #CC3300">&quot;bar&quot;</span>,figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">8</span>,<span style="color: #FF6600">8</span>))
+plt<span style="color: #555555">.</span>axhline(<span style="color: #FF6600">0</span>, color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;k&#39;</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&amp;lt;matplotlib.lines.Line2D at 0x113bc6350&amp;gt;
+
+
+
+
+&amp;lt;matplotlib.figure.Figure at 0x113bc6550&amp;gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_39_2.png" /></p>
+<hr />
+<h3 id="question-2">Question 2</h3>
+<p><em>Which feature did you attempt to predict? What was the reported prediction score? Is this feature is necessary for identifying customers' spending habits?</em><br />
+<strong>Hint:</strong> The coefficient of determination, <code>R^2</code>, is scored between 0 and 1, with 1 being a perfect fit. A negative <code>R^2</code> implies the model fails to fit the data.</p>
+<p><strong>Answer:</strong></p>
+<p>I am going to predict <code>Detergents_Paper</code> or <code>Grocery</code>. Reported prediction score for them are 0.815241 and 0.795768 respectively. No! this feature is less important for identifying customer's spending habits. The reason is following:</p>
+<ol>
+<li>
+<p>A predication with higher score (close to 1.0) implies that the training features are likely to predicate the label feature. Alternalely, label feature is more dependent on the other features, which makes it unnecessary for identifying customer's spending habits.</p>
+</li>
+<li>
+<p>Predication with lower score (negative value) indicates the labeling feature is independent to others and necessary for learning algorithm.</p>
+</li>
+</ol>
+<hr />
+<h3 id="visualize-feature-distributions">Visualize Feature Distributions</h3>
+<p>To get a better understanding of the dataset, we can construct a scatter matrix of each of the six product features present in the data. If you found that the feature you attempted to predict above is relevant for identifying a specific customer, then the scatter matrix below may not show any correlation between that feature and the others. Conversely, if you believe that feature is not relevant for identifying a specific customer, the scatter matrix might show a correlation between that feature and another feature in the data. Run the code block below to produce a scatter matrix.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> (<span style="color: #FF6600">16</span>,<span style="color: #FF6600">21</span>))
+sns<span style="color: #555555">.</span>pairplot(data)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&amp;lt;seaborn.axisgrid.PairGrid at 0x113bc6c90&amp;gt;
+
+
+
+
+&amp;lt;matplotlib.figure.Figure at 0x113bc6b90&amp;gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_45_2.png" /></p>
+<h4 id="study-of-variance-covariance-of-the-data">Study of variance covariance of the data</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>data<span style="color: #555555">.</span>cov()
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Fresh</th>
+      <td>1.599549e+08</td>
+      <td>9.381789e+06</td>
+      <td>-1.424713e+06</td>
+      <td>2.123665e+07</td>
+      <td>-6.147826e+06</td>
+      <td>8.727310e+06</td>
+    </tr>
+    <tr>
+      <th>Milk</th>
+      <td>9.381789e+06</td>
+      <td>5.446997e+07</td>
+      <td>5.108319e+07</td>
+      <td>4.442612e+06</td>
+      <td>2.328834e+07</td>
+      <td>8.457925e+06</td>
+    </tr>
+    <tr>
+      <th>Grocery</th>
+      <td>-1.424713e+06</td>
+      <td>5.108319e+07</td>
+      <td>9.031010e+07</td>
+      <td>-1.854282e+06</td>
+      <td>4.189519e+07</td>
+      <td>5.507291e+06</td>
+    </tr>
+    <tr>
+      <th>Frozen</th>
+      <td>2.123665e+07</td>
+      <td>4.442612e+06</td>
+      <td>-1.854282e+06</td>
+      <td>2.356785e+07</td>
+      <td>-3.044325e+06</td>
+      <td>5.352342e+06</td>
+    </tr>
+    <tr>
+      <th>Detergents_Paper</th>
+      <td>-6.147826e+06</td>
+      <td>2.328834e+07</td>
+      <td>4.189519e+07</td>
+      <td>-3.044325e+06</td>
+      <td>2.273244e+07</td>
+      <td>9.316807e+05</td>
+    </tr>
+    <tr>
+      <th>Delicatessen</th>
+      <td>8.727310e+06</td>
+      <td>8.457925e+06</td>
+      <td>5.507291e+06</td>
+      <td>5.352342e+06</td>
+      <td>9.316807e+05</td>
+      <td>7.952997e+06</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> (<span style="color: #FF6600">10</span>,<span style="color: #FF6600">10</span>))
+sns<span style="color: #555555">.</span>heatmap(data<span style="color: #555555">.</span>cov(),annot<span style="color: #555555">=</span><span style="color: #336666">True</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0x115490890&amp;gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_48_1.png" /></p>
+<p>This plot of covariance gives us little bit more idea about possible correlation between variables. This is symmetric plot. Diagonal values represents the variance where as non diagonal values gives some information about correlation. For example we can look <strong>Detergents_Paper</strong> and <strong>Grocery</strong>. Lets look them in separate plot below:</p>
+<h4 id="plot-of-detergents_paper-with-grocery">plot of Detergents_Paper with Grocery</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> (<span style="color: #FF6600">8</span>,<span style="color: #FF6600">8</span>))
+sns<span style="color: #555555">.</span>jointplot(x<span style="color: #555555">=</span><span style="color: #CC3300">&quot;Detergents_Paper&quot;</span>, y<span style="color: #555555">=</span><span style="color: #CC3300">&quot;Grocery&quot;</span>, data<span style="color: #555555">=</span>data,size<span style="color: #555555">=</span><span style="color: #FF6600">15</span>,kind <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;reg&#39;</span>);
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&amp;lt;matplotlib.figure.Figure at 0x115ec98d0&amp;gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_51_1.png" /></p>
+<hr />
+<h3 id="question-3">Question 3</h3>
+<p><em>Are there any pairs of features which exhibit some degree of correlation? Does this confirm or deny your suspicions about the relevance of the feature you attempted to predict? How is the data for those features distributed?</em><br />
+<strong>Hint:</strong> Is the data normally distributed? Where do most of the data points lie? </p>
+<p><strong>Answer:</strong></p>
+<ol>
+<li><strong>Are there any pairs of features which exhibit some degree of correlation?</strong></li>
+</ol>
+<p>Yes! <code>Detergents_Paper</code> and <code>Grocery</code> are highly correlated. There may be little correlation between <code>Detergents_Paper</code> and <code>Milk</code>, <code>Grocery</code> and <code>Milk</code> as well.</p>
+<ol>
+<li>
+<p><strong>Does this confirm or deny your suspicions about the relevance of the feature you attempted to predict?</strong></p>
+<p>Yes! It confirms my suspicions about the relevance of the feature in Question 2.</p>
+</li>
+<li>
+<p><strong>How is the data for those features distributed?</strong></p>
+<p>The data distribution plot looks more like a F distribution.</p>
+</li>
+</ol>
+<hr />
+<h2 id="data-preprocessing">Data Preprocessing</h2>
+<p>In this section, you will preprocess the data to create a better representation of customers by performing a scaling on the data and detecting (and optionally removing) outliers. Preprocessing data is often times a critical step in assuring that results you obtain from your analysis are significant and meaningful.</p>
+<h3 id="implementation-feature-scaling">Implementation: Feature Scaling</h3>
+<p>If data is not normally distributed, especially if the mean and median vary significantly (indicating a large skew), it is most <a href="http://econbrowser.com/archives/2014/02/use-of-logarithms-in-economics">often appropriate</a> to apply a non-linear scaling — particularly for financial data. One way to achieve this scaling is by using a <a href="http://scipy.github.io/devdocs/generated/scipy.stats.boxcox.html">Box-Cox test</a>, which calculates the best power transformation of the data that reduces skewness. A simpler approach which can work in most cases would be applying the natural logarithm.</p>
+<p>In the code block below, you will need to implement the following:
+ - Assign a copy of the data to <code>log_data</code> after applying logarithmic scaling. Use the <code>np.log</code> function for this.
+ - Assign a copy of the sample data to <code>log_samples</code> after applying logarithmic scaling. Again, use <code>np.log</code>.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># TODO: Scale the data using the natural logarithm</span>
+log_data <span style="color: #555555">=</span> np<span style="color: #555555">.</span>log(data)
+
+<span style="color: #0099FF; font-style: italic"># TODO: Scale the sample data using the natural logarithm</span>
+log_samples <span style="color: #555555">=</span> np<span style="color: #555555">.</span>log(samples)
+
+<span style="color: #0099FF; font-style: italic"># Produce a scatter matrix for each pair of newly-transformed features</span>
+sns<span style="color: #555555">.</span>pairplot(log_data)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&amp;lt;seaborn.axisgrid.PairGrid at 0x110d1cbd0&amp;gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_58_1.png" /></p>
+<h3 id="observation">Observation</h3>
+<p>After applying a natural logarithm scaling to the data, the distribution of each feature should appear much more normal. For any pairs of features you may have identified earlier as being correlated, observe here whether that correlation is still present (and whether it is now stronger or weaker than before).</p>
+<p>Run the code below to see how the sample data has changed after having the natural logarithm applied to it.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Display the log-transformed sample data</span>
+display(log_samples)
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>10.364514</td>
+      <td>9.418898</td>
+      <td>9.372204</td>
+      <td>5.659482</td>
+      <td>8.263848</td>
+      <td>7.983099</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>11.241602</td>
+      <td>8.152774</td>
+      <td>8.868132</td>
+      <td>9.713416</td>
+      <td>6.656727</td>
+      <td>6.822197</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.574711</td>
+      <td>8.190077</td>
+      <td>9.425452</td>
+      <td>4.584967</td>
+      <td>7.996317</td>
+      <td>4.127134</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="implementation-outlier-detection">Implementation: Outlier Detection</h3>
+<p>Detecting outliers in the data is extremely important in the data preprocessing step of any analysis. The presence of outliers can often skew results which take into consideration these data points. There are many "rules of thumb" for what constitutes an outlier in a dataset. Here, we will use <a href="http://datapigtechnologies.com/blog/index.php/highlighting-outliers-in-your-data-with-the-tukey-method/">Tukey's Method for identfying outliers</a>: An <em>outlier step</em> is calculated as 1.5 times the interquartile range (IQR). A data point with a feature that is beyond an outlier step outside of the IQR for that feature is considered abnormal.</p>
+<p>In the code block below, you will need to implement the following:
+ - Assign the value of the 25th percentile for the given feature to <code>Q1</code>. Use <code>np.percentile</code> for this.
+ - Assign the value of the 75th percentile for the given feature to <code>Q3</code>. Again, use <code>np.percentile</code>.
+ - Assign the calculation of an outlier step for the given feature to <code>step</code>.
+ - Optionally remove data points from the dataset by adding indices to the <code>outliers</code> list.</p>
+<p><strong>NOTE:</strong> If you choose to remove any outliers, ensure that the sample data does not contain any of these points!<br />
+Once you have performed this implementation, the dataset will be stored in the variable <code>good_data</code>.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>log_data[<span style="color: #CC3300">&#39;sn&#39;</span>] <span style="color: #555555">=</span> log_data<span style="color: #555555">.</span>index
+bad_indexes <span style="color: #555555">=</span> {}
+
+<span style="color: #0099FF; font-style: italic"># For each feature find the data points with extreme high or low values</span>
+<span style="color: #006699; font-weight: bold">for</span> feature <span style="color: #000000; font-weight: bold">in</span> log_data<span style="color: #555555">.</span>keys():
+
+    feature_data <span style="color: #555555">=</span> log_data[feature]
+    <span style="color: #0099FF; font-style: italic"># TODO: Calculate Q1 (25th percentile of the data) for the given feature</span>
+    Q1 <span style="color: #555555">=</span> np<span style="color: #555555">.</span>percentile(feature_data, <span style="color: #FF6600">25</span>)
+
+    <span style="color: #0099FF; font-style: italic"># TODO: Calculate Q3 (75th percentile of the data) for the given feature</span>
+    Q3 <span style="color: #555555">=</span> np<span style="color: #555555">.</span>percentile(feature_data, <span style="color: #FF6600">75</span>)
+
+    <span style="color: #0099FF; font-style: italic"># TODO: Use the interquartile range to calculate an outlier step (1.5 times the interquartile range)</span>
+    step <span style="color: #555555">=</span> <span style="color: #FF6600">1.5</span> <span style="color: #555555">*</span> (Q3 <span style="color: #555555">-</span> Q1)
+
+    feature_outliers <span style="color: #555555">=</span> log_data[<span style="color: #555555">~</span>((feature_data <span style="color: #555555">&gt;=</span> Q1 <span style="color: #555555">-</span> step) <span style="color: #555555">&amp;</span> (feature_data <span style="color: #555555">&lt;=</span> Q3 <span style="color: #555555">+</span> step))]
+
+
+    <span style="color: #0099FF; font-style: italic"># Display the outliers</span>
+    <span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;Data points considered outliers for the feature &#39;{}&#39;:&quot;</span><span style="color: #555555">.</span>format(feature))
+    display(feature_outliers)
+
+
+
+    <span style="color: #006699; font-weight: bold">for</span> i, r <span style="color: #000000; font-weight: bold">in</span> feature_data<span style="color: #555555">.</span>iteritems():
+        <span style="color: #006699; font-weight: bold">if</span> <span style="color: #000000; font-weight: bold">not</span> (Q1 <span style="color: #555555">-</span> step <span style="color: #555555">&lt;=</span> r <span style="color: #555555">&lt;=</span> Q3 <span style="color: #555555">+</span> step):
+            <span style="color: #006699; font-weight: bold">if</span> i <span style="color: #000000; font-weight: bold">not</span> <span style="color: #000000; font-weight: bold">in</span> bad_indexes:
+                bad_indexes[i] <span style="color: #555555">=</span> <span style="color: #FF6600">1</span>
+            <span style="color: #006699; font-weight: bold">else</span>:
+                bad_indexes[i] <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+
+
+<span style="color: #0099FF; font-style: italic"># OPTIONAL: Select the indices for data points you wish to remove</span>
+outliers  <span style="color: #555555">=</span> [i <span style="color: #006699; font-weight: bold">for</span> i, n <span style="color: #000000; font-weight: bold">in</span> bad_indexes<span style="color: #555555">.</span>items() <span style="color: #006699; font-weight: bold">if</span> n <span style="color: #555555">&gt;</span> <span style="color: #FF6600">1</span>]
+
+
+
+<span style="color: #0099FF; font-style: italic"># Remove the outliers, if any were specified</span>
+good_data <span style="color: #555555">=</span> log_data<span style="color: #555555">.</span>drop(log_data<span style="color: #555555">.</span>index[outliers])<span style="color: #555555">.</span>reset_index(drop <span style="color: #555555">=</span> <span style="color: #336666">True</span>)
+outliars_data <span style="color: #555555">=</span> log_data<span style="color: #555555">.</span>iloc[log_data<span style="color: #555555">.</span>index[outliers],:]
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Data points considered outliers for the feature &#39;Fresh&#39;:
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+      <th>sn</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>65</th>
+      <td>4.442651</td>
+      <td>9.950323</td>
+      <td>10.732651</td>
+      <td>3.583519</td>
+      <td>10.095388</td>
+      <td>7.260523</td>
+      <td>65</td>
+    </tr>
+    <tr>
+      <th>66</th>
+      <td>2.197225</td>
+      <td>7.335634</td>
+      <td>8.911530</td>
+      <td>5.164786</td>
+      <td>8.151333</td>
+      <td>3.295837</td>
+      <td>66</td>
+    </tr>
+    <tr>
+      <th>81</th>
+      <td>5.389072</td>
+      <td>9.163249</td>
+      <td>9.575192</td>
+      <td>5.645447</td>
+      <td>8.964184</td>
+      <td>5.049856</td>
+      <td>81</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>1.098612</td>
+      <td>7.979339</td>
+      <td>8.740657</td>
+      <td>6.086775</td>
+      <td>5.407172</td>
+      <td>6.563856</td>
+      <td>95</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>3.135494</td>
+      <td>7.869402</td>
+      <td>9.001839</td>
+      <td>4.976734</td>
+      <td>8.262043</td>
+      <td>5.379897</td>
+      <td>96</td>
+    </tr>
+    <tr>
+      <th>128</th>
+      <td>4.941642</td>
+      <td>9.087834</td>
+      <td>8.248791</td>
+      <td>4.955827</td>
+      <td>6.967909</td>
+      <td>1.098612</td>
+      <td>128</td>
+    </tr>
+    <tr>
+      <th>171</th>
+      <td>5.298317</td>
+      <td>10.160530</td>
+      <td>9.894245</td>
+      <td>6.478510</td>
+      <td>9.079434</td>
+      <td>8.740337</td>
+      <td>171</td>
+    </tr>
+    <tr>
+      <th>193</th>
+      <td>5.192957</td>
+      <td>8.156223</td>
+      <td>9.917982</td>
+      <td>6.865891</td>
+      <td>8.633731</td>
+      <td>6.501290</td>
+      <td>193</td>
+    </tr>
+    <tr>
+      <th>218</th>
+      <td>2.890372</td>
+      <td>8.923191</td>
+      <td>9.629380</td>
+      <td>7.158514</td>
+      <td>8.475746</td>
+      <td>8.759669</td>
+      <td>218</td>
+    </tr>
+    <tr>
+      <th>304</th>
+      <td>5.081404</td>
+      <td>8.917311</td>
+      <td>10.117510</td>
+      <td>6.424869</td>
+      <td>9.374413</td>
+      <td>7.787382</td>
+      <td>304</td>
+    </tr>
+    <tr>
+      <th>305</th>
+      <td>5.493061</td>
+      <td>9.468001</td>
+      <td>9.088399</td>
+      <td>6.683361</td>
+      <td>8.271037</td>
+      <td>5.351858</td>
+      <td>305</td>
+    </tr>
+    <tr>
+      <th>338</th>
+      <td>1.098612</td>
+      <td>5.808142</td>
+      <td>8.856661</td>
+      <td>9.655090</td>
+      <td>2.708050</td>
+      <td>6.309918</td>
+      <td>338</td>
+    </tr>
+    <tr>
+      <th>353</th>
+      <td>4.762174</td>
+      <td>8.742574</td>
+      <td>9.961898</td>
+      <td>5.429346</td>
+      <td>9.069007</td>
+      <td>7.013016</td>
+      <td>353</td>
+    </tr>
+    <tr>
+      <th>355</th>
+      <td>5.247024</td>
+      <td>6.588926</td>
+      <td>7.606885</td>
+      <td>5.501258</td>
+      <td>5.214936</td>
+      <td>4.844187</td>
+      <td>355</td>
+    </tr>
+    <tr>
+      <th>357</th>
+      <td>3.610918</td>
+      <td>7.150701</td>
+      <td>10.011086</td>
+      <td>4.919981</td>
+      <td>8.816853</td>
+      <td>4.700480</td>
+      <td>357</td>
+    </tr>
+    <tr>
+      <th>412</th>
+      <td>4.574711</td>
+      <td>8.190077</td>
+      <td>9.425452</td>
+      <td>4.584967</td>
+      <td>7.996317</td>
+      <td>4.127134</td>
+      <td>412</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Data points considered outliers for the feature &#39;Milk&#39;:
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+      <th>sn</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>86</th>
+      <td>10.039983</td>
+      <td>11.205013</td>
+      <td>10.377047</td>
+      <td>6.894670</td>
+      <td>9.906981</td>
+      <td>6.805723</td>
+      <td>86</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>6.220590</td>
+      <td>4.718499</td>
+      <td>6.656727</td>
+      <td>6.796824</td>
+      <td>4.025352</td>
+      <td>4.882802</td>
+      <td>98</td>
+    </tr>
+    <tr>
+      <th>154</th>
+      <td>6.432940</td>
+      <td>4.007333</td>
+      <td>4.919981</td>
+      <td>4.317488</td>
+      <td>1.945910</td>
+      <td>2.079442</td>
+      <td>154</td>
+    </tr>
+    <tr>
+      <th>356</th>
+      <td>10.029503</td>
+      <td>4.897840</td>
+      <td>5.384495</td>
+      <td>8.057377</td>
+      <td>2.197225</td>
+      <td>6.306275</td>
+      <td>356</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Data points considered outliers for the feature &#39;Grocery&#39;:
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+      <th>sn</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>75</th>
+      <td>9.923192</td>
+      <td>7.036148</td>
+      <td>1.098612</td>
+      <td>8.390949</td>
+      <td>1.098612</td>
+      <td>6.882437</td>
+      <td>75</td>
+    </tr>
+    <tr>
+      <th>154</th>
+      <td>6.432940</td>
+      <td>4.007333</td>
+      <td>4.919981</td>
+      <td>4.317488</td>
+      <td>1.945910</td>
+      <td>2.079442</td>
+      <td>154</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Data points considered outliers for the feature &#39;Frozen&#39;:
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+      <th>sn</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>38</th>
+      <td>8.431853</td>
+      <td>9.663261</td>
+      <td>9.723703</td>
+      <td>3.496508</td>
+      <td>8.847360</td>
+      <td>6.070738</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <th>57</th>
+      <td>8.597297</td>
+      <td>9.203618</td>
+      <td>9.257892</td>
+      <td>3.637586</td>
+      <td>8.932213</td>
+      <td>7.156177</td>
+      <td>57</td>
+    </tr>
+    <tr>
+      <th>65</th>
+      <td>4.442651</td>
+      <td>9.950323</td>
+      <td>10.732651</td>
+      <td>3.583519</td>
+      <td>10.095388</td>
+      <td>7.260523</td>
+      <td>65</td>
+    </tr>
+    <tr>
+      <th>145</th>
+      <td>10.000569</td>
+      <td>9.034080</td>
+      <td>10.457143</td>
+      <td>3.737670</td>
+      <td>9.440738</td>
+      <td>8.396155</td>
+      <td>145</td>
+    </tr>
+    <tr>
+      <th>175</th>
+      <td>7.759187</td>
+      <td>8.967632</td>
+      <td>9.382106</td>
+      <td>3.951244</td>
+      <td>8.341887</td>
+      <td>7.436617</td>
+      <td>175</td>
+    </tr>
+    <tr>
+      <th>264</th>
+      <td>6.978214</td>
+      <td>9.177714</td>
+      <td>9.645041</td>
+      <td>4.110874</td>
+      <td>8.696176</td>
+      <td>7.142827</td>
+      <td>264</td>
+    </tr>
+    <tr>
+      <th>325</th>
+      <td>10.395650</td>
+      <td>9.728181</td>
+      <td>9.519735</td>
+      <td>11.016479</td>
+      <td>7.148346</td>
+      <td>8.632128</td>
+      <td>325</td>
+    </tr>
+    <tr>
+      <th>420</th>
+      <td>8.402007</td>
+      <td>8.569026</td>
+      <td>9.490015</td>
+      <td>3.218876</td>
+      <td>8.827321</td>
+      <td>7.239215</td>
+      <td>420</td>
+    </tr>
+    <tr>
+      <th>429</th>
+      <td>9.060331</td>
+      <td>7.467371</td>
+      <td>8.183118</td>
+      <td>3.850148</td>
+      <td>4.430817</td>
+      <td>7.824446</td>
+      <td>429</td>
+    </tr>
+    <tr>
+      <th>439</th>
+      <td>7.932721</td>
+      <td>7.437206</td>
+      <td>7.828038</td>
+      <td>4.174387</td>
+      <td>6.167516</td>
+      <td>3.951244</td>
+      <td>439</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Data points considered outliers for the feature &#39;Detergents_Paper&#39;:
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+      <th>sn</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>75</th>
+      <td>9.923192</td>
+      <td>7.036148</td>
+      <td>1.098612</td>
+      <td>8.390949</td>
+      <td>1.098612</td>
+      <td>6.882437</td>
+      <td>75</td>
+    </tr>
+    <tr>
+      <th>161</th>
+      <td>9.428190</td>
+      <td>6.291569</td>
+      <td>5.645447</td>
+      <td>6.995766</td>
+      <td>1.098612</td>
+      <td>7.711101</td>
+      <td>161</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Data points considered outliers for the feature &#39;Delicatessen&#39;:
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+      <th>sn</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>66</th>
+      <td>2.197225</td>
+      <td>7.335634</td>
+      <td>8.911530</td>
+      <td>5.164786</td>
+      <td>8.151333</td>
+      <td>3.295837</td>
+      <td>66</td>
+    </tr>
+    <tr>
+      <th>109</th>
+      <td>7.248504</td>
+      <td>9.724899</td>
+      <td>10.274568</td>
+      <td>6.511745</td>
+      <td>6.728629</td>
+      <td>1.098612</td>
+      <td>109</td>
+    </tr>
+    <tr>
+      <th>128</th>
+      <td>4.941642</td>
+      <td>9.087834</td>
+      <td>8.248791</td>
+      <td>4.955827</td>
+      <td>6.967909</td>
+      <td>1.098612</td>
+      <td>128</td>
+    </tr>
+    <tr>
+      <th>137</th>
+      <td>8.034955</td>
+      <td>8.997147</td>
+      <td>9.021840</td>
+      <td>6.493754</td>
+      <td>6.580639</td>
+      <td>3.583519</td>
+      <td>137</td>
+    </tr>
+    <tr>
+      <th>142</th>
+      <td>10.519646</td>
+      <td>8.875147</td>
+      <td>9.018332</td>
+      <td>8.004700</td>
+      <td>2.995732</td>
+      <td>1.098612</td>
+      <td>142</td>
+    </tr>
+    <tr>
+      <th>154</th>
+      <td>6.432940</td>
+      <td>4.007333</td>
+      <td>4.919981</td>
+      <td>4.317488</td>
+      <td>1.945910</td>
+      <td>2.079442</td>
+      <td>154</td>
+    </tr>
+    <tr>
+      <th>183</th>
+      <td>10.514529</td>
+      <td>10.690808</td>
+      <td>9.911952</td>
+      <td>10.505999</td>
+      <td>5.476464</td>
+      <td>10.777768</td>
+      <td>183</td>
+    </tr>
+    <tr>
+      <th>184</th>
+      <td>5.789960</td>
+      <td>6.822197</td>
+      <td>8.457443</td>
+      <td>4.304065</td>
+      <td>5.811141</td>
+      <td>2.397895</td>
+      <td>184</td>
+    </tr>
+    <tr>
+      <th>187</th>
+      <td>7.798933</td>
+      <td>8.987447</td>
+      <td>9.192075</td>
+      <td>8.743372</td>
+      <td>8.148735</td>
+      <td>1.098612</td>
+      <td>187</td>
+    </tr>
+    <tr>
+      <th>203</th>
+      <td>6.368187</td>
+      <td>6.529419</td>
+      <td>7.703459</td>
+      <td>6.150603</td>
+      <td>6.860664</td>
+      <td>2.890372</td>
+      <td>203</td>
+    </tr>
+    <tr>
+      <th>233</th>
+      <td>6.871091</td>
+      <td>8.513988</td>
+      <td>8.106515</td>
+      <td>6.842683</td>
+      <td>6.013715</td>
+      <td>1.945910</td>
+      <td>233</td>
+    </tr>
+    <tr>
+      <th>285</th>
+      <td>10.602965</td>
+      <td>6.461468</td>
+      <td>8.188689</td>
+      <td>6.948897</td>
+      <td>6.077642</td>
+      <td>2.890372</td>
+      <td>285</td>
+    </tr>
+    <tr>
+      <th>289</th>
+      <td>10.663966</td>
+      <td>5.655992</td>
+      <td>6.154858</td>
+      <td>7.235619</td>
+      <td>3.465736</td>
+      <td>3.091042</td>
+      <td>289</td>
+    </tr>
+    <tr>
+      <th>343</th>
+      <td>7.431892</td>
+      <td>8.848509</td>
+      <td>10.177932</td>
+      <td>7.283448</td>
+      <td>9.646593</td>
+      <td>3.610918</td>
+      <td>343</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Data points considered outliers for the feature &#39;sn&#39;:
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+      <th>sn</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div>
+
+<p><strong><em> Outliars data</em></strong></p>
+<p>Outliars indices </p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>[i <span style="color: #006699; font-weight: bold">for</span> i, n <span style="color: #000000; font-weight: bold">in</span> bad_indexes<span style="color: #555555">.</span>items() <span style="color: #006699; font-weight: bold">if</span> n <span style="color: #555555">&gt;</span> <span style="color: #FF6600">1</span>]
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>[128, 154, 65, 66, 75]
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>outliars_data
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+      <th>sn</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>128</th>
+      <td>4.941642</td>
+      <td>9.087834</td>
+      <td>8.248791</td>
+      <td>4.955827</td>
+      <td>6.967909</td>
+      <td>1.098612</td>
+      <td>128</td>
+    </tr>
+    <tr>
+      <th>154</th>
+      <td>6.432940</td>
+      <td>4.007333</td>
+      <td>4.919981</td>
+      <td>4.317488</td>
+      <td>1.945910</td>
+      <td>2.079442</td>
+      <td>154</td>
+    </tr>
+    <tr>
+      <th>65</th>
+      <td>4.442651</td>
+      <td>9.950323</td>
+      <td>10.732651</td>
+      <td>3.583519</td>
+      <td>10.095388</td>
+      <td>7.260523</td>
+      <td>65</td>
+    </tr>
+    <tr>
+      <th>66</th>
+      <td>2.197225</td>
+      <td>7.335634</td>
+      <td>8.911530</td>
+      <td>5.164786</td>
+      <td>8.151333</td>
+      <td>3.295837</td>
+      <td>66</td>
+    </tr>
+    <tr>
+      <th>75</th>
+      <td>9.923192</td>
+      <td>7.036148</td>
+      <td>1.098612</td>
+      <td>8.390949</td>
+      <td>1.098612</td>
+      <td>6.882437</td>
+      <td>75</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h4 id="visualization-of-outliers">Visualization of outliers</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">outlier_plotter</span>(Feature):
+    ax <span style="color: #555555">=</span> good_data<span style="color: #555555">.</span>plot(kind <span style="color: #555555">=</span><span style="color: #CC3300">&#39;scatter&#39;</span>,\
+               x <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;sn&#39;</span>,\
+               y <span style="color: #555555">=</span> Feature,\
+               color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;LightGreen&#39;</span>,\
+               label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;good_data&#39;</span>,\
+               s<span style="color: #555555">=</span><span style="color: #FF6600">30</span>)
+    outliars_data<span style="color: #555555">.</span>plot(kind <span style="color: #555555">=</span><span style="color: #CC3300">&#39;scatter&#39;</span>, \
+                   x <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;sn&#39;</span> ,\
+                   y <span style="color: #555555">=</span> Feature,\
+                   color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Darkred&#39;</span>,\
+                   label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;outliars_data&#39;</span>,\
+                   s<span style="color: #555555">=</span><span style="color: #FF6600">60</span>,ax<span style="color: #555555">=</span>ax)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>outlier_plotter(Feature<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Milk&#39;</span>)
+outlier_plotter(Feature<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Grocery&#39;</span>)
+outlier_plotter(Feature<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Fresh&#39;</span>)
+outlier_plotter(Feature<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Frozen&#39;</span>)
+good_data <span style="color: #555555">=</span> good_data<span style="color: #555555">.</span>drop(<span style="color: #CC3300">&#39;sn&#39;</span>,axis <span style="color: #555555">=</span><span style="color: #FF6600">1</span>)
+</pre></div>
+
+
+<p><img alt="png" src="../output_69_0.png" /></p>
+<p><img alt="png" src="../output_69_1.png" /></p>
+<p><img alt="png" src="../output_69_2.png" /></p>
+<p><img alt="png" src="../output_69_3.png" /></p>
+<hr />
+<h3 id="question-4">Question 4</h3>
+<p><em>Are there any data points considered outliers for more than one feature based on the definition above? Should these data points be removed from the dataset? If any data points were added to the <code>outliers</code> list to be removed, explain why.</em> </p>
+<p><strong>Answer:</strong></p>
+<p>Yes, There are data points considered outliers for more than one feature based on the definition above.</p>
+<p>Yes, they should be removed  and the reason is that the data points at row [128, 154, 65, 66, 75] has more than one outlier features because they are more likely to be true outliers than others.</p>
+<p>Removing all of them could cause underfitting. So, for ones with one feature outlier, I decided to keep them as single outlier feature. It may be the desirable pattern in the datasets.</p>
+<hr />
+<h2 id="feature-transformation">Feature Transformation</h2>
+<p>In this section you will use principal component analysis (PCA) to draw conclusions about the underlying structure of the wholesale customer data. Since using PCA on a dataset calculates the dimensions which best maximize variance, we will find which compound combinations of features best describe customers.</p>
+<h3 id="implementation-pca">Implementation: PCA</h3>
+<p>Now that the data has been scaled to a more normal distribution and has had any necessary outliers removed, we can now apply PCA to the <code>good_data</code> to discover which dimensions about the data best maximize the variance of features involved. In addition to finding these dimensions, PCA will also report the <em>explained variance ratio</em> of each dimension — how much variance within the data is explained by that dimension alone. Note that a component (dimension) from PCA can be considered a new "feature" of the space, however it is a composition of the original features present in the data.</p>
+<p>In the code block below, you will need to implement the following:
+ - Import <code>sklearn.decomposition.PCA</code> and assign the results of fitting PCA in six dimensions with <code>good_data</code> to <code>pca</code>.
+ - Apply a PCA transformation of <code>log_samples</code> using <code>pca.transform</code>, and assign the results to <code>pca_samples</code>.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.decomposition</span> <span style="color: #006699; font-weight: bold">import</span> PCA
+
+
+<span style="color: #0099FF; font-style: italic"># TODO: Apply PCA by fitting the good data with the same number of dimensions as features</span>
+pca <span style="color: #555555">=</span> PCA()
+pca<span style="color: #555555">.</span>fit(good_data)
+
+<span style="color: #0099FF; font-style: italic"># TODO: Transform log_samples using the PCA fit above</span>
+pca_samples <span style="color: #555555">=</span> pca<span style="color: #555555">.</span>transform(log_samples)
+
+<span style="color: #0099FF; font-style: italic"># Generate PCA results plot</span>
+pca_results <span style="color: #555555">=</span> vs<span style="color: #555555">.</span>pca_results(good_data, pca)
+</pre></div>
+
+
+<p><img alt="png" src="../output_76_0.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>display(pca_results)
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Explained Variance</th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Dimension 1</th>
+      <td>0.4430</td>
+      <td>0.1675</td>
+      <td>-0.4014</td>
+      <td>-0.4381</td>
+      <td>0.1782</td>
+      <td>-0.7514</td>
+      <td>-0.1499</td>
+    </tr>
+    <tr>
+      <th>Dimension 2</th>
+      <td>0.2638</td>
+      <td>-0.6859</td>
+      <td>-0.1672</td>
+      <td>-0.0707</td>
+      <td>-0.5005</td>
+      <td>-0.0424</td>
+      <td>-0.4941</td>
+    </tr>
+    <tr>
+      <th>Dimension 3</th>
+      <td>0.1231</td>
+      <td>-0.6774</td>
+      <td>0.0402</td>
+      <td>-0.0195</td>
+      <td>0.3150</td>
+      <td>-0.2117</td>
+      <td>0.6286</td>
+    </tr>
+    <tr>
+      <th>Dimension 4</th>
+      <td>0.1012</td>
+      <td>-0.2043</td>
+      <td>0.0128</td>
+      <td>0.0557</td>
+      <td>0.7854</td>
+      <td>0.2096</td>
+      <td>-0.5423</td>
+    </tr>
+    <tr>
+      <th>Dimension 5</th>
+      <td>0.0485</td>
+      <td>-0.0026</td>
+      <td>0.7192</td>
+      <td>0.3554</td>
+      <td>-0.0331</td>
+      <td>-0.5582</td>
+      <td>-0.2092</td>
+    </tr>
+    <tr>
+      <th>Dimension 6</th>
+      <td>0.0204</td>
+      <td>0.0292</td>
+      <td>-0.5402</td>
+      <td>0.8205</td>
+      <td>0.0205</td>
+      <td>-0.1824</td>
+      <td>0.0197</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">print</span> pca_results[<span style="color: #CC3300">&#39;Explained Variance&#39;</span>]<span style="color: #555555">.</span>cumsum()
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Dimension 1    0.4430
+Dimension 2    0.7068
+Dimension 3    0.8299
+Dimension 4    0.9311
+Dimension 5    0.9796
+Dimension 6    1.0000
+Name: Explained Variance, dtype: float64
+</pre></div>
+
+
+<hr />
+<h3 id="question-5">Question 5</h3>
+<p><em>How much variance in the data is explained</em> <strong><em>in total</em></strong> <em>by the first and second principal component? What about the first four principal components? Using the visualization provided above, discuss what the first four dimensions best represent in terms of customer spending.</em><br />
+<strong>Hint:</strong> A positive increase in a specific dimension corresponds with an <em>increase</em> of the <em>positive-weighted</em> features and a <em>decrease</em> of the <em>negative-weighted</em> features. The rate of increase or decrease is based on the indivdual feature weights.</p>
+<p><strong>Answer:</strong></p>
+<ol>
+<li>
+<p><strong>How much variance in the data is explained in total by the first and second principal component?</strong></p>
+<p>Total variance by the first and second principal component: <strong><em>0.7068</em></strong></p>
+</li>
+<li>
+<p><strong>What about the first four principal components?</strong></p>
+<p>Total variance by first four princile components: <strong><em>0.9311</em></strong></p>
+</li>
+<li>
+<p><strong>Using the visualization provided above, discuss what the first four dimensions best represent in terms of customer spending.</strong></p>
+<p><strong><em>Dimension 1:</em></strong>  It shows large increases for features Milk, Grocery and Detergents_Paper, a small increase for Delicatessen, and small decreases for features Fresh and Frozen.</p>
+<p><strong><em>Dimension 2:</em></strong>  It shows large increases for Fresh, Frozen and Delicatessen, and small increase for Milk, Grocery and Detergents_Paper.</p>
+<p><strong><em>Dimension 3:</em></strong>  It shows large increases for Frozen and Delicatessen, and large decreases for Fresh and Detergents_Paper.</p>
+<p><strong><em>Dimension 4:</em></strong>  It shows large increases for Frozen and Detergents_Paper, and large a decrease for Fish and Delicatessen.</p>
+</li>
+</ol>
+<hr />
+<h3 id="observation_1">Observation</h3>
+<p>Run the code below to see how the log-transformed sample data has changed after having a PCA transformation applied to it in six dimensions. Observe the numerical value for the first four dimensions of the sample points. Consider if this is consistent with your initial interpretation of the sample points.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Display sample log-data after having a PCA transformation applied</span>
+display(pd<span style="color: #555555">.</span>DataFrame(np<span style="color: #555555">.</span>round(pca_samples, <span style="color: #FF6600">4</span>), columns <span style="color: #555555">=</span> pca_results<span style="color: #555555">.</span>index<span style="color: #555555">.</span>values))
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Dimension 1</th>
+      <th>Dimension 2</th>
+      <th>Dimension 3</th>
+      <th>Dimension 4</th>
+      <th>Dimension 5</th>
+      <th>Dimension 6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-2.2406</td>
+      <td>-1.2419</td>
+      <td>-1.0729</td>
+      <td>-1.9589</td>
+      <td>0.2160</td>
+      <td>-0.1782</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.7394</td>
+      <td>-2.9834</td>
+      <td>-0.8204</td>
+      <td>1.2945</td>
+      <td>0.1297</td>
+      <td>0.4712</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-2.1528</td>
+      <td>5.3859</td>
+      <td>0.0930</td>
+      <td>0.4023</td>
+      <td>0.3577</td>
+      <td>0.3111</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="implementation-dimensionality-reduction">Implementation: Dimensionality Reduction</h3>
+<p>When using principal component analysis, one of the main goals is to reduce the dimensionality of the data — in effect, reducing the complexity of the problem. Dimensionality reduction comes at a cost: Fewer dimensions used implies less of the total variance in the data is being explained. Because of this, the <em>cumulative explained variance ratio</em> is extremely important for knowing how many dimensions are necessary for the problem. Additionally, if a signifiant amount of variance is explained by only two or three dimensions, the reduced data can be visualized afterwards.</p>
+<p>In the code block below, you will need to implement the following:
+ - Assign the results of fitting PCA in two dimensions with <code>good_data</code> to <code>pca</code>.
+ - Apply a PCA transformation of <code>good_data</code> using <code>pca.transform</code>, and assign the results to <code>reduced_data</code>.
+ - Apply a PCA transformation of <code>log_samples</code> using <code>pca.transform</code>, and assign the results to <code>pca_samples</code>.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># TODO: Apply PCA by fitting the good data with only two dimensions</span>
+pca <span style="color: #555555">=</span> PCA(n_components<span style="color: #555555">=</span><span style="color: #FF6600">2</span>)
+pca<span style="color: #555555">.</span>fit(good_data)
+
+<span style="color: #0099FF; font-style: italic"># TODO: Transform the good data using the PCA fit above</span>
+reduced_data <span style="color: #555555">=</span> pca<span style="color: #555555">.</span>transform(good_data)
+
+<span style="color: #0099FF; font-style: italic"># TODO: Transform the sample log-data using the PCA fit above</span>
+pca_samples <span style="color: #555555">=</span> pca<span style="color: #555555">.</span>transform(log_samples)
+
+<span style="color: #0099FF; font-style: italic"># Create a DataFrame for the reduced data</span>
+reduced_data <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>DataFrame(reduced_data, columns <span style="color: #555555">=</span> [<span style="color: #CC3300">&#39;Dimension 1&#39;</span>, <span style="color: #CC3300">&#39;Dimension 2&#39;</span>])
+</pre></div>
+
+
+<h3 id="observation_2">Observation</h3>
+<p>Run the code below to see how the log-transformed sample data has changed after having a PCA transformation applied to it using only two dimensions. Observe how the values for the first two dimensions remains unchanged when compared to a PCA transformation in six dimensions.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Display sample log-data after applying PCA transformation in two dimensions</span>
+display(pd<span style="color: #555555">.</span>DataFrame(np<span style="color: #555555">.</span>round(pca_samples, <span style="color: #FF6600">4</span>), columns <span style="color: #555555">=</span> [<span style="color: #CC3300">&#39;Dimension 1&#39;</span>, <span style="color: #CC3300">&#39;Dimension 2&#39;</span>]))
+
+<span style="color: #0099FF; font-style: italic"># scatter plot of reduced features</span>
+<span style="color: #0099FF; font-style: italic">#pd.scatter_matrix(reduced_data, alpha = 0.3, figsize = (10,10), diagonal = &#39;kde&#39;);</span>
+sns<span style="color: #555555">.</span>pairplot(reduced_data,size <span style="color: #555555">=</span><span style="color: #FF6600">5</span>)
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Dimension 1</th>
+      <th>Dimension 2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-2.2406</td>
+      <td>-1.2419</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.7394</td>
+      <td>-2.9834</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-2.1528</td>
+      <td>5.3859</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&amp;lt;seaborn.axisgrid.PairGrid at 0x119715710&amp;gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_88_2.png" /></p>
+<h2 id="visualizing-a-biplot">Visualizing a Biplot</h2>
+<p>A biplot is a scatterplot where each data point is represented by its scores along the principal components. The axes are the principal components (in this case <code>Dimension 1</code> and <code>Dimension 2</code>). In addition, the biplot shows the projection of the original features along the components. A biplot can help us interpret the reduced dimensions of the data, and discover relationships between the principal components and original features.</p>
+<p>Run the code cell below to produce a biplot of the reduced-dimension data.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Create a biplot</span>
+vs<span style="color: #555555">.</span>biplot(good_data, reduced_data, pca)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0x119c34b10&amp;gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_90_1.png" /></p>
+<h3 id="observation_3">Observation</h3>
+<p>Once we have the original feature projections (in red), it is easier to interpret the relative position of each data point in the scatterplot. For instance, a point the lower right corner of the figure will likely correspond to a customer that spends a lot on <code>'Milk'</code>, <code>'Grocery'</code> and <code>'Detergents_Paper'</code>, but not so much on the other product categories. </p>
+<p>From the biplot, which of the original features are most strongly correlated with the first component? What about those that are associated with the second component? Do these observations agree with the pca_results plot you obtained earlier?</p>
+<hr />
+<h2 id="clustering">Clustering</h2>
+<p>In this section, you will choose to use either a K-Means clustering algorithm or a Gaussian Mixture Model clustering algorithm to identify the various customer segments hidden in the data. You will then recover specific data points from the clusters to understand their significance by transforming them back into their original dimension and scale. </p>
+<hr />
+<h3 id="question-6">Question 6</h3>
+<p><em>What are the advantages to using a K-Means clustering algorithm? What are the advantages to using a Gaussian Mixture Model clustering algorithm? Given your observations about the wholesale customer data so far, which of the two algorithms will you use and why?</em></p>
+<p><strong>Answer:</strong></p>
+<ol>
+<li>
+<p><strong>What are the advantages to using a K-Means clustering algorithm?</strong></p>
+<p>It is simple to understand and easy to implement.In computational point of view, it is  fast to run and always converge. It is suitable for searching convex clusters.</p>
+</li>
+<li>
+<p><strong>What are the advantages to using a Gaussian Mixture Model clustering algorithm?</strong></p>
+</li>
+</ol>
+<p>It is the fastest algorithm for learning mixture models among other available models. In case of overlapping clusters, it has "soft" classification technique available. In GMM, there are well-studied statistical inference techniques available.</p>
+<ol>
+<li>
+<p><strong>Given your observations about the wholesale customer data so far, which of the two algorithms will you use and why?</strong></p>
+<p><strong><em>Gaussian Mixture Model clustering algorithm</em></strong> would be the most appropriate because from preious scatter graph of data sets with reduced features, there are two clusters that overlap with each other. </p>
+</li>
+</ol>
+<hr />
+<h3 id="implementation-creating-clusters">Implementation: Creating Clusters</h3>
+<p>Depending on the problem, the number of clusters that you expect to be in the data may already be known. When the number of clusters is not known <em>a priori</em>, there is no guarantee that a given number of clusters best segments the data, since it is unclear what structure exists in the data — if any. However, we can quantify the "goodness" of a clustering by calculating each data point's <em>silhouette coefficient</em>. The <a href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.silhouette_score.html">silhouette coefficient</a> for a data point measures how similar it is to its assigned cluster from -1 (dissimilar) to 1 (similar). Calculating the <em>mean</em> silhouette coefficient provides for a simple scoring method of a given clustering.</p>
+<p>In the code block below, you will need to implement the following:
+ - Fit a clustering algorithm to the <code>reduced_data</code> and assign it to <code>clusterer</code>.
+ - Predict the cluster for each data point in <code>reduced_data</code> using <code>clusterer.predict</code> and assign them to <code>preds</code>.
+ - Find the cluster centers using the algorithm's respective attribute and assign them to <code>centers</code>.
+ - Predict the cluster for each sample data point in <code>pca_samples</code> and assign them <code>sample_preds</code>.
+ - Import <code>sklearn.metrics.silhouette_score</code> and calculate the silhouette score of <code>reduced_data</code> against <code>preds</code>.
+   - Assign the silhouette score to <code>score</code> and print the result.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.mixture</span> <span style="color: #006699; font-weight: bold">import</span> GaussianMixture <span style="color: #006699; font-weight: bold">as</span> GMM
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.metrics</span> <span style="color: #006699; font-weight: bold">import</span> silhouette_score
+
+<span style="color: #0099FF; font-style: italic"># method to find the best n_components</span>
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">score_cluster</span>(data, num_components):
+    clusterer <span style="color: #555555">=</span> GMM(n_components<span style="color: #555555">=</span>num_components)
+    clusterer<span style="color: #555555">.</span>fit(data)
+    preds <span style="color: #555555">=</span> clusterer<span style="color: #555555">.</span>predict(data)
+    score <span style="color: #555555">=</span> silhouette_score(data, preds)
+    <span style="color: #006699; font-weight: bold">return</span> score
+
+<span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;Silhouette Score for different sizes&quot;</span>)
+silhouette_scores_matrix <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>DataFrame(index<span style="color: #555555">=</span>[<span style="color: #CC3300">&#39;Score&#39;</span>])
+
+<span style="color: #006699; font-weight: bold">for</span> size <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(<span style="color: #FF6600">2</span>,<span style="color: #FF6600">11</span>):
+    silhouette_scores_matrix[size] <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>Series(score_cluster(reduced_data, size),\
+                                               index <span style="color: #555555">=</span> silhouette_scores_matrix<span style="color: #555555">.</span>index)
+
+display(silhouette_scores_matrix)
+
+best_n_components <span style="color: #555555">=</span> <span style="color: #FF6600">2</span>
+
+<span style="color: #0099FF; font-style: italic"># Apply the selected clustering algorithm to the reduced data </span>
+clusterer <span style="color: #555555">=</span> GMM(n_components<span style="color: #555555">=</span>best_n_components)
+clusterer<span style="color: #555555">.</span>fit(reduced_data)
+
+<span style="color: #0099FF; font-style: italic"># Predict the cluster for each data point</span>
+preds <span style="color: #555555">=</span> clusterer<span style="color: #555555">.</span>predict(reduced_data)
+
+<span style="color: #0099FF; font-style: italic"># Find the cluster centers</span>
+centers <span style="color: #555555">=</span> clusterer<span style="color: #555555">.</span>means_
+
+<span style="color: #0099FF; font-style: italic"># Predict the cluster for each transformed sample data point</span>
+sample_preds <span style="color: #555555">=</span> clusterer<span style="color: #555555">.</span>predict(pca_samples)
+
+<span style="color: #0099FF; font-style: italic"># Calculate the mean silhouette coefficient for the number of clusters chosen</span>
+score <span style="color: #555555">=</span> silhouette_score(reduced_data, preds)
+
+<span style="color: #006699; font-weight: bold">print</span>(<span style="color: #CC3300">&quot;Best Score: {}, n_components={}&quot;</span><span style="color: #555555">.</span>format(score, best_n_components))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Silhouette Score for different sizes
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>10</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Score</th>
+      <td>0.421917</td>
+      <td>0.395557</td>
+      <td>0.279418</td>
+      <td>0.321519</td>
+      <td>0.25418</td>
+      <td>0.323427</td>
+      <td>0.309646</td>
+      <td>0.328185</td>
+      <td>0.319549</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Best Score: 0.422324682646, n_components=2
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>silhouette_scores_matrix<span style="color: #555555">.</span>plot(kind <span style="color: #555555">=</span> <span style="color: #CC3300">&quot;barh&quot;</span>,figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">14</span>,<span style="color: #FF6600">4</span>))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0x11ca59050&amp;gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_100_1.png" /></p>
+<hr />
+<h3 id="question-7">Question 7</h3>
+<p><em>Report the silhouette score for several cluster numbers you tried. Of these, which number of clusters has the best silhouette score?</em> </p>
+<p><strong>Answer:</strong></p>
+<p>It is shown in previous output of "<strong>Implementation: Creating Clusters</strong>". the Best Score: 0.42, for number of components=2.</p>
+<hr />
+<h3 id="cluster-visualization">Cluster Visualization</h3>
+<p>Once you've chosen the optimal number of clusters for your clustering algorithm using the scoring metric above, you can now visualize the results by executing the code block below. Note that, for experimentation purposes, you are welcome to adjust the number of clusters for your clustering algorithm to see various visualizations. The final visualization provided should, however, correspond with the optimal number of clusters. </p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Display the results of the clustering from implementation</span>
+vs<span style="color: #555555">.</span>cluster_results(reduced_data, preds, centers, pca_samples)
+</pre></div>
+
+
+<p><img alt="png" src="../output_106_0.png" /></p>
+<h3 id="implementation-data-recovery">Implementation: Data Recovery</h3>
+<p>Each cluster present in the visualization above has a central point. These centers (or means) are not specifically data points from the data, but rather the <em>averages</em> of all the data points predicted in the respective clusters. For the problem of creating customer segments, a cluster's center point corresponds to <em>the average customer of that segment</em>. Since the data is currently reduced in dimension and scaled by a logarithm, we can recover the representative customer spending from these data points by applying the inverse transformations.</p>
+<p>In the code block below, you will need to implement the following:
+ - Apply the inverse transform to <code>centers</code> using <code>pca.inverse_transform</code> and assign the new centers to <code>log_centers</code>.
+ - Apply the inverse function of <code>np.log</code> to <code>log_centers</code> using <code>np.exp</code> and assign the true centers to <code>true_centers</code>.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># TODO: Inverse transform the centers</span>
+log_centers <span style="color: #555555">=</span> pca<span style="color: #555555">.</span>inverse_transform(centers)
+
+<span style="color: #0099FF; font-style: italic"># TODO: Exponentiate the centers</span>
+true_centers <span style="color: #555555">=</span> np<span style="color: #555555">.</span>exp(log_centers)
+
+<span style="color: #0099FF; font-style: italic"># Display the true centers</span>
+segments <span style="color: #555555">=</span> [<span style="color: #CC3300">&#39;Segment {}&#39;</span><span style="color: #555555">.</span>format(i) <span style="color: #006699; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(<span style="color: #FF6600">0</span>,<span style="color: #336666">len</span>(centers))]
+true_centers <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>DataFrame(np<span style="color: #555555">.</span>round(true_centers), columns <span style="color: #555555">=</span> data<span style="color: #555555">.</span>keys())
+true_centers<span style="color: #555555">.</span>index <span style="color: #555555">=</span> segments
+
+display(true_centers)
+<span style="color: #0099FF; font-style: italic">#show segments in percentile</span>
+newdata <span style="color: #555555">=</span> data<span style="color: #555555">.</span>append(true_centers)
+
+
+<span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;Percentiles of the centers&quot;</span>)
+percent_centers <span style="color: #555555">=</span> <span style="color: #FF6600">100.0</span> <span style="color: #555555">*</span> newdata<span style="color: #555555">.</span>rank(axis<span style="color: #555555">=</span><span style="color: #FF6600">0</span>, pct<span style="color: #555555">=</span><span style="color: #336666">True</span>)\
+                         <span style="color: #555555">.</span>loc[[<span style="color: #CC3300">&#39;Segment 0&#39;</span>, <span style="color: #CC3300">&#39;Segment 1&#39;</span>]]\
+                         <span style="color: #555555">.</span>round(decimals<span style="color: #555555">=</span><span style="color: #FF6600">3</span>)
+
+display(percent_centers)
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Segment 0</th>
+      <td>8939.0</td>
+      <td>2108.0</td>
+      <td>2758.0</td>
+      <td>2073.0</td>
+      <td>352.0</td>
+      <td>730.0</td>
+    </tr>
+    <tr>
+      <th>Segment 1</th>
+      <td>3567.0</td>
+      <td>7860.0</td>
+      <td>12249.0</td>
+      <td>873.0</td>
+      <td>4713.0</td>
+      <td>966.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Percentiles of the centers
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Segment 0</th>
+      <td>52.5</td>
+      <td>34.4</td>
+      <td>34.4</td>
+      <td>58.4</td>
+      <td>32.0</td>
+      <td>41.2</td>
+    </tr>
+    <tr>
+      <th>Segment 1</th>
+      <td>28.1</td>
+      <td>79.0</td>
+      <td>80.5</td>
+      <td>31.0</td>
+      <td>80.3</td>
+      <td>50.2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h4 id="plot-of-true-center">Plot of true center</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>true_centers<span style="color: #555555">.</span>plot(kind <span style="color: #555555">=</span> <span style="color: #CC3300">&quot;barh&quot;</span>,figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">10</span>,<span style="color: #FF6600">6</span>))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0x1196ac210&amp;gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_110_1.png" /></p>
+<h4 id="plot-of-percentile-centers">Plot of Percentile centers</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>percent_centers<span style="color: #555555">.</span>plot(kind <span style="color: #555555">=</span> <span style="color: #CC3300">&quot;barh&quot;</span>,figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">10</span>,<span style="color: #FF6600">6</span>))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0x11b6d8950&amp;gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_112_1.png" /></p>
+<hr />
+<h3 id="question-8">Question 8</h3>
+<p>Consider the total purchase cost of each product category for the representative data points above, and reference the statistical description of the dataset at the beginning of this project. <em>What set of establishments could each of the customer segments represent?</em><br />
+<strong>Hint:</strong> A customer who is assigned to <code>'Cluster X'</code> should best identify with the establishments represented by the feature set of <code>'Segment X'</code>.</p>
+<p><strong>Answer:</strong></p>
+<ul>
+<li>
+<p><strong>Segment 0</strong> customers buy most Fresh, Frozen (&gt; %50) and much Delicatessen (40%), it's mostly likely to be a <strong>convinence store or greegrocery</strong>.</p>
+</li>
+<li>
+<p><strong>Segment 1</strong> customers buy lots of Grocery, Milk and Detergents_Paper (&gt; 70%), following by Delicatessen (~%50), it indicates it's a <strong>supermarket</strong>.</p>
+</li>
+</ul>
+<hr />
+<h3 id="question-9">Question 9</h3>
+<p><em>For each sample point, which customer segment from</em> <strong><em>Question 8</em></strong> <em>best represents it? Are the predictions for each sample point consistent with this?</em></p>
+<p>Run the code block below to find which cluster each sample point is predicted to be.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Display the predictions</span>
+<span style="color: #006699; font-weight: bold">for</span> i, pred <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>(sample_preds):
+    <span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;Sample point&quot;</span>, i, <span style="color: #CC3300">&quot;predicted to be in Cluster&quot;</span>, pred)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Sample point 0 predicted to be in Cluster 0
+Sample point 1 predicted to be in Cluster 1
+Sample point 2 predicted to be in Cluster 0
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>samples<span style="color: #555555">.</span>plot<span style="color: #555555">.</span>barh(stacked<span style="color: #555555">=</span><span style="color: #336666">True</span>,figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">10</span>,<span style="color: #FF6600">2</span>) );
+</pre></div>
+
+
+<p><img alt="png" src="../output_119_0.png" /></p>
+<p><strong>Answer:</strong></p>
+<ol>
+<li>
+<p><strong>For each sample point, which customer segment from Question 8 best represents it?</strong></p>
+<p>It is shown in output of <strong>Question 9</strong>.</p>
+</li>
+<li>
+<p><strong>Are the predictions for each sample point consistent with this?</strong></p>
+<p>Yes, more or less. The prediction agrees with previous guess that samples are Supermarket, Greengrocer, except for sample 3 as Convenience store.</p>
+<p>Sample 1 customers buy lots of produces in all category, which is close to Segment 0.</p>
+<p>Sample 2 customers buy mostly Fresh and frozen, which makes it close to Segment 1.</p>
+<p>Sample 3 customers buy mostly Grocery and Detergents_Paper, which makes it close to Segment 0.</p>
+</li>
+<li>
+<p>Samples</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Fresh</th>
+<th>Milk</th>
+<th>Grocery</th>
+<th>Frozen</th>
+<th>Detergents_Paper</th>
+<th>Delicatessen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1.560499</td>
+<td>0.884800</td>
+<td>0.400925</td>
+<td>-0.574313</td>
+<td>0.209873</td>
+</tr>
+<tr>
+<td>1</td>
+<td>5.084854</td>
+<td>-0.315148</td>
+<td>-0.089470</td>
+<td>2.776994</td>
+<td>-0.441685</td>
+</tr>
+<tr>
+<td>2</td>
+<td>-0.942242</td>
+<td>-0.297242</td>
+<td>0.468664</td>
+<td>-0.613289</td>
+<td>0.018584</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="conclusion">Conclusion</h2>
+<p>In this final section, you will investigate ways that you can make use of the clustered data. First, you will consider how the different groups of customers, the <strong><em>customer segments</em></strong>, may be affected differently by a specific delivery scheme. Next, you will consider how giving a label to each customer (which <em>segment</em> that customer belongs to) can provide for additional features about the customer data. Finally, you will compare the <strong><em>customer segments</em></strong> to a hidden variable present in the data, to see whether the clustering identified certain relationships.</p>
+<hr />
+<h3 id="question-10">Question 10</h3>
+<p>Companies will often run <a href="https://en.wikipedia.org/wiki/A/B_testing">A/B tests</a> when making small changes to their products or services to determine whether making that change will affect its customers positively or negatively. The wholesale distributor is considering changing its delivery service from currently 5 days a week to 3 days a week. However, the distributor will only make this change in delivery service for customers that react positively.</p>
+<p><strong>How can the wholesale distributor use the customer segments to determine which customers, if any, would react positively to the change in delivery service?</strong></p>
+<p><strong>Hint:</strong> Can we assume the change affects all customers equally? How can we determine which group of customers it affects the most?</p>
+<p><strong>Answer:</strong></p>
+<p>The items that customer purchase like: Fresh, Milk and Frozen are time sensitive and customer may prefer faster and frequent dilivery. Clustering designed with focusing on these three features may give  distributor more intution.</p>
+<p>One can perform the A/B test by selecting a random sample from each cluster and reducing the delivery frequency for each of them. Then a suvey of customer satisfaction could be made for further analysis. An equally sized group of customers with same shopping conditions except the delivery time selected from the remaining customers could be used for comparison. The A/B test data is prepared, interpreated and cross-validated by changing the delivery service to certain amount of test customers. The process can be iterated until certain model is verified or market goals are met.</p>
+<hr />
+<h3 id="question-11">Question 11</h3>
+<p>Additional structure is derived from originally unlabeled data when using clustering techniques. Since each customer has a <strong><em>customer segment</em></strong> it best identifies with (depending on the clustering algorithm applied), we can consider <em>'customer segment'</em> as an <strong>engineered feature</strong> for the data. Assume the wholesale distributor recently acquired ten new customers and each provided estimates for anticipated annual spending of each product category. Knowing these estimates, the wholesale distributor wants to classify each new customer to a <strong><em>customer segment</em></strong> to determine the most appropriate delivery service. </p>
+<p><em><em>How can the wholesale distributor label the new customers using only their estimated product spending and the</em> <strong><em>customer segment</em></strong> </em>data?<strong><em><br />
+</em>*Hint:</strong> A supervised learner could be used to train on the original customers. What would be the target variable?</p>
+<p><strong>Answer:</strong></p>
+<p>The customer segment (cluster prediction) can be used as target and one can design the supervised learning model based on them. The model developed could be used to predict the new customer data. </p>
+<hr />
+<h3 id="visualizing-underlying-distributions">Visualizing Underlying Distributions</h3>
+<p>At the beginning of this project, it was discussed that the <code>'Channel'</code> and <code>'Region'</code> features would be excluded from the dataset so that the customer product categories were emphasized in the analysis. By reintroducing the <code>'Channel'</code> feature to the dataset, an interesting structure emerges when considering the same PCA dimensionality reduction applied earlier to the original dataset.</p>
+<p>Run the code block below to see how each data point is labeled either <code>'HoReCa'</code> (Hotel/Restaurant/Cafe) or <code>'Retail'</code> the reduced space. In addition, you will find the sample points are circled in the plot, which will identify their labeling.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Display the clustering results based on &#39;Channel&#39; data</span>
+vs<span style="color: #555555">.</span>channel_results(reduced_data, outliers, pca_samples)
+</pre></div>
+
+
+<p><img alt="png" src="../output_132_0.png" /></p>
+<hr />
+<h3 id="question-12">Question 12</h3>
+<p><em>How well does the clustering algorithm and number of clusters you've chosen compare to this underlying distribution of Hotel/Restaurant/Cafe customers to Retailer customers? Are there customer segments that would be classified as purely 'Retailers' or 'Hotels/Restaurants/Cafes' by this distribution? Would you consider these classifications as consistent with your previous definition of the customer segments?</em></p>
+<p><strong>Answer:</strong></p>
+<ol>
+<li><strong>How well does the clustering algorithm and number of clusters you've chosen compare to this underlying distribution of Hotel/Restaurant/Cafe customers to Retailer customers?</strong> </li>
+</ol>
+<p>The algorithm and the number of clusters chosen matches with the underlying distribution.</p>
+<ol>
+<li>
+<p><strong>Are there customer segments that would be classified as purely 'Retailers' or 'Hotels/Restaurants/Cafes' by this distribution?</strong></p>
+<p>No, there will be overlap areas for two clusters. Although there is some overlap between the two groups in the middle of the distribution, segment 0 in the analysis is clearly "Retail", and segment 1 is clearly "Hotel/Restaurants/Cafes".</p>
+</li>
+<li>
+<p><strong>Would you consider these classifications as consistent with your previous definition of the customer segments?</strong></p>
+<p>It shows the previous definition of customer segments is consistent with the classification using the Channel feature. I believe the algorithm did a reasonable job of clustering these customers according to broad categories of business type.</p>
+</li>
+</ol>
+<hr />
+<blockquote>
+<p><strong>Note</strong>: Once you have completed all of the code implementations and successfully answered each question above, you may finalize your work by exporting the iPython Notebook as an HTML document. You can do this by using the menu above and navigating to<br />
+<strong>File -&gt; Download as -&gt; HTML (.html)</strong>. Include the finished document along with this notebook as your submission.</p>
+</blockquote>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>
+</pre></div>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../finding_donors/finding_donors/" class="btn btn-neutral float-right" title="Finding Donors">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../boston_housing/boston_housing/" class="btn btn-neutral" title="Boston Housing"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../boston_housing/boston_housing/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../finding_donors/finding_donors/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../../search/main.js" defer></script>
+
+</body>
+</html>
