@@ -1,0 +1,1921 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>Finding Donors - Data Fiction</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Finding Donors";
+    var mkdocs_page_input_path = "ml/finding_donors/finding_donors.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> Data Fiction</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="tocbase current">
+    
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../..">Home</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../WhyCodes/">Why Codes?</a>
+  </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Machine Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../boston_housing/boston_housing/">Boston Housing</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Customer_segments/customer_segments/">Customer Clustering</a>
+  </li>
+        
+          
+
+
+  
+    
+    <li class="navtree toctree-l2 page current">
+      <a class="current" href="./">
+        Finding Donors
+          <span class="toctree-expand"></span>
+      </a>
+    </li>
+    
+      
+
+  <li class="toctree-l2 current with-children">
+    <a href="#machine-learning-engineer-nanodegree">
+      Machine Learning Engineer Nanodegree
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2 current">
+    <ul class="subnav-l2 current">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#supervised-learning">Supervised Learning</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#project-finding-donors-for-charityml">Project: Finding Donors for CharityML</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#getting-started">Getting Started</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#exploring-the-data">
+      Exploring the Data
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#data-info">Data info</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l4">
+    <a href="#histogram">
+      Histogram
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#pairplot">Pairplot:</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l4">
+    <a href="#implementation-data-exploration">
+      Implementation: Data Exploration
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#1-income-versus-merital-status-and-sex">1. Income versus merital status and sex:</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#2-income-versus-age-and-hours-per-week">2. Income versus age and hours per week</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#3-income-versus-education-number-and-eduction-level">3. Income versus education number and eduction level</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#preparing-the-data">
+      Preparing the Data
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#transforming-skewed-continuous-features">Transforming Skewed Continuous Features</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#normalizing-numerical-features">Normalizing Numerical Features</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#implementation-data-preprocessing">Implementation: Data Preprocessing</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#shuffle-and-split-data">Shuffle and Split Data</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#evaluating-model-performance">
+      Evaluating Model Performance
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#metrics-and-the-naive-predictor">Metrics and the Naive Predictor</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-1-naive-predictor-performace">Question 1 - Naive Predictor Performace</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#supervised-learning-models">Supervised Learning Models</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-2-model-application">Question 2 - Model Application</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#answer">Answer:</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#implementation-creating-a-training-and-predicting-pipeline">Implementation - Creating a Training and Predicting Pipeline</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#implementation-initial-model-evaluation">Implementation: Initial Model Evaluation</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#improving-results">
+      Improving Results
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-3-choosing-the-best-model">Question 3 - Choosing the Best Model</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-4-describing-the-model-in-laymans-terms">Question 4 - Describing the Model in Layman's Terms</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#implementation-model-tuning">Implementation: Model Tuning</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l4">
+    <a href="#question-5-final-model-evaluation">
+      Question 5 - Final Model Evaluation
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#results">Results:</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#feature-importance">
+      Feature Importance
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-6-feature-relevance-observation">Question 6 - Feature Relevance Observation</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#implementation-extracting-feature-importance">Implementation - Extracting Feature Importance</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-7-extracting-feature-importance">Question 7 - Extracting Feature Importance</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#feature-selection">Feature Selection</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-8-effects-of-feature-selection">Question 8 - Effects of Feature Selection</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+
+  
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../vehicle-detection/CARND-Project-5/">Vehicle Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../perceptron/dlnd-your-first-neural-network/">Perceptron</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Deep Learning CNN</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/NMIST/NMIST/">NMIST</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/CIFRT10/CIFR10/">CIFT10</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/traffic-sign/Traffic_Sign_Classifier/">Traffic Sign Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/translator/dlnd_language_translation/">Language Translator</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Deep Learning RNN</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/Vanila/1.Vanila-LSTM/">Vanila LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/stacked/2.Stacked-LSTM/">Stacked LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/bidirectional/5. BiDirectional-LSTM/">Bidirectional LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/rnn/RNN_project/">Recurrent Neural Network</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Rinforcement Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../rl/smartcab/smartcab/">SmartCab</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">GAN</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/gan/dlnd_face_generation/">Face Generation</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../References/ref.md">References</a>
+  </li>
+    
+  </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">Data Fiction</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Machine Learning &raquo;</li>
+        
+      
+    
+    <li>Finding Donors</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="machine-learning-engineer-nanodegree">Machine Learning Engineer Nanodegree</h1>
+<h2 id="supervised-learning">Supervised Learning</h2>
+<h2 id="project-finding-donors-for-charityml">Project: Finding Donors for <em>CharityML</em></h2>
+<p>Welcome to the second project of the Machine Learning Engineer Nanodegree! In this notebook, some template code has already been provided for you, and it will be your job to implement the additional functionality necessary to successfully complete this project. Sections that begin with <strong>'Implementation'</strong> in the header indicate that the following block of code will require additional functionality which you must provide. Instructions will be provided for each section and the specifics of the implementation are marked in the code block with a <code>'TODO'</code> statement. Please be sure to read the instructions carefully!</p>
+<p>In addition to implementing code, there will be questions that you must answer which relate to the project and your implementation. Each section where you will answer a question is preceded by a <strong>'Question X'</strong> header. Carefully read each question and provide thorough answers in the following text boxes that begin with <strong>'Answer:'</strong>. Your project submission will be evaluated based on your answers to each of the questions and the implementation you provide.  </p>
+<blockquote>
+<p><strong>Note:</strong> Code and Markdown cells can be executed using the <strong>Shift + Enter</strong> keyboard shortcut. In addition, Markdown cells can be edited by typically double-clicking the cell to enter edit mode.</p>
+</blockquote>
+<h2 id="getting-started">Getting Started</h2>
+<p>In this project, you will employ several supervised algorithms of your choice to accurately model individuals' income using data collected from the 1994 U.S. Census. You will then choose the best candidate algorithm from preliminary results and further optimize this algorithm to best model the data. Your goal with this implementation is to construct a model that accurately predicts whether an individual makes more than $50,000. This sort of task can arise in a non-profit setting, where organizations survive on donations.  Understanding an individual's income can help a non-profit better understand how large of a donation to request, or whether or not they should reach out to begin with.  While it can be difficult to determine an individual's general income bracket directly from public sources, we can (as we will see) infer this value from other publically available features. </p>
+<p>The dataset for this project originates from the <a href="https://archive.ics.uci.edu/ml/datasets/Census+Income">UCI Machine Learning Repository</a>. The datset was donated by Ron Kohavi and Barry Becker, after being published in the article <em>"Scaling Up the Accuracy of Naive-Bayes Classifiers: A Decision-Tree Hybrid"</em>. You can find the article by Ron Kohavi <a href="https://www.aaai.org/Papers/KDD/1996/KDD96-033.pdf">online</a>. The data we investigate here consists of small changes to the original dataset, such as removing the <code>'fnlwgt'</code> feature and records with missing or ill-formatted entries.</p>
+<hr />
+<h2 id="exploring-the-data">Exploring the Data</h2>
+<p>Run the code cell below to load necessary Python libraries and load the census data. Note that the last column from this dataset, <code>'income'</code>, will be our target label (whether an individual makes more than, or at most, $50,000 annually). All other columns are features about each individual in the census database.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Import libraries necessary for this project</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">pandas</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">pd</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">time</span> <span style="color: #006699; font-weight: bold">import</span> time
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">IPython.display</span> <span style="color: #006699; font-weight: bold">import</span> display <span style="color: #0099FF; font-style: italic"># Allows the use of display() for DataFrames</span>
+
+<span style="color: #0099FF; font-style: italic"># Import supplementary visualization code visuals.py</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">visuals</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">vs</span>
+
+<span style="color: #0099FF; font-style: italic"># Pretty display for notebooks</span>
+<span style="color: #555555">%</span>matplotlib inline
+
+<span style="color: #0099FF; font-style: italic"># Load the Census dataset</span>
+data <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>read_csv(<span style="color: #CC3300">&quot;census.csv&quot;</span>)
+
+<span style="color: #0099FF; font-style: italic"># Success - Display the first record</span>
+display(data<span style="color: #555555">.</span>head(n<span style="color: #555555">=</span><span style="color: #FF6600">2</span>))
+<span style="color: #006699; font-weight: bold">print</span>(<span style="color: #CC3300">&#39;shape of data =&#39;</span>,  data<span style="color: #555555">.</span>shape)
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>workclass</th>
+      <th>education_level</th>
+      <th>education-num</th>
+      <th>marital-status</th>
+      <th>occupation</th>
+      <th>relationship</th>
+      <th>race</th>
+      <th>sex</th>
+      <th>capital-gain</th>
+      <th>capital-loss</th>
+      <th>hours-per-week</th>
+      <th>native-country</th>
+      <th>income</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>39</td>
+      <td>State-gov</td>
+      <td>Bachelors</td>
+      <td>13.0</td>
+      <td>Never-married</td>
+      <td>Adm-clerical</td>
+      <td>Not-in-family</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>2174.0</td>
+      <td>0.0</td>
+      <td>40.0</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>50</td>
+      <td>Self-emp-not-inc</td>
+      <td>Bachelors</td>
+      <td>13.0</td>
+      <td>Married-civ-spouse</td>
+      <td>Exec-managerial</td>
+      <td>Husband</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>13.0</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>(&#39;shape of data =&#39;, (45222, 14))
+</pre></div>
+
+
+<h5 id="data-info">Data info</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>data<span style="color: #555555">.</span>info()
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&amp;lt;class &#39;pandas.core.frame.DataFrame&#39;&amp;gt;
+RangeIndex: 45222 entries, 0 to 45221
+Data columns (total 14 columns):
+age                45222 non-null int64
+workclass          45222 non-null object
+education_level    45222 non-null object
+education-num      45222 non-null float64
+marital-status     45222 non-null object
+occupation         45222 non-null object
+relationship       45222 non-null object
+race               45222 non-null object
+sex                45222 non-null object
+capital-gain       45222 non-null float64
+capital-loss       45222 non-null float64
+hours-per-week     45222 non-null float64
+native-country     45222 non-null object
+income             45222 non-null object
+dtypes: float64(4), int64(1), object(9)
+memory usage: 4.8+ MB
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>data<span style="color: #555555">.</span>describe()
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>education-num</th>
+      <th>capital-gain</th>
+      <th>capital-loss</th>
+      <th>hours-per-week</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>45222.000000</td>
+      <td>45222.000000</td>
+      <td>45222.000000</td>
+      <td>45222.000000</td>
+      <td>45222.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>38.547941</td>
+      <td>10.118460</td>
+      <td>1101.430344</td>
+      <td>88.595418</td>
+      <td>40.938017</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>13.217870</td>
+      <td>2.552881</td>
+      <td>7506.430084</td>
+      <td>404.956092</td>
+      <td>12.007508</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>17.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>28.000000</td>
+      <td>9.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>40.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>37.000000</td>
+      <td>10.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>40.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>47.000000</td>
+      <td>13.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>45.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>90.000000</td>
+      <td>16.000000</td>
+      <td>99999.000000</td>
+      <td>4356.000000</td>
+      <td>99.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<hr />
+<h4 id="histogram">Histogram</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> (<span style="color: #FF6600">14</span>,<span style="color: #FF6600">10</span>))
+plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">2</span>,<span style="color: #FF6600">3</span>,<span style="color: #FF6600">1</span>)
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&quot;distribution of age&quot;</span>)
+data[<span style="color: #CC3300">&#39;age&#39;</span>]<span style="color: #555555">.</span>hist(bins <span style="color: #555555">=</span> <span style="color: #FF6600">100</span>)
+plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">2</span>,<span style="color: #FF6600">3</span>,<span style="color: #FF6600">2</span>)
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&quot;distribution of education-num&quot;</span>)
+data[<span style="color: #CC3300">&#39;education-num&#39;</span>]<span style="color: #555555">.</span>hist(bins <span style="color: #555555">=</span> <span style="color: #FF6600">40</span>)
+plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">2</span>,<span style="color: #FF6600">3</span>,<span style="color: #FF6600">3</span>)
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&quot;distribution of capital-gain&quot;</span>)
+data[<span style="color: #CC3300">&#39;capital-gain&#39;</span>]<span style="color: #555555">.</span>hist(bins <span style="color: #555555">=</span> <span style="color: #FF6600">100</span>)
+plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">2</span>,<span style="color: #FF6600">3</span>,<span style="color: #FF6600">4</span>)
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&quot;distribution of hours-per-week&quot;</span>)
+data[<span style="color: #CC3300">&#39;hours-per-week&#39;</span>]<span style="color: #555555">.</span>hist(bins <span style="color: #555555">=</span> <span style="color: #FF6600">50</span>)
+plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">2</span>,<span style="color: #FF6600">3</span>,<span style="color: #FF6600">5</span>)
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&quot;distribution of capital-loss&quot;</span>)
+data[<span style="color: #CC3300">&#39;capital-loss&#39;</span>]<span style="color: #555555">.</span>hist(bins <span style="color: #555555">=</span> <span style="color: #FF6600">50</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0x13ab99890&amp;gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_10_1.png" /></p>
+<hr />
+<h5 id="pairplot">Pairplot:</h5>
+<p>Lets look little more insight about dependency or independency of income with other variables like age, hours per week etc.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">seaborn</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">sns</span>
+plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> (<span style="color: #FF6600">16</span>,<span style="color: #FF6600">21</span>))
+sns<span style="color: #555555">.</span>set()
+sns<span style="color: #555555">.</span>pairplot(data, hue<span style="color: #555555">=</span><span style="color: #CC3300">&quot;income&quot;</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&amp;lt;seaborn.axisgrid.PairGrid at 0x13bb2b290&amp;gt;
+
+
+
+
+&amp;lt;matplotlib.figure.Figure at 0x13b569490&amp;gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_13_2.png" /></p>
+<p>It shows high earning is in general for older age, large education number and hours per week etc. This might be because of knowledge and experience.</p>
+<hr />
+<h3 id="implementation-data-exploration">Implementation: Data Exploration</h3>
+<p>A cursory investigation of the dataset will determine how many individuals fit into either group, and will tell us about the percentage of these individuals making more than \$50,000. In the code cell below, you will need to compute the following:
+- The total number of records, <code>'n_records'</code>
+- The number of individuals making more than \$50,000 annually, <code>'n_greater_50k'</code>.
+- The number of individuals making at most \$50,000 annually, <code>'n_at_most_50k'</code>.
+- The percentage of individuals making more than \$50,000 annually, <code>'greater_percent'</code>.</p>
+<p><strong>Hint:</strong> You may need to look at the table above to understand how the <code>'income'</code> entries are formatted. </p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Total number of records</span>
+n_records <span style="color: #555555">=</span> data<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>]
+
+<span style="color: #0099FF; font-style: italic"># Number of records where individual&#39;s income is more than $50,000</span>
+n_greater_50k <span style="color: #555555">=</span> data[(data<span style="color: #555555">.</span>income<span style="color: #555555">==</span><span style="color: #CC3300">&#39;&gt;50K&#39;</span>)]<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>]
+
+<span style="color: #0099FF; font-style: italic"># Number of records where individual&#39;s income is at most $50,000</span>
+n_at_most_50k <span style="color: #555555">=</span> data[(data<span style="color: #555555">.</span>income<span style="color: #555555">==</span><span style="color: #CC3300">&#39;&lt;=50K&#39;</span>)]<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>]
+
+<span style="color: #0099FF; font-style: italic"># Percentage of individuals whose income is more than $50,000</span>
+greater_percent <span style="color: #555555">=</span> (n_greater_50k<span style="color: #555555">/</span><span style="color: #336666">float</span>(n_records))<span style="color: #555555">*</span><span style="color: #FF6600">100.0</span>
+
+<span style="color: #0099FF; font-style: italic"># Print the results</span>
+<span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;Total number of records: {}&quot;</span><span style="color: #555555">.</span>format(n_records))
+<span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;Individuals making more than $50,000: {}&quot;</span><span style="color: #555555">.</span>format(n_greater_50k))
+<span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;Individuals making at most $50,000: {}&quot;</span><span style="color: #555555">.</span>format(n_at_most_50k))
+<span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;Percentage of individuals making more than $50,000: {:.2f}%&quot;</span><span style="color: #555555">.</span>format(greater_percent))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Total number of records: 45222
+Individuals making more than $50,000: 11208
+Individuals making at most $50,000: 34014
+Percentage of individuals making more than $50,000: 24.78%
+</pre></div>
+
+
+<p>I love to plot them in pi-chart.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span>(<span style="color: #FF6600">4</span>,<span style="color: #FF6600">4</span>))
+labels <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;High Earning&#39;</span>, <span style="color: #CC3300">&#39;Low Earning&#39;</span>
+sizes <span style="color: #555555">=</span> [n_greater_50k, n_at_most_50k]
+colors <span style="color: #555555">=</span> [<span style="color: #CC3300">&#39;yellowgreen&#39;</span>, <span style="color: #CC3300">&#39;gold&#39;</span>]
+explode <span style="color: #555555">=</span> (<span style="color: #FF6600">0</span>, <span style="color: #FF6600">0.1</span>)
+plt<span style="color: #555555">.</span>pie(sizes, explode<span style="color: #555555">=</span>explode, labels<span style="color: #555555">=</span>labels, colors<span style="color: #555555">=</span>colors,
+        autopct<span style="color: #555555">=</span><span style="color: #CC3300">&#39;</span><span style="color: #AA0000">%1.1f%%</span><span style="color: #CC3300">&#39;</span>, shadow<span style="color: #555555">=</span><span style="color: #336666">True</span>, startangle<span style="color: #555555">=</span><span style="color: #FF6600">90</span>)
+plt<span style="color: #555555">.</span>axis(<span style="color: #CC3300">&#39;equal&#39;</span>)
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Income&#39;</span>)
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_19_0.png" /></p>
+<hr />
+<h4 id="1-income-versus-merital-status-and-sex">1. Income versus merital status and sex:</h4>
+<p>Lets look the distribution of count over different merital status and sex: </p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>sns<span style="color: #555555">.</span>countplot(y<span style="color: #555555">=</span><span style="color: #CC3300">&quot;marital-status&quot;</span>, hue<span style="color: #555555">=</span><span style="color: #CC3300">&quot;income&quot;</span>, data<span style="color: #555555">=</span>data, palette<span style="color: #555555">=</span><span style="color: #CC3300">&quot;Greens_d&quot;</span>);
+</pre></div>
+
+
+<p><img alt="png" src="../output_22_0.png" /></p>
+<p>Plot below shows the count of individuals making less than or more than 50K, with a breakdown by the features sex and marital-status.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">seaborn</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">sns</span>
+plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> (<span style="color: #FF6600">16</span>,<span style="color: #FF6600">21</span>))
+sns<span style="color: #555555">.</span>set(style<span style="color: #555555">=</span><span style="color: #CC3300">&quot;whitegrid&quot;</span>, color_codes<span style="color: #555555">=</span><span style="color: #336666">True</span>)
+sns<span style="color: #555555">.</span>factorplot(<span style="color: #CC3300">&quot;sex&quot;</span>, col<span style="color: #555555">=</span><span style="color: #CC3300">&quot;marital-status&quot;</span>, data<span style="color: #555555">=</span>data, 
+               hue<span style="color: #555555">=</span><span style="color: #CC3300">&#39;income&#39;</span>, kind<span style="color: #555555">=</span><span style="color: #CC3300">&quot;count&quot;</span>, col_wrap<span style="color: #555555">=</span><span style="color: #FF6600">2</span>);
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&amp;lt;matplotlib.figure.Figure at 0x13f1333d0&amp;gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_24_1.png" /></p>
+<p>Naturally, married families are more stable, happy and show more in count and also earn much!</p>
+<hr />
+<h4 id="2-income-versus-age-and-hours-per-week">2. Income versus age and hours per week</h4>
+<hr />
+<p>I am pretty much interested to see income with respect to age</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> (<span style="color: #FF6600">15</span>,<span style="color: #FF6600">21</span>))
+plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">1</span>,<span style="color: #FF6600">2</span>,<span style="color: #FF6600">1</span>)
+sns<span style="color: #555555">.</span>countplot(y<span style="color: #555555">=</span><span style="color: #CC3300">&quot;age&quot;</span>, hue<span style="color: #555555">=</span><span style="color: #CC3300">&quot;income&quot;</span>, data<span style="color: #555555">=</span>data, palette<span style="color: #555555">=</span><span style="color: #CC3300">&quot;Greens_d&quot;</span>);
+plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">1</span>,<span style="color: #FF6600">2</span>,<span style="color: #FF6600">2</span>)
+sns<span style="color: #555555">.</span>countplot(y<span style="color: #555555">=</span><span style="color: #CC3300">&quot;hours-per-week&quot;</span>, hue<span style="color: #555555">=</span><span style="color: #CC3300">&quot;income&quot;</span>, data<span style="color: #555555">=</span>data, palette<span style="color: #555555">=</span><span style="color: #CC3300">&quot;Greens_d&quot;</span>);
+</pre></div>
+
+
+<p><img alt="png" src="../output_28_0.png" /></p>
+<p>Wow! Look at the profile of count distribution over age, young generation are going crazy. Large no of young people are working hard to earn less money. They should! Because they have to learn. If you want to earn more, you need to wait patiently and keep learning skills till 40. :) :)</p>
+<p>From hours per week count, <strong><em>why is that 40 hours so much special?</em></strong> This data is little bit biased. We prefer to say 10, 15, 20, 25 etc. But do not bother to say exact value like 13.5 hours or 21 hours. Working place, office etc set working hours like 10 hrs, 20 hrs etc thats why people say like that.</p>
+<p><strong><em>I have a question to my reviewer:</em></strong> Should I add some <strong>normal noise</strong> to this data(hours per week) during preprocessing to get more robust model?</p>
+<p>Is there any relation of age with working hours? Lets see it below.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> (<span style="color: #FF6600">15</span>,<span style="color: #FF6600">21</span>))
+sns<span style="color: #555555">.</span>jointplot(x<span style="color: #555555">=</span><span style="color: #CC3300">&quot;age&quot;</span>, y<span style="color: #555555">=</span><span style="color: #CC3300">&quot;hours-per-week&quot;</span>, data<span style="color: #555555">=</span>data,size<span style="color: #555555">=</span><span style="color: #FF6600">15</span>,kind <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;reg&#39;</span>);
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&amp;lt;matplotlib.figure.Figure at 0x1459e1410&amp;gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_30_1.png" /></p>
+<p>I see as the age grows people work more hours, (Do they sleep less ? or take no rest? no idea! There is not data for sleeping habit). Happyness and calmness definitely play a role to decide for donation!</p>
+<hr />
+<h4 id="3-income-versus-education-number-and-eduction-level">3. Income versus education number and eduction level</h4>
+<p>First lets see how are these two related.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> (<span style="color: #FF6600">10</span>,<span style="color: #FF6600">10</span>))
+sns<span style="color: #555555">.</span>barplot(x<span style="color: #555555">=</span><span style="color: #CC3300">&quot;education-num&quot;</span>, y<span style="color: #555555">=</span><span style="color: #CC3300">&quot;education_level&quot;</span>, data<span style="color: #555555">=</span>data);
+</pre></div>
+
+
+<p><img alt="png" src="../output_35_0.png" /></p>
+<p>Our guess came true. Doctorate has highest education number. Second heighest is Prof-school and pre school is the lowest one.</p>
+<p>Lets see distribution of count of income over different education level and education number.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> (<span style="color: #FF6600">16</span>,<span style="color: #FF6600">16</span>))
+plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">1</span>,<span style="color: #FF6600">2</span>,<span style="color: #FF6600">1</span>)
+sns<span style="color: #555555">.</span>countplot(y<span style="color: #555555">=</span><span style="color: #CC3300">&quot;education-num&quot;</span>, hue<span style="color: #555555">=</span><span style="color: #CC3300">&quot;income&quot;</span>, data<span style="color: #555555">=</span>data, palette<span style="color: #555555">=</span><span style="color: #CC3300">&quot;Greens_d&quot;</span>);
+plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">1</span>,<span style="color: #FF6600">2</span>,<span style="color: #FF6600">2</span>)
+sns<span style="color: #555555">.</span>countplot(y<span style="color: #555555">=</span><span style="color: #CC3300">&quot;education_level&quot;</span>, hue<span style="color: #555555">=</span><span style="color: #CC3300">&quot;income&quot;</span>, data<span style="color: #555555">=</span>data, palette<span style="color: #555555">=</span><span style="color: #CC3300">&quot;Greens_d&quot;</span>);
+</pre></div>
+
+
+<p><img alt="png" src="../output_38_0.png" /></p>
+<p>WOw! Look at that <strong>HS-grad</strong> which has <strong>education number = 9</strong>. These are the majority of the total population. Interestingly <strong>Bachelors (education num = 13)</strong> have heighest count on earning much compaired to others!</p>
+<p>I am going to skip two more features (capital- gain and capital-loss). Which are being discussed in <strong>Data Preparation</strong> topics</p>
+<hr />
+<hr />
+<h2 id="preparing-the-data">Preparing the Data</h2>
+<p>Before data can be used as input for machine learning algorithms, it often must be cleaned, formatted, and restructured — this is typically known as <strong>preprocessing</strong>. Fortunately, for this dataset, there are no invalid or missing entries we must deal with, however, there are some qualities about certain features that must be adjusted. This preprocessing can help tremendously with the outcome and predictive power of nearly all learning algorithms.</p>
+<h3 id="transforming-skewed-continuous-features">Transforming Skewed Continuous Features</h3>
+<p>A dataset may sometimes contain at least one feature whose values tend to lie near a single number, but will also have a non-trivial number of vastly larger or smaller values than that single number.  Algorithms can be sensitive to such distributions of values and can underperform if the range is not properly normalized. With the census dataset two features fit this description: '<code>capital-gain'</code> and <code>'capital-loss'</code>. </p>
+<p>Run the code cell below to plot a histogram of these two features. Note the range of the values present and how they are distributed.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Split the data into features and target label</span>
+income_raw <span style="color: #555555">=</span> data[<span style="color: #CC3300">&#39;income&#39;</span>]
+features_raw <span style="color: #555555">=</span> data<span style="color: #555555">.</span>drop(<span style="color: #CC3300">&#39;income&#39;</span>, axis <span style="color: #555555">=</span> <span style="color: #FF6600">1</span>)
+
+<span style="color: #0099FF; font-style: italic"># Visualize skewed continuous features of original data</span>
+vs<span style="color: #555555">.</span>distribution(data)
+</pre></div>
+
+
+<p><img alt="png" src="../output_44_0.png" /></p>
+<p>For highly-skewed feature distributions such as <code>'capital-gain'</code> and <code>'capital-loss'</code>, it is common practice to apply a <a href="https://en.wikipedia.org/wiki/Data_transformation_(statistics)">logarithmic transformation</a> on the data so that the very large and very small values do not negatively affect the performance of a learning algorithm. Using a logarithmic transformation significantly reduces the range of values caused by outliers. Care must be taken when applying this transformation however: The logarithm of <code>0</code> is undefined, so we must translate the values by a small amount above <code>0</code> to apply the the logarithm successfully.</p>
+<p>Run the code cell below to perform a transformation on the data and visualize the results. Again, note the range of values and how they are distributed. </p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Log-transform the skewed features</span>
+skewed <span style="color: #555555">=</span> [<span style="color: #CC3300">&#39;capital-gain&#39;</span>, <span style="color: #CC3300">&#39;capital-loss&#39;</span>]
+features_raw[skewed] <span style="color: #555555">=</span> data[skewed]<span style="color: #555555">.</span>apply(<span style="color: #006699; font-weight: bold">lambda</span> x: np<span style="color: #555555">.</span>log(x <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>))
+
+<span style="color: #0099FF; font-style: italic"># Visualize the new log distributions</span>
+vs<span style="color: #555555">.</span>distribution(features_raw, transformed <span style="color: #555555">=</span> <span style="color: #336666">True</span>)
+</pre></div>
+
+
+<p><img alt="png" src="../output_46_0.png" /></p>
+<h3 id="normalizing-numerical-features">Normalizing Numerical Features</h3>
+<p>In addition to performing transformations on features that are highly skewed, it is often good practice to perform some type of scaling on numerical features. Applying a scaling to the data does not change the shape of each feature's distribution (such as <code>'capital-gain'</code> or <code>'capital-loss'</code> above); however, normalization ensures that each feature is treated equally when applying supervised learners. Note that once scaling is applied, observing the data in its raw form will no longer have the same original meaning, as exampled below.</p>
+<p>Run the code cell below to normalize each numerical feature. We will use <a href="http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html"><code>sklearn.preprocessing.MinMaxScaler</code></a> for this.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Import sklearn.preprocessing.StandardScaler</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.preprocessing</span> <span style="color: #006699; font-weight: bold">import</span> MinMaxScaler
+
+<span style="color: #0099FF; font-style: italic"># Initialize a scaler, then apply it to the features</span>
+scaler <span style="color: #555555">=</span> MinMaxScaler()
+numerical <span style="color: #555555">=</span> [<span style="color: #CC3300">&#39;age&#39;</span>, <span style="color: #CC3300">&#39;education-num&#39;</span>, <span style="color: #CC3300">&#39;capital-gain&#39;</span>, <span style="color: #CC3300">&#39;capital-loss&#39;</span>, <span style="color: #CC3300">&#39;hours-per-week&#39;</span>]
+features_raw[numerical] <span style="color: #555555">=</span> scaler<span style="color: #555555">.</span>fit_transform(data[numerical])
+
+<span style="color: #0099FF; font-style: italic"># Show an example of a record with scaling applied</span>
+display(features_raw<span style="color: #555555">.</span>head(n <span style="color: #555555">=</span> <span style="color: #FF6600">2</span>))
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>workclass</th>
+      <th>education_level</th>
+      <th>education-num</th>
+      <th>marital-status</th>
+      <th>occupation</th>
+      <th>relationship</th>
+      <th>race</th>
+      <th>sex</th>
+      <th>capital-gain</th>
+      <th>capital-loss</th>
+      <th>hours-per-week</th>
+      <th>native-country</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.301370</td>
+      <td>State-gov</td>
+      <td>Bachelors</td>
+      <td>0.8</td>
+      <td>Never-married</td>
+      <td>Adm-clerical</td>
+      <td>Not-in-family</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>0.02174</td>
+      <td>0.0</td>
+      <td>0.397959</td>
+      <td>United-States</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.452055</td>
+      <td>Self-emp-not-inc</td>
+      <td>Bachelors</td>
+      <td>0.8</td>
+      <td>Married-civ-spouse</td>
+      <td>Exec-managerial</td>
+      <td>Husband</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>0.00000</td>
+      <td>0.0</td>
+      <td>0.122449</td>
+      <td>United-States</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="implementation-data-preprocessing">Implementation: Data Preprocessing</h3>
+<p>From the table in <strong>Exploring the Data</strong> above, we can see there are several features for each record that are non-numeric. Typically, learning algorithms expect input to be numeric, which requires that non-numeric features (called <em>categorical variables</em>) be converted. One popular way to convert categorical variables is by using the <strong>one-hot encoding</strong> scheme. One-hot encoding creates a <em>"dummy"</em> variable for each possible category of each non-numeric feature. For example, assume <code>someFeature</code> has three possible entries: <code>A</code>, <code>B</code>, or <code>C</code>. We then encode this feature into <code>someFeature_A</code>, <code>someFeature_B</code> and <code>someFeature_C</code>.</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">someFeature</th>
+<th></th>
+<th align="center">someFeature_A</th>
+<th align="center">someFeature_B</th>
+<th align="center">someFeature_C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">B</td>
+<td></td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">C</td>
+<td>----&gt; one-hot encode ----&gt;</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">A</td>
+<td></td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+</tbody>
+</table>
+<p>Additionally, as with the non-numeric features, we need to convert the non-numeric target label, <code>'income'</code> to numerical values for the learning algorithm to work. Since there are only two possible categories for this label ("&lt;=50K" and "&gt;50K"), we can avoid using one-hot encoding and simply encode these two categories as <code>0</code> and <code>1</code>, respectively. In code cell below, you will need to implement the following:
+ - Use <a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.get_dummies.html?highlight=get_dummies#pandas.get_dummies"><code>pandas.get_dummies()</code></a> to perform one-hot encoding on the <code>'features_raw'</code> data.
+ - Convert the target label <code>'income_raw'</code> to numerical entries.
+   - Set records with "&lt;=50K" to <code>0</code> and records with "&gt;50K" to <code>1</code>.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># One-hot encode the &#39;features_raw&#39; data using pandas.get_dummies()</span>
+features <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>get_dummies(features_raw)
+
+
+
+<span style="color: #0099FF; font-style: italic"># Encode the &#39;income_raw&#39; data to numerical values</span>
+income <span style="color: #555555">=</span> income_raw<span style="color: #555555">.</span>apply(<span style="color: #006699; font-weight: bold">lambda</span> x: <span style="color: #FF6600">1</span> <span style="color: #006699; font-weight: bold">if</span> x <span style="color: #555555">==</span> <span style="color: #CC3300">&#39;&gt;50K&#39;</span> <span style="color: #006699; font-weight: bold">else</span> <span style="color: #FF6600">0</span>)
+<span style="color: #0099FF; font-style: italic"># Alternate method</span>
+<span style="color: #0099FF; font-style: italic"># pd.get_dummies(income_raw)[&#39;&gt;50K&#39;]</span>
+<span style="color: #0099FF; font-style: italic"># pd.get_dummies(income_raw, drop_first=True)</span>
+
+
+
+<span style="color: #0099FF; font-style: italic"># Print the number of features after one-hot encoding</span>
+encoded <span style="color: #555555">=</span> <span style="color: #336666">list</span>(features<span style="color: #555555">.</span>columns)
+<span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;{} total features after one-hot encoding.&quot;</span><span style="color: #555555">.</span>format(<span style="color: #336666">len</span>(encoded)))
+
+<span style="color: #0099FF; font-style: italic"># Uncomment the following line to see the encoded feature names</span>
+<span style="color: #0099FF; font-style: italic">#print encoded</span>
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>103 total features after one-hot encoding.
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>features<span style="color: #555555">.</span>shape
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>(45222, 103)
+</pre></div>
+
+
+<h3 id="shuffle-and-split-data">Shuffle and Split Data</h3>
+<p>Now all <em>categorical variables</em> have been converted into numerical features, and all numerical features have been normalized. As always, we will now split the data (both features and their labels) into training and test sets. 80% of the data will be used for training and 20% for testing.</p>
+<p>Run the code cell below to perform this split.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Import train_test_split</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.model_selection</span> <span style="color: #006699; font-weight: bold">import</span> train_test_split
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.utils</span> <span style="color: #006699; font-weight: bold">import</span> shuffle
+
+
+<span style="color: #0099FF; font-style: italic">#shuffle the data</span>
+features, income <span style="color: #555555">=</span> shuffle(features, income)
+
+<span style="color: #0099FF; font-style: italic"># Split the &#39;features&#39; and &#39;income&#39; data into training and testing sets</span>
+X_train, X_test, y_train, y_test <span style="color: #555555">=</span> train_test_split(features, income, test_size <span style="color: #555555">=</span> <span style="color: #FF6600">0.2</span>, random_state <span style="color: #555555">=</span> <span style="color: #FF6600">0</span>)
+
+<span style="color: #0099FF; font-style: italic"># Show the results of the split</span>
+<span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;Training set has {} samples.&quot;</span><span style="color: #555555">.</span>format(X_train<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>]))
+<span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;Testing set has {} samples.&quot;</span><span style="color: #555555">.</span>format(X_test<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>]))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Training set has 36177 samples.
+Testing set has 9045 samples.
+</pre></div>
+
+
+<hr />
+<h2 id="evaluating-model-performance">Evaluating Model Performance</h2>
+<p>In this section, we will investigate four different algorithms, and determine which is best at modeling the data. Three of these algorithms will be supervised learners of your choice, and the fourth algorithm is known as a <em>naive predictor</em>.</p>
+<h3 id="metrics-and-the-naive-predictor">Metrics and the Naive Predictor</h3>
+<p><em>CharityML</em>, equipped with their research, knows individuals that make more than \$50,000 are most likely to donate to their charity. Because of this, <em>CharityML</em> is particularly interested in predicting who makes more than \$50,000 accurately. It would seem that using <strong>accuracy</strong> as a metric for evaluating a particular model's performace would be appropriate. Additionally, identifying someone that <em>does not</em> make more than \$50,000 as someone who does would be detrimental to <em>CharityML</em>, since they are looking to find individuals willing to donate. Therefore, a model's ability to precisely predict those that make more than \$50,000 is <em>more important</em> than the model's ability to <strong>recall</strong> those individuals. We can use <strong>F-beta score</strong> as a metric that considers both precision and recall:</p>
+<p>$$ F_{\beta} = (1 + \beta^2) \cdot \frac{precision \cdot recall}{\left( \beta^2 \cdot precision \right) + recall} $$</p>
+<p>In particular, when $\beta = 0.5$, more emphasis is placed on precision. This is called the <strong>F$_{0.5}$ score</strong> (or F-score for simplicity).</p>
+<p>Looking at the distribution of classes (those who make at most \$50,000, and those who make more), it's clear most individuals do not make more than \$50,000. This can greatly affect <strong>accuracy</strong>, since we could simply say <em>"this person does not make more than \$50,000"</em> and generally be right, without ever looking at the data! Making such a statement would be called <strong>naive</strong>, since we have not considered any information to substantiate the claim. It is always important to consider the <em>naive prediction</em> for your data, to help establish a benchmark for whether a model is performing well. That been said, using that prediction would be pointless: If we predicted all people made less than \$50,000, <em>CharityML</em> would identify no one as donors. </p>
+<hr />
+<h3 id="question-1-naive-predictor-performace">Question 1 - Naive Predictor Performace</h3>
+<p><em>If we chose a model that always predicted an individual made more than \$50,000, what would that model's accuracy and F-score be on this dataset?</em><br />
+<strong>Note:</strong> You must use the code cell below and assign your results to <code>'accuracy'</code> and <code>'fscore'</code> to be used later.</p>
+<p><strong>Answer</strong></p>
+<p>Since this model always predicts individual making more than \$50,000,</p>
+<ul>
+<li>True Positive(TP) = greater_percentage*no_of_observations</li>
+<li>False Positive(FP) = no_of_observations - True Positive</li>
+<li>
+<p>False Negative(FN) = 0</p>
+</li>
+<li>
+<p>accuracy = $\large{\frac{TP}{TP+FP}}$ = greater_percent/100</p>
+</li>
+<li>recall = $\large{\frac{TP}{TP+FN}}$ = 1.0</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Accuracy</span>
+accuracy <span style="color: #555555">=</span> greater_percent <span style="color: #555555">/</span> <span style="color: #FF6600">100.0</span>
+
+<span style="color: #0099FF; font-style: italic"># Calculate F-score with beta = 0.5</span>
+beta <span style="color: #555555">=</span> <span style="color: #FF6600">0.5</span>
+recall <span style="color: #555555">=</span> <span style="color: #FF6600">1.0</span>
+fscore <span style="color: #555555">=</span> (<span style="color: #FF6600">1</span> <span style="color: #555555">+</span> beta<span style="color: #555555">**</span><span style="color: #FF6600">2</span>) <span style="color: #555555">*</span> accuracy <span style="color: #555555">*</span> recall <span style="color: #555555">/</span> (beta<span style="color: #555555">**</span><span style="color: #FF6600">2</span> <span style="color: #555555">*</span> accuracy <span style="color: #555555">+</span> recall)
+
+<span style="color: #0099FF; font-style: italic"># Print results </span>
+<span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;Naive Predictor: [Accuracy score: {:.4f}, F-score: {:.4f}]&quot;</span><span style="color: #555555">.</span>format(accuracy, fscore))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Naive Predictor: [Accuracy score: 0.2478, F-score: 0.2917]
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>accuracy
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>0.2478439697492371
+</pre></div>
+
+
+<hr />
+<h3 id="supervised-learning-models">Supervised Learning Models</h3>
+<p><strong>The following supervised learning models are currently available in</strong> <a href="http://scikit-learn.org/stable/supervised_learning.html"><code>scikit-learn</code></a> <strong>that you may choose from:</strong>
+- Gaussian Naive Bayes (GaussianNB)
+- Decision Trees
+- Ensemble Methods (Bagging, AdaBoost, Random Forest, Gradient Boosting)
+- K-Nearest Neighbors (KNeighbors)
+- Stochastic Gradient Descent Classifier (SGDC)
+- Support Vector Machines (SVM)
+- Logistic Regression</p>
+<hr />
+<h3 id="question-2-model-application">Question 2 - Model Application</h3>
+<p>List three of the supervised learning models above that are appropriate for this problem that you will test on the census data. For each model chosen
+- <em>Describe one real-world application in industry where the model can be applied.</em> (You may need to do research for this — give references!)
+- <em>What are the strengths of the model; when does it perform well?</em>
+- <em>What are the weaknesses of the model; when does it perform poorly?</em>
+- <em>What makes this model a good candidate for the problem, given what you know about the data?</em></p>
+<h3 id="answer"><strong>Answer: </strong></h3>
+<table>
+<thead>
+<tr>
+<th>model</th>
+<th>real-world application</th>
+<th>strength</th>
+<th>weakness</th>
+<th>why it's a good candidate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://en.wikipedia.org/wiki/Naive_Bayes_classifier#Relation_to_logistic_regression">Gaussian Naive Bayes</a></td>
+<td>natural languages processing (such as spam classification and text document classification)</td>
+<td>even it being simple, It works well in many complex real-world situation.it relies on the independence assumption which means that each distribution can be independently estimated as a one-dimensional distribution and there is no decoupling between them. This helps to reduce the  problems stemming from the curse of dimensionality, such as the need for data sets that scale exponentially with the number of features.</td>
+<td>Since it relies on the independence assumption; it only works well with limited amount of features and</td>
+<td>This model classifies datasets with complex relationships. Naive Bayes classifiers are also highly scalable because it requires a number of parameters linear in the number of variables in a learning problem.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>model</th>
+<th>real-world application</th>
+<th>strength</th>
+<th>weakness</th>
+<th>why it's a good candidate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://en.wikipedia.org/wiki/Support_vector_machine#Applications">Support Vector Machine</a></td>
+<td>knowledge-based systems such as image recognition and hand-written digit recognition, widely applied in the biological and other sciences</td>
+<td>It has both linear classification and non-linear classification using what is called the kernel trick. It can map inputs into high-dimensional feature spaces and captures complex relationships in dataset. A special property of SVM is that they simultaneously minimize the empirical classification error and maximize the geometric margin and hence make them more robust among other classifiers.</td>
+<td>It is problematic for learning with data points and many features. It requirs full labelling of data. It shows computational inefficiency specifically the complex parameters such as C (regularization) and kernels are hard to interpret</td>
+<td>It's powerful in capturing complex relationships in data automatically. It can be optimized by fine tuning parameters.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>model</th>
+<th>real-world application</th>
+<th>strength</th>
+<th>weakness</th>
+<th>why it's a good candidate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://en.wikipedia.org/wiki/Logistic_regression#Fields_and_example_applications">Logistic Regression</a></td>
+<td>medical (disease diagonastics) and economics (mortage), social science(voter prediction), natural language processing, business (prediction of a customer's propensity to purchase a product)</td>
+<td>It is simple, fast, efficient for small dataset with limited features.  It is more robust: the independent variables don’t have to be normally distributed, or have equal variance in each group. It may handle nonlinear effects.</td>
+<td>It cannot capture complex relationship in data, need fine tune of feature population and selection to avoid underfitting or overfitting.</td>
+<td>It is the baseline algorithms in most framework. It is widely used in many applications.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="implementation-creating-a-training-and-predicting-pipeline">Implementation - Creating a Training and Predicting Pipeline</h3>
+<p>To properly evaluate the performance of each model you've chosen, it's important that you create a training and predicting pipeline that allows you to quickly and effectively train models using various sizes of training data and perform predictions on the testing data. Your implementation here will be used in the following section.
+In the code block below, you will need to implement the following:
+ - Import <code>fbeta_score</code> and <code>accuracy_score</code> from <a href="http://scikit-learn.org/stable/modules/classes.html#sklearn-metrics-metrics"><code>sklearn.metrics</code></a>.
+ - Fit the learner to the sampled training data and record the training time.
+ - Perform predictions on the test data <code>X_test</code>, and also on the first 300 training points <code>X_train[:300]</code>.
+   - Record the total prediction time.
+ - Calculate the accuracy score for both the training subset and testing set.
+ - Calculate the F-score for both the training subset and testing set.
+   - Make sure that you set the <code>beta</code> parameter!</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Import two metrics from sklearn - fbeta_score and accuracy_score</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.metrics</span> <span style="color: #006699; font-weight: bold">import</span> fbeta_score, accuracy_score
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">time</span> <span style="color: #006699; font-weight: bold">import</span> time
+
+beta <span style="color: #555555">=</span> <span style="color: #FF6600">0.5</span>
+
+
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">train_predict</span>(learner, sample_size, X_train, y_train, X_test, y_test): 
+    <span style="color: #CC3300; font-style: italic">&#39;&#39;&#39;</span>
+<span style="color: #CC3300; font-style: italic">    inputs:</span>
+<span style="color: #CC3300; font-style: italic">        learner: the learning algorithm to be trained and predicted on</span>
+<span style="color: #CC3300; font-style: italic">        sample_size: the size of samples (number) to be drawn from training set</span>
+<span style="color: #CC3300; font-style: italic">        X_train: features training set</span>
+<span style="color: #CC3300; font-style: italic">        y_train: income training set</span>
+<span style="color: #CC3300; font-style: italic">        X_test: features testing set</span>
+<span style="color: #CC3300; font-style: italic">        y_test: income testing set</span>
+<span style="color: #CC3300; font-style: italic">    &#39;&#39;&#39;</span>
+
+    results <span style="color: #555555">=</span> {}
+    <span style="color: #0099FF; font-style: italic"># Training sets has been modified the by sample size to train model</span>
+    <span style="color: #0099FF; font-style: italic"># with different number of samples.Otherwise training time for each model would be constant</span>
+    X_train <span style="color: #555555">=</span> X_train[:sample_size]
+    y_train <span style="color: #555555">=</span> y_train[:sample_size]
+
+
+    <span style="color: #0099FF; font-style: italic"># TODO: Fit the learner to the training data using slicing with &#39;sample_size&#39;</span>
+    start <span style="color: #555555">=</span> time()  <span style="color: #0099FF; font-style: italic"># Get start time  --------&gt;</span>
+    learner<span style="color: #555555">.</span>fit(X_train, y_train)
+    end <span style="color: #555555">=</span> time()    <span style="color: #0099FF; font-style: italic"># Get end time      &lt;--------</span>
+
+
+
+    <span style="color: #0099FF; font-style: italic"># TODO: Calculate the training time</span>
+    results[<span style="color: #CC3300">&#39;train_time&#39;</span>] <span style="color: #555555">=</span> end<span style="color: #555555">-</span>start
+
+
+    <span style="color: #0099FF; font-style: italic"># TODO: Get the predictions on the test set,</span>
+    <span style="color: #0099FF; font-style: italic">#       then get predictions on the first 300 training samples</span>
+    start <span style="color: #555555">=</span> time()  <span style="color: #0099FF; font-style: italic"># Get start time    -------&gt;</span>
+    predictions_test <span style="color: #555555">=</span> learner<span style="color: #555555">.</span>predict(X_test)
+    predictions_train <span style="color: #555555">=</span> learner<span style="color: #555555">.</span>predict(X_train[:<span style="color: #FF6600">300</span>])
+    end <span style="color: #555555">=</span> time()    <span style="color: #0099FF; font-style: italic"># Get end time        &lt;-------</span>
+
+
+    <span style="color: #0099FF; font-style: italic"># TODO: Calculate the total prediction time</span>
+    results[<span style="color: #CC3300">&#39;pred_time&#39;</span>] <span style="color: #555555">=</span> end<span style="color: #555555">-</span>start
+
+
+
+
+    <span style="color: #0099FF; font-style: italic"># TODO: Compute accuracy on the first 300 training samples</span>
+    results[<span style="color: #CC3300">&#39;acc_train&#39;</span>] <span style="color: #555555">=</span> accuracy_score(y_train[:<span style="color: #FF6600">300</span>], predictions_train)
+
+    <span style="color: #0099FF; font-style: italic"># TODO: Compute accuracy on test set</span>
+    results[<span style="color: #CC3300">&#39;acc_test&#39;</span>] <span style="color: #555555">=</span> accuracy_score(y_test, predictions_test)
+
+    <span style="color: #0099FF; font-style: italic"># TODO: Compute F-score on the the first 300 training samples</span>
+    results[<span style="color: #CC3300">&#39;f_train&#39;</span>] <span style="color: #555555">=</span> fbeta_score(y_train[:<span style="color: #FF6600">300</span>], predictions_train, beta<span style="color: #555555">=</span>beta)
+
+    <span style="color: #0099FF; font-style: italic"># TODO: Compute F-score on the test set</span>
+    results[<span style="color: #CC3300">&#39;f_test&#39;</span>] <span style="color: #555555">=</span> fbeta_score(y_test, predictions_test, beta<span style="color: #555555">=</span>beta)
+
+    <span style="color: #0099FF; font-style: italic"># Success</span>
+    <span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;{} trained on {} samples.&quot;</span><span style="color: #555555">.</span>format(learner<span style="color: #555555">.</span><span style="color: #003333">__class__</span><span style="color: #555555">.</span><span style="color: #003333">__name__</span>, sample_size))
+
+    <span style="color: #0099FF; font-style: italic"># Return the results</span>
+    <span style="color: #006699; font-weight: bold">return</span> results
+</pre></div>
+
+
+<h3 id="implementation-initial-model-evaluation">Implementation: Initial Model Evaluation</h3>
+<p>In the code cell, you will need to implement the following:
+- Import the three supervised learning models you've discussed in the previous section.
+- Initialize the three models and store them in <code>'clf_A'</code>, <code>'clf_B'</code>, and <code>'clf_C'</code>.
+  - Use a <code>'random_state'</code> for each model you use, if provided.
+  - <strong>Note:</strong> Use the default settings for each model — you will tune one specific model in a later section.
+- Calculate the number of records equal to 1%, 10%, and 100% of the training data.
+  - Store those values in <code>'samples_1'</code>, <code>'samples_10'</code>, and <code>'samples_100'</code> respectively.</p>
+<p><strong>Note:</strong> Depending on which algorithms you chose, the following implementation may take some time to run!</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># TODO: Import the three supervised learning models from sklearn</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.linear_model</span> <span style="color: #006699; font-weight: bold">import</span> LogisticRegression, SGDClassifier
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.svm</span> <span style="color: #006699; font-weight: bold">import</span> LinearSVC, SVC
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.ensemble</span> <span style="color: #006699; font-weight: bold">import</span> AdaBoostClassifier, GradientBoostingClassifier
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.neighbors</span> <span style="color: #006699; font-weight: bold">import</span> KNeighborsClassifier
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.naive_bayes</span> <span style="color: #006699; font-weight: bold">import</span> GaussianNB
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.tree</span> <span style="color: #006699; font-weight: bold">import</span> DecisionTreeClassifier
+
+<span style="color: #0099FF; font-style: italic"># TODO: Initialize the three models</span>
+clf_A <span style="color: #555555">=</span> LogisticRegression(random_state<span style="color: #555555">=</span><span style="color: #FF6600">101</span>)
+clf_B <span style="color: #555555">=</span> LinearSVC(random_state<span style="color: #555555">=</span><span style="color: #FF6600">102</span>)
+clf_C <span style="color: #555555">=</span> GaussianNB()
+
+<span style="color: #0099FF; font-style: italic"># TODO: Calculate the number of samples for 1%, 10%, and 100% of the training data</span>
+n_train <span style="color: #555555">=</span> <span style="color: #336666">len</span>(y_train)
+samples_1 <span style="color: #555555">=</span> <span style="color: #336666">int</span>(n_train <span style="color: #555555">*</span> <span style="color: #FF6600">0.01</span>)
+samples_10 <span style="color: #555555">=</span> <span style="color: #336666">int</span>(n_train <span style="color: #555555">*</span> <span style="color: #FF6600">0.1</span>)
+samples_100 <span style="color: #555555">=</span> n_train
+
+<span style="color: #0099FF; font-style: italic"># Collect results on the learners</span>
+results <span style="color: #555555">=</span> {}
+<span style="color: #006699; font-weight: bold">for</span> clf <span style="color: #000000; font-weight: bold">in</span> [clf_A, clf_B, clf_C]:
+    clf_name <span style="color: #555555">=</span> clf<span style="color: #555555">.</span><span style="color: #003333">__class__</span><span style="color: #555555">.</span><span style="color: #003333">__name__</span>
+    results[clf_name] <span style="color: #555555">=</span> {}
+    <span style="color: #006699; font-weight: bold">for</span> i, samples <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>([samples_1, samples_10, samples_100]):
+        results[clf_name][i] <span style="color: #555555">=</span> \
+        train_predict(clf, samples, X_train, y_train, X_test, y_test)
+
+<span style="color: #0099FF; font-style: italic"># Run metrics visualization for the three supervised learning models chosen</span>
+vs<span style="color: #555555">.</span>evaluate(results, accuracy, fscore)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>LogisticRegression trained on 361 samples.
+LogisticRegression trained on 3617 samples.
+LogisticRegression trained on 36177 samples.
+LinearSVC trained on 361 samples.
+LinearSVC trained on 3617 samples.
+LinearSVC trained on 36177 samples.
+GaussianNB trained on 361 samples.
+GaussianNB trained on 3617 samples.
+GaussianNB trained on 36177 samples.
+</pre></div>
+
+
+<p><img alt="png" src="../output_72_1.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> results<span style="color: #555555">.</span>items():
+    <span style="color: #006699; font-weight: bold">print</span> i[<span style="color: #FF6600">0</span>]
+    display(pd<span style="color: #555555">.</span>DataFrame(i[<span style="color: #FF6600">1</span>])<span style="color: #555555">.</span>rename(columns<span style="color: #555555">=</span>{<span style="color: #FF6600">0</span>:<span style="color: #CC3300">&#39;1%&#39;</span>, <span style="color: #FF6600">1</span>:<span style="color: #CC3300">&#39;10%&#39;</span>, <span style="color: #FF6600">2</span>:<span style="color: #CC3300">&#39;100%&#39;</span>}))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>LinearSVC
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>1%</th>
+      <th>10%</th>
+      <th>100%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>acc_test</th>
+      <td>0.812604</td>
+      <td>0.842012</td>
+      <td>0.847319</td>
+    </tr>
+    <tr>
+      <th>acc_train</th>
+      <td>0.876667</td>
+      <td>0.860000</td>
+      <td>0.843333</td>
+    </tr>
+    <tr>
+      <th>f_test</th>
+      <td>0.622364</td>
+      <td>0.689428</td>
+      <td>0.705203</td>
+    </tr>
+    <tr>
+      <th>f_train</th>
+      <td>0.734463</td>
+      <td>0.705521</td>
+      <td>0.668790</td>
+    </tr>
+    <tr>
+      <th>pred_time</th>
+      <td>0.004078</td>
+      <td>0.004321</td>
+      <td>0.004121</td>
+    </tr>
+    <tr>
+      <th>train_time</th>
+      <td>0.003039</td>
+      <td>0.045014</td>
+      <td>0.769056</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>LogisticRegression
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>1%</th>
+      <th>10%</th>
+      <th>100%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>acc_test</th>
+      <td>0.817247</td>
+      <td>0.838474</td>
+      <td>0.847208</td>
+    </tr>
+    <tr>
+      <th>acc_train</th>
+      <td>0.876667</td>
+      <td>0.850000</td>
+      <td>0.840000</td>
+    </tr>
+    <tr>
+      <th>f_test</th>
+      <td>0.632853</td>
+      <td>0.682881</td>
+      <td>0.703769</td>
+    </tr>
+    <tr>
+      <th>f_train</th>
+      <td>0.745342</td>
+      <td>0.683230</td>
+      <td>0.660377</td>
+    </tr>
+    <tr>
+      <th>pred_time</th>
+      <td>0.004678</td>
+      <td>0.004482</td>
+      <td>0.004177</td>
+    </tr>
+    <tr>
+      <th>train_time</th>
+      <td>0.002453</td>
+      <td>0.020018</td>
+      <td>0.333923</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>GaussianNB
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>1%</th>
+      <th>10%</th>
+      <th>100%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>acc_test</th>
+      <td>0.489331</td>
+      <td>0.350138</td>
+      <td>0.598231</td>
+    </tr>
+    <tr>
+      <th>acc_train</th>
+      <td>0.483333</td>
+      <td>0.333333</td>
+      <td>0.593333</td>
+    </tr>
+    <tr>
+      <th>f_test</th>
+      <td>0.359942</td>
+      <td>0.317909</td>
+      <td>0.425515</td>
+    </tr>
+    <tr>
+      <th>f_train</th>
+      <td>0.360825</td>
+      <td>0.302102</td>
+      <td>0.407268</td>
+    </tr>
+    <tr>
+      <th>pred_time</th>
+      <td>0.029218</td>
+      <td>0.024140</td>
+      <td>0.023861</td>
+    </tr>
+    <tr>
+      <th>train_time</th>
+      <td>0.001960</td>
+      <td>0.009882</td>
+      <td>0.090051</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<hr />
+<h2 id="improving-results">Improving Results</h2>
+<p>In this final section, you will choose from the three supervised learning models the <em>best</em> model to use on the student data. You will then perform a grid search optimization for the model over the entire training set (<code>X_train</code> and <code>y_train</code>) by tuning at least one parameter to improve upon the untuned model's F-score. </p>
+<hr />
+<h3 id="question-3-choosing-the-best-model">Question 3 - Choosing the Best Model</h3>
+<p><em>Based on the evaluation you performed earlier, in one to two paragraphs, explain to </em>CharityML<em> which of the three models you believe to be most appropriate for the task of identifying individuals that make more than \$50,000.</em><br />
+<strong>Hint:</strong> Your answer should include discussion of the metrics, prediction/training time, and the algorithm's suitability for the data.</p>
+<p><strong>Answer: </strong></p>
+<p>I conclude <code>Logistic Regression</code> as the most appropriate model with respect to both accuracy and computation time. It has shown the best balance between training/testing speed, and accuracy/f1 scores of test data with different volumes. It also shows a little overfitting problem as there's no large gap between training scores and testing scores.</p>
+<p>The <code>Support Vector Machine</code> has a slightly higer accuracy and f-score, but long training time makes it difficult for tuning hyperparameters later. In case of extra computation cost could not be paid to get little increase in performance, SVM would be droped.</p>
+<p><code>Naive Bayers with Gaussian</code> model shows the fastest training speed and least variance of scores between training and testing, however, it may have undefitting problem and need more training samples or iterations. This model is rejected simply because it has small accuracy.</p>
+<hr />
+<h3 id="question-4-describing-the-model-in-laymans-terms">Question 4 - Describing the Model in Layman's Terms</h3>
+<p><em>In one to two paragraphs, explain to </em>CharityML<em>, in layman's terms, how the final model chosen is supposed to work. Be sure that you are describing the major qualities of the model, such as how the model is trained and how the model makes a prediction. Avoid using advanced mathematical or technical jargon, such as describing equations or discussing the algorithm implementation.</em></p>
+<p><strong>Answer: </strong> </p>
+<p>Logistic Regression is my final model.</p>
+<ul>
+<li>
+<p>Logistic Regression first learns from the training data. To learn a model from the data it utilizes weights. These weights are initially assigned as random numbers. As the training steps keep consuming training data, it modifies those weights with respect to the label of the data. At the end it uses classification function to classify data. It is like a model which tries to remember the class lebel of the data by observing different data of same class. Overfitting and underfitting are like over memorization and lack of information. If the features are plotted in a 2-D map, logistic regression draws stright lines as boundaries to seperate features into different classifictions.</p>
+</li>
+<li>
+<p>The detailed steps of how Logistic Regression works is as follows:</p>
+<ol>
+<li>
+<p>Outline of Model: It first multiplies features with weights and add them up, then a classification function is applied to the sum. If the function output is large enough, then the classifier would positively relate it with a certain label.</p>
+</li>
+<li>
+<p>Performance checking: One need an objective score to measure how the classifier performs. During training, the predictions are compared to true labels to provide feedback. The weights are updated in order to get a better score in following predictions.</p>
+</li>
+<li>
+<p>Testing step: For prediction, it applies the weights, multiplication, summation, and function to the testing sample to get the final prediction.</p>
+</li>
+</ol>
+</li>
+</ul>
+<hr />
+<h3 id="implementation-model-tuning">Implementation: Model Tuning</h3>
+<p>Fine tune the chosen model. Use grid search (<code>GridSearchCV</code>) with at least one important parameter tuned with at least 3 different values. You will need to use the entire training set for this. In the code cell below, you will need to implement the following:
+- Import <a href="http://scikit-learn.org/0.17/modules/generated/sklearn.grid_search.GridSearchCV.html"><code>sklearn.grid_search.GridSearchCV</code></a> and <a href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.make_scorer.html"><code>sklearn.metrics.make_scorer</code></a>.
+- Initialize the classifier you've chosen and store it in <code>clf</code>.
+ - Set a <code>random_state</code> if one is available to the same state you set before.
+- Create a dictionary of parameters you wish to tune for the chosen model.
+ - Example: <code>parameters = {'parameter' : [list of values]}</code>.
+ - <strong>Note:</strong> Avoid tuning the <code>max_features</code> parameter of your learner if that parameter is available!
+- Use <code>make_scorer</code> to create an <code>fbeta_score</code> scoring object (with $\beta = 0.5$).
+- Perform grid search on the classifier <code>clf</code> using the <code>'scorer'</code>, and store it in <code>grid_obj</code>.
+- Fit the grid search object to the training data (<code>X_train</code>, <code>y_train</code>), and store it in <code>grid_fit</code>.</p>
+<p><strong>Note:</strong> Depending on the algorithm chosen and the parameter list, the following implementation may take some time to run!</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># TODO: Import &#39;GridSearchCV&#39;, &#39;make_scorer&#39;, and any other necessary libraries</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.model_selection</span> <span style="color: #006699; font-weight: bold">import</span> GridSearchCV
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.metrics</span> <span style="color: #006699; font-weight: bold">import</span> make_scorer
+
+
+<span style="color: #0099FF; font-style: italic"># TODO: Initialize the classifier</span>
+clf <span style="color: #555555">=</span> LogisticRegression()
+
+<span style="color: #0099FF; font-style: italic"># TODO: Create the parameters list you wish to tune</span>
+parameters <span style="color: #555555">=</span> {<span style="color: #CC3300">&#39;solver&#39;</span>: [<span style="color: #CC3300">&#39;newton-cg&#39;</span>, <span style="color: #CC3300">&#39;lbfgs&#39;</span>, <span style="color: #CC3300">&#39;sag&#39;</span>],
+              <span style="color: #CC3300">&#39;C&#39;</span>: np<span style="color: #555555">.</span>logspace(<span style="color: #555555">-</span><span style="color: #FF6600">2</span>, <span style="color: #FF6600">2</span>, <span style="color: #FF6600">13</span>),
+              <span style="color: #CC3300">&#39;random_state&#39;</span>: [<span style="color: #FF6600">101</span>,<span style="color: #FF6600">101</span>,<span style="color: #FF6600">101</span>]}
+
+<span style="color: #0099FF; font-style: italic"># TODO: Make an fbeta_score scoring object</span>
+scorer <span style="color: #555555">=</span> make_scorer(fbeta_score, beta<span style="color: #555555">=</span>beta)
+
+<span style="color: #0099FF; font-style: italic"># TODO: Perform grid search on the classifier using &#39;scorer&#39; as the scoring method</span>
+grid_obj <span style="color: #555555">=</span> GridSearchCV(clf, parameters, cv <span style="color: #555555">=</span><span style="color: #FF6600">4</span>, scoring<span style="color: #555555">=</span>scorer)
+
+<span style="color: #0099FF; font-style: italic"># TODO: Fit the grid search object to the training data and find the optimal parameters</span>
+grid_fit <span style="color: #555555">=</span> grid_obj<span style="color: #555555">.</span>fit(X_train, y_train)
+
+<span style="color: #0099FF; font-style: italic"># Get the estimator</span>
+best_clf <span style="color: #555555">=</span> grid_fit<span style="color: #555555">.</span>best_estimator_
+
+<span style="color: #0099FF; font-style: italic"># Make predictions using the unoptimized and model</span>
+predictions <span style="color: #555555">=</span> (clf<span style="color: #555555">.</span>fit(X_train, y_train))<span style="color: #555555">.</span>predict(X_test)
+best_predictions <span style="color: #555555">=</span> best_clf<span style="color: #555555">.</span>predict(X_test)
+
+<span style="color: #0099FF; font-style: italic"># Report the before-and-afterscores</span>
+<span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;Unoptimized model</span><span style="color: #CC3300; font-weight: bold">\n</span><span style="color: #CC3300">------&quot;</span>)
+<span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;Accuracy score on testing data: {:.4f}&quot;</span><span style="color: #555555">.</span>format(accuracy_score(y_test, predictions)))
+<span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;F-score on testing data: {:.4f}&quot;</span><span style="color: #555555">.</span>format(fbeta_score(y_test, predictions, beta <span style="color: #555555">=</span> <span style="color: #FF6600">0.5</span>)))
+
+
+<span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;</span><span style="color: #CC3300; font-weight: bold">\n</span><span style="color: #CC3300">Optimized Model</span><span style="color: #CC3300; font-weight: bold">\n</span><span style="color: #CC3300">------&quot;</span>)
+<span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;Final accuracy score on the testing data: {:.4f}&quot;</span><span style="color: #555555">.</span>format(accuracy_score(y_test, best_predictions)))
+<span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;Final F-score on the testing data: {:.4f}&quot;</span><span style="color: #555555">.</span>format(fbeta_score(y_test, best_predictions, beta <span style="color: #555555">=</span> <span style="color: #FF6600">0.5</span>)))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Unoptimized model
+------
+Accuracy score on testing data: 0.8472
+F-score on testing data: 0.7038
+
+Optimized Model
+------
+Final accuracy score on the testing data: 0.8478
+Final F-score on the testing data: 0.7046
+</pre></div>
+
+
+<hr />
+<h3 id="question-5-final-model-evaluation">Question 5 - Final Model Evaluation</h3>
+<p><em>What is your optimized model's accuracy and F-score on the testing data? Are these scores better or worse than the unoptimized model? How do the results from your optimized model compare to the naive predictor benchmarks you found earlier in <strong>Question 1</strong>?</em><br />
+<strong>Note:</strong> Fill in the table below with your results, and then provide discussion in the <strong>Answer</strong> box.</p>
+<h4 id="results">Results:</h4>
+<table>
+<thead>
+<tr>
+<th align="center">Metric</th>
+<th align="center">Benchmark Predictor</th>
+<th align="center">Unoptimized Model</th>
+<th align="center">Optimized Model</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Accuracy Score</td>
+<td align="center">0.2478</td>
+<td align="center">0.8483</td>
+<td align="center">0.8494</td>
+</tr>
+<tr>
+<td align="center">F-score</td>
+<td align="center">0.2917</td>
+<td align="center">0.6993</td>
+<td align="center">0.7008</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Answer: </strong></p>
+<p>The optimized model have better accuracy and F-score than unoptimized model, the improvement is small as the grid search of parameters is coarse.</p>
+<p>The optimized model has much larger accuracy and F-score compared to the benchmark predicator (of naive all positive model).</p>
+<hr />
+<hr />
+<h2 id="feature-importance">Feature Importance</h2>
+<p>An important task when performing supervised learning on a dataset like the census data we study here is determining which features provide the most predictive power. By focusing on the relationship between only a few crucial features and the target label we simplify our understanding of the phenomenon, which is most always a useful thing to do. In the case of this project, that means we wish to identify a small number of features that most strongly predict whether an individual makes at most or more than \$50,000.</p>
+<p>Choose a scikit-learn classifier (e.g., adaboost, random forests) that has a <code>feature_importance_</code> attribute, which is a function that ranks the importance of features according to the chosen classifier.  In the next python cell fit this classifier to training set and use this attribute to determine the top 5 most important features for the census dataset.</p>
+<hr />
+<h3 id="question-6-feature-relevance-observation">Question 6 - Feature Relevance Observation</h3>
+<p>When <strong>Exploring the Data</strong>, it was shown there are thirteen available features for each individual on record in the census data.<br />
+<em>Of these thirteen records, which five features do you believe to be most important for prediction, and in what order would you rank them and why?</em></p>
+<p><strong>Answer:</strong></p>
+<p>The top five features could be <code>age, income, occupation, education_level, marital-status</code>, in decreasing order of importance.</p>
+<p>This is based on the assumptions that a naive profile of generous donor could be an adult person who has moderate level income, occupation, education background and happy family. Hence these are corresponding to factors of rule in society, wealth, career, education background, and family rule. </p>
+<hr />
+<h3 id="implementation-extracting-feature-importance">Implementation - Extracting Feature Importance</h3>
+<p>Choose a <code>scikit-learn</code> supervised learning algorithm that has a <code>feature_importance_</code> attribute availble for it. This attribute is a function that ranks the importance of each feature when making predictions based on the chosen algorithm.</p>
+<p>In the code cell below, you will need to implement the following:
+ - Import a supervised learning model from sklearn if it is different from the three used earlier.
+ - Train the supervised model on the entire training set.
+ - Extract the feature importances using <code>'.feature_importances_'</code>.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># TODO: Import a supervised learning model that has &#39;feature_importances_&#39;</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.ensemble</span> <span style="color: #006699; font-weight: bold">import</span> AdaBoostClassifier, RandomForestClassifier, GradientBoostingClassifier
+
+<span style="color: #0099FF; font-style: italic"># TODO: Train the supervised model on the training set </span>
+model <span style="color: #555555">=</span> GradientBoostingClassifier()<span style="color: #555555">.</span>fit(X_train, y_train)
+
+<span style="color: #0099FF; font-style: italic"># TODO: Extract the feature importances</span>
+importances <span style="color: #555555">=</span> model<span style="color: #555555">.</span>feature_importances_
+
+<span style="color: #0099FF; font-style: italic"># Plot</span>
+vs<span style="color: #555555">.</span>feature_plot(importances, X_train, y_train)
+</pre></div>
+
+
+<p><img alt="png" src="../output_95_0.png" /></p>
+<hr />
+<h3 id="question-7-extracting-feature-importance">Question 7 - Extracting Feature Importance</h3>
+<p>Observe the visualization created above which displays the five most relevant features for predicting if an individual makes at most or above \$50,000.<br />
+<em>How do these five features compare to the five features you discussed in <strong>Question 6</strong>? If you were close to the same answer, how does this visualization confirm your thoughts? If you were not close, why do you think these features are more relevant?</em></p>
+<p><strong>Answer:</strong></p>
+<ol>
+<li>
+<p><strong>How do these five features compare to the five features you discussed in Question 6? </strong></p>
+<p>Features in Question 6 have mached at 2 places (age and marital status) and  one is related (education-num)I missed two (capital gain and capital loss).</p>
+</li>
+<li>
+<p><strong>If you were close to the same answer, how does this visualization confirm your thoughts? </strong></p>
+<p>Since the trained model gives good scores and quantative  weights of feature importances, the importances given by ensemble classifier is more convincing.</p>
+</li>
+<li>
+<p><strong>If you were not close, why do you think these features are more relevant?</strong></p>
+<p>According to the model ranking, capital loss/gain (investment) are more important than income and career (salary), and education number is more important than education level.</p>
+</li>
+</ol>
+<hr />
+<h3 id="feature-selection">Feature Selection</h3>
+<p>How does a model perform if we only use a subset of all the available features in the data? With less features required to train, the expectation is that training and prediction time is much lower — at the cost of performance metrics. From the visualization above, we see that the top five most important features contribute more than half of the importance of <strong>all</strong> features present in the data. This hints that we can attempt to <em>reduce the feature space</em> and simplify the information required for the model to learn. The code cell below will use the same optimized model you found earlier, and train it on the same training set <em>with only the top five important features</em>. </p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Import functionality for cloning a model</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.base</span> <span style="color: #006699; font-weight: bold">import</span> clone
+
+<span style="color: #0099FF; font-style: italic"># Reduce the feature space</span>
+X_train_reduced <span style="color: #555555">=</span> X_train[X_train<span style="color: #555555">.</span>columns<span style="color: #555555">.</span>values[(np<span style="color: #555555">.</span>argsort(importances)[::<span style="color: #555555">-</span><span style="color: #FF6600">1</span>])[:<span style="color: #FF6600">5</span>]]]
+X_test_reduced <span style="color: #555555">=</span> X_test[X_test<span style="color: #555555">.</span>columns<span style="color: #555555">.</span>values[(np<span style="color: #555555">.</span>argsort(importances)[::<span style="color: #555555">-</span><span style="color: #FF6600">1</span>])[:<span style="color: #FF6600">5</span>]]]
+
+<span style="color: #0099FF; font-style: italic"># Train on the &quot;best&quot; model found from grid search earlier</span>
+clf <span style="color: #555555">=</span> (clone(best_clf))<span style="color: #555555">.</span>fit(X_train_reduced, y_train)
+
+<span style="color: #0099FF; font-style: italic"># Make new predictions</span>
+reduced_predictions <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>predict(X_test_reduced)
+
+<span style="color: #0099FF; font-style: italic"># Report scores from the final model using both versions of data</span>
+<span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;Final Model trained on full data</span><span style="color: #CC3300; font-weight: bold">\n</span><span style="color: #CC3300">------&quot;</span>)
+<span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;Accuracy on testing data: {:.4f}&quot;</span><span style="color: #555555">.</span>format(accuracy_score(y_test, best_predictions)))
+<span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;F-score on testing data: {:.4f}&quot;</span><span style="color: #555555">.</span>format(fbeta_score(y_test, best_predictions, beta <span style="color: #555555">=</span> <span style="color: #FF6600">0.5</span>)))
+<span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;</span><span style="color: #CC3300; font-weight: bold">\n</span><span style="color: #CC3300">Final Model trained on reduced data</span><span style="color: #CC3300; font-weight: bold">\n</span><span style="color: #CC3300">------&quot;</span>)
+<span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;Accuracy on testing data: {:.4f}&quot;</span><span style="color: #555555">.</span>format(accuracy_score(y_test, reduced_predictions)))
+<span style="color: #006699; font-weight: bold">print</span> (<span style="color: #CC3300">&quot;F-score on testing data: {:.4f}&quot;</span><span style="color: #555555">.</span>format(fbeta_score(y_test, reduced_predictions, beta <span style="color: #555555">=</span> <span style="color: #FF6600">0.5</span>)))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Final Model trained on full data
+------
+Accuracy on testing data: 0.8478
+F-score on testing data: 0.7046
+
+Final Model trained on reduced data
+------
+Accuracy on testing data: 0.8363
+F-score on testing data: 0.6791
+</pre></div>
+
+
+<hr />
+<h3 id="question-8-effects-of-feature-selection">Question 8 - Effects of Feature Selection</h3>
+<p><em>How does the final model's F-score and accuracy score on the reduced data using only five features compare to those same scores when all features are used?</em><br />
+<em>If training time was a factor, would you consider using the reduced data as your training set?</em></p>
+<p><strong>Answer:</strong></p>
+<p>Yes! if time or computation power is of high priority, the reduced features are good choices. The scores of training top 5 features are slightly smaller than the full features, yet it only takes less than 1/10 time for training and testing. Little gain in accuracy by spending much in computation cust could be stupidity! </p>
+<hr />
+<blockquote>
+<p><strong>Note</strong>: Once you have completed all of the code implementations and successfully answered each question above, you may finalize your work by exporting the iPython Notebook as an HTML document. You can do this by using the menu above and navigating to<br />
+<strong>File -&gt; Download as -&gt; HTML (.html)</strong>. Include the finished document along with this notebook as your submission.</p>
+</blockquote>
+<p><strong>references</strong>
+- <a href="http://scikit-learn.org/stable/tutorial/machine_learning_map/"><code>sklearn</code>: Choosing the right estimator from</a>
+- <a href="http://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html"><code>sklearn</code>: Classifier comparison</a>
+- <a href="wikipedia.org">wikipedia</a>
+- <a href="http://www.statisticssolutions.com/assumptions-of-logistic-regression/">Assumptions of Logistic regression</a></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../vehicle-detection/CARND-Project-5/" class="btn btn-neutral float-right" title="Vehicle Detection">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../Customer_segments/customer_segments/" class="btn btn-neutral" title="Customer Clustering"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../Customer_segments/customer_segments/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../vehicle-detection/CARND-Project-5/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../../search/main.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>Vanila LSTM - Data Fiction</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Vanila LSTM";
+    var mkdocs_page_input_path = "dl/Vanila/1.Vanila-LSTM.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> Data Fiction</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="tocbase current">
+    
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../..">Home</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../WhyCodes/">Why Codes?</a>
+  </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Machine Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/boston_housing/boston_housing/">Boston Housing</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Customer_segments/customer_segments/">Customer Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/finding_donors/finding_donors/">Finding Donors</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/vehicle-detection/CARND-Project-5/">Vehicle Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/perceptron/dlnd-your-first-neural-network/">Perceptron</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Deep Learning CNN</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../NMIST/NMIST/">NMIST</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../CIFRT10/CIFR10/">CIFT10</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../traffic-sign/Traffic_Sign_Classifier/">Traffic Sign Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../translator/dlnd_language_translation/">Language Translator</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Deep Learning RNN</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  
+    
+    <li class="navtree toctree-l2 page current">
+      <a class="current" href="./">
+        Vanila LSTM
+          <span class="toctree-expand"></span>
+      </a>
+    </li>
+    
+      
+
+  <li class="toctree-l2 current with-children">
+    <a href="#1-vanila-lstm">
+      1. Vanila LSTM
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2 current">
+    <ul class="subnav-l2 current">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#sequence-generator">Sequence Generator</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#one-hot-encoder">One Hot Encoder</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#one-hot-decoder">One Hot Decoder</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#generate-sequence-examples">Generate Sequence Examples</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#vanila-lstm">Vanila LSTM</a>
+        </li>
+    
+    </ul>
+  </li>
+
+
+  
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../stacked/2.Stacked-LSTM/">Stacked LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../bidirectional/5. BiDirectional-LSTM/">Bidirectional LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../rnn/RNN_project/">Recurrent Neural Network</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Rinforcement Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../rl/smartcab/smartcab/">SmartCab</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">GAN</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../gan/dlnd_face_generation/">Face Generation</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../References/ref.md">References</a>
+  </li>
+    
+  </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">Data Fiction</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Deep Learning RNN &raquo;</li>
+        
+      
+    
+    <li>Vanila LSTM</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="1-vanila-lstm">1. Vanila LSTM</h1>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">random</span> <span style="color: #006699; font-weight: bold">import</span> randint
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">import</span> array
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">import</span> argmax
+</pre></div>
+
+
+<h4 id="sequence-generator">Sequence Generator</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">generate_sequence</span>(length, n_features):
+    <span style="color: #006699; font-weight: bold">return</span> [randint(<span style="color: #FF6600">0</span>, n_features<span style="color: #555555">-</span><span style="color: #FF6600">1</span>) <span style="color: #006699; font-weight: bold">for</span> _ <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(length)]
+</pre></div>
+
+
+<p>Generate random sequence</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>sequence <span style="color: #555555">=</span> generate_sequence(<span style="color: #FF6600">25</span>, <span style="color: #FF6600">100</span>)
+<span style="color: #006699; font-weight: bold">print</span>(sequence)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>[81, 54, 44, 82, 86, 43, 46, 20, 85, 71, 55, 58, 26, 78, 66, 70, 38, 55, 91, 25, 51, 32, 89, 9, 83]
+</pre></div>
+
+
+<h4 id="one-hot-encoder">One Hot Encoder</h4>
+<p>One hot encode sequence</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">one_hot_encode</span>(sequence, n_features):
+    encoding <span style="color: #555555">=</span> <span style="color: #336666">list</span>()
+    <span style="color: #006699; font-weight: bold">for</span> value <span style="color: #000000; font-weight: bold">in</span> sequence:
+        vector <span style="color: #555555">=</span> [<span style="color: #FF6600">0</span> <span style="color: #006699; font-weight: bold">for</span> _ <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(n_features)]
+        vector[value] <span style="color: #555555">=</span> <span style="color: #FF6600">1</span>
+        encoding<span style="color: #555555">.</span>append(vector)
+    <span style="color: #006699; font-weight: bold">return</span> array(encoding)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>encoded <span style="color: #555555">=</span> one_hot_encode(sequence, <span style="color: #FF6600">100</span>)
+<span style="color: #006699; font-weight: bold">print</span>(encoded)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>[[0 0 0 ..., 0 0 0]
+ [0 0 0 ..., 0 0 0]
+ [0 0 0 ..., 0 0 0]
+ ..., 
+ [0 0 0 ..., 0 0 0]
+ [0 0 0 ..., 0 0 0]
+ [0 0 0 ..., 0 0 0]]
+</pre></div>
+
+
+<h4 id="one-hot-decoder">One Hot Decoder</h4>
+<p>Decode a one hot encoded string</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">one_hot_decode</span>(encoded_seq):
+    <span style="color: #006699; font-weight: bold">return</span> [argmax(vector) <span style="color: #006699; font-weight: bold">for</span> vector <span style="color: #000000; font-weight: bold">in</span> encoded_seq]
+</pre></div>
+
+
+<p>One hot decode</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>decoded <span style="color: #555555">=</span> one_hot_decode(encoded)
+<span style="color: #006699; font-weight: bold">print</span>(decoded)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>[81, 54, 44, 82, 86, 43, 46, 20, 85, 71, 55, 58, 26, 78, 66, 70, 38, 55, 91, 25, 51, 32, 89, 9, 83]
+</pre></div>
+
+
+<h4 id="generate-sequence-examples">Generate Sequence Examples</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>length <span style="color: #555555">=</span> <span style="color: #FF6600">5</span>
+n_features <span style="color: #555555">=</span><span style="color: #FF6600">10</span>
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic">#generate sequence</span>
+sequence <span style="color: #555555">=</span> generate_sequence(length, n_features)
+
+<span style="color: #0099FF; font-style: italic"># one hot encode</span>
+encoded <span style="color: #555555">=</span> one_hot_encode(sequence, n_features)
+
+<span style="color: #0099FF; font-style: italic"># reshape sequence to be 3D</span>
+X <span style="color: #555555">=</span> encoded<span style="color: #555555">.</span>reshape((<span style="color: #FF6600">1</span>, length, n_features))
+<span style="color: #006699; font-weight: bold">print</span>(<span style="color: #CC3300">&#39;Sequence is: {},</span><span style="color: #CC3300; font-weight: bold">\n</span><span style="color: #CC3300"> encoded is :{},</span><span style="color: #CC3300; font-weight: bold">\n</span><span style="color: #CC3300"> X has shape: {},</span><span style="color: #CC3300; font-weight: bold">\n</span><span style="color: #CC3300"> X is: {}&#39;</span>\
+      <span style="color: #555555">.</span>format(sequence,encoded,X<span style="color: #555555">.</span>shape,X))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Sequence is: [2, 4, 2, 5, 7],
+ encoded is :[[0 0 1 0 0 0 0 0 0 0]
+ [0 0 0 0 1 0 0 0 0 0]
+ [0 0 1 0 0 0 0 0 0 0]
+ [0 0 0 0 0 1 0 0 0 0]
+ [0 0 0 0 0 0 0 1 0 0]],
+ X has shape: (1, 5, 10),
+ X is: [[[0 0 1 0 0 0 0 0 0 0]
+  [0 0 0 0 1 0 0 0 0 0]
+  [0 0 1 0 0 0 0 0 0 0]
+  [0 0 0 0 0 1 0 0 0 0]
+  [0 0 0 0 0 0 0 1 0 0]]]
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>y <span style="color: #555555">=</span> encoded[<span style="color: #FF6600">2</span>]<span style="color: #555555">.</span>reshape(<span style="color: #FF6600">1</span>, n_features)
+y
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>array([[0, 0, 1, 0, 0, 0, 0, 0, 0, 0]])
+</pre></div>
+
+
+<p>Generate one example for an lstm</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">generate_example</span>(length, n_features, out_index):
+
+    <span style="color: #0099FF; font-style: italic"># generate sequence</span>
+    sequence <span style="color: #555555">=</span> generate_sequence(length, n_features)
+
+    <span style="color: #0099FF; font-style: italic"># one hot encode</span>
+    encoded <span style="color: #555555">=</span> one_hot_encode(sequence, n_features)
+
+    <span style="color: #0099FF; font-style: italic"># reshape sequence to be 3D</span>
+    X <span style="color: #555555">=</span> encoded<span style="color: #555555">.</span>reshape((<span style="color: #FF6600">1</span>, length, n_features))
+
+    <span style="color: #0099FF; font-style: italic"># select output</span>
+    y <span style="color: #555555">=</span> encoded[out_index]<span style="color: #555555">.</span>reshape(<span style="color: #FF6600">1</span>, n_features)
+
+    <span style="color: #006699; font-weight: bold">return</span> X, y
+</pre></div>
+
+
+<hr />
+<h4 id="vanila-lstm">Vanila LSTM</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">keras.models</span> <span style="color: #006699; font-weight: bold">import</span> Sequential
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">keras.layers</span> <span style="color: #006699; font-weight: bold">import</span> LSTM
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">keras.layers</span> <span style="color: #006699; font-weight: bold">import</span> Dense
+</pre></div>
+
+
+<ul>
+<li>Define model</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>length <span style="color: #555555">=</span> <span style="color: #FF6600">50</span>
+n_features <span style="color: #555555">=</span> <span style="color: #FF6600">100</span>
+out_index <span style="color: #555555">=</span> <span style="color: #FF6600">2</span>
+
+
+model <span style="color: #555555">=</span> Sequential()
+
+model<span style="color: #555555">.</span>add(LSTM(<span style="color: #FF6600">25</span>, input_shape<span style="color: #555555">=</span>(length, n_features)))
+
+model<span style="color: #555555">.</span>add(Dense(n_features, activation<span style="color: #555555">=</span><span style="color: #CC3300">&#39;softmax&#39;</span>)) 
+
+model<span style="color: #555555">.</span>compile(loss<span style="color: #555555">=</span><span style="color: #CC3300">&#39;categorical_crossentropy&#39;</span>,
+              optimizer<span style="color: #555555">=</span><span style="color: #CC3300">&#39;adam&#39;</span>,
+              metrics<span style="color: #555555">=</span>[<span style="color: #CC3300">&#39;acc&#39;</span>]) 
+
+<span style="color: #006699; font-weight: bold">print</span>(model<span style="color: #555555">.</span>summary())
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+lstm_3 (LSTM)                (None, 25)                12600     
+_________________________________________________________________
+dense_3 (Dense)              (None, 100)               2600      
+=================================================================
+Total params: 15,200
+Trainable params: 15,200
+Non-trainable params: 0
+_________________________________________________________________
+None
+</pre></div>
+
+
+<ul>
+<li>Fit model</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(<span style="color: #FF6600">10</span>):
+    X, y <span style="color: #555555">=</span> generate_example(length, n_features, out_index)
+    model<span style="color: #555555">.</span>fit(X, y, epochs<span style="color: #555555">=</span><span style="color: #FF6600">1</span>, verbose<span style="color: #555555">=</span><span style="color: #FF6600">2</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 1/1
+1s - loss: 4.6111 - acc: 0.0000e+00
+Epoch 1/1
+0s - loss: 4.5636 - acc: 0.0000e+00
+Epoch 1/1
+0s - loss: 4.6073 - acc: 0.0000e+00
+Epoch 1/1
+0s - loss: 4.5968 - acc: 0.0000e+00
+Epoch 1/1
+0s - loss: 4.5582 - acc: 0.0000e+00
+Epoch 1/1
+0s - loss: 4.5816 - acc: 0.0000e+00
+Epoch 1/1
+0s - loss: 4.6481 - acc: 0.0000e+00
+Epoch 1/1
+0s - loss: 4.5947 - acc: 0.0000e+00
+Epoch 1/1
+0s - loss: 4.6196 - acc: 0.0000e+00
+Epoch 1/1
+0s - loss: 4.5835 - acc: 0.0000e+00
+</pre></div>
+
+
+<ul>
+<li>Evaluate model</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>correct <span style="color: #555555">=</span> <span style="color: #FF6600">0</span>
+<span style="color: #006699; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(<span style="color: #FF6600">100</span>):
+    X, y <span style="color: #555555">=</span> generate_example(length, n_features, out_index)
+    yhat <span style="color: #555555">=</span> model<span style="color: #555555">.</span>predict(X)
+    <span style="color: #006699; font-weight: bold">if</span> one_hot_decode(yhat) <span style="color: #555555">==</span> one_hot_decode(y):
+        correct <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+<span style="color: #006699; font-weight: bold">print</span>(<span style="color: #CC3300">&#39;Accuracy: </span><span style="color: #AA0000">%f</span><span style="color: #CC3300">&#39;</span> <span style="color: #555555">%</span> ((correct<span style="color: #555555">/</span><span style="color: #FF6600">100</span>)<span style="color: #555555">*</span><span style="color: #FF6600">100.0</span>))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Accuracy: 0.000000
+</pre></div>
+
+
+<ul>
+<li>Prediction on new data</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>X, y <span style="color: #555555">=</span> generate_example(length, n_features, out_index) 
+yhat <span style="color: #555555">=</span> model<span style="color: #555555">.</span>predict(X)
+<span style="color: #006699; font-weight: bold">print</span>(<span style="color: #CC3300">&#39;Sequence: </span><span style="color: #AA0000">%s</span><span style="color: #CC3300">&#39;</span> <span style="color: #555555">%</span> [one_hot_decode(x) <span style="color: #006699; font-weight: bold">for</span> x <span style="color: #000000; font-weight: bold">in</span> X])
+<span style="color: #006699; font-weight: bold">print</span>(<span style="color: #CC3300">&#39;Expected: </span><span style="color: #AA0000">%s</span><span style="color: #CC3300">&#39;</span> <span style="color: #555555">%</span> one_hot_decode(y)) 
+<span style="color: #006699; font-weight: bold">print</span>(<span style="color: #CC3300">&#39;Predicted: </span><span style="color: #AA0000">%s</span><span style="color: #CC3300">&#39;</span> <span style="color: #555555">%</span> one_hot_decode(yhat))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Sequence: [[60, 56, 22, 5, 67, 76, 43, 14, 35, 72, 11, 48, 30, 44, 12, 55, 41, 79, 17, 70, 20, 39, 70, 1, 48, 94, 12, 56, 46, 4, 92, 77, 50, 12, 91, 50, 78, 59, 47, 83, 75, 19, 15, 57, 78, 34, 88, 75, 3, 19]]
+Expected: [22]
+Predicted: [30]
+</pre></div>
+
+
+<hr />
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../stacked/2.Stacked-LSTM/" class="btn btn-neutral float-right" title="Stacked LSTM">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../translator/dlnd_language_translation/" class="btn btn-neutral" title="Language Translator"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../translator/dlnd_language_translation/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../stacked/2.Stacked-LSTM/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../../search/main.js" defer></script>
+
+</body>
+</html>

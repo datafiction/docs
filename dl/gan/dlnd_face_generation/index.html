@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>Face Generation - Data Fiction</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Face Generation";
+    var mkdocs_page_input_path = "dl/gan/dlnd_face_generation.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> Data Fiction</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="tocbase current">
+    
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../..">Home</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../WhyCodes/">Why Codes?</a>
+  </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Machine Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/boston_housing/boston_housing/">Boston Housing</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Customer_segments/customer_segments/">Customer Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/finding_donors/finding_donors/">Finding Donors</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/vehicle-detection/CARND-Project-5/">Vehicle Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/perceptron/dlnd-your-first-neural-network/">Perceptron</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Deep Learning CNN</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../NMIST/NMIST/">NMIST</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../CIFRT10/CIFR10/">CIFT10</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../traffic-sign/Traffic_Sign_Classifier/">Traffic Sign Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../translator/dlnd_language_translation/">Language Translator</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Deep Learning RNN</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Vanila/1.Vanila-LSTM/">Vanila LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../stacked/2.Stacked-LSTM/">Stacked LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../bidirectional/5. BiDirectional-LSTM/">Bidirectional LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../rnn/RNN_project/">Recurrent Neural Network</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Rinforcement Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../rl/smartcab/smartcab/">SmartCab</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">GAN</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  
+    
+    <li class="navtree toctree-l2 page current">
+      <a class="current" href="./">
+        Face Generation
+          <span class="toctree-expand"></span>
+      </a>
+    </li>
+    
+      
+
+
+
+  <li class="toctree-l2 current">
+    <ul class="subnav-l2 current">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#get-the-data">Get the Data</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#explore-the-data">
+      Explore the Data
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#mnist">MNIST</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#celeba">CelebA</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#preprocess-the-data">Preprocess the Data</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#build-the-neural-network">
+      Build the Neural Network
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#check-the-version-of-tensorflow-and-access-to-gpu">Check the Version of TensorFlow and Access to GPU</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#input">Input</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#discriminator">Discriminator</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#generator">Generator</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#loss">Loss</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#optimization">Optimization</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#neural-network-training">
+      Neural Network Training
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#show-output">Show Output</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#train">Train</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#mnist_1">MNIST</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#celeba_1">CelebA</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#submitting-this-project">Submitting This Project</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+
+  
+        
+      </ul>
+    </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../References/ref.md">References</a>
+  </li>
+    
+  </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">Data Fiction</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>GAN &raquo;</li>
+        
+      
+    
+    <li>Face Generation</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="face-generation">Face Generation</h1>
+<p>In this project, you'll use generative adversarial networks to generate new images of faces.</p>
+<h3 id="get-the-data">Get the Data</h3>
+<p>You'll be using two datasets in this project:
+- MNIST
+- CelebA</p>
+<p>Since the celebA dataset is complex and you're doing GANs in a project for the first time, we want you to test your neural network on MNIST before CelebA.  Running the GANs on MNIST will allow you to see how well your model trains sooner.</p>
+<p>If you're using <a href="https://www.floydhub.com/">FloydHub</a>, set <code>data_dir</code> to "/input" and use the <a href="http://docs.floydhub.com/home/using_datasets/">FloydHub data ID</a> "R5KrjnANiKVhLWAkpXhNBe".</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>data_dir <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;./data&#39;</span>
+
+<span style="color: #0099FF; font-style: italic"># FloydHub - Use with data ID &quot;R5KrjnANiKVhLWAkpXhNBe&quot;</span>
+<span style="color: #0099FF; font-style: italic">#data_dir = &#39;/input&#39;</span>
+
+
+<span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #CC3300; font-style: italic">DON&#39;T MODIFY ANYTHING IN THIS CELL</span>
+<span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">helper</span>
+
+helper<span style="color: #555555">.</span>download_extract(<span style="color: #CC3300">&#39;mnist&#39;</span>, data_dir)
+helper<span style="color: #555555">.</span>download_extract(<span style="color: #CC3300">&#39;celeba&#39;</span>, data_dir)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Found mnist Data
+Found celeba Data
+</pre></div>
+
+
+<h2 id="explore-the-data">Explore the Data</h2>
+<h3 id="mnist">MNIST</h3>
+<p>As you're aware, the <a href="http://yann.lecun.com/exdb/mnist/">MNIST</a> dataset contains images of handwritten digits. You can view the first number of examples by changing <code>show_n_images</code>. </p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>show_n_images <span style="color: #555555">=</span> <span style="color: #FF6600">25</span>
+
+<span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #CC3300; font-style: italic">DON&#39;T MODIFY ANYTHING IN THIS CELL</span>
+<span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #555555">%</span>matplotlib inline
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">os</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">glob</span> <span style="color: #006699; font-weight: bold">import</span> glob
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">matplotlib</span> <span style="color: #006699; font-weight: bold">import</span> pyplot
+
+mnist_images <span style="color: #555555">=</span> helper<span style="color: #555555">.</span>get_batch(glob(os<span style="color: #555555">.</span>path<span style="color: #555555">.</span>join(data_dir, <span style="color: #CC3300">&#39;mnist/*.jpg&#39;</span>))[:show_n_images], <span style="color: #FF6600">28</span>, <span style="color: #FF6600">28</span>, <span style="color: #CC3300">&#39;L&#39;</span>)
+pyplot<span style="color: #555555">.</span>imshow(helper<span style="color: #555555">.</span>images_square_grid(mnist_images, <span style="color: #CC3300">&#39;L&#39;</span>), cmap<span style="color: #555555">=</span><span style="color: #CC3300">&#39;gray&#39;</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&amp;lt;matplotlib.image.AxesImage at 0x7f5ca6429390&amp;gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_3_1.png" /></p>
+<h3 id="celeba">CelebA</h3>
+<p>The <a href="http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html">CelebFaces Attributes Dataset (CelebA)</a> dataset contains over 200,000 celebrity images with annotations.  Since you're going to be generating faces, you won't need the annotations.  You can view the first number of examples by changing <code>show_n_images</code>.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>show_n_images <span style="color: #555555">=</span> <span style="color: #FF6600">25</span>
+
+<span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #CC3300; font-style: italic">DON&#39;T MODIFY ANYTHING IN THIS CELL</span>
+<span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+mnist_images <span style="color: #555555">=</span> helper<span style="color: #555555">.</span>get_batch(glob(os<span style="color: #555555">.</span>path<span style="color: #555555">.</span>join(data_dir, <span style="color: #CC3300">&#39;img_align_celeba/*.jpg&#39;</span>))[:show_n_images], <span style="color: #FF6600">28</span>, <span style="color: #FF6600">28</span>, <span style="color: #CC3300">&#39;RGB&#39;</span>)
+pyplot<span style="color: #555555">.</span>imshow(helper<span style="color: #555555">.</span>images_square_grid(mnist_images, <span style="color: #CC3300">&#39;RGB&#39;</span>))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&amp;lt;matplotlib.image.AxesImage at 0x7f5ca634ff60&amp;gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_5_1.png" /></p>
+<h2 id="preprocess-the-data">Preprocess the Data</h2>
+<p>Since the project's main focus is on building the GANs, we'll preprocess the data for you.  The values of the MNIST and CelebA dataset will be in the range of -0.5 to 0.5 of 28x28 dimensional images.  The CelebA images will be cropped to remove parts of the image that don't include a face, then resized down to 28x28.</p>
+<p>The MNIST images are black and white images with a single [color channel](https://en.wikipedia.org/wiki/Channel_(digital_image%29) while the CelebA images have [3 color channels (RGB color channel)](https://en.wikipedia.org/wiki/Channel_(digital_image%29#RGB_Images).</p>
+<h2 id="build-the-neural-network">Build the Neural Network</h2>
+<p>You'll build the components necessary to build a GANs by implementing the following functions below:
+- <code>model_inputs</code>
+- <code>discriminator</code>
+- <code>generator</code>
+- <code>model_loss</code>
+- <code>model_opt</code>
+- <code>train</code></p>
+<h3 id="check-the-version-of-tensorflow-and-access-to-gpu">Check the Version of TensorFlow and Access to GPU</h3>
+<p>This will check to make sure you have the correct version of TensorFlow and access to a GPU</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #CC3300; font-style: italic">DON&#39;T MODIFY ANYTHING IN THIS CELL</span>
+<span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">distutils.version</span> <span style="color: #006699; font-weight: bold">import</span> LooseVersion
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">warnings</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">tensorflow</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">tf</span>
+
+<span style="color: #0099FF; font-style: italic"># Check TensorFlow Version</span>
+<span style="color: #006699; font-weight: bold">assert</span> LooseVersion(tf<span style="color: #555555">.</span>__version__) <span style="color: #555555">&gt;=</span> LooseVersion(<span style="color: #CC3300">&#39;1.0&#39;</span>), <span style="color: #CC3300">&#39;Please use TensorFlow version 1.0 or newer.  You are using {}&#39;</span><span style="color: #555555">.</span>format(tf<span style="color: #555555">.</span>__version__)
+<span style="color: #006699; font-weight: bold">print</span>(<span style="color: #CC3300">&#39;TensorFlow Version: {}&#39;</span><span style="color: #555555">.</span>format(tf<span style="color: #555555">.</span>__version__))
+
+<span style="color: #0099FF; font-style: italic"># Check for a GPU</span>
+<span style="color: #006699; font-weight: bold">if</span> <span style="color: #000000; font-weight: bold">not</span> tf<span style="color: #555555">.</span>test<span style="color: #555555">.</span>gpu_device_name():
+    warnings<span style="color: #555555">.</span>warn(<span style="color: #CC3300">&#39;No GPU found. Please use a GPU to train your neural network.&#39;</span>)
+<span style="color: #006699; font-weight: bold">else</span>:
+    <span style="color: #006699; font-weight: bold">print</span>(<span style="color: #CC3300">&#39;Default GPU Device: {}&#39;</span><span style="color: #555555">.</span>format(tf<span style="color: #555555">.</span>test<span style="color: #555555">.</span>gpu_device_name()))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>TensorFlow Version: 1.0.0
+Default GPU Device: /gpu:0
+</pre></div>
+
+
+<h3 id="input">Input</h3>
+<p>Implement the <code>model_inputs</code> function to create TF Placeholders for the Neural Network. It should create the following placeholders:
+- Real input images placeholder with rank 4 using <code>image_width</code>, <code>image_height</code>, and <code>image_channels</code>.
+- Z input placeholder with rank 2 using <code>z_dim</code>.
+- Learning rate placeholder with rank 0.</p>
+<p>Return the placeholders in the following the tuple (tensor of real input images, tensor of z data)</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">problem_unittests</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">tests</span>
+
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">model_inputs</span>(image_width, image_height, image_channels, z_dim):
+    <span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #CC3300; font-style: italic">    Create the model inputs</span>
+<span style="color: #CC3300; font-style: italic">    :param image_width: The input image width</span>
+<span style="color: #CC3300; font-style: italic">    :param image_height: The input image height</span>
+<span style="color: #CC3300; font-style: italic">    :param image_channels: The number of image channels</span>
+<span style="color: #CC3300; font-style: italic">    :param z_dim: The dimension of Z</span>
+<span style="color: #CC3300; font-style: italic">    :return: Tuple of (tensor of real input images, tensor of z data, learning rate)</span>
+<span style="color: #CC3300; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #0099FF; font-style: italic"># TODO: Implement Function</span>
+
+
+    <span style="color: #0099FF; font-style: italic">#1. Real input images placeholder with rank 4 using image_width, image_height, and image_channels.</span>
+    input_real <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>placeholder(tf<span style="color: #555555">.</span>float32, [<span style="color: #336666">None</span>, image_width,\
+                                             image_height,\
+                                             image_channels],\
+                                             name <span style="color: #555555">=</span> <span style="color: #CC3300">&quot;input_real&quot;</span>)
+
+
+
+    <span style="color: #0099FF; font-style: italic">#2. Z input placeholder with rank 2 using z_dim.</span>
+    input_z <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>placeholder(tf<span style="color: #555555">.</span>float32, [<span style="color: #336666">None</span>, z_dim],\
+                                       name <span style="color: #555555">=</span> <span style="color: #CC3300">&quot;input_z&quot;</span>)
+
+
+    <span style="color: #0099FF; font-style: italic">#3. Learning rate placeholder with rank 0.</span>
+    learning_rate <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>placeholder(tf<span style="color: #555555">.</span>float32, <span style="color: #336666">None</span>,\
+                                   name <span style="color: #555555">=</span> <span style="color: #CC3300">&quot;learning_rate&quot;</span>)
+
+
+    <span style="color: #006699; font-weight: bold">return</span> input_real, input_z, learning_rate
+
+
+
+<span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #CC3300; font-style: italic">DON&#39;T MODIFY ANYTHING IN THIS CELL THAT IS BELOW THIS LINE</span>
+<span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+tests<span style="color: #555555">.</span>test_model_inputs(model_inputs)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Tests Passed
+</pre></div>
+
+
+<h3 id="discriminator">Discriminator</h3>
+<p>Implement <code>discriminator</code> to create a discriminator neural network that discriminates on <code>images</code>.  This function should be able to reuse the variabes in the neural network.  Use <a href="https://www.tensorflow.org/api_docs/python/tf/variable_scope"><code>tf.variable_scope</code></a> with a scope name of "discriminator" to allow the variables to be reused.  The function should return a tuple of (tensor output of the generator, tensor logits of the generator).</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">discriminator</span>(images, reuse<span style="color: #555555">=</span><span style="color: #336666">False</span>):
+    <span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #CC3300; font-style: italic">    Create the discriminator network</span>
+<span style="color: #CC3300; font-style: italic">    :param image: Tensor of input image(s)</span>
+<span style="color: #CC3300; font-style: italic">    :param reuse: Boolean if the weights should be reused</span>
+<span style="color: #CC3300; font-style: italic">    :return: Tuple of (tensor output of the discriminator, tensor logits of the discriminator)</span>
+<span style="color: #CC3300; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #0099FF; font-style: italic"># TODO: Implement Function</span>
+
+    alpha<span style="color: #555555">=</span> <span style="color: #FF6600">0.1</span>
+    sdev<span style="color: #555555">=</span> <span style="color: #FF6600">0.02</span>
+    <span style="color: #006699; font-weight: bold">with</span> tf<span style="color: #555555">.</span>variable_scope(<span style="color: #CC3300">&#39;discriminator&#39;</span>, reuse<span style="color: #555555">=</span>reuse):
+
+        <span style="color: #0099FF; font-style: italic"># input layer with image size(28*28*3)</span>
+        x1 <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>layers<span style="color: #555555">.</span>conv2d(images, <span style="color: #FF6600">32</span>, <span style="color: #FF6600">5</span>, <span style="color: #FF6600">2</span>,\
+                        padding<span style="color: #555555">=</span><span style="color: #CC3300">&#39;same&#39;</span>,\
+                        kernel_initializer<span style="color: #555555">=</span>tf<span style="color: #555555">.</span>random_normal_initializer(stddev<span style="color: #555555">=</span>sdev))
+        lrelu1 <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>maximum(alpha <span style="color: #555555">*</span> x1, x1)
+        <span style="color: #0099FF; font-style: italic"># Layer 1 out: 14x14x32</span>
+
+
+
+        <span style="color: #0099FF; font-style: italic"># Layer 2: 14x14x32</span>
+        x2 <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>layers<span style="color: #555555">.</span>conv2d(lrelu1, <span style="color: #FF6600">64</span>, <span style="color: #FF6600">5</span>, <span style="color: #FF6600">2</span>,\
+                        padding<span style="color: #555555">=</span><span style="color: #CC3300">&#39;same&#39;</span>,\
+                        kernel_initializer<span style="color: #555555">=</span>tf<span style="color: #555555">.</span>random_normal_initializer(stddev<span style="color: #555555">=</span>sdev))
+        bn2 <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>layers<span style="color: #555555">.</span>batch_normalization(x2, training<span style="color: #555555">=</span><span style="color: #336666">True</span>)
+        lrelu2 <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>maximum(alpha <span style="color: #555555">*</span> bn2, bn2)
+        <span style="color: #0099FF; font-style: italic"># Layer 2 out: 7x7x64</span>
+
+
+
+        x3 <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>layers<span style="color: #555555">.</span>conv2d(lrelu2, <span style="color: #FF6600">128</span>, <span style="color: #FF6600">5</span>, <span style="color: #FF6600">2</span>,\
+                        padding<span style="color: #555555">=</span><span style="color: #CC3300">&#39;same&#39;</span>,\
+                        kernel_initializer<span style="color: #555555">=</span>tf<span style="color: #555555">.</span>random_normal_initializer(stddev<span style="color: #555555">=</span>sdev))
+        bn3 <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>layers<span style="color: #555555">.</span>batch_normalization(x3, training<span style="color: #555555">=</span><span style="color: #336666">True</span>)
+        lrelu3 <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>maximum(alpha <span style="color: #555555">*</span> bn3, bn3)
+        <span style="color: #0099FF; font-style: italic"># Layer 3 out: 4x4x128</span>
+
+
+
+        x4 <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>layers<span style="color: #555555">.</span>conv2d(lrelu3, <span style="color: #FF6600">256</span>, <span style="color: #FF6600">5</span>, <span style="color: #FF6600">2</span>,\
+                        padding<span style="color: #555555">=</span><span style="color: #CC3300">&#39;same&#39;</span>,\
+                        kernel_initializer<span style="color: #555555">=</span>tf<span style="color: #555555">.</span>random_normal_initializer(stddev<span style="color: #555555">=</span>sdev))
+        bn4 <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>layers<span style="color: #555555">.</span>batch_normalization(x4, training<span style="color: #555555">=</span><span style="color: #336666">True</span>)
+        lrelu4 <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>maximum(alpha <span style="color: #555555">*</span> bn4, bn4)
+        <span style="color: #0099FF; font-style: italic"># Layer 4 out: 2x2x256</span>
+
+
+
+        flattened <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>reshape(lrelu4, (<span style="color: #555555">-</span><span style="color: #FF6600">1</span>, <span style="color: #FF6600">2</span><span style="color: #555555">*</span><span style="color: #FF6600">2</span><span style="color: #555555">*</span><span style="color: #FF6600">256</span>))
+        logits <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>layers<span style="color: #555555">.</span>dense(flattened, <span style="color: #FF6600">1</span>,\
+                            kernel_initializer<span style="color: #555555">=</span>tf<span style="color: #555555">.</span>random_normal_initializer(stddev<span style="color: #555555">=</span>sdev))
+        output <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>sigmoid(logits)
+
+        <span style="color: #006699; font-weight: bold">return</span> output, logits
+
+
+<span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #CC3300; font-style: italic">DON&#39;T MODIFY ANYTHING IN THIS CELL THAT IS BELOW THIS LINE</span>
+<span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+tests<span style="color: #555555">.</span>test_discriminator(discriminator, tf)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Tests Passed
+</pre></div>
+
+
+<h3 id="generator">Generator</h3>
+<p>Implement <code>generator</code> to generate an image using <code>z</code>. This function should be able to reuse the variabes in the neural network.  Use <a href="https://www.tensorflow.org/api_docs/python/tf/variable_scope"><code>tf.variable_scope</code></a> with a scope name of "generator" to allow the variables to be reused. The function should return the generated 28 x 28 x <code>out_channel_dim</code> images.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">generator</span>(z, out_channel_dim, is_train<span style="color: #555555">=</span><span style="color: #336666">True</span>):
+    <span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #CC3300; font-style: italic">    Create the generator network</span>
+<span style="color: #CC3300; font-style: italic">    :param z: Input z</span>
+<span style="color: #CC3300; font-style: italic">    :param out_channel_dim: The number of channels in the output image</span>
+<span style="color: #CC3300; font-style: italic">    :param is_train: Boolean if generator is being used for training</span>
+<span style="color: #CC3300; font-style: italic">    :return: The tensor output of the generator</span>
+<span style="color: #CC3300; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #0099FF; font-style: italic"># TODO: Implement Function</span>
+
+    alpha <span style="color: #555555">=</span> <span style="color: #FF6600">0.2</span>
+    sdev <span style="color: #555555">=</span> <span style="color: #FF6600">0.02</span>
+    <span style="color: #0099FF; font-style: italic"># variable scope for generator</span>
+    <span style="color: #006699; font-weight: bold">with</span> tf<span style="color: #555555">.</span>variable_scope(<span style="color: #CC3300">&#39;generator&#39;</span>, reuse<span style="color: #555555">=</span><span style="color: #000000; font-weight: bold">not</span> is_train):
+        <span style="color: #0099FF; font-style: italic">#fake with fully connected</span>
+
+        <span style="color: #0099FF; font-style: italic"># Layer 1 in: 7x7x256</span>
+        x1 <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>layers<span style="color: #555555">.</span>dense(z, <span style="color: #FF6600">4</span> <span style="color: #555555">*</span> <span style="color: #FF6600">4</span> <span style="color: #555555">*</span> <span style="color: #FF6600">512</span>)
+        x1 <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>reshape(x1, (<span style="color: #555555">-</span><span style="color: #FF6600">1</span>, <span style="color: #FF6600">4</span>, <span style="color: #FF6600">4</span>, <span style="color: #FF6600">512</span>))
+        lrelu1 <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>maximum(alpha <span style="color: #555555">*</span> x1, x1)
+        <span style="color: #0099FF; font-style: italic"># Layer 1 out: 4x4x512</span>
+
+
+        x2 <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>layers<span style="color: #555555">.</span>conv2d_transpose(lrelu1, <span style="color: #FF6600">128</span>, <span style="color: #FF6600">4</span>, <span style="color: #FF6600">1</span>,\
+                                padding<span style="color: #555555">=</span><span style="color: #CC3300">&#39;valid&#39;</span>,\
+                                kernel_initializer<span style="color: #555555">=</span>tf<span style="color: #555555">.</span>random_normal_initializer(stddev<span style="color: #555555">=</span>sdev))
+        bn2 <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>layers<span style="color: #555555">.</span>batch_normalization(x2, training<span style="color: #555555">=</span>is_train)
+        lrelu2 <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>maximum(alpha <span style="color: #555555">*</span> bn2, bn2)
+        <span style="color: #0099FF; font-style: italic"># Layer 2 out: 8x8x128</span>
+
+
+        x3 <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>layers<span style="color: #555555">.</span>conv2d_transpose(lrelu2, <span style="color: #FF6600">64</span>, <span style="color: #FF6600">5</span>, <span style="color: #FF6600">2</span>,\
+                                padding<span style="color: #555555">=</span><span style="color: #CC3300">&#39;same&#39;</span>, \
+                                kernel_initializer<span style="color: #555555">=</span>tf<span style="color: #555555">.</span>random_normal_initializer(stddev<span style="color: #555555">=</span>sdev))
+        bn3 <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>layers<span style="color: #555555">.</span>batch_normalization(x3, training<span style="color: #555555">=</span>is_train)
+        lrelu3 <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>maximum(alpha <span style="color: #555555">*</span> bn3, bn3)
+        <span style="color: #0099FF; font-style: italic"># Layer 3 out: 16x16x64</span>
+
+
+
+        x4 <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>layers<span style="color: #555555">.</span>conv2d_transpose(lrelu3, <span style="color: #FF6600">32</span>, <span style="color: #FF6600">5</span>, <span style="color: #FF6600">2</span>,\
+                                padding<span style="color: #555555">=</span><span style="color: #CC3300">&#39;same&#39;</span>,\
+                                kernel_initializer<span style="color: #555555">=</span>tf<span style="color: #555555">.</span>random_normal_initializer(stddev<span style="color: #555555">=</span>sdev))
+        bn4 <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>layers<span style="color: #555555">.</span>batch_normalization(x4, training<span style="color: #555555">=</span>is_train)
+        lrelu4 <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>maximum(alpha <span style="color: #555555">*</span> bn4, bn4)
+        <span style="color: #0099FF; font-style: italic"># Layer 4 out: 32x32x32</span>
+
+
+
+        logits <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>layers<span style="color: #555555">.</span>conv2d_transpose(lrelu4, out_channel_dim, <span style="color: #FF6600">3</span>, <span style="color: #FF6600">1</span>,\
+                                    padding<span style="color: #555555">=</span><span style="color: #CC3300">&#39;same&#39;</span>,\
+                                    kernel_initializer<span style="color: #555555">=</span>tf<span style="color: #555555">.</span>random_normal_initializer(stddev<span style="color: #555555">=</span>sdev))
+        output <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>tanh(logits)
+
+
+        <span style="color: #006699; font-weight: bold">return</span> output
+
+
+
+
+<span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #CC3300; font-style: italic">DON&#39;T MODIFY ANYTHING IN THIS CELL THAT IS BELOW THIS LINE</span>
+<span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+tests<span style="color: #555555">.</span>test_generator(generator, tf)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Tests Passed
+</pre></div>
+
+
+<h3 id="loss">Loss</h3>
+<p>Implement <code>model_loss</code> to build the GANs for training and calculate the loss.  The function should return a tuple of (discriminator loss, generator loss).  Use the following functions you implemented:
+- <code>discriminator(images, reuse=False)</code>
+- <code>generator(z, out_channel_dim, is_train=True)</code></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">model_loss</span>(input_real, input_z, out_channel_dim):
+    <span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #CC3300; font-style: italic">    Get the loss for the discriminator and generator</span>
+<span style="color: #CC3300; font-style: italic">    :param input_real: Images from the real dataset</span>
+<span style="color: #CC3300; font-style: italic">    :param input_z: Z input</span>
+<span style="color: #CC3300; font-style: italic">    :param out_channel_dim: The number of channels in the output image</span>
+<span style="color: #CC3300; font-style: italic">    :return: A tuple of (discriminator loss, generator loss)</span>
+<span style="color: #CC3300; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #0099FF; font-style: italic"># TODO: Implement Function</span>
+
+    g_model <span style="color: #555555">=</span> generator(input_z, out_channel_dim)
+
+    d_model_real, d_logits_real <span style="color: #555555">=</span> discriminator(input_real)
+    d_model_fake, d_logits_fake <span style="color: #555555">=</span> discriminator(g_model, reuse<span style="color: #555555">=</span><span style="color: #336666">True</span>)
+
+
+
+    d_loss_real <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>reduce_mean(
+        tf<span style="color: #555555">.</span>nn<span style="color: #555555">.</span>sigmoid_cross_entropy_with_logits(logits<span style="color: #555555">=</span>d_logits_real,\
+                                                labels<span style="color: #555555">=</span>tf<span style="color: #555555">.</span>ones_like(d_model_real)))
+    d_loss_fake <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>reduce_mean(
+        tf<span style="color: #555555">.</span>nn<span style="color: #555555">.</span>sigmoid_cross_entropy_with_logits(logits<span style="color: #555555">=</span>d_logits_fake,\
+                                                labels<span style="color: #555555">=</span>tf<span style="color: #555555">.</span>zeros_like(d_model_fake)))
+    g_loss <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>reduce_mean(
+        tf<span style="color: #555555">.</span>nn<span style="color: #555555">.</span>sigmoid_cross_entropy_with_logits(logits<span style="color: #555555">=</span>d_logits_fake,\
+                                                labels<span style="color: #555555">=</span>tf<span style="color: #555555">.</span>ones_like(d_model_fake)))
+
+
+
+    d_loss <span style="color: #555555">=</span> d_loss_real <span style="color: #555555">+</span> d_loss_fake
+
+    <span style="color: #006699; font-weight: bold">return</span> d_loss, g_loss
+
+
+<span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #CC3300; font-style: italic">DON&#39;T MODIFY ANYTHING IN THIS CELL THAT IS BELOW THIS LINE</span>
+<span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+tests<span style="color: #555555">.</span>test_model_loss(model_loss)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Tests Passed
+</pre></div>
+
+
+<h3 id="optimization">Optimization</h3>
+<p>Implement <code>model_opt</code> to create the optimization operations for the GANs. Use <a href="https://www.tensorflow.org/api_docs/python/tf/trainable_variables"><code>tf.trainable_variables</code></a> to get all the trainable variables.  Filter the variables with names that are in the discriminator and generator scope names.  The function should return a tuple of (discriminator training operation, generator training operation).</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">model_opt</span>(d_loss, g_loss, learning_rate, beta1):
+    <span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #CC3300; font-style: italic">    Get optimization operations</span>
+<span style="color: #CC3300; font-style: italic">    :param d_loss: Discriminator loss Tensor</span>
+<span style="color: #CC3300; font-style: italic">    :param g_loss: Generator loss Tensor</span>
+<span style="color: #CC3300; font-style: italic">    :param learning_rate: Learning Rate Placeholder</span>
+<span style="color: #CC3300; font-style: italic">    :param beta1: The exponential decay rate for the 1st moment in the optimizer</span>
+<span style="color: #CC3300; font-style: italic">    :return: A tuple of (discriminator training operation, generator training operation)</span>
+<span style="color: #CC3300; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #0099FF; font-style: italic"># TODO: Implement Function</span>
+
+
+    t_vars <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>trainable_variables()
+    d_vars <span style="color: #555555">=</span> [var <span style="color: #006699; font-weight: bold">for</span> var <span style="color: #000000; font-weight: bold">in</span> t_vars <span style="color: #006699; font-weight: bold">if</span> var<span style="color: #555555">.</span>name<span style="color: #555555">.</span>startswith(<span style="color: #CC3300">&#39;discriminator&#39;</span>)]
+    g_vars <span style="color: #555555">=</span> [var <span style="color: #006699; font-weight: bold">for</span> var <span style="color: #000000; font-weight: bold">in</span> t_vars <span style="color: #006699; font-weight: bold">if</span> var<span style="color: #555555">.</span>name<span style="color: #555555">.</span>startswith(<span style="color: #CC3300">&#39;generator&#39;</span>)]
+
+
+    <span style="color: #0099FF; font-style: italic"># Optimize</span>
+    d_train_opt <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>train<span style="color: #555555">.</span>AdamOptimizer(learning_rate,\
+                                    beta1<span style="color: #555555">=</span>beta1)<span style="color: #555555">.</span>minimize(d_loss, var_list<span style="color: #555555">=</span>d_vars)
+
+
+    <span style="color: #006699; font-weight: bold">with</span> tf<span style="color: #555555">.</span>control_dependencies(tf<span style="color: #555555">.</span>get_collection(tf<span style="color: #555555">.</span>GraphKeys<span style="color: #555555">.</span>UPDATE_OPS)): 
+        g_train_opt <span style="color: #555555">=</span> tf<span style="color: #555555">.</span>train<span style="color: #555555">.</span>AdamOptimizer(learning_rate,\
+                                    beta1<span style="color: #555555">=</span>beta1)<span style="color: #555555">.</span>minimize(g_loss, var_list<span style="color: #555555">=</span>g_vars)
+
+    <span style="color: #006699; font-weight: bold">return</span> d_train_opt, g_train_opt
+
+
+
+
+<span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #CC3300; font-style: italic">DON&#39;T MODIFY ANYTHING IN THIS CELL THAT IS BELOW THIS LINE</span>
+<span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+tests<span style="color: #555555">.</span>test_model_opt(model_opt, tf)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Tests Passed
+</pre></div>
+
+
+<h2 id="neural-network-training">Neural Network Training</h2>
+<h3 id="show-output">Show Output</h3>
+<p>Use this function to show the current output of the generator during training. It will help you determine how well the GANs is training.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #CC3300; font-style: italic">DON&#39;T MODIFY ANYTHING IN THIS CELL</span>
+<span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">show_generator_output</span>(sess, n_images, input_z, out_channel_dim, image_mode):
+    <span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #CC3300; font-style: italic">    Show example output for the generator</span>
+<span style="color: #CC3300; font-style: italic">    :param sess: TensorFlow session</span>
+<span style="color: #CC3300; font-style: italic">    :param n_images: Number of Images to display</span>
+<span style="color: #CC3300; font-style: italic">    :param input_z: Input Z Tensor</span>
+<span style="color: #CC3300; font-style: italic">    :param out_channel_dim: The number of channels in the output image</span>
+<span style="color: #CC3300; font-style: italic">    :param image_mode: The mode to use for images (&quot;RGB&quot; or &quot;L&quot;)</span>
+<span style="color: #CC3300; font-style: italic">    &quot;&quot;&quot;</span>
+    cmap <span style="color: #555555">=</span> <span style="color: #336666">None</span> <span style="color: #006699; font-weight: bold">if</span> image_mode <span style="color: #555555">==</span> <span style="color: #CC3300">&#39;RGB&#39;</span> <span style="color: #006699; font-weight: bold">else</span> <span style="color: #CC3300">&#39;gray&#39;</span>
+    z_dim <span style="color: #555555">=</span> input_z<span style="color: #555555">.</span>get_shape()<span style="color: #555555">.</span>as_list()[<span style="color: #555555">-</span><span style="color: #FF6600">1</span>]
+    example_z <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>uniform(<span style="color: #555555">-</span><span style="color: #FF6600">1</span>, <span style="color: #FF6600">1</span>, size<span style="color: #555555">=</span>[n_images, z_dim])
+
+    samples <span style="color: #555555">=</span> sess<span style="color: #555555">.</span>run(
+        generator(input_z, out_channel_dim, <span style="color: #336666">False</span>),
+        feed_dict<span style="color: #555555">=</span>{input_z: example_z})
+
+    images_grid <span style="color: #555555">=</span> helper<span style="color: #555555">.</span>images_square_grid(samples, image_mode)
+    pyplot<span style="color: #555555">.</span>imshow(images_grid, cmap<span style="color: #555555">=</span>cmap)
+    pyplot<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<h3 id="train">Train</h3>
+<p>Implement <code>train</code> to build and train the GANs.  Use the following functions you implemented:
+- <code>model_inputs(image_width, image_height, image_channels, z_dim)</code>
+- <code>model_loss(input_real, input_z, out_channel_dim)</code>
+- <code>model_opt(d_loss, g_loss, learning_rate, beta1)</code></p>
+<p>Use the <code>show_generator_output</code> to show <code>generator</code> output while you train. Running <code>show_generator_output</code> for every batch will drastically increase training time and increase the size of the notebook.  It's recommended to print the <code>generator</code> output every 100 batches.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">train</span>(epoch_count, batch_size, z_dim, learning_rate, beta1, get_batches, data_shape, data_image_mode):
+    <span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #CC3300; font-style: italic">    Train the GAN</span>
+<span style="color: #CC3300; font-style: italic">    :param epoch_count: Number of epochs</span>
+<span style="color: #CC3300; font-style: italic">    :param batch_size: Batch Size</span>
+<span style="color: #CC3300; font-style: italic">    :param z_dim: Z dimension</span>
+<span style="color: #CC3300; font-style: italic">    :param learning_rate: Learning Rate</span>
+<span style="color: #CC3300; font-style: italic">    :param beta1: The exponential decay rate for the 1st moment in the optimizer</span>
+<span style="color: #CC3300; font-style: italic">    :param get_batches: Function to get batches</span>
+<span style="color: #CC3300; font-style: italic">    :param data_shape: Shape of the data</span>
+<span style="color: #CC3300; font-style: italic">    :param data_image_mode: The image mode to use for images (&quot;RGB&quot; or &quot;L&quot;)</span>
+<span style="color: #CC3300; font-style: italic">    &quot;&quot;&quot;</span>
+    <span style="color: #0099FF; font-style: italic"># TODO: Build Model</span>
+
+    n_samples, width, height, channels <span style="color: #555555">=</span> data_shape
+    input_real, input_z, learn_rate <span style="color: #555555">=</span> model_inputs(width, height, channels, z_dim)
+    d_loss, g_loss <span style="color: #555555">=</span> model_loss(input_real, input_z, channels)
+    d_opt, g_opt <span style="color: #555555">=</span> model_opt(d_loss, g_loss, learn_rate, beta1)
+
+    steps <span style="color: #555555">=</span> <span style="color: #FF6600">0</span>
+    show_every <span style="color: #555555">=</span> <span style="color: #FF6600">50</span>
+    print_every <span style="color: #555555">=</span> <span style="color: #FF6600">25</span>
+
+    <span style="color: #006699; font-weight: bold">with</span> tf<span style="color: #555555">.</span>Session() <span style="color: #006699; font-weight: bold">as</span> sess:
+        sess<span style="color: #555555">.</span>run(tf<span style="color: #555555">.</span>global_variables_initializer())
+        <span style="color: #006699; font-weight: bold">for</span> epoch_i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(epoch_count):
+            <span style="color: #006699; font-weight: bold">for</span> batch_images <span style="color: #000000; font-weight: bold">in</span> get_batches(batch_size):
+                batch_images <span style="color: #555555">*=</span> <span style="color: #FF6600">2</span>
+
+                <span style="color: #0099FF; font-style: italic"># TODO: Train Model</span>
+                steps <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+
+                <span style="color: #0099FF; font-style: italic"># Sample random noise for G</span>
+                batch_z <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>uniform(<span style="color: #555555">-</span><span style="color: #FF6600">1</span>, <span style="color: #FF6600">1</span>, size<span style="color: #555555">=</span>(batch_size, z_dim))
+
+
+                <span style="color: #0099FF; font-style: italic"># Run optimizers</span>
+                _ <span style="color: #555555">=</span> sess<span style="color: #555555">.</span>run(d_opt, feed_dict<span style="color: #555555">=</span>{input_real: batch_images,\
+                                               input_z: batch_z,\
+                                               learn_rate: learning_rate})
+
+                _ <span style="color: #555555">=</span> sess<span style="color: #555555">.</span>run(g_opt, feed_dict<span style="color: #555555">=</span>{input_real: batch_images,\
+                                               input_z: batch_z,\
+                                               learn_rate: learning_rate})
+
+
+
+
+                <span style="color: #0099FF; font-style: italic"># show_generator_output to show generator output</span>
+                <span style="color: #006699; font-weight: bold">if</span> steps <span style="color: #555555">%</span> show_every <span style="color: #555555">==</span> <span style="color: #FF6600">0</span>:
+                    n_images <span style="color: #555555">=</span> <span style="color: #FF6600">16</span>
+                    show_generator_output(sess, n_images, input_z, channels, data_image_mode)
+
+
+
+
+                <span style="color: #006699; font-weight: bold">if</span> steps <span style="color: #555555">%</span> print_every <span style="color: #555555">==</span> <span style="color: #FF6600">0</span>:
+                    train_loss_d <span style="color: #555555">=</span> d_loss<span style="color: #555555">.</span>eval({input_z: batch_z, input_real: batch_images})
+                    train_loss_g <span style="color: #555555">=</span> g_loss<span style="color: #555555">.</span>eval({input_z: batch_z})
+
+                    <span style="color: #006699; font-weight: bold">print</span>(<span style="color: #CC3300">&quot;Epoch {}/{}...&quot;</span><span style="color: #555555">.</span>format(epoch_i, epoch_count),
+                          <span style="color: #CC3300">&quot;Discriminator Loss: {:.4f}...&quot;</span><span style="color: #555555">.</span>format(train_loss_d),
+                          <span style="color: #CC3300">&quot;Generator Loss: {:.4f}&quot;</span><span style="color: #555555">.</span>format(train_loss_g))
+</pre></div>
+
+
+<h3 id="mnist_1">MNIST</h3>
+<p>Test your GANs architecture on MNIST.  After 2 epochs, the GANs should be able to generate images that look like handwritten digits.  Make sure the loss of the generator is lower than the loss of the discriminator or close to 0.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>batch_size <span style="color: #555555">=</span> <span style="color: #FF6600">64</span>
+z_dim <span style="color: #555555">=</span> <span style="color: #FF6600">100</span>
+learning_rate <span style="color: #555555">=</span> <span style="color: #FF6600">0.0005</span>
+beta1 <span style="color: #555555">=</span> <span style="color: #FF6600">0.5</span>
+
+
+<span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #CC3300; font-style: italic">DON&#39;T MODIFY ANYTHING IN THIS CELL THAT IS BELOW THIS LINE</span>
+<span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+epochs <span style="color: #555555">=</span> <span style="color: #FF6600">2</span>
+
+mnist_dataset <span style="color: #555555">=</span> helper<span style="color: #555555">.</span>Dataset(<span style="color: #CC3300">&#39;mnist&#39;</span>, glob(os<span style="color: #555555">.</span>path<span style="color: #555555">.</span>join(data_dir, <span style="color: #CC3300">&#39;mnist/*.jpg&#39;</span>)))
+<span style="color: #006699; font-weight: bold">with</span> tf<span style="color: #555555">.</span>Graph()<span style="color: #555555">.</span>as_default():
+    train(epochs, batch_size, z_dim, learning_rate, beta1, mnist_dataset<span style="color: #555555">.</span>get_batches,
+          mnist_dataset<span style="color: #555555">.</span>shape, mnist_dataset<span style="color: #555555">.</span>image_mode)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/2... Discriminator Loss: 0.1132... Generator Loss: 3.8164
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_1.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/2... Discriminator Loss: 0.4083... Generator Loss: 1.6668
+Epoch 0/2... Discriminator Loss: 0.2134... Generator Loss: 2.3080
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_3.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/2... Discriminator Loss: 0.8935... Generator Loss: 0.7820
+Epoch 0/2... Discriminator Loss: 0.9974... Generator Loss: 0.9753
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_5.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/2... Discriminator Loss: 1.4598... Generator Loss: 0.4637
+Epoch 0/2... Discriminator Loss: 1.0837... Generator Loss: 0.9862
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_7.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/2... Discriminator Loss: 1.0771... Generator Loss: 1.2634
+Epoch 0/2... Discriminator Loss: 1.5585... Generator Loss: 0.3205
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_9.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/2... Discriminator Loss: 1.0825... Generator Loss: 0.6745
+Epoch 0/2... Discriminator Loss: 0.9129... Generator Loss: 1.0191
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_11.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/2... Discriminator Loss: 0.9434... Generator Loss: 0.8767
+Epoch 0/2... Discriminator Loss: 0.9463... Generator Loss: 0.9866
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_13.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/2... Discriminator Loss: 1.1447... Generator Loss: 0.6476
+Epoch 0/2... Discriminator Loss: 1.3758... Generator Loss: 0.4319
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_15.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/2... Discriminator Loss: 0.9714... Generator Loss: 0.6623
+Epoch 0/2... Discriminator Loss: 1.5291... Generator Loss: 0.3816
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_17.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/2... Discriminator Loss: 1.3693... Generator Loss: 2.0586
+Epoch 0/2... Discriminator Loss: 1.7561... Generator Loss: 0.2967
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_19.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/2... Discriminator Loss: 1.5004... Generator Loss: 0.3576
+Epoch 0/2... Discriminator Loss: 0.7120... Generator Loss: 1.2979
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_21.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/2... Discriminator Loss: 0.8413... Generator Loss: 1.0782
+Epoch 0/2... Discriminator Loss: 1.1858... Generator Loss: 0.5920
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_23.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/2... Discriminator Loss: 1.0060... Generator Loss: 0.6120
+Epoch 0/2... Discriminator Loss: 1.2757... Generator Loss: 0.4474
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_25.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/2... Discriminator Loss: 1.5774... Generator Loss: 0.3005
+Epoch 0/2... Discriminator Loss: 1.2721... Generator Loss: 0.4242
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_27.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/2... Discriminator Loss: 1.0972... Generator Loss: 0.5191
+Epoch 0/2... Discriminator Loss: 0.8444... Generator Loss: 1.2999
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_29.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/2... Discriminator Loss: 0.8549... Generator Loss: 0.9284
+Epoch 0/2... Discriminator Loss: 0.8498... Generator Loss: 0.9417
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_31.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/2... Discriminator Loss: 0.6521... Generator Loss: 1.2973
+Epoch 0/2... Discriminator Loss: 0.9847... Generator Loss: 0.6543
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_33.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/2... Discriminator Loss: 1.2542... Generator Loss: 0.4832
+Epoch 0/2... Discriminator Loss: 0.9244... Generator Loss: 1.4905
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_35.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/2... Discriminator Loss: 1.0157... Generator Loss: 0.5582
+Epoch 0/2... Discriminator Loss: 0.5705... Generator Loss: 1.7848
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_37.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 1/2... Discriminator Loss: 1.0804... Generator Loss: 0.7368
+Epoch 1/2... Discriminator Loss: 1.3714... Generator Loss: 2.7104
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_39.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 1/2... Discriminator Loss: 0.7393... Generator Loss: 1.0792
+Epoch 1/2... Discriminator Loss: 0.8901... Generator Loss: 0.9193
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_41.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 1/2... Discriminator Loss: 1.3041... Generator Loss: 0.4482
+Epoch 1/2... Discriminator Loss: 1.0246... Generator Loss: 1.6754
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_43.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 1/2... Discriminator Loss: 1.4366... Generator Loss: 0.4005
+Epoch 1/2... Discriminator Loss: 0.7496... Generator Loss: 0.9064
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_45.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 1/2... Discriminator Loss: 1.0066... Generator Loss: 0.6571
+Epoch 1/2... Discriminator Loss: 0.6344... Generator Loss: 1.0048
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_47.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 1/2... Discriminator Loss: 0.9111... Generator Loss: 1.4843
+Epoch 1/2... Discriminator Loss: 0.8954... Generator Loss: 1.0413
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_49.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 1/2... Discriminator Loss: 2.1049... Generator Loss: 0.1755
+Epoch 1/2... Discriminator Loss: 1.0708... Generator Loss: 0.5250
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_51.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 1/2... Discriminator Loss: 1.4498... Generator Loss: 0.3438
+Epoch 1/2... Discriminator Loss: 0.8951... Generator Loss: 0.7148
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_53.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 1/2... Discriminator Loss: 0.9677... Generator Loss: 0.6380
+Epoch 1/2... Discriminator Loss: 2.0528... Generator Loss: 0.1594
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_55.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 1/2... Discriminator Loss: 0.5354... Generator Loss: 1.1890
+Epoch 1/2... Discriminator Loss: 1.5721... Generator Loss: 0.5104
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_57.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 1/2... Discriminator Loss: 0.7788... Generator Loss: 0.9999
+Epoch 1/2... Discriminator Loss: 0.8880... Generator Loss: 0.6436
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_59.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 1/2... Discriminator Loss: 0.6986... Generator Loss: 1.4282
+Epoch 1/2... Discriminator Loss: 1.2309... Generator Loss: 0.4484
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_61.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 1/2... Discriminator Loss: 1.0756... Generator Loss: 0.6155
+Epoch 1/2... Discriminator Loss: 3.1573... Generator Loss: 3.8849
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_63.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 1/2... Discriminator Loss: 0.8739... Generator Loss: 0.6847
+Epoch 1/2... Discriminator Loss: 1.7689... Generator Loss: 0.2244
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_65.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 1/2... Discriminator Loss: 0.8876... Generator Loss: 0.7815
+Epoch 1/2... Discriminator Loss: 1.1661... Generator Loss: 0.4628
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_67.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 1/2... Discriminator Loss: 1.5133... Generator Loss: 0.3179
+Epoch 1/2... Discriminator Loss: 0.6079... Generator Loss: 1.3311
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_69.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 1/2... Discriminator Loss: 0.7159... Generator Loss: 1.5858
+Epoch 1/2... Discriminator Loss: 0.7321... Generator Loss: 0.8564
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_71.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 1/2... Discriminator Loss: 1.2747... Generator Loss: 0.4073
+Epoch 1/2... Discriminator Loss: 1.3412... Generator Loss: 0.3678
+</pre></div>
+
+
+<p><img alt="png" src="../output_23_73.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 1/2... Discriminator Loss: 0.8914... Generator Loss: 0.7424
+</pre></div>
+
+
+<h3 id="celeba_1">CelebA</h3>
+<p>Run your GANs on CelebA.  It will take around 20 minutes on the average GPU to run one epoch.  You can run the whole epoch or stop when it starts to generate realistic faces.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>batch_size <span style="color: #555555">=</span> <span style="color: #FF6600">64</span>
+z_dim <span style="color: #555555">=</span> <span style="color: #FF6600">100</span>
+learning_rate <span style="color: #555555">=</span> <span style="color: #FF6600">0.0005</span>
+beta1 <span style="color: #555555">=</span> <span style="color: #FF6600">0.5</span>
+
+
+<span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #CC3300; font-style: italic">DON&#39;T MODIFY ANYTHING IN THIS CELL THAT IS BELOW THIS LINE</span>
+<span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+epochs <span style="color: #555555">=</span> <span style="color: #FF6600">1</span>
+
+celeba_dataset <span style="color: #555555">=</span> helper<span style="color: #555555">.</span>Dataset(<span style="color: #CC3300">&#39;celeba&#39;</span>, glob(os<span style="color: #555555">.</span>path<span style="color: #555555">.</span>join(data_dir, <span style="color: #CC3300">&#39;img_align_celeba/*.jpg&#39;</span>)))
+<span style="color: #006699; font-weight: bold">with</span> tf<span style="color: #555555">.</span>Graph()<span style="color: #555555">.</span>as_default():
+    train(epochs, batch_size, z_dim, learning_rate, beta1, celeba_dataset<span style="color: #555555">.</span>get_batches,
+          celeba_dataset<span style="color: #555555">.</span>shape, celeba_dataset<span style="color: #555555">.</span>image_mode)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.6341... Generator Loss: 1.5425
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_1.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.0661... Generator Loss: 1.4051
+Epoch 0/1... Discriminator Loss: 1.4774... Generator Loss: 0.4814
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_3.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.5296... Generator Loss: 2.0486
+Epoch 0/1... Discriminator Loss: 0.4144... Generator Loss: 1.7049
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_5.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.8953... Generator Loss: 1.3714
+Epoch 0/1... Discriminator Loss: 1.2676... Generator Loss: 2.1938
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_7.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.6703... Generator Loss: 1.9268
+Epoch 0/1... Discriminator Loss: 1.3622... Generator Loss: 0.9100
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_9.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.8473... Generator Loss: 1.2377
+Epoch 0/1... Discriminator Loss: 0.7923... Generator Loss: 1.3153
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_11.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 2.3745... Generator Loss: 3.9981
+Epoch 0/1... Discriminator Loss: 1.3498... Generator Loss: 0.9091
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_13.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.9757... Generator Loss: 1.3260
+Epoch 0/1... Discriminator Loss: 0.9970... Generator Loss: 0.8662
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_15.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.2872... Generator Loss: 0.7643
+Epoch 0/1... Discriminator Loss: 0.9423... Generator Loss: 1.0006
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_17.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.6227... Generator Loss: 1.2088
+Epoch 0/1... Discriminator Loss: 0.5900... Generator Loss: 1.5671
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_19.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.0243... Generator Loss: 0.9068
+Epoch 0/1... Discriminator Loss: 1.5452... Generator Loss: 0.3467
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_21.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.9187... Generator Loss: 1.3025
+Epoch 0/1... Discriminator Loss: 0.9896... Generator Loss: 0.9055
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_23.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.9112... Generator Loss: 1.2679
+Epoch 0/1... Discriminator Loss: 1.0865... Generator Loss: 1.3766
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_25.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.0086... Generator Loss: 0.7582
+Epoch 0/1... Discriminator Loss: 0.8523... Generator Loss: 1.3466
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_27.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.7004... Generator Loss: 1.6204
+Epoch 0/1... Discriminator Loss: 1.1147... Generator Loss: 1.0215
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_29.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.9817... Generator Loss: 0.9707
+Epoch 0/1... Discriminator Loss: 0.8524... Generator Loss: 0.7910
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_31.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.3500... Generator Loss: 0.6876
+Epoch 0/1... Discriminator Loss: 1.1861... Generator Loss: 0.7478
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_33.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.4163... Generator Loss: 0.4300
+Epoch 0/1... Discriminator Loss: 1.3214... Generator Loss: 0.6985
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_35.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.6581... Generator Loss: 0.3179
+Epoch 0/1... Discriminator Loss: 0.8624... Generator Loss: 2.0154
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_37.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.7325... Generator Loss: 1.5246
+Epoch 0/1... Discriminator Loss: 1.3200... Generator Loss: 0.4783
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_39.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.9317... Generator Loss: 0.8402
+Epoch 0/1... Discriminator Loss: 1.2700... Generator Loss: 1.6259
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_41.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.6959... Generator Loss: 1.6403
+Epoch 0/1... Discriminator Loss: 0.9565... Generator Loss: 1.8874
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_43.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.7762... Generator Loss: 1.6332
+Epoch 0/1... Discriminator Loss: 0.9902... Generator Loss: 0.6471
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_45.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.0775... Generator Loss: 0.6818
+Epoch 0/1... Discriminator Loss: 1.0928... Generator Loss: 0.9076
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_47.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.2636... Generator Loss: 0.8888
+Epoch 0/1... Discriminator Loss: 1.9158... Generator Loss: 0.1960
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_49.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.0883... Generator Loss: 0.6902
+Epoch 0/1... Discriminator Loss: 1.0772... Generator Loss: 0.6896
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_51.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.1797... Generator Loss: 0.5554
+Epoch 0/1... Discriminator Loss: 1.1049... Generator Loss: 0.9699
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_53.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.2788... Generator Loss: 2.0408
+Epoch 0/1... Discriminator Loss: 0.7399... Generator Loss: 1.1408
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_55.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.3329... Generator Loss: 0.4466
+Epoch 0/1... Discriminator Loss: 0.9657... Generator Loss: 0.9572
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_57.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.0361... Generator Loss: 0.7271
+Epoch 0/1... Discriminator Loss: 1.0897... Generator Loss: 0.8504
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_59.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.2010... Generator Loss: 1.1790
+Epoch 0/1... Discriminator Loss: 1.6883... Generator Loss: 1.1168
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_61.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.0092... Generator Loss: 0.6636
+Epoch 0/1... Discriminator Loss: 1.3417... Generator Loss: 0.5133
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_63.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.9791... Generator Loss: 0.9111
+Epoch 0/1... Discriminator Loss: 0.8803... Generator Loss: 1.1090
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_65.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.8513... Generator Loss: 1.2366
+Epoch 0/1... Discriminator Loss: 0.7197... Generator Loss: 1.5789
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_67.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.9334... Generator Loss: 0.7907
+Epoch 0/1... Discriminator Loss: 1.1299... Generator Loss: 0.5871
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_69.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.9805... Generator Loss: 1.1100
+Epoch 0/1... Discriminator Loss: 1.1180... Generator Loss: 2.0649
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_71.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.9413... Generator Loss: 0.6843
+Epoch 0/1... Discriminator Loss: 1.1723... Generator Loss: 1.0662
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_73.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.3740... Generator Loss: 0.4719
+Epoch 0/1... Discriminator Loss: 1.2226... Generator Loss: 0.7428
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_75.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.0916... Generator Loss: 1.5043
+Epoch 0/1... Discriminator Loss: 1.2517... Generator Loss: 2.0049
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_77.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.1599... Generator Loss: 0.7082
+Epoch 0/1... Discriminator Loss: 1.0402... Generator Loss: 0.8053
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_79.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.0036... Generator Loss: 0.9750
+Epoch 0/1... Discriminator Loss: 0.9274... Generator Loss: 0.9230
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_81.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.1304... Generator Loss: 1.1508
+Epoch 0/1... Discriminator Loss: 0.7811... Generator Loss: 1.4115
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_83.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.0645... Generator Loss: 0.8931
+Epoch 0/1... Discriminator Loss: 1.4299... Generator Loss: 2.5213
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_85.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.0405... Generator Loss: 0.6912
+Epoch 0/1... Discriminator Loss: 1.1746... Generator Loss: 0.6077
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_87.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.9569... Generator Loss: 2.3023
+Epoch 0/1... Discriminator Loss: 0.9257... Generator Loss: 0.9512
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_89.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.9541... Generator Loss: 0.7513
+Epoch 0/1... Discriminator Loss: 0.9034... Generator Loss: 0.9518
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_91.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.1156... Generator Loss: 0.8511
+Epoch 0/1... Discriminator Loss: 0.9349... Generator Loss: 1.1430
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_93.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.0691... Generator Loss: 0.6279
+Epoch 0/1... Discriminator Loss: 1.1409... Generator Loss: 0.9605
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_95.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.4045... Generator Loss: 0.3858
+Epoch 0/1... Discriminator Loss: 1.0732... Generator Loss: 0.7521
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_97.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.0664... Generator Loss: 0.9785
+Epoch 0/1... Discriminator Loss: 1.1484... Generator Loss: 1.4160
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_99.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.2619... Generator Loss: 0.5863
+Epoch 0/1... Discriminator Loss: 0.9650... Generator Loss: 0.9150
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_101.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.9211... Generator Loss: 1.4288
+Epoch 0/1... Discriminator Loss: 0.9854... Generator Loss: 0.7512
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_103.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.8539... Generator Loss: 0.9985
+Epoch 0/1... Discriminator Loss: 0.9036... Generator Loss: 1.0608
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_105.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.0430... Generator Loss: 0.7103
+Epoch 0/1... Discriminator Loss: 0.8404... Generator Loss: 0.9762
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_107.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.2528... Generator Loss: 0.5786
+Epoch 0/1... Discriminator Loss: 1.2818... Generator Loss: 0.4568
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_109.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.0006... Generator Loss: 0.8900
+Epoch 0/1... Discriminator Loss: 1.3815... Generator Loss: 0.3886
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_111.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.2679... Generator Loss: 0.5873
+Epoch 0/1... Discriminator Loss: 0.9585... Generator Loss: 0.9575
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_113.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.2240... Generator Loss: 0.7966
+Epoch 0/1... Discriminator Loss: 0.8579... Generator Loss: 1.4551
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_115.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.3028... Generator Loss: 0.5394
+Epoch 0/1... Discriminator Loss: 1.1112... Generator Loss: 0.7762
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_117.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.1230... Generator Loss: 0.9227
+Epoch 0/1... Discriminator Loss: 1.2362... Generator Loss: 0.5178
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_119.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.0913... Generator Loss: 0.7929
+Epoch 0/1... Discriminator Loss: 0.8596... Generator Loss: 0.9705
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_121.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 1.1329... Generator Loss: 0.6999
+Epoch 0/1... Discriminator Loss: 1.0311... Generator Loss: 0.8163
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_123.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.8289... Generator Loss: 1.1358
+Epoch 0/1... Discriminator Loss: 1.2079... Generator Loss: 0.5730
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_125.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 0/1... Discriminator Loss: 0.9879... Generator Loss: 0.7466
+</pre></div>
+
+
+<h3 id="submitting-this-project">Submitting This Project</h3>
+<p>When submitting this project, make sure to run all the cells before saving the notebook. Save the notebook file as "dlnd_face_generation.ipynb" and save it as a HTML file under "File" -&gt; "Download as". Include the "helper.py" and "problem_unittests.py" files in your submission.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../../../rl/smartcab/smartcab/" class="btn btn-neutral" title="SmartCab"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../../rl/smartcab/smartcab/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../../search/main.js" defer></script>
+
+</body>
+</html>
