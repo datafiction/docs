@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../../img/favicon.ico">
-  <title>Language Translator - Data Fiction</title>
+  <title>Language Translator - Machine Learning</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
   <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 
@@ -37,7 +37,7 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href="../../.." class="icon icon-home"> Data Fiction</a>
+        <a href="../../.." class="icon icon-home"> Machine Learning</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
@@ -57,13 +57,6 @@
   </li>
     
       
-
-
-  <li class="navtree toctree-l1 inactive">
-    <a class="" href="../../../WhyCodes/">Why Codes?</a>
-  </li>
-    
-      
   <li class="navtree toctree-l1 label">
     <p class="caption">Machine Learning</p>
   </li>
@@ -74,6 +67,13 @@
   
     <li class="navtree toctree-l1 group">
       <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/intro/">Introduction</a>
+  </li>
+        
           
 
 
@@ -114,7 +114,7 @@
     
       
   <li class="navtree toctree-l1 label">
-    <p class="caption">Deep Learning CNN</p>
+    <p class="caption">Deeplearning</p>
   </li>
 
 
@@ -127,20 +127,38 @@
 
 
   <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../intro/">Introduction</a>
+  </li>
+        
+          
+  <li class="navtree toctree-l2 label">
+    <p class="caption">Deep Learning CNN</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l2 group">
+      <ul class="navtree subnav-l2 current">
+          
+
+
+  <li class="navtree toctree-l3 inactive">
     <a class="" href="../../NMIST/NMIST/">NMIST</a>
   </li>
         
           
 
 
-  <li class="navtree toctree-l2 inactive">
+  <li class="navtree toctree-l3 inactive">
     <a class="" href="../../CIFRT10/CIFR10/">CIFT10</a>
   </li>
         
           
 
 
-  <li class="navtree toctree-l2 inactive">
+  <li class="navtree toctree-l3 inactive">
     <a class="" href="../../traffic-sign/Traffic_Sign_Classifier/">Traffic Sign Detection</a>
   </li>
         
@@ -149,16 +167,15 @@
 
   
     
-    <li class="navtree toctree-l2 page current">
+    <li class="navtree toctree-l3 page current">
       <a class="current" href="./">
         Language Translator
-          <span class="toctree-expand"></span>
       </a>
     </li>
     
       
 
-  <li class="toctree-l2 current with-children">
+  <li class="toctree-l3 current with-children">
     <a href="#language-translation">
       Language Translation
       <span class="toctree-expand"></span>
@@ -167,23 +184,23 @@
 
 
 
-  <li class="toctree-l2 current">
-    <ul class="subnav-l2 current">
+  <li class="toctree-l3 current">
+    <ul class="subnav-l3 current">
     
       
-        <li class="toctree-l3">
-          <a class="toctree-l4" href="#get-the-data">Get the Data</a>
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#get-the-data">Get the Data</a>
         </li>
     
       
-        <li class="toctree-l3">
-          <a class="toctree-l4" href="#explore-the-data">Explore the Data</a>
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#explore-the-data">Explore the Data</a>
         </li>
     
       
           
 
-  <li class="toctree-l3">
+  <li class="toctree-l4">
     <a href="#implement-preprocessing-function">
       Implement Preprocessing Function
       <span class="toctree-expand"></span>
@@ -192,30 +209,30 @@
 
 
 
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#text-to-word-ids">Text to Word Ids</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#preprocess-all-the-data-and-save-it">Preprocess all the data and save it</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+      
+
   <li class="toctree-l3">
-    <ul class="subnav-l3 toc-hidden">
-    
-      
-        <li class="toctree-l4">
-          <a class="toctree-l5" href="#text-to-word-ids">Text to Word Ids</a>
-        </li>
-    
-      
-        <li class="toctree-l4">
-          <a class="toctree-l5" href="#preprocess-all-the-data-and-save-it">Preprocess all the data and save it</a>
-        </li>
-    
-    </ul>
-  </li>
-
-      
-    
-    </ul>
-  </li>
-
-      
-
-  <li class="toctree-l2">
     <a href="#check-point">
       Check Point
       <span class="toctree-expand"></span>
@@ -224,18 +241,18 @@
 
 
 
-  <li class="toctree-l2">
-    <ul class="subnav-l2 toc-hidden">
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
     
       
-        <li class="toctree-l3">
-          <a class="toctree-l4" href="#check-the-version-of-tensorflow-and-access-to-gpu">Check the Version of TensorFlow and Access to GPU</a>
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#check-the-version-of-tensorflow-and-access-to-gpu">Check the Version of TensorFlow and Access to GPU</a>
         </li>
     
       
           
 
-  <li class="toctree-l3">
+  <li class="toctree-l4">
     <a href="#build-the-neural-network">
       Build the Neural Network
       <span class="toctree-expand"></span>
@@ -244,42 +261,42 @@
 
 
 
-  <li class="toctree-l3">
-    <ul class="subnav-l3 toc-hidden">
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
     
       
-        <li class="toctree-l4">
-          <a class="toctree-l5" href="#input">Input</a>
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#input">Input</a>
         </li>
     
       
-        <li class="toctree-l4">
-          <a class="toctree-l5" href="#process-decoding-input">Process Decoding Input</a>
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#process-decoding-input">Process Decoding Input</a>
         </li>
     
       
-        <li class="toctree-l4">
-          <a class="toctree-l5" href="#encoding">Encoding</a>
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#encoding">Encoding</a>
         </li>
     
       
-        <li class="toctree-l4">
-          <a class="toctree-l5" href="#decoding-training">Decoding - Training</a>
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#decoding-training">Decoding - Training</a>
         </li>
     
       
-        <li class="toctree-l4">
-          <a class="toctree-l5" href="#decoding-inference">Decoding - Inference</a>
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#decoding-inference">Decoding - Inference</a>
         </li>
     
       
-        <li class="toctree-l4">
-          <a class="toctree-l5" href="#build-the-decoding-layer">Build the Decoding Layer</a>
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#build-the-decoding-layer">Build the Decoding Layer</a>
         </li>
     
       
-        <li class="toctree-l4">
-          <a class="toctree-l5" href="#build-the-neural-network_1">Build the Neural Network</a>
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#build-the-neural-network_1">Build the Neural Network</a>
         </li>
     
     </ul>
@@ -290,9 +307,51 @@
       
           
 
-  <li class="toctree-l3">
+  <li class="toctree-l4">
     <a href="#neural-network-training">
       Neural Network Training
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#hyperparameters">Hyperparameters</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#build-the-graph">Build the Graph</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#train">Train</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#save-parameters">Save Parameters</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+      
+
+  <li class="toctree-l3">
+    <a href="#checkpoint">
+      Checkpoint
       <span class="toctree-expand"></span>
     </a>
   </li>
@@ -304,64 +363,22 @@
     
       
         <li class="toctree-l4">
-          <a class="toctree-l5" href="#hyperparameters">Hyperparameters</a>
+          <a class="toctree-l5" href="#sentence-to-sequence">Sentence to Sequence</a>
         </li>
     
       
         <li class="toctree-l4">
-          <a class="toctree-l5" href="#build-the-graph">Build the Graph</a>
+          <a class="toctree-l5" href="#translate">Translate</a>
         </li>
     
       
         <li class="toctree-l4">
-          <a class="toctree-l5" href="#train">Train</a>
+          <a class="toctree-l5" href="#imperfect-translation">Imperfect Translation</a>
         </li>
     
       
         <li class="toctree-l4">
-          <a class="toctree-l5" href="#save-parameters">Save Parameters</a>
-        </li>
-    
-    </ul>
-  </li>
-
-      
-    
-    </ul>
-  </li>
-
-      
-
-  <li class="toctree-l2">
-    <a href="#checkpoint">
-      Checkpoint
-      <span class="toctree-expand"></span>
-    </a>
-  </li>
-
-
-
-  <li class="toctree-l2">
-    <ul class="subnav-l2 toc-hidden">
-    
-      
-        <li class="toctree-l3">
-          <a class="toctree-l4" href="#sentence-to-sequence">Sentence to Sequence</a>
-        </li>
-    
-      
-        <li class="toctree-l3">
-          <a class="toctree-l4" href="#translate">Translate</a>
-        </li>
-    
-      
-        <li class="toctree-l3">
-          <a class="toctree-l4" href="#imperfect-translation">Imperfect Translation</a>
-        </li>
-    
-      
-        <li class="toctree-l3">
-          <a class="toctree-l4" href="#submitting-this-project">Submitting This Project</a>
+          <a class="toctree-l5" href="#submitting-this-project">Submitting This Project</a>
         </li>
     
     </ul>
@@ -372,9 +389,9 @@
         
       </ul>
     </li>
-    
-      
-  <li class="navtree toctree-l1 label">
+        
+          
+  <li class="navtree toctree-l2 label">
     <p class="caption">Deep Learning RNN</p>
   </li>
 
@@ -382,35 +399,38 @@
   
 
   
-    <li class="navtree toctree-l1 group">
-      <ul class="navtree subnav-l1 current">
+    <li class="navtree toctree-l2 group">
+      <ul class="navtree subnav-l2 current">
           
 
 
-  <li class="navtree toctree-l2 inactive">
+  <li class="navtree toctree-l3 inactive">
     <a class="" href="../../Vanila/1.Vanila-LSTM/">Vanila LSTM</a>
   </li>
         
           
 
 
-  <li class="navtree toctree-l2 inactive">
+  <li class="navtree toctree-l3 inactive">
     <a class="" href="../../stacked/2.Stacked-LSTM/">Stacked LSTM</a>
   </li>
         
           
 
 
-  <li class="navtree toctree-l2 inactive">
+  <li class="navtree toctree-l3 inactive">
     <a class="" href="../../bidirectional/5. BiDirectional-LSTM/">Bidirectional LSTM</a>
   </li>
         
           
 
 
-  <li class="navtree toctree-l2 inactive">
+  <li class="navtree toctree-l3 inactive">
     <a class="" href="../../rnn/RNN_project/">Recurrent Neural Network</a>
   </li>
+        
+      </ul>
+    </li>
         
       </ul>
     </li>
@@ -474,7 +494,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../..">Data Fiction</a>
+        <a href="../../..">Machine Learning</a>
       </nav>
 
       
@@ -487,6 +507,10 @@
       
         
           <li>Deep Learning CNN &raquo;</li>
+        
+      
+        
+          <li>Deeplearning &raquo;</li>
         
       
     
