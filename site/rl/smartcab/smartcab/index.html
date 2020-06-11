@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>SmartCab - Machine Learning</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "SmartCab";
+    var mkdocs_page_input_path = "rl/smartcab/smartcab.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> Machine Learning</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="tocbase current">
+    
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../..">Home</a>
+  </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Machine Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/LinearModels/Linear-models/">Linear Regression</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Classifiers/Logistic/Logistic/">Logistic Regression</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Classifiers/Tree/Tree/">Decision Tree</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Classifiers/Ensamble/ensamble/">Ensamble Methods</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Classifiers/SVM/svm/">Support Vector Machine</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/Kmeans/Kmeans/">Kmeans Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/Agglomerative/Agglomerative/">Agglomerative Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/AffinityPropagation/Affinity-Propagation/">Affinity Propagation</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/Spectral/Spectral/">Spectral Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/DBSCAN/DBSCAN/">DBSCAN Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/MeanShift/Mean-shift/">Mean Shift Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/Comparison/Comparison/">Cluster Comparison</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">ML Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../mlp/intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../mlp/boston_housing/boston_housing/">Boston Housing</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../mlp/Customer_segments/customer_segments/">Customer Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../mlp/finding_donors/finding_donors/">Finding Donors</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../mlp/vehicle-detection/CARND-Project-5/">Vehicle Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../mlp/perceptron/dlnd-your-first-neural-network/">Perceptron</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Deep Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/Vanila/1.Vanila-LSTM/">Vanila LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/stacked/2.Stacked-LSTM/">Stacked LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/bidirectional/5. BiDirectional-LSTM/">Bidirectional LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/rnn/RNN_project/">Recurrent Neural Network</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">DL Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/NMIST/NMIST/">Digit Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/CIFRT10/CIFR10/">Image Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/traffic-sign/Traffic_Sign_Classifier/">Traffic Sign Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/translator/dlnd_language_translation/">Language Translator</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Rinforcement Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  
+    
+    <li class="navtree toctree-l2 page current">
+      <a class="current" href="./">
+        SmartCab
+          <span class="toctree-expand"></span>
+      </a>
+    </li>
+    
+      
+
+  <li class="toctree-l2 current with-children">
+    <a href="#machine-learning-engineer-nanodegree">
+      Machine Learning Engineer Nanodegree
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2 current">
+    <ul class="subnav-l2 current">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#reinforcement-learning">Reinforcement Learning</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#project-train-a-smartcab-to-drive">Project: Train a Smartcab to Drive</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#getting-started">
+      Getting Started
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#understand-the-world">Understand the World</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-1">Question 1</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#understand-the-code">Understand the Code</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-2">Question 2</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#implement-a-basic-driving-agent">
+      Implement a Basic Driving Agent
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#basic-agent-simulation-results">Basic Agent Simulation Results</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-3">Question 3</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#inform-the-driving-agent">
+      Inform the Driving Agent
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#identify-states">Identify States</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-4">Question 4</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#define-a-state-space">Define a State Space</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-5">Question 5</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#update-the-driving-agent-state">Update the Driving Agent State</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#implement-a-q-learning-driving-agent">
+      Implement a Q-Learning Driving Agent
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#q-learning-simulation-results">Q-Learning Simulation Results</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-6">Question 6</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#improve-the-q-learning-driving-agent">
+      Improve the Q-Learning Driving Agent
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#improved-q-learning-simulation-results">Improved Q-Learning Simulation Results</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l4">
+    <a href="#visualizing-some-decay-functions">
+      Visualizing some decay functions
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#choice-of-different-decay-functions">Choice of different decay functions</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#case-i">Case-I:</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#case-ii">Case-II:</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#caseiii">Case:III:</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#case-iv">Case-IV:</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-7">Question 7</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#define-an-optimal-policy">Define an Optimal Policy</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-8">Question 8</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#optional-future-rewards-discount-factor-gamma">Optional: Future Rewards - Discount Factor, 'gamma'</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#optional-question-9">Optional Question 9</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+
+  
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">GAN Project</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/gan/dlnd_face_generation/">Face Generation</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../References/ref.md">References</a>
+  </li>
+    
+  </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">Machine Learning</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Rinforcement Learning &raquo;</li>
+        
+      
+    
+    <li>SmartCab</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="machine-learning-engineer-nanodegree">Machine Learning Engineer Nanodegree</h1>
+<h2 id="reinforcement-learning">Reinforcement Learning</h2>
+<h2 id="project-train-a-smartcab-to-drive">Project: Train a Smartcab to Drive</h2>
+<p>Welcome to the fourth project of the Machine Learning Engineer Nanodegree! In this notebook, template code has already been provided for you to aid in your analysis of the <em>Smartcab</em> and your implemented learning algorithm. You will not need to modify the included code beyond what is requested. There will be questions that you must answer which relate to the project and the visualizations provided in the notebook. Each section where you will answer a question is preceded by a <strong>'Question X'</strong> header. Carefully read each question and provide thorough answers in the following text boxes that begin with <strong>'Answer:'</strong>. Your project submission will be evaluated based on your answers to each of the questions and the implementation you provide in <code>agent.py</code>.  </p>
+<blockquote>
+<p><strong>Note:</strong> Code and Markdown cells can be executed using the <strong>Shift + Enter</strong> keyboard shortcut. In addition, Markdown cells can be edited by typically double-clicking the cell to enter edit mode.</p>
+</blockquote>
+<hr />
+<h2 id="getting-started">Getting Started</h2>
+<p>In this project, you will work towards constructing an optimized Q-Learning driving agent that will navigate a <em>Smartcab</em> through its environment towards a goal. Since the <em>Smartcab</em> is expected to drive passengers from one location to another, the driving agent will be evaluated on two very important metrics: <strong>Safety</strong> and <strong>Reliability</strong>. A driving agent that gets the <em>Smartcab</em> to its destination while running red lights or narrowly avoiding accidents would be considered <strong>unsafe</strong>. Similarly, a driving agent that frequently fails to reach the destination in time would be considered <strong>unreliable</strong>. Maximizing the driving agent's <strong>safety</strong> and <strong>reliability</strong> would ensure that <em>Smartcabs</em> have a permanent place in the transportation industry.</p>
+<p><strong>Safety</strong> and <strong>Reliability</strong> are measured using a letter-grade system as follows:</p>
+<table>
+<thead>
+<tr>
+<th align="center">Grade</th>
+<th align="center">Safety</th>
+<th align="center">Reliability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">A+</td>
+<td align="center">Agent commits no traffic violations,<br/>and always chooses the correct action.</td>
+<td align="center">Agent reaches the destination in time<br />for 100% of trips.</td>
+</tr>
+<tr>
+<td align="center">A</td>
+<td align="center">Agent commits few minor traffic violations,<br/>such as failing to move on a green light.</td>
+<td align="center">Agent reaches the destination on time<br />for at least 90% of trips.</td>
+</tr>
+<tr>
+<td align="center">B</td>
+<td align="center">Agent commits frequent minor traffic violations,<br/>such as failing to move on a green light.</td>
+<td align="center">Agent reaches the destination on time<br />for at least 80% of trips.</td>
+</tr>
+<tr>
+<td align="center">C</td>
+<td align="center">Agent commits at least one major traffic violation,<br/> such as driving through a red light.</td>
+<td align="center">Agent reaches the destination on time<br />for at least 70% of trips.</td>
+</tr>
+<tr>
+<td align="center">D</td>
+<td align="center">Agent causes at least one minor accident,<br/> such as turning left on green with oncoming traffic.</td>
+<td align="center">Agent reaches the destination on time<br />for at least 60% of trips.</td>
+</tr>
+<tr>
+<td align="center">F</td>
+<td align="center">Agent causes at least one major accident,<br />such as driving through a red light with cross-traffic.</td>
+<td align="center">Agent fails to reach the destination on time<br />for at least 60% of trips.</td>
+</tr>
+</tbody>
+</table>
+<p>To assist evaluating these important metrics, you will need to load visualization code that will be used later on in the project. Run the code cell below to import this code which is required for your analysis.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Import the visualization code</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">visuals</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">vs</span>
+
+<span style="color: #0099FF; font-style: italic"># Pretty display for notebooks</span>
+<span style="color: #555555">%</span>matplotlib inline
+</pre></div>
+
+
+<h3 id="understand-the-world">Understand the World</h3>
+<p>Before starting to work on implementing your driving agent, it's necessary to first understand the world (environment) which the <em>Smartcab</em> and driving agent work in. One of the major components to building a self-learning agent is understanding the characteristics about the agent, which includes how the agent operates. To begin, simply run the <code>agent.py</code> agent code exactly how it is -- no need to make any additions whatsoever. Let the resulting simulation run for some time to see the various working components. Note that in the visual simulation (if enabled), the <strong>white vehicle</strong> is the <em>Smartcab</em>.</p>
+<hr />
+<h3 id="question-1">Question 1</h3>
+<p>In a few sentences, describe what you observe during the simulation when running the default <code>agent.py</code> agent code. Some things you could consider:
+- <em>Does the Smartcab move at all during the simulation?</em>
+- <em>What kind of rewards is the driving agent receiving?</em>
+- <em>How does the light changing color affect the rewards?</em>  </p>
+<p><strong>Hint:</strong> From the <code>/smartcab/</code> top-level directory (where this notebook is located), run the command </p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #CC3300">&#39;python smartcab/agent.py&#39;</span>
+</pre></div>
+
+
+<p><strong>Answer:</strong></p>
+<p>The Smartcab doesn't move, while other cars moving according to the traffic light signals. Between trials, smartcab is repositioned to different locations. <br>
+The Smartcab gets rewards based on the policy violation. For example, Positive rewards, if there is a green light with other traffic. Negative rewards, if there is a green light without other traffic. Positive rewards, if there is a red light etc. There are several types of violations:</p>
+<ul>
+<li>No violation</li>
+<li>Minor violation</li>
+<li>Major violation</li>
+<li>Minor accident</li>
+<li>Major accident</li>
+</ul>
+<p><strong><em>The example of a violation rule:</em></strong></p>
+<p>```
+      # 1. Agent wants to drive forward: 
+        if action == 'forward':
+            if light != 'green': # Running red light
+                violation = 2 # Major violation
+                if inputs['left'] == 'forward' or inputs['right'] == 'forward': # Cross traffic
+                    violation = 4 # Accident</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>    # 2. Agent wants to drive left:
+    elif action == &#39;left&#39;:
+        if light != &#39;green&#39;: # Running a red light
+            violation = 2 # Major violation
+            if inputs[&#39;left&#39;] == &#39;forward&#39; or inputs[&#39;right&#39;] == &#39;forward&#39;: # Cross traffic
+                violation = 4 # Accident
+            elif inputs[&#39;oncoming&#39;] == &#39;right&#39;: # Oncoming car turning right
+                violation = 4 # Accident
+        else: # Green light
+            if inputs[&#39;oncoming&#39;] == &#39;right&#39; or inputs[&#39;oncoming&#39;] == &#39;forward&#39;: # Incoming traffic
+                violation = 3 # Accident
+            else: # Valid move!
+                heading = (heading[1], -heading[0])
+
+
+
+    # 3. Agent wants to drive right:
+    elif action == &#39;right&#39;:
+        if light != &#39;green&#39; and inputs[&#39;left&#39;] == &#39;forward&#39;: # Cross traffic
+            violation = 3 # Accident
+        else: # Valid move!
+            heading = (-heading[1], heading[0])
+
+
+
+    # 4. Agent wants to perform no action: 
+    elif action == None:
+        if light == &#39;green&#39; and inputs[&#39;oncoming&#39;] != &#39;left&#39;: # No oncoming traffic
+            violation = 1 # Minor violation
+            ```
+</pre></div>
+
+
+<p><strong><em> If there is no policy violation the agent get rewarded based on the rules  </em></strong></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span># Did the agent attempt a valid move?
+        if violation == 0:
+            if action == agent.get_next_waypoint(): # Was it the correct action?
+                reward += 2 - penalty # (2, 1)
+            elif action == None and light != &#39;green&#39;: # Was the agent stuck at a red light?
+                reward += 2 - penalty # (2, 1)
+            else: # Valid but incorrect
+                reward += 1 - penalty # (1, 0)
+
+
+            # Move the agent
+            if action is not None:
+                location = ((location[0] + heading[0] - self.bounds[0]) % (self.bounds[2] - self.bounds[0] + 1) + self.bounds[0],
+                            (location[1] + heading[1] - self.bounds[1]) % (self.bounds[3] - self.bounds[1] + 1) + self.bounds[1])  # wrap-around
+                state[&#39;location&#39;] = location
+                state[&#39;heading&#39;] = heading
+</pre></div>
+
+
+<p><strong><em>otherwise these rules will be applied.</em></strong></p>
+<p><code># Agent attempted invalid move  
+        else:
+            if violation == 1: # Minor violation
+                reward += -5
+            elif violation == 2: # Major violation
+                reward += -10
+            elif violation == 3: # Minor accident
+                reward += -20
+            elif violation == 4: # Major accident
+                reward += -40</code></p>
+<hr />
+<h3 id="understand-the-code">Understand the Code</h3>
+<p>In addition to understanding the world, it is also necessary to understand the code itself that governs how the world, simulation, and so on operate. Attempting to create a driving agent would be difficult without having at least explored the <em>"hidden"</em> devices that make everything work. In the <code>/smartcab/</code> top-level directory, there are two folders: <code>/logs/</code> (which will be used later) and <code>/smartcab/</code>. Open the <code>/smartcab/</code> folder and explore each Python file included, then answer the following question.</p>
+<hr />
+<h3 id="question-2">Question 2</h3>
+<ul>
+<li><em>In the </em><code>agent.py</code><em> Python file, choose three flags that can be set and explain how they change the simulation.</em></li>
+<li><em>In the </em><code>environment.py</code><em> Python file, what Environment class function is called when an agent performs an action?</em></li>
+<li><em>In the </em><code>simulator.py</code><em> Python file, what is the difference between the </em><code>'render_text()'</code><em> function and the </em><code>'render()'</code><em> function?</em></li>
+<li><em>In the </em><code>planner.py</code><em> Python file, will the </em><code>'next_waypoint()</code><em> function consider the North-South or East-West direction first?</em></li>
+</ul>
+<p><strong>Answer:</strong></p>
+<p><strong>In the <em><code>agent.py</code></em> Python file, choose three flags that can be set and explain how they change the simulation.</strong> </p>
+<ul>
+<li>
+<p><strong>learning</strong> (True/False): This indicates whether the agent is learning or not. It is to force the driving agent to use Q-learning.</p>
+</li>
+<li>
+<p><strong>epsilon</strong> (float): This is the random exploration factor. It has continuous value, which is default to 1. If it is test set it to 0. While choosing action, if it is learning it has to choose random action with 'epsilon' probability, if it is not learning, choose a random action. Thus it is probability which defines how often the agent acts randomly in order to avoid dead ends.</p>
+</li>
+<li>
+<p><strong>alpha</strong> (float): This is the learning factor. This parameter tunes the rewards recieved from the learning steps. It has continuous value , default is 0.5, if it is test set it to 0.</p>
+</li>
+</ul>
+<p><br>
+<strong>In the <em><code>environment.py</code></em> Python file, what Environment class function is called when an agent performs an action?</strong></p>
+<ul>
+<li><strong>def act(self, agent, action)</strong>: This function considers an action and performs it if it is legal and recieve a reward for the agent based on traffic rules.</li>
+</ul>
+<p><br>
+<strong>In the <em><code>simulator.py</code></em> Python file, what is the difference between the <em><code>'render_text()'</code></em> function and the
+<em><code>'render()'</code></em> function?</strong></p>
+<ul>
+<li><strong>render_text(self, trial, testing=False)</strong> This is the non-GUI render display of the simulation. This sends trial data to be displayed in the terminal.</li>
+<li><strong>render(self, trial, testing=False)</strong>: This is the GUI render display of the simulation. Supplementary trial data can be found from render_text. </li>
+<li>First one is used to generate the text (render_text) and the second for displaying it (render)</li>
+</ul>
+<p><br>      <br />
+<strong>In the <em><code>planner.py</code></em> Python file, will the <em><code>'next_waypoint()</code></em> function consider the North-South or East-West direction first?</strong>
+ - East-West direction is considered first. It checks if destination is cardinally East or West of location first, and then North or South location.</p>
+<hr />
+<hr />
+<h2 id="implement-a-basic-driving-agent">Implement a Basic Driving Agent</h2>
+<p>The first step to creating an optimized Q-Learning driving agent is getting the agent to actually take valid actions. In this case, a valid action is one of <code>None</code>, (do nothing) <code>'Left'</code> (turn left), <code>'Right'</code> (turn right), or <code>'Forward'</code> (go forward). For your first implementation, navigate to the <code>'choose_action()'</code> agent function and make the driving agent randomly choose one of these actions. Note that you have access to several class variables that will help you write this functionality, such as <code>'self.learning'</code> and <code>'self.valid_actions'</code>. Once implemented, run the agent file and simulation briefly to confirm that your driving agent is taking a random action each time step.</p>
+<h3 id="basic-agent-simulation-results">Basic Agent Simulation Results</h3>
+<p>To obtain results from the initial simulation, you will need to adjust following flags:
+- <code>'enforce_deadline'</code> - Set this to <code>True</code> to force the driving agent to capture whether it reaches the destination in time.
+- <code>'update_delay'</code> - Set this to a small value (such as <code>0.01</code>) to reduce the time between steps in each trial.
+- <code>'log_metrics'</code> - Set this to <code>True</code> to log the simluation results as a <code>.csv</code> file in <code>/logs/</code>.
+- <code>'n_test'</code> - Set this to <code>'10'</code> to perform 10 testing trials.</p>
+<p>Optionally, you may disable to the visual simulation (which can make the trials go faster) by setting the <code>'display'</code> flag to <code>False</code>. Flags that have been set here should be returned to their default setting when debugging. It is important that you understand what each flag does and how it affects the simulation!</p>
+<p>Once you have successfully completed the initial simulation (there should have been 20 training trials and 10 testing trials), run the code cell below to visualize the results. Note that log files are overwritten when identical simulations are run, so be careful with what log file is being loaded!
+Run the agent.py file after setting the flags from projects/smartcab folder instead of projects/smartcab/smartcab.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Load the &#39;sim_no-learning&#39; log file from the initial simulation results</span>
+vs<span style="color: #555555">.</span>plot_trials(<span style="color: #CC3300">&#39;sim_no-learning.csv&#39;</span>)
+</pre></div>
+
+
+<p><img alt="png" src="../output_19_0.png" /></p>
+<hr />
+<h3 id="question-3">Question 3</h3>
+<p>Using the visualization above that was produced from your initial simulation, provide an analysis and make several observations about the driving agent. Be sure that you are making at least one observation about each panel present in the visualization. Some things you could consider:
+- <em>How frequently is the driving agent making bad decisions? How many of those bad decisions cause accidents?</em>
+- <em>Given that the agent is driving randomly, does the rate of reliabilty make sense?</em>
+- <em>What kind of rewards is the agent receiving for its actions? Do the rewards suggest it has been penalized heavily?</em>
+- <em>As the number of trials increases, does the outcome of results change significantly?</em>
+- <em>Would this Smartcab be considered safe and/or reliable for its passengers? Why or why not?</em></p>
+<p><strong>Answer:</strong></p>
+<p><strong>How frequently is the driving agent making bad decisions? How many of those bad decisions cause accidents?</strong></p>
+<ul>
+<li>The driving agent makes bad decisions in 30% to 40% of all cases. Minor accidents take about 1% to 5%, while major accidents are close to 5% to 10% of all cases.<br></li>
+</ul>
+<p><strong>Given that the agent is driving randomly, does the rate of reliabilty make sense?</strong></p>
+<ul>
+<li>The reliability means a driving agent that frequently reaches the destination in time. Since the agent is acting randomly, the result is also random and not very much meaningful. <br> </li>
+</ul>
+<p><strong>What kind of rewards is the agent receiving for its actions? Do the rewards suggest it has been penalized heavily?</strong></p>
+<ul>
+<li>The agent is getting negative rewards on average. The agents is not making bad decision all the time, but the rolling average is always negative. From above plot, Reward per actioon decreased from -4 to -6, it suggests it has been penalized heavily. <br></li>
+</ul>
+<p><strong>As the number of trials increases, does the outcome of results change significantly?</strong>
+ - No, the result stay relatively the same. The reason is our agent is very random and doen't know the constains and is not able to learn from failures and successes. <br></p>
+<p><strong>Would this Smartcab be considered safe and/or reliable for its passengers? Why or why not?</strong></p>
+<ul>
+<li>No, as the both ratings suggest, the Smartcab is neither reliable nor safe, since the cab didn't get to the destination, and make a lot of violations.</li>
+</ul>
+<hr />
+<hr />
+<h2 id="inform-the-driving-agent">Inform the Driving Agent</h2>
+<p>The second step to creating an optimized Q-learning driving agent is defining a set of states that the agent can occupy in the environment. Depending on the input, sensory data, and additional variables available to the driving agent, a set of states can be defined for the agent so that it can eventually <em>learn</em> what action it should take when occupying a state. The condition of <code>'if state then action'</code> for each state is called a <strong>policy</strong>, and is ultimately what the driving agent is expected to learn. Without defining states, the driving agent would never understand which action is most optimal -- or even what environmental variables and conditions it cares about!</p>
+<h3 id="identify-states">Identify States</h3>
+<p>Inspecting the <code>'build_state()'</code> agent function shows that the driving agent is given the following data from the environment:
+- <code>'waypoint'</code>, which is the direction the <em>Smartcab</em> should drive leading to the destination, relative to the <em>Smartcab</em>'s heading.
+- <code>'inputs'</code>, which is the sensor data from the <em>Smartcab</em>. It includes 
+  - <code>'light'</code>, the color of the light.
+  - <code>'left'</code>, the intended direction of travel for a vehicle to the <em>Smartcab</em>'s left. Returns <code>None</code> if no vehicle is present.
+  - <code>'right'</code>, the intended direction of travel for a vehicle to the <em>Smartcab</em>'s right. Returns <code>None</code> if no vehicle is present.
+  - <code>'oncoming'</code>, the intended direction of travel for a vehicle across the intersection from the <em>Smartcab</em>. Returns <code>None</code> if no vehicle is present.
+- <code>'deadline'</code>, which is the number of actions remaining for the <em>Smartcab</em> to reach the destination before running out of time.</p>
+<hr />
+<h3 id="question-4">Question 4</h3>
+<p><em>Which features available to the agent are most relevant for learning both <strong>safety</strong> and <strong>efficiency</strong>? Why are these features appropriate for modeling the </em>Smartcab<em> in the environment? If you did not choose some features, why are those features</em> not <em>appropriate?</em></p>
+<p><strong>Answer:</strong></p>
+<p>all the features are appropriate for learning safety and efficiency (reliability). </p>
+<p>waypoint, light, oncoming, right, left are the most relevant ones. 
+- Knowing the waypoint is how the smartcab get to the destination.
+- Light can let the smartcab to know whether it should stop or drive at the intersections. 
+- Oncoming, left, rigth are relevant because the smartcab should not drive into other cars.
+- Deadline seems to be relevant at first glance, since it forces the agent to reach the destination as soon as possible. Unfortunately it could be a source of problems. For instance the agent could break the rules in order to reach the destination faster when it's near the final point. So, we won't use it.Deadline is not appropriate, since knowing deadline won't help smartcab get to destination. </p>
+<p>Too many features will make it hard to learn a good policy.</p>
+<hr />
+<h3 id="define-a-state-space">Define a State Space</h3>
+<p>When defining a set of states that the agent can occupy, it is necessary to consider the <em>size</em> of the state space. That is to say, if you expect the driving agent to learn a <strong>policy</strong> for each state, you would need to have an optimal action for <em>every</em> state the agent can occupy. If the number of all possible states is very large, it might be the case that the driving agent never learns what to do in some states, which can lead to uninformed decisions. For example, consider a case where the following features are used to define the state of the <em>Smartcab</em>:</p>
+<p><code>('is_raining', 'is_foggy', 'is_red_light', 'turn_left', 'no_traffic', 'previous_turn_left', 'time_of_day')</code>.</p>
+<p>How frequently would the agent occupy a state like <code>(False, True, True, True, False, False, '3AM')</code>? Without a near-infinite amount of time for training, it's doubtful the agent would ever learn the proper action!</p>
+<hr />
+<h3 id="question-5">Question 5</h3>
+<p><em>If a state is defined using the features you've selected from <strong>Question 4</strong>, what would be the size of the state space? Given what you know about the evironment and how it is simulated, do you think the driving agent could learn a policy for each possible state within a reasonable number of training trials?</em><br />
+<strong>Hint:</strong> Consider the <em>combinations</em> of features to calculate the total number of states!</p>
+<p><strong>Answer:</strong></p>
+<p>The total number of states is defined by the product of the number of possible states for each feature. We estimate the total number of states as: </p>
+<blockquote>
+<p>WAYPOINT x LIGHTS_STATES x INPUT[LEFT] x INPUT[ONCOMING]</p>
+</blockquote>
+<ul>
+<li>WAIPOINT: 3 (left, right, forward)</li>
+<li>LIGHTS_STATES:   2 (green, red)</li>
+<li>INPUT[LEFT]:     4 (None, left, right, forwards)</li>
+<li>INPUT[ONCOMING]: 4 (None, left, right, forwards)</li>
+</ul>
+<p><br>
+Therefore, the total number of states is 96. Figuring out the policy for each possible state will take some time, because the Smartcab should visit each state  and try different actions to learn the reward policy. The agent won't learn a policy for each possible state. That will take too much time to train. However, the agent doesn't need to do that to get a reasonable good performance.</p>
+<hr />
+<h3 id="update-the-driving-agent-state">Update the Driving Agent State</h3>
+<p>For your second implementation, navigate to the <code>'build_state()'</code> agent function. With the justification you've provided in <strong>Question 4</strong>, you will now set the <code>'state'</code> variable to a tuple of all the features necessary for Q-Learning. Confirm your driving agent is updating its state by running the agent file and simulation briefly and note whether the state is displaying. If the visual simulation is used, confirm that the updated state corresponds with what is seen in the simulation.</p>
+<p><strong>Note:</strong> Remember to reset simulation flags to their default setting when making this observation!</p>
+<hr />
+<h2 id="implement-a-q-learning-driving-agent">Implement a Q-Learning Driving Agent</h2>
+<p>The third step to creating an optimized Q-Learning agent is to begin implementing the functionality of Q-Learning itself. The concept of Q-Learning is fairly straightforward: For every state the agent visits, create an entry in the Q-table for all state-action pairs available. Then, when the agent encounters a state and performs an action, update the Q-value associated with that state-action pair based on the reward received and the interative update rule implemented. Of course, additional benefits come from Q-Learning, such that we can have the agent choose the <em>best</em> action for each state based on the Q-values of each state-action pair possible. For this project, you will be implementing a <em>decaying,</em> $\epsilon$<em>-greedy</em> Q-learning algorithm with <em>no</em> discount factor. Follow the implementation instructions under each <strong>TODO</strong> in the agent functions.</p>
+<p>Note that the agent attribute <code>self.Q</code> is a dictionary: This is how the Q-table will be formed. Each state will be a key of the <code>self.Q</code> dictionary, and each value will then be another dictionary that holds the <em>action</em> and <em>Q-value</em>. Here is an example:</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>{ &#39;state-1&#39;: { 
+    &#39;action-1&#39; : Qvalue-1,
+    &#39;action-2&#39; : Qvalue-2,
+     ...
+   },
+  &#39;state-2&#39;: {
+    &#39;action-1&#39; : Qvalue-1,
+     ...
+   },
+   ...
+}
+</pre></div>
+
+
+<p>Furthermore, note that you are expected to use a <em>decaying</em> $\epsilon$ <em>(exploration) factor</em>. Hence, as the number of trials increases, $\epsilon$ should decrease towards 0. This is because the agent is expected to learn from its behavior and begin acting on its learned behavior. Additionally, The agent will be tested on what it has learned after $\epsilon$ has passed a certain threshold (the default threshold is 0.01). For the initial Q-Learning implementation, you will be implementing a linear decaying function for $\epsilon$.</p>
+<h3 id="q-learning-simulation-results">Q-Learning Simulation Results</h3>
+<p>To obtain results from the initial Q-Learning implementation, you will need to adjust the following flags and setup:
+- <code>'enforce_deadline'</code> - Set this to <code>True</code> to force the driving agent to capture whether it reaches the destination in time.
+- <code>'update_delay'</code> - Set this to a small value (such as <code>0.01</code>) to reduce the time between steps in each trial.
+- <code>'log_metrics'</code> - Set this to <code>True</code> to log the simluation results as a <code>.csv</code> file and the Q-table as a <code>.txt</code> file in <code>/logs/</code>.
+- <code>'n_test'</code> - Set this to <code>'10'</code> to perform 10 testing trials.
+- <code>'learning'</code> - Set this to <code>'True'</code> to tell the driving agent to use your Q-Learning implementation.</p>
+<p>In addition, use the following decay function for $\epsilon$:</p>
+<p>$$ \epsilon_{t+1} = \epsilon_{t} - 0.05, \hspace{10px}\textrm{for trial number } t$$</p>
+<p>If you have difficulty getting your implementation to work, try setting the <code>'verbose'</code> flag to <code>True</code> to help debug. Flags that have been set here should be returned to their default setting when debugging. It is important that you understand what each flag does and how it affects the simulation! </p>
+<p>Once you have successfully completed the initial Q-Learning simulation, run the code cell below to visualize the results. Note that log files are overwritten when identical simulations are run, so be careful with what log file is being loaded!</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Load the &#39;sim_default-learning&#39; file from the default Q-Learning simulation</span>
+vs<span style="color: #555555">.</span>plot_trials(<span style="color: #CC3300">&#39;sim_default-learning.csv&#39;</span>)
+</pre></div>
+
+
+<p><img alt="png" src="../output_38_0.png" /></p>
+<hr />
+<h3 id="question-6">Question 6</h3>
+<p>Using the visualization above that was produced from your default Q-Learning simulation, provide an analysis and make observations about the driving agent like in <strong>Question 3</strong>. Note that the simulation should have also produced the Q-table in a text file which can help you make observations about the agent's learning. Some additional things you could consider:<br />
+- <em>Are there any observations that are similar between the basic driving agent and the default Q-Learning agent?</em>
+- <em>Approximately how many training trials did the driving agent require before testing? Does that number make sense given the epsilon-tolerance?</em>
+- <em>Is the decaying function you implemented for $\epsilon$ (the exploration factor) accurately represented in the parameters panel?</em>
+- <em>As the number of training trials increased, did the number of bad actions decrease? Did the average reward increase?</em>
+- <em>How does the safety and reliability rating compare to the initial driving agent?</em></p>
+<p><strong>Answer:</strong></p>
+<p><strong>Are there any observations that are similar between the basic driving agent and the default Q-Learning agent?</strong></p>
+<p>Even though we see some improvements, the ratings haven't changed. In both scenarios, the agent fail both test. It's still dangerous to use the Smartcab in the environment. 
+<br><br></p>
+<p><strong>Approximately how many training trials did the driving agent require before testing? Does that number make sense given the epsilon-tolerance?</strong></p>
+<p>The Smartcab needs 20 trials for training before testing. This makes sense since we use decay function <code>self.epsilon = self.epsilon - 0.05</code>, which reach the tolerence value after 20 trials. The test runs after the epsilon value becomes less than 0.001 (tolerance). Taking into account the default value ($\epsilon$ =1) we can easily check that 20 trials is our threshold indeed (1-20x0.05 &lt; 0.001)
+<br><br></p>
+<p><strong>Is the decaying function you implemented for $\epsilon$ (the exploration factor) accurately represented in the parameters panel?</strong></p>
+<p>Yes, we can see a linear function with a negative slope. It starts with $\epsilon$ =1 and ends up with $\epsilon$ =0 after 20 trials.
+<br><br></p>
+<p><strong>As the number of training trials increased, did the number of bad actions decrease? Did the average reward increase?</strong></p>
+<p>Fortunatelly, the total number of bad actions has decreased therefore the total amount of good actions has increased. At the end of the training the average reward value has gone up to -4 from -2. The number of bad actions decreased from ~33% to ~18%.<br />
+<br><br></p>
+<p><strong>How does the safety and reliability rating compare to the initial driving agent?</strong></p>
+<p>The agent still gets Fs. Unfortunately the rolling rate of reliability is fluctuating around 35% with no evidences of any improvement. Compare to basic driving agent, default Q-Learning agent has improved success rate, though it's still failed, we can understand that from logs, to reflect this rating as well we need more no.of trianing trials before testing, and reliability improved and showed here as Rating B.</p>
+<hr />
+<hr />
+<h2 id="improve-the-q-learning-driving-agent">Improve the Q-Learning Driving Agent</h2>
+<p>The third step to creating an optimized Q-Learning agent is to perform the optimization! Now that the Q-Learning algorithm is implemented and the driving agent is successfully learning, it's necessary to tune settings and adjust learning paramaters so the driving agent learns both <strong>safety</strong> and <strong>efficiency</strong>. Typically this step will require a lot of trial and error, as some settings will invariably make the learning worse. One thing to keep in mind is the act of learning itself and the time that this takes: In theory, we could allow the agent to learn for an incredibly long amount of time; however, another goal of Q-Learning is to <em>transition from experimenting with unlearned behavior to acting on learned behavior</em>. For example, always allowing the agent to perform a random action during training (if $\epsilon = 1$ and never decays) will certainly make it <em>learn</em>, but never let it <em>act</em>. When improving on your Q-Learning implementation, consider the impliciations it creates and whether it is logistically sensible to make a particular adjustment.</p>
+<h3 id="improved-q-learning-simulation-results">Improved Q-Learning Simulation Results</h3>
+<p>To obtain results from the initial Q-Learning implementation, you will need to adjust the following flags and setup:
+- <code>'enforce_deadline'</code> - Set this to <code>True</code> to force the driving agent to capture whether it reaches the destination in time.
+- <code>'update_delay'</code> - Set this to a small value (such as <code>0.01</code>) to reduce the time between steps in each trial.
+- <code>'log_metrics'</code> - Set this to <code>True</code> to log the simluation results as a <code>.csv</code> file and the Q-table as a <code>.txt</code> file in <code>/logs/</code>.
+- <code>'learning'</code> - Set this to <code>'True'</code> to tell the driving agent to use your Q-Learning implementation.
+- <code>'optimized'</code> - Set this to <code>'True'</code> to tell the driving agent you are performing an optimized version of the Q-Learning implementation.</p>
+<p>Additional flags that can be adjusted as part of optimizing the Q-Learning agent:
+- <code>'n_test'</code> - Set this to some positive number (previously 10) to perform that many testing trials.
+- <code>'alpha'</code> - Set this to a real number between 0 - 1 to adjust the learning rate of the Q-Learning algorithm.
+- <code>'epsilon'</code> - Set this to a real number between 0 - 1 to adjust the starting exploration factor of the Q-Learning algorithm.
+- <code>'tolerance'</code> - set this to some small value larger than 0 (default was 0.05) to set the epsilon threshold for testing.</p>
+<p>Furthermore, use a decaying function of your choice for $\epsilon$ (the exploration factor). Note that whichever function you use, it <strong>must decay to </strong><code>'tolerance'</code><strong> at a reasonable rate</strong>. The Q-Learning agent will not begin testing until this occurs. Some example decaying functions (for $t$, the number of trials):</p>
+<p>$$ \epsilon = a^t, \textrm{for } 0 &lt; a &lt; 1 \hspace{50px}\epsilon = \frac{1}{t^2}\hspace{50px}\epsilon = e^{-at}, \textrm{for } 0 &lt; a &lt; 1 \hspace{50px} \epsilon = \cos(at), \textrm{for } 0 &lt; a &lt; 1$$
+You may also use a decaying function for $\alpha$ (the learning rate) if you so choose, however this is typically less common. If you do so, be sure that it adheres to the inequality $0 \leq \alpha \leq 1$.</p>
+<p>If you have difficulty getting your implementation to work, try setting the <code>'verbose'</code> flag to <code>True</code> to help debug. Flags that have been set here should be returned to their default setting when debugging. It is important that you understand what each flag does and how it affects the simulation! </p>
+<p>Once you have successfully completed the improved Q-Learning simulation, run the code cell below to visualize the results. Note that log files are overwritten when identical simulations are run, so be careful with what log file is being loaded!</p>
+<hr />
+<h3 id="visualizing-some-decay-functions">Visualizing some decay functions</h3>
+<hr />
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">math</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">math</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">pandas</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">pd</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">matplotlib</span> <span style="color: #006699; font-weight: bold">import</span> cm
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">class</span> <span style="color: #00AA88; font-weight: bold">decay</span>(<span style="color: #336666">object</span>):
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">__init__</span>(<span style="color: #336666">self</span>,t,a):
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>t <span style="color: #555555">=</span> t
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>a <span style="color: #555555">=</span> a
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">fun1</span>(<span style="color: #336666">self</span>):
+        <span style="color: #006699; font-weight: bold">return</span> <span style="color: #FF6600">1.0</span><span style="color: #555555">-</span>(<span style="color: #336666">self</span><span style="color: #555555">.</span>t<span style="color: #555555">*</span><span style="color: #FF6600">0.01</span>)
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">fun2</span>(<span style="color: #336666">self</span>):
+        <span style="color: #006699; font-weight: bold">return</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>a<span style="color: #555555">**</span>(<span style="color: #336666">self</span><span style="color: #555555">.</span>t)  
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">fun3</span>(<span style="color: #336666">self</span>):
+        <span style="color: #006699; font-weight: bold">return</span> np<span style="color: #555555">.</span>exp(<span style="color: #555555">-</span><span style="color: #336666">self</span><span style="color: #555555">.</span>a<span style="color: #555555">*</span><span style="color: #336666">self</span><span style="color: #555555">.</span>t)
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">fun4</span>(<span style="color: #336666">self</span>):
+        <span style="color: #006699; font-weight: bold">return</span> np<span style="color: #555555">.</span>cos(<span style="color: #336666">self</span><span style="color: #555555">.</span>a<span style="color: #555555">*</span><span style="color: #336666">self</span><span style="color: #555555">.</span>t)
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">fun5</span>(<span style="color: #336666">self</span>):
+        <span style="color: #006699; font-weight: bold">return</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>a<span style="color: #555555">/</span>np<span style="color: #555555">.</span>sqrt(<span style="color: #336666">self</span><span style="color: #555555">.</span>t) <span style="color: #555555">-</span><span style="color: #FF6600">0.5</span>
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">fun6</span>(<span style="color: #336666">self</span>):
+        <span style="color: #006699; font-weight: bold">return</span> <span style="color: #FF6600">1.0</span><span style="color: #555555">/</span>((<span style="color: #336666">self</span><span style="color: #555555">.</span>a<span style="color: #555555">*</span><span style="color: #336666">self</span><span style="color: #555555">.</span>t)<span style="color: #555555">**</span><span style="color: #FF6600">3</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>a1 <span style="color: #555555">=</span> np<span style="color: #555555">.</span>arange(<span style="color: #FF6600">0.001</span>,<span style="color: #FF6600">1.0</span>,<span style="color: #FF6600">0.01</span>) 
+x <span style="color: #555555">=</span> np<span style="color: #555555">.</span>arange(<span style="color: #FF6600">1</span>,<span style="color: #FF6600">100.0</span>,<span style="color: #FF6600">1.0</span>)
+plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> (<span style="color: #FF6600">12</span>,<span style="color: #FF6600">10</span>))
+<span style="color: #006699; font-weight: bold">for</span> ia <span style="color: #000000; font-weight: bold">in</span> a1:
+    plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">2</span>,<span style="color: #FF6600">3</span>,<span style="color: #FF6600">1</span>)
+    plt<span style="color: #555555">.</span>plot(x,decay(x,ia)<span style="color: #555555">.</span>fun1())
+    plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">2</span>,<span style="color: #FF6600">3</span>,<span style="color: #FF6600">2</span>)
+    plt<span style="color: #555555">.</span>plot(x,decay(x,ia)<span style="color: #555555">.</span>fun2())
+    plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">2</span>,<span style="color: #FF6600">3</span>,<span style="color: #FF6600">3</span>)
+    plt<span style="color: #555555">.</span>plot(x,decay(x,ia)<span style="color: #555555">.</span>fun3())
+
+a2 <span style="color: #555555">=</span> np<span style="color: #555555">.</span>arange(<span style="color: #FF6600">0.001</span>,<span style="color: #FF6600">0.009</span>,<span style="color: #FF6600">0.0005</span>) 
+<span style="color: #006699; font-weight: bold">for</span> ia <span style="color: #000000; font-weight: bold">in</span> a2: 
+    plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">2</span>,<span style="color: #FF6600">3</span>,<span style="color: #FF6600">4</span>)
+    plt<span style="color: #555555">.</span>plot(x,decay(x,ia)<span style="color: #555555">.</span>fun4())
+    plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">2</span>,<span style="color: #FF6600">3</span>,<span style="color: #FF6600">5</span>)
+    plt<span style="color: #555555">.</span>plot(x,decay(x,ia)<span style="color: #555555">.</span>fun5())
+    plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">2</span>,<span style="color: #FF6600">3</span>,<span style="color: #FF6600">6</span>)
+    plt<span style="color: #555555">.</span>plot(x,decay(x,ia)<span style="color: #555555">.</span>fun6())
+</pre></div>
+
+
+<p><img alt="png" src="../output_50_0.png" /></p>
+<hr />
+<h4 id="choice-of-different-decay-functions">Choice of different decay functions</h4>
+<h4 id="case-i">Case-I:</h4>
+<hr />
+<table>
+<thead>
+<tr>
+<th>model</th>
+<th>epsilon</th>
+<th>tolerance</th>
+<th>alpha</th>
+<th>a</th>
+<th>safety</th>
+<th>reliability</th>
+<th>trainings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linear</td>
+<td>$$\epsilon = \epsilon -0.005\hspace{25px}$$</td>
+<td>0.0001</td>
+<td>0.06</td>
+<td>-</td>
+<td>A+</td>
+<td>A+</td>
+<td>200</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Load the &#39;sim_improved-learning&#39; file from the improved Q-Learning simulation</span>
+vs<span style="color: #555555">.</span>plot_trials(<span style="color: #CC3300">&#39;sim_improved-learning1.csv&#39;</span>)
+</pre></div>
+
+
+<p><img alt="png" src="../output_57_0.png" /></p>
+<hr />
+<h4 id="case-ii">Case-II:</h4>
+<hr />
+<table>
+<thead>
+<tr>
+<th>model</th>
+<th>epsilon</th>
+<th>tolerance</th>
+<th>alpha</th>
+<th>a</th>
+<th>safety</th>
+<th>reliability</th>
+<th>trainings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exponential</td>
+<td>$$\epsilon = e^{-at}\hspace{50px}$$</td>
+<td>0.0001</td>
+<td>0.06</td>
+<td>0.01</td>
+<td>A+</td>
+<td>B</td>
+<td>~700</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Load the &#39;sim_improved-learning&#39; file from the improved Q-Learning simulation</span>
+<span style="color: #0099FF; font-style: italic"># Linear function self.epsilon = math.exp(1)**(-a*self.trials) a =0.01</span>
+vs<span style="color: #555555">.</span>plot_trials(<span style="color: #CC3300">&#39;sim_improved-learning2.csv&#39;</span>)
+</pre></div>
+
+
+<p><img alt="png" src="../output_63_0.png" /></p>
+<hr />
+<h4 id="caseiii">Case:III:</h4>
+<hr />
+<table>
+<thead>
+<tr>
+<th>model</th>
+<th>epsilon</th>
+<th>tolerance</th>
+<th>alpha</th>
+<th>a</th>
+<th>safety</th>
+<th>reliability</th>
+<th>trainings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exponential</td>
+<td>$$\epsilon = a^t\hspace{25px}$$</td>
+<td>0.0001</td>
+<td>0.06</td>
+<td>0.99</td>
+<td>A+</td>
+<td>B</td>
+<td>~700</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Load the &#39;sim_improved-learning&#39; file from the improved Q-Learning simulation</span>
+<span style="color: #0099FF; font-style: italic"># Linear function  self.epsilon = a**self.trials a =0.99</span>
+
+vs<span style="color: #555555">.</span>plot_trials(<span style="color: #CC3300">&#39;sim_improved-learning3.csv&#39;</span>)
+</pre></div>
+
+
+<p><img alt="png" src="../output_69_0.png" /></p>
+<hr />
+<h4 id="case-iv">Case-IV:</h4>
+<hr />
+<p>| model  |epsilon   |tolerance   |alpha   | a   | safety  |reliability   |trainings   |
+|---|---|---|---|---|---|---|---| |<br />
+| trigonometric  | $$ \epsilon = \cos(at) +0.5\hspace{50px}$$| 0.01  | 0.06  | 0.001  | A+  |  A | ~2000  |</p>
+<hr />
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Load the &#39;sim_improved-learning&#39; file from the improved Q-Learning simulation</span>
+<span style="color: #0099FF; font-style: italic"># Linear function  self.epsilon = math.cos(a*self.trials)+0.5 a=0.001 tolerance=0.01</span>
+
+vs<span style="color: #555555">.</span>plot_trials(<span style="color: #CC3300">&#39;sim_improved-learning5.csv&#39;</span>)
+</pre></div>
+
+
+<p><img alt="png" src="../output_75_0.png" /></p>
+<hr />
+<h3 id="question-7">Question 7</h3>
+<p>Using the visualization above that was produced from your improved Q-Learning simulation, provide a final analysis and make observations about the improved driving agent like in <strong>Question 6</strong>. Questions you should answer:<br />
+- <em>What decaying function was used for epsilon (the exploration factor)?</em>
+- <em>Approximately how many training trials were needed for your agent before begining testing?</em>
+- <em>What epsilon-tolerance and alpha (learning rate) did you use? Why did you use them?</em>
+- <em>How much improvement was made with this Q-Learner when compared to the default Q-Learner from the previous section?</em>
+- <em>Would you say that the Q-Learner results show that your driving agent successfully learned an appropriate policy?</em>
+- <em>Are you satisfied with the safety and reliability ratings of the </em>Smartcab<em>?</em></p>
+<p><strong>Answer:</strong></p>
+<p>Following is the summary table for all models used:</p>
+<table>
+<thead>
+<tr>
+<th>model</th>
+<th>epsilon</th>
+<th>tolerance</th>
+<th>alpha</th>
+<th>a</th>
+<th>safety</th>
+<th>reliability</th>
+<th>trainings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linear</td>
+<td>$$\epsilon = \epsilon -0.005\hspace{25px}$$</td>
+<td>0.0001</td>
+<td>0.06</td>
+<td>-</td>
+<td>A+</td>
+<td>A+</td>
+<td>200</td>
+</tr>
+<tr>
+<td>exponential</td>
+<td>$$\epsilon = e^{-at}\hspace{50px}$$</td>
+<td>0.0001</td>
+<td>0.06</td>
+<td>0.01</td>
+<td>A+</td>
+<td>B</td>
+<td>~700</td>
+</tr>
+<tr>
+<td>exponential</td>
+<td>$$\epsilon = a^t\hspace{25px}$$</td>
+<td>0.0001</td>
+<td>0.06</td>
+<td>0.99</td>
+<td>A+</td>
+<td>B</td>
+<td>~700</td>
+</tr>
+<tr>
+<td>trigonometric</td>
+<td>$$ \epsilon = \cos(at) +0.5\hspace{50px}$$</td>
+<td>0.01</td>
+<td>0.06</td>
+<td>0.001</td>
+<td>A+</td>
+<td>A</td>
+<td>~2000</td>
+</tr>
+<tr>
+<td><br></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>What decaying function was used for epsilon (the exploration factor)?</strong></p>
+<p>Different decay function used asr listed in the chart above.
+ <br><br></p>
+<p><strong>Approximately how many training trials were needed for your agent before begining testing?</strong></p>
+<p>From above chart it ranges from 200 to 2000.</p>
+<p><strong>How much improvement was made with this Q-Learner when compared to the default Q-Learner from the previous section?</strong></p>
+<p>There is a tremendous increase in terms safety and reliability. The Smartcab managed to achieve A/A+, A+/B, A+/B A+/A grades respectively, comparing to F in  case of the default Q-Learner. </p>
+<p><strong>Would you say that the Q-Learner results show that your driving agent successfully learned an appropriate policy?</strong></p>
+<p>Taking into account the rewards, the linear and exponential decay functions got into a positive reward sector after some training examples. Other functions slowly achive that success. In each of the case driving agent is learning successfully.</p>
+<p><strong>Are you satisfied with the safety and reliability ratings of the Smartcab?</strong></p>
+<p>Yes, I am satisfied with the learning rate and only partially with the safety and reliability ratings, there is a room for improvement here because I have got B+ some where. Obviously the Smartcab is not ready for usage in real world, it still causes road accidents.</p>
+<hr />
+<h3 id="define-an-optimal-policy">Define an Optimal Policy</h3>
+<p>Sometimes, the answer to the important question <em>"what am I trying to get my agent to learn?"</em> only has a theoretical answer and cannot be concretely described. Here, however, you can concretely define what it is the agent is trying to learn, and that is the U.S. right-of-way traffic laws. Since these laws are known information, you can further define, for each state the <em>Smartcab</em> is occupying, the optimal action for the driving agent based on these laws. In that case, we call the set of optimal state-action pairs an <strong>optimal policy</strong>. Hence, unlike some theoretical answers, it is clear whether the agent is acting "incorrectly" not only by the reward (penalty) it receives, but also by pure observation. If the agent drives through a red light, we both see it receive a negative reward but also know that it is not the correct behavior. This can be used to your advantage for verifying whether the <strong>policy</strong> your driving agent has learned is the correct one, or if it is a <strong>suboptimal policy</strong>.</p>
+<hr />
+<h3 id="question-8">Question 8</h3>
+<p>Provide a few examples (using the states you've defined) of what an optimal policy for this problem would look like. Afterwards, investigate the <code>'sim_improved-learning.txt'</code> text file to see the results of your improved Q-Learning algorithm. </p>
+<p><strong>For each state that has been recorded from the simulation, is the </strong>policy<strong> (the action with the highest value) correct for the given state? Are there any states where the policy is different than what would be expected from an optimal policy?</strong></p>
+<p><strong>Provide an example of a state and all state-action rewards recorded, and explain why it is the correct policy.</strong></p>
+<p><strong>Answer:</strong> </p>
+<p>In most cases the policy does make sense.</p>
+<p>The state dictionary is defined like this:</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>state = (inputs[&#39;light&#39;],\
+         inputs[&#39;oncoming&#39;],\
+         inputs[&#39;right&#39;],\
+         inputs[&#39;left&#39;],\
+         waypoint)
+</pre></div>
+
+
+<hr />
+<p><strong><em>Example-1</em></strong>: Consider following state-action-reward</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>(&#39;green&#39;, None, &#39;forward&#39;, &#39;right&#39;, &#39;left&#39;)---&gt; left
+ -- forward : 0.13
+ -- None : -0.78
+ -- right : 0.17
+ -- left : 0.67
+</pre></div>
+
+
+<p>Here traffic light is <code>green</code>, there is <code>no</code> upcomimg traffic and the waypoint is <code>left</code>. So , moving to <code>left</code> has highest reward and going <code>left</code> is optimal policy.</p>
+<hr />
+<p><strong><em>Example-2</em></strong>: Consider following state-action-reward</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>(&#39;green&#39;, &#39;right&#39;, None, None, &#39;right&#39;)---&gt; right
+ -- forward : 0.41
+ -- None : -3.46
+ -- right : 1.62
+ -- left : -12.22
+</pre></div>
+
+
+<p>Here traffic light is <code>green</code>,  the waypoint is <code>right</code>. Moving to <code>right</code> has highest reward and going <code>right</code> is optimal policy.</p>
+<hr />
+<p><strong><em>Example-3</em></strong>: Consider following state-action-reward</p>
+<p><code>('green', 'right', 'left', None, 'right')--&gt; forward
+ -- forward : 0.68
+ -- None : -1.34
+ -- right : 0.42
+ -- left : -2.34</code>
+ Here traffic light is <code>green</code>, the waypoint is <code>right</code>. But policy shows going <code>forward</code> has maximum reward. While the correct action would be going to <code>right</code>. So , this is a sub-optimal policy. This will be corected while agent gets more steps to learn.</p>
+<hr />
+<hr />
+<h3 id="optional-future-rewards-discount-factor-gamma">Optional: Future Rewards - Discount Factor, <code>'gamma'</code></h3>
+<p>Curiously, as part of the Q-Learning algorithm, you were asked to <strong>not</strong> use the discount factor, <code>'gamma'</code> in the implementation. Including future rewards in the algorithm is used to aid in propogating positive rewards backwards from a future state to the current state. Essentially, if the driving agent is given the option to make several actions to arrive at different states, including future rewards will bias the agent towards states that could provide even more rewards. An example of this would be the driving agent moving towards a goal: With all actions and rewards equal, moving towards the goal would theoretically yield better rewards if there is an additional reward for reaching the goal. However, even though in this project, the driving agent is trying to reach a destination in the allotted time, including future rewards will not benefit the agent. In fact, if the agent were given many trials to learn, it could negatively affect Q-values!</p>
+<hr />
+<h3 id="optional-question-9">Optional Question 9</h3>
+<p><em>There are two characteristics about the project that invalidate the use of future rewards in the Q-Learning algorithm. One characteristic has to do with the </em>Smartcab<em> itself, and the other has to do with the environment. Can you figure out what they are and why future rewards won't work for this project?</em></p>
+<p><strong>Answer:</strong></p>
+<hr />
+<blockquote>
+<p><strong>Note</strong>: Once you have completed all of the code implementations and successfully answered each question above, you may finalize your work by exporting the iPython Notebook as an HTML document. You can do this by using the menu above and navigating to<br />
+<strong>File -&gt; Download as -&gt; HTML (.html)</strong>. Include the finished document along with this notebook as your submission.</p>
+</blockquote>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../../dl/gan/dlnd_face_generation/" class="btn btn-neutral float-right" title="Face Generation">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../../dl/translator/dlnd_language_translation/" class="btn btn-neutral" title="Language Translator"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../../dl/translator/dlnd_language_translation/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../../dl/gan/dlnd_face_generation/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../../search/main.js" defer></script>
+
+</body>
+</html>

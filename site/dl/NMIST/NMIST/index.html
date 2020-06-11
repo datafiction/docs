@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>Digit Classifier - Machine Learning</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Digit Classifier";
+    var mkdocs_page_input_path = "dl/NMIST/NMIST.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> Machine Learning</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="tocbase current">
+    
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../..">Home</a>
+  </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Machine Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/LinearModels/Linear-models/">Linear Regression</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Classifiers/Logistic/Logistic/">Logistic Regression</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Classifiers/Tree/Tree/">Decision Tree</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Classifiers/Ensamble/ensamble/">Ensamble Methods</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Classifiers/SVM/svm/">Support Vector Machine</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/Kmeans/Kmeans/">Kmeans Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/Agglomerative/Agglomerative/">Agglomerative Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/AffinityPropagation/Affinity-Propagation/">Affinity Propagation</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/Spectral/Spectral/">Spectral Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/DBSCAN/DBSCAN/">DBSCAN Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/MeanShift/Mean-shift/">Mean Shift Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/Comparison/Comparison/">Cluster Comparison</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">ML Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../mlp/intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../mlp/boston_housing/boston_housing/">Boston Housing</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../mlp/Customer_segments/customer_segments/">Customer Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../mlp/finding_donors/finding_donors/">Finding Donors</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../mlp/vehicle-detection/CARND-Project-5/">Vehicle Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../mlp/perceptron/dlnd-your-first-neural-network/">Perceptron</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Deep Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Vanila/1.Vanila-LSTM/">Vanila LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../stacked/2.Stacked-LSTM/">Stacked LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../bidirectional/5. BiDirectional-LSTM/">Bidirectional LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../rnn/RNN_project/">Recurrent Neural Network</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">DL Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  
+    
+    <li class="navtree toctree-l2 page current">
+      <a class="current" href="./">
+        Digit Classifier
+          <span class="toctree-expand"></span>
+      </a>
+    </li>
+    
+      
+
+  <li class="toctree-l2 current with-children">
+    <a href="#keras-convolutional-neural-network">
+      Keras- Convolutional Neural Network
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2 current">
+    <ul class="subnav-l2 current">
+    
+      
+          
+
+  <li class="toctree-l3 current with-children">
+    <a href="#digit-recognization-nmist">
+      Digit Recognization: NMIST
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3 current">
+    <ul class="subnav-l3 current">
+    
+      
+          
+
+  <li class="toctree-l4 current with-children">
+    <a href="#1-baseline-mlp-for-mnist-dataset">
+      1. Baseline MLP for MNIST dataset
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4 current">
+    <ul class="subnav-l4 current">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#prepare-data-set">Prepare Data Set</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#visualize-the-data">Visualize the data</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#convert-image-matrix-to-vector">Convert Image matrix to Vector</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#normalization">Normalization</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l5">
+    <a href="#prepare-labels">
+      Prepare Labels
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l5">
+    <ul class="subnav-l5 toc-hidden">
+    
+      
+        <li class="toctree-l6">
+          <a class="toctree-l7" href="#model">Model</a>
+        </li>
+    
+      
+        <li class="toctree-l6">
+          <a class="toctree-l7" href="#build-model">Build Model</a>
+        </li>
+    
+      
+        <li class="toctree-l6">
+          <a class="toctree-l7" href="#evaluation">Evaluation</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l4">
+    <a href="#2-simple-cnn-for-the-mnist-dataset">
+      2.  Simple CNN for the MNIST Dataset
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#get-data">Get Data</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#model_1">Model</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#build">Build</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#fit-model">Fit Model</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#evaluate-model">Evaluate Model</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l4">
+    <a href="#3-larger-cnn-for-the-mnist-dataset">
+      3. Larger CNN for the MNIST Dataset
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+          
+
+  <li class="toctree-l5 current with-children">
+    <a href="#prepare-data">
+      Prepare Data
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l5 current">
+    <ul class="subnav-l5 current">
+    
+      
+        <li class="toctree-l6">
+          <a class="toctree-l7" href="#model_2">Model</a>
+        </li>
+    
+      
+        <li class="toctree-l6">
+          <a class="toctree-l7" href="#build-model_1">Build Model</a>
+        </li>
+    
+      
+        <li class="toctree-l6">
+          <a class="toctree-l7" href="#fit-model_1">Fit Model</a>
+        </li>
+    
+      
+        <li class="toctree-l6">
+          <a class="toctree-l7" href="#evalauation">Evalauation</a>
+        </li>
+    
+      
+        <li class="toctree-l6">
+          <a class="toctree-l7" href="#plot">Plot</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+
+  
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../CIFRT10/CIFR10/">Image Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../traffic-sign/Traffic_Sign_Classifier/">Traffic Sign Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../translator/dlnd_language_translation/">Language Translator</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Rinforcement Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../rl/smartcab/smartcab/">SmartCab</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">GAN Project</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../gan/dlnd_face_generation/">Face Generation</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../References/ref.md">References</a>
+  </li>
+    
+  </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">Machine Learning</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>DL Projects &raquo;</li>
+        
+      
+    
+    <li>Digit Classifier</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="keras-convolutional-neural-network">Keras- Convolutional Neural Network</h1>
+<h2 id="digit-recognization-nmist">Digit Recognization: NMIST</h2>
+<h3 id="1-baseline-mlp-for-mnist-dataset">1. Baseline MLP for MNIST dataset</h3>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Baseline MLP for MNIST dataset</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">keras.datasets</span> <span style="color: #006699; font-weight: bold">import</span> mnist
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">keras.models</span> <span style="color: #006699; font-weight: bold">import</span> Sequential
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">keras.layers</span> <span style="color: #006699; font-weight: bold">import</span> Dense
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">keras.layers</span> <span style="color: #006699; font-weight: bold">import</span> Dropout
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">keras.utils</span> <span style="color: #006699; font-weight: bold">import</span> np_utils
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Using TensorFlow backend.
+</pre></div>
+
+
+<h5 id="prepare-data-set">Prepare Data Set</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># fix random seed for reproducibility</span>
+seed <span style="color: #555555">=</span> <span style="color: #FF6600">7</span>
+numpy<span style="color: #555555">.</span>random<span style="color: #555555">.</span>seed(seed)
+
+<span style="color: #0099FF; font-style: italic"># load data</span>
+(X_train, y_train), (X_test, y_test) <span style="color: #555555">=</span> mnist<span style="color: #555555">.</span>load_data()
+</pre></div>
+
+
+<ul>
+<li>How many data files are there?</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>X_train<span style="color: #555555">.</span>shape,X_test<span style="color: #555555">.</span>shape
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>((60000, 28, 28), (10000, 28, 28))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>y_train<span style="color: #555555">.</span>shape,y_test<span style="color: #555555">.</span>shape
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>((60000,), (10000,))
+</pre></div>
+
+
+<h4 id="visualize-the-data">Visualize the data</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #555555">%</span>matplotlib inline
+
+plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> [<span style="color: #FF6600">10</span>,<span style="color: #FF6600">8</span>])
+<span style="color: #006699; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(<span style="color: #FF6600">1</span>,<span style="color: #FF6600">10</span>):
+    plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">3</span>,<span style="color: #FF6600">3</span>,i)
+    plt<span style="color: #555555">.</span>imshow(X_train[i])
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_10_0.png" /></p>
+<h4 id="convert-image-matrix-to-vector">Convert Image matrix to Vector</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># flatten 28*28 images to a 784 vector for each image</span>
+num_pixels <span style="color: #555555">=</span> X_train<span style="color: #555555">.</span>shape[<span style="color: #FF6600">1</span>] <span style="color: #555555">*</span> X_train<span style="color: #555555">.</span>shape[<span style="color: #FF6600">2</span>]
+X_train <span style="color: #555555">=</span> X_train<span style="color: #555555">.</span>reshape(X_train<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>], num_pixels)<span style="color: #555555">.</span>astype(<span style="color: #CC3300">&#39;float32&#39;</span>)
+X_test <span style="color: #555555">=</span> X_test<span style="color: #555555">.</span>reshape(X_test<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>], num_pixels)<span style="color: #555555">.</span>astype(<span style="color: #CC3300">&#39;float32&#39;</span>)
+</pre></div>
+
+
+<h4 id="normalization">Normalization</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># normalize inputs from 0-255 to 0-1</span>
+X_train <span style="color: #555555">=</span> X_train <span style="color: #555555">/</span> <span style="color: #FF6600">255</span>
+X_test <span style="color: #555555">=</span> X_test <span style="color: #555555">/</span> <span style="color: #FF6600">255</span>
+</pre></div>
+
+
+<h4 id="prepare-labels">Prepare Labels</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># one hot encode outputs</span>
+y_train <span style="color: #555555">=</span> np_utils<span style="color: #555555">.</span>to_categorical(y_train)
+y_test <span style="color: #555555">=</span> np_utils<span style="color: #555555">.</span>to_categorical(y_test)
+num_classes <span style="color: #555555">=</span> y_test<span style="color: #555555">.</span>shape[<span style="color: #FF6600">1</span>]
+</pre></div>
+
+
+<h5 id="model">Model</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># define baseline model</span>
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">baseline_model</span>():
+    <span style="color: #0099FF; font-style: italic"># create model</span>
+    model <span style="color: #555555">=</span> Sequential()
+
+    model<span style="color: #555555">.</span>add(Dense(num_pixels,
+                    input_dim<span style="color: #555555">=</span>num_pixels,
+                    kernel_initializer<span style="color: #555555">=</span><span style="color: #CC3300">&#39;normal&#39;</span>,
+                    activation<span style="color: #555555">=</span><span style="color: #CC3300">&#39;relu&#39;</span>))
+
+    model<span style="color: #555555">.</span>add(Dense(num_classes,
+                    kernel_initializer<span style="color: #555555">=</span><span style="color: #CC3300">&#39;normal&#39;</span>,
+                    activation<span style="color: #555555">=</span><span style="color: #CC3300">&#39;softmax&#39;</span>))
+
+    <span style="color: #0099FF; font-style: italic"># Compile model</span>
+    model<span style="color: #555555">.</span>compile(loss<span style="color: #555555">=</span><span style="color: #CC3300">&#39;categorical_crossentropy&#39;</span>,
+                  optimizer<span style="color: #555555">=</span><span style="color: #CC3300">&#39;adam&#39;</span>,
+                  metrics<span style="color: #555555">=</span>[<span style="color: #CC3300">&#39;accuracy&#39;</span>])
+
+    <span style="color: #006699; font-weight: bold">return</span> model
+</pre></div>
+
+
+<h5 id="build-model">Build Model</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>model <span style="color: #555555">=</span> baseline_model()
+model<span style="color: #555555">.</span>summary()
+
+<span style="color: #0099FF; font-style: italic"># Fit the model</span>
+model<span style="color: #555555">.</span>fit(X_train, y_train,
+          validation_data<span style="color: #555555">=</span>(X_test, y_test),
+          epochs<span style="color: #555555">=</span><span style="color: #FF6600">10</span>,
+          batch_size<span style="color: #555555">=</span><span style="color: #FF6600">200</span>,
+          verbose<span style="color: #555555">=</span><span style="color: #FF6600">2</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>WARNING:tensorflow:From /Users/admin/anaconda3/lib/python3.7/site-packages/tensorflow/python/framework/op_def_library.py:263: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Colocations handled automatically by placer.
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+dense_1 (Dense)              (None, 784)               615440    
+_________________________________________________________________
+dense_2 (Dense)              (None, 10)                7850      
+=================================================================
+Total params: 623,290
+Trainable params: 623,290
+Non-trainable params: 0
+_________________________________________________________________
+WARNING:tensorflow:From /Users/admin/anaconda3/lib/python3.7/site-packages/tensorflow/python/ops/math_ops.py:3066: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+Train on 60000 samples, validate on 10000 samples
+Epoch 1/10
+ - 4s - loss: 0.2801 - acc: 0.9209 - val_loss: 0.1417 - val_acc: 0.9572
+Epoch 2/10
+ - 3s - loss: 0.1118 - acc: 0.9676 - val_loss: 0.0921 - val_acc: 0.9705
+Epoch 3/10
+ - 3s - loss: 0.0720 - acc: 0.9794 - val_loss: 0.0785 - val_acc: 0.9773
+Epoch 4/10
+ - 3s - loss: 0.0505 - acc: 0.9857 - val_loss: 0.0739 - val_acc: 0.9772
+Epoch 5/10
+ - 3s - loss: 0.0372 - acc: 0.9892 - val_loss: 0.0665 - val_acc: 0.9792
+Epoch 6/10
+ - 3s - loss: 0.0267 - acc: 0.9929 - val_loss: 0.0620 - val_acc: 0.9808
+Epoch 7/10
+ - 3s - loss: 0.0208 - acc: 0.9947 - val_loss: 0.0618 - val_acc: 0.9808
+Epoch 8/10
+ - 3s - loss: 0.0142 - acc: 0.9967 - val_loss: 0.0630 - val_acc: 0.9807
+Epoch 9/10
+ - 3s - loss: 0.0113 - acc: 0.9976 - val_loss: 0.0589 - val_acc: 0.9807
+Epoch 10/10
+ - 3s - loss: 0.0082 - acc: 0.9984 - val_loss: 0.0581 - val_acc: 0.9818
+
+
+
+
+
+&lt;keras.callbacks.History at 0x1298a5eb8&gt;
+</pre></div>
+
+
+<h5 id="evaluation">Evaluation</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Final evaluation of the model</span>
+scores <span style="color: #555555">=</span> model<span style="color: #555555">.</span>evaluate(X_test, y_test, verbose<span style="color: #555555">=</span><span style="color: #FF6600">0</span>)
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;Baseline Error: </span><span style="color: #AA0000">%.2f%%</span><span style="color: #CC3300">&quot;</span> <span style="color: #555555">%</span> (<span style="color: #FF6600">100</span><span style="color: #555555">-</span>scores[<span style="color: #FF6600">1</span>]<span style="color: #555555">*</span><span style="color: #FF6600">100</span>))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Baseline Error: 1.82%
+</pre></div>
+
+
+<hr />
+<h3 id="2-simple-cnn-for-the-mnist-dataset">2.  Simple CNN for the MNIST Dataset</h3>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Simple CNN for the MNIST Dataset</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">keras.layers</span> <span style="color: #006699; font-weight: bold">import</span> Flatten
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">keras.layers.convolutional</span> <span style="color: #006699; font-weight: bold">import</span> Conv2D
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">keras.layers.convolutional</span> <span style="color: #006699; font-weight: bold">import</span> MaxPooling2D
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># fix dimension ordering issue</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">keras</span> <span style="color: #006699; font-weight: bold">import</span> backend <span style="color: #006699; font-weight: bold">as</span> K
+K<span style="color: #555555">.</span>set_image_dim_ordering(<span style="color: #CC3300">&#39;th&#39;</span>)
+</pre></div>
+
+
+<h5 id="get-data">Get Data</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># fix random seed for reproducibility</span>
+seed <span style="color: #555555">=</span> <span style="color: #FF6600">7</span>
+numpy<span style="color: #555555">.</span>random<span style="color: #555555">.</span>seed(seed)
+
+<span style="color: #0099FF; font-style: italic"># load data</span>
+(X_train, y_train), (X_test, y_test) <span style="color: #555555">=</span> mnist<span style="color: #555555">.</span>load_data()
+
+
+<span style="color: #0099FF; font-style: italic"># reshape to be [samples][channels][width][height]</span>
+X_train <span style="color: #555555">=</span> X_train<span style="color: #555555">.</span>reshape(X_train<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>], <span style="color: #FF6600">1</span>, <span style="color: #FF6600">28</span>, <span style="color: #FF6600">28</span>)<span style="color: #555555">.</span>astype(<span style="color: #CC3300">&#39;float32&#39;</span>)
+X_test <span style="color: #555555">=</span> X_test<span style="color: #555555">.</span>reshape(X_test<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>], <span style="color: #FF6600">1</span>, <span style="color: #FF6600">28</span>, <span style="color: #FF6600">28</span>)<span style="color: #555555">.</span>astype(<span style="color: #CC3300">&#39;float32&#39;</span>)
+
+
+<span style="color: #0099FF; font-style: italic"># normalize inputs from 0-255 to 0-1</span>
+X_train <span style="color: #555555">=</span> X_train <span style="color: #555555">/</span> <span style="color: #FF6600">255</span>
+X_test <span style="color: #555555">=</span> X_test <span style="color: #555555">/</span> <span style="color: #FF6600">255</span>
+
+
+<span style="color: #0099FF; font-style: italic"># one hot encode outputs</span>
+y_train <span style="color: #555555">=</span> np_utils<span style="color: #555555">.</span>to_categorical(y_train)
+y_test <span style="color: #555555">=</span> np_utils<span style="color: #555555">.</span>to_categorical(y_test)
+num_classes <span style="color: #555555">=</span> y_test<span style="color: #555555">.</span>shape[<span style="color: #FF6600">1</span>]
+</pre></div>
+
+
+<h5 id="model_1">Model</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># define a simple CNN model</span>
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">baseline_model</span>():
+    <span style="color: #0099FF; font-style: italic"># create model</span>
+    model <span style="color: #555555">=</span> Sequential()
+
+    model<span style="color: #555555">.</span>add(Conv2D(<span style="color: #FF6600">32</span>,
+                     (<span style="color: #FF6600">5</span>, <span style="color: #FF6600">5</span>),
+                     input_shape<span style="color: #555555">=</span>(<span style="color: #FF6600">1</span>, <span style="color: #FF6600">28</span>, <span style="color: #FF6600">28</span>),
+                     activation<span style="color: #555555">=</span><span style="color: #CC3300">&#39;relu&#39;</span>))
+
+
+    model<span style="color: #555555">.</span>add(MaxPooling2D(pool_size<span style="color: #555555">=</span>(<span style="color: #FF6600">2</span>, <span style="color: #FF6600">2</span>)))
+
+    model<span style="color: #555555">.</span>add(Dropout(<span style="color: #FF6600">0.2</span>))
+
+    model<span style="color: #555555">.</span>add(Flatten())
+
+    model<span style="color: #555555">.</span>add(Dense(<span style="color: #FF6600">128</span>, activation<span style="color: #555555">=</span><span style="color: #CC3300">&#39;relu&#39;</span>))
+
+    model<span style="color: #555555">.</span>add(Dense(num_classes, activation<span style="color: #555555">=</span><span style="color: #CC3300">&#39;softmax&#39;</span>))
+
+
+
+    <span style="color: #0099FF; font-style: italic"># Compile model</span>
+    model<span style="color: #555555">.</span>compile(loss<span style="color: #555555">=</span><span style="color: #CC3300">&#39;categorical_crossentropy&#39;</span>, 
+                  optimizer<span style="color: #555555">=</span><span style="color: #CC3300">&#39;adam&#39;</span>,
+                  metrics<span style="color: #555555">=</span>[<span style="color: #CC3300">&#39;accuracy&#39;</span>])
+
+
+    <span style="color: #006699; font-weight: bold">return</span> model
+</pre></div>
+
+
+<h5 id="build">Build</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># build the model</span>
+model <span style="color: #555555">=</span> baseline_model()
+model<span style="color: #555555">.</span>summary()
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>WARNING:tensorflow:From /Users/admin/anaconda3/lib/python3.7/site-packages/keras/backend/tensorflow_backend.py:3445: calling dropout (from tensorflow.python.ops.nn_ops) with keep_prob is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `rate` instead of `keep_prob`. Rate should be set to `rate = 1 - keep_prob`.
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d_1 (Conv2D)            (None, 32, 24, 24)        832       
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 32, 12, 12)        0         
+_________________________________________________________________
+dropout_1 (Dropout)          (None, 32, 12, 12)        0         
+_________________________________________________________________
+flatten_1 (Flatten)          (None, 4608)              0         
+_________________________________________________________________
+dense_3 (Dense)              (None, 128)               589952    
+_________________________________________________________________
+dense_4 (Dense)              (None, 10)                1290      
+=================================================================
+Total params: 592,074
+Trainable params: 592,074
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+
+
+<h5 id="fit-model">Fit Model</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Fit the model</span>
+model<span style="color: #555555">.</span>fit(X_train,
+          y_train,
+          validation_data<span style="color: #555555">=</span>(X_test, y_test),
+          epochs<span style="color: #555555">=</span><span style="color: #FF6600">4</span>,
+          batch_size<span style="color: #555555">=</span><span style="color: #FF6600">200</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Train on 60000 samples, validate on 10000 samples
+Epoch 1/4
+60000/60000 [==============================] - 26s 436us/step - loss: 0.2234 - acc: 0.9364 - val_loss: 0.0783 - val_acc: 0.9751
+Epoch 2/4
+60000/60000 [==============================] - 26s 428us/step - loss: 0.0712 - acc: 0.9787 - val_loss: 0.0456 - val_acc: 0.9851
+Epoch 3/4
+60000/60000 [==============================] - 25s 419us/step - loss: 0.0510 - acc: 0.9844 - val_loss: 0.0439 - val_acc: 0.9860
+Epoch 4/4
+60000/60000 [==============================] - 25s 416us/step - loss: 0.0393 - acc: 0.9880 - val_loss: 0.0402 - val_acc: 0.9878
+
+
+
+
+
+&lt;keras.callbacks.History at 0xb416675c0&gt;
+</pre></div>
+
+
+<h5 id="evaluate-model">Evaluate Model</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Final evaluation of the model</span>
+scores <span style="color: #555555">=</span> model<span style="color: #555555">.</span>evaluate(X_test, y_test, verbose<span style="color: #555555">=</span><span style="color: #FF6600">0</span>)
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;CNN Error: </span><span style="color: #AA0000">%.2f%%</span><span style="color: #CC3300">&quot;</span> <span style="color: #555555">%</span> (<span style="color: #FF6600">100</span><span style="color: #555555">-</span>scores[<span style="color: #FF6600">1</span>]<span style="color: #555555">*</span><span style="color: #FF6600">100</span>))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>CNN Error: 1.22%
+</pre></div>
+
+
+<hr />
+<h3 id="3-larger-cnn-for-the-mnist-dataset">3. Larger CNN for the MNIST Dataset</h3>
+<h4 id="prepare-data">Prepare Data</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>K<span style="color: #555555">.</span>set_image_dim_ordering(<span style="color: #CC3300">&#39;th&#39;</span>)
+<span style="color: #0099FF; font-style: italic"># fix random seed for reproducibility</span>
+seed <span style="color: #555555">=</span> <span style="color: #FF6600">7</span>
+numpy<span style="color: #555555">.</span>random<span style="color: #555555">.</span>seed(seed)
+<span style="color: #0099FF; font-style: italic"># load data</span>
+(X_train, y_train), (X_test, y_test) <span style="color: #555555">=</span> mnist<span style="color: #555555">.</span>load_data()
+<span style="color: #0099FF; font-style: italic"># reshape to be [samples][pixels][width][height]</span>
+X_train <span style="color: #555555">=</span> X_train<span style="color: #555555">.</span>reshape(X_train<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>], <span style="color: #FF6600">1</span>, <span style="color: #FF6600">28</span>, <span style="color: #FF6600">28</span>)<span style="color: #555555">.</span>astype(<span style="color: #CC3300">&#39;float32&#39;</span>)
+X_test <span style="color: #555555">=</span> X_test<span style="color: #555555">.</span>reshape(X_test<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>], <span style="color: #FF6600">1</span>, <span style="color: #FF6600">28</span>, <span style="color: #FF6600">28</span>)<span style="color: #555555">.</span>astype(<span style="color: #CC3300">&#39;float32&#39;</span>)
+<span style="color: #0099FF; font-style: italic"># normalize inputs from 0-255 to 0-1</span>
+X_train <span style="color: #555555">=</span> X_train <span style="color: #555555">/</span> <span style="color: #FF6600">255</span>
+X_test <span style="color: #555555">=</span> X_test <span style="color: #555555">/</span> <span style="color: #FF6600">255</span>
+<span style="color: #0099FF; font-style: italic"># one hot encode outputs</span>
+y_train <span style="color: #555555">=</span> np_utils<span style="color: #555555">.</span>to_categorical(y_train)
+y_test <span style="color: #555555">=</span> np_utils<span style="color: #555555">.</span>to_categorical(y_test)
+num_classes <span style="color: #555555">=</span> y_test<span style="color: #555555">.</span>shape[<span style="color: #FF6600">1</span>]
+</pre></div>
+
+
+<h5 id="model_2">Model</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># define the larger model</span>
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">larger_model</span>():
+    <span style="color: #0099FF; font-style: italic"># create model</span>
+    model <span style="color: #555555">=</span> Sequential()
+
+    model<span style="color: #555555">.</span>add(Conv2D(<span style="color: #FF6600">30</span>, 
+                     (<span style="color: #FF6600">5</span>, <span style="color: #FF6600">5</span>),
+                     input_shape<span style="color: #555555">=</span>(<span style="color: #FF6600">1</span>, <span style="color: #FF6600">28</span>, <span style="color: #FF6600">28</span>),
+                     activation<span style="color: #555555">=</span><span style="color: #CC3300">&#39;relu&#39;</span>))
+
+    model<span style="color: #555555">.</span>add(MaxPooling2D(pool_size<span style="color: #555555">=</span>(<span style="color: #FF6600">2</span>, <span style="color: #FF6600">2</span>)))
+
+    model<span style="color: #555555">.</span>add(Conv2D(<span style="color: #FF6600">15</span>, (<span style="color: #FF6600">3</span>, <span style="color: #FF6600">3</span>), activation<span style="color: #555555">=</span><span style="color: #CC3300">&#39;relu&#39;</span>))
+
+    model<span style="color: #555555">.</span>add(MaxPooling2D(pool_size<span style="color: #555555">=</span>(<span style="color: #FF6600">2</span>, <span style="color: #FF6600">2</span>)))
+
+    model<span style="color: #555555">.</span>add(Dropout(<span style="color: #FF6600">0.2</span>))
+
+    model<span style="color: #555555">.</span>add(Flatten())
+
+    model<span style="color: #555555">.</span>add(Dense(<span style="color: #FF6600">128</span>, activation<span style="color: #555555">=</span><span style="color: #CC3300">&#39;relu&#39;</span>))
+    model<span style="color: #555555">.</span>add(Dense(<span style="color: #FF6600">50</span>, activation<span style="color: #555555">=</span><span style="color: #CC3300">&#39;relu&#39;</span>))
+
+    model<span style="color: #555555">.</span>add(Dense(num_classes, activation<span style="color: #555555">=</span><span style="color: #CC3300">&#39;softmax&#39;</span>))
+
+
+    <span style="color: #0099FF; font-style: italic"># Compile model    </span>
+    model<span style="color: #555555">.</span>compile(loss<span style="color: #555555">=</span><span style="color: #CC3300">&#39;categorical_crossentropy&#39;</span>,
+                  optimizer<span style="color: #555555">=</span><span style="color: #CC3300">&#39;adam&#39;</span>,
+                  metrics<span style="color: #555555">=</span>[<span style="color: #CC3300">&#39;accuracy&#39;</span>])
+
+
+    <span style="color: #006699; font-weight: bold">return</span> model
+</pre></div>
+
+
+<h5 id="build-model_1">Build Model</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># build the model</span>
+model <span style="color: #555555">=</span> larger_model()
+</pre></div>
+
+
+<h5 id="fit-model_1">Fit Model</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Fit the model</span>
+model<span style="color: #555555">.</span>fit(X_train,
+          y_train,
+          validation_data<span style="color: #555555">=</span>(X_test, y_test),
+          epochs<span style="color: #555555">=</span><span style="color: #FF6600">10</span>,
+          batch_size<span style="color: #555555">=</span><span style="color: #FF6600">200</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Train on 60000 samples, validate on 10000 samples
+Epoch 1/10
+60000/60000 [==============================] - 31s 510us/step - loss: 0.3871 - acc: 0.8817 - val_loss: 0.0904 - val_acc: 0.9714
+Epoch 2/10
+60000/60000 [==============================] - 30s 494us/step - loss: 0.0998 - acc: 0.9699 - val_loss: 0.0540 - val_acc: 0.9829
+Epoch 3/10
+60000/60000 [==============================] - 30s 504us/step - loss: 0.0738 - acc: 0.9772 - val_loss: 0.0417 - val_acc: 0.9864
+Epoch 4/10
+60000/60000 [==============================] - 29s 492us/step - loss: 0.0602 - acc: 0.9816 - val_loss: 0.0375 - val_acc: 0.9870
+Epoch 5/10
+60000/60000 [==============================] - 29s 487us/step - loss: 0.0517 - acc: 0.9835 - val_loss: 0.0359 - val_acc: 0.9886
+Epoch 6/10
+60000/60000 [==============================] - 29s 476us/step - loss: 0.0446 - acc: 0.9855 - val_loss: 0.0307 - val_acc: 0.9902
+Epoch 7/10
+60000/60000 [==============================] - 40s 665us/step - loss: 0.0393 - acc: 0.9880 - val_loss: 0.0313 - val_acc: 0.9900
+Epoch 8/10
+60000/60000 [==============================] - 33s 551us/step - loss: 0.0357 - acc: 0.9887 - val_loss: 0.0259 - val_acc: 0.9911
+Epoch 9/10
+60000/60000 [==============================] - 30s 508us/step - loss: 0.0322 - acc: 0.9899 - val_loss: 0.0242 - val_acc: 0.9925
+Epoch 10/10
+60000/60000 [==============================] - 31s 512us/step - loss: 0.0307 - acc: 0.9898 - val_loss: 0.0271 - val_acc: 0.9906
+
+
+
+
+
+&lt;keras.callbacks.History at 0xb2e19f320&gt;
+</pre></div>
+
+
+<h5 id="evalauation">Evalauation</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Final evaluation of the model</span>
+scores <span style="color: #555555">=</span> model<span style="color: #555555">.</span>evaluate(X_test, y_test, verbose<span style="color: #555555">=</span><span style="color: #FF6600">0</span>)
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;Large CNN Error: </span><span style="color: #AA0000">%.2f%%</span><span style="color: #CC3300">&quot;</span> <span style="color: #555555">%</span> (<span style="color: #FF6600">100</span><span style="color: #555555">-</span>scores[<span style="color: #FF6600">1</span>]<span style="color: #555555">*</span><span style="color: #FF6600">100</span>))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Large CNN Error: 0.94%
+</pre></div>
+
+
+<h5 id="plot">Plot</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Plot ad hoc mnist instances</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">keras.datasets</span> <span style="color: #006699; font-weight: bold">import</span> mnist
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #0099FF; font-style: italic"># load (downloaded if needed) the MNIST dataset</span>
+(X_train, y_train), (X_test, y_test) <span style="color: #555555">=</span> mnist<span style="color: #555555">.</span>load_data()
+<span style="color: #0099FF; font-style: italic"># plot 4 images as gray scale</span>
+plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">221</span>)
+plt<span style="color: #555555">.</span>imshow(X_train[<span style="color: #FF6600">0</span>], cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>get_cmap(<span style="color: #CC3300">&#39;gray&#39;</span>))
+plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">222</span>)
+plt<span style="color: #555555">.</span>imshow(X_train[<span style="color: #FF6600">1</span>], cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>get_cmap(<span style="color: #CC3300">&#39;gray&#39;</span>))
+plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">223</span>)
+plt<span style="color: #555555">.</span>imshow(X_train[<span style="color: #FF6600">2</span>], cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>get_cmap(<span style="color: #CC3300">&#39;gray&#39;</span>))
+plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">224</span>)
+plt<span style="color: #555555">.</span>imshow(X_train[<span style="color: #FF6600">3</span>], cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>get_cmap(<span style="color: #CC3300">&#39;gray&#39;</span>))
+<span style="color: #0099FF; font-style: italic"># show the plot</span>
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_50_0.png" /></p>
+<hr />
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../CIFRT10/CIFR10/" class="btn btn-neutral float-right" title="Image Classifier">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../rnn/RNN_project/" class="btn btn-neutral" title="Recurrent Neural Network"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../rnn/RNN_project/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../CIFRT10/CIFR10/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../../search/main.js" defer></script>
+
+</body>
+</html>

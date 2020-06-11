@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>Bidirectional LSTM - Machine Learning</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Bidirectional LSTM";
+    var mkdocs_page_input_path = "dl/bidirectional/5. BiDirectional-LSTM.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> Machine Learning</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="tocbase current">
+    
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../..">Home</a>
+  </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Machine Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/LinearModels/Linear-models/">Linear Regression</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Classifiers/Logistic/Logistic/">Logistic Regression</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Classifiers/Tree/Tree/">Decision Tree</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Classifiers/Ensamble/ensamble/">Ensamble Methods</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Classifiers/SVM/svm/">Support Vector Machine</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/Kmeans/Kmeans/">Kmeans Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/Agglomerative/Agglomerative/">Agglomerative Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/AffinityPropagation/Affinity-Propagation/">Affinity Propagation</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/Spectral/Spectral/">Spectral Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/DBSCAN/DBSCAN/">DBSCAN Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/MeanShift/Mean-shift/">Mean Shift Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/Comparison/Comparison/">Cluster Comparison</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">ML Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../mlp/intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../mlp/boston_housing/boston_housing/">Boston Housing</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../mlp/Customer_segments/customer_segments/">Customer Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../mlp/finding_donors/finding_donors/">Finding Donors</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../mlp/vehicle-detection/CARND-Project-5/">Vehicle Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../mlp/perceptron/dlnd-your-first-neural-network/">Perceptron</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Deep Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Vanila/1.Vanila-LSTM/">Vanila LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../stacked/2.Stacked-LSTM/">Stacked LSTM</a>
+  </li>
+        
+          
+
+
+  
+    
+    <li class="navtree toctree-l2 page current">
+      <a class="current" href="./">
+        Bidirectional LSTM
+          <span class="toctree-expand"></span>
+      </a>
+    </li>
+    
+      
+
+  <li class="toctree-l2 current with-children">
+    <a href="#bydirectional-lstm">
+      Bydirectional-LSTM
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2 current">
+    <ul class="subnav-l2 current">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#model">model</a>
+        </li>
+    
+    </ul>
+  </li>
+
+
+  
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../rnn/RNN_project/">Recurrent Neural Network</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">DL Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../NMIST/NMIST/">Digit Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../CIFRT10/CIFR10/">Image Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../traffic-sign/Traffic_Sign_Classifier/">Traffic Sign Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../translator/dlnd_language_translation/">Language Translator</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Rinforcement Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../rl/smartcab/smartcab/">SmartCab</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">GAN Project</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../gan/dlnd_face_generation/">Face Generation</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../References/ref.md">References</a>
+  </li>
+    
+  </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">Machine Learning</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Deep Learning &raquo;</li>
+        
+      
+    
+    <li>Bidirectional LSTM</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="bydirectional-lstm">Bydirectional-LSTM</h2>
+<hr />
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">random</span> <span style="color: #006699; font-weight: bold">import</span> random
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">import</span> array
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">import</span> cumsum
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">import</span> array_equal
+</pre></div>
+
+
+<hr />
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># create a cumulative sum sequence</span>
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">get_sequence</span>(n_timesteps):
+  <span style="color: #0099FF; font-style: italic"># create a sequence of random numbers in [0,1]</span>
+  X <span style="color: #555555">=</span> array([random() <span style="color: #006699; font-weight: bold">for</span> _ <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(n_timesteps)])
+  <span style="color: #0099FF; font-style: italic"># calculate cut-off value to change class values</span>
+  limit <span style="color: #555555">=</span> n_timesteps<span style="color: #555555">/</span><span style="color: #FF6600">4.0</span>
+  <span style="color: #0099FF; font-style: italic"># determine the class outcome for each item in cumulative sequence</span>
+  y <span style="color: #555555">=</span> array([<span style="color: #FF6600">0</span> <span style="color: #006699; font-weight: bold">if</span> x <span style="color: #555555">&lt;</span> limit <span style="color: #006699; font-weight: bold">else</span> <span style="color: #FF6600">1</span> <span style="color: #006699; font-weight: bold">for</span> x <span style="color: #000000; font-weight: bold">in</span> cumsum(X)])
+  <span style="color: #006699; font-weight: bold">return</span> X, y
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># create multiple samples of cumulative sum sequences</span>
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">get_sequences</span>(n_sequences, n_timesteps):
+  seqX, seqY <span style="color: #555555">=</span> <span style="color: #336666">list</span>(), <span style="color: #336666">list</span>()
+  <span style="color: #0099FF; font-style: italic"># create and store sequences</span>
+  <span style="color: #006699; font-weight: bold">for</span> _ <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(n_sequences):
+    X, y <span style="color: #555555">=</span> get_sequence(n_timesteps)
+    seqX<span style="color: #555555">.</span>append(X)
+    seqY<span style="color: #555555">.</span>append(y)
+
+
+  <span style="color: #0099FF; font-style: italic"># reshape input and output for lstm</span>
+  seqX <span style="color: #555555">=</span> array(seqX)<span style="color: #555555">.</span>reshape(n_sequences, n_timesteps, <span style="color: #FF6600">1</span>)
+  seqY <span style="color: #555555">=</span> array(seqY)<span style="color: #555555">.</span>reshape(n_sequences, n_timesteps, <span style="color: #FF6600">1</span>)
+  <span style="color: #006699; font-weight: bold">return</span> seqX, seqY
+</pre></div>
+
+
+<h3 id="model">model</h3>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">keras.models</span> <span style="color: #006699; font-weight: bold">import</span> Sequential
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">keras.layers</span> <span style="color: #006699; font-weight: bold">import</span> LSTM
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">keras.layers</span> <span style="color: #006699; font-weight: bold">import</span> Dense
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">keras.layers</span> <span style="color: #006699; font-weight: bold">import</span> TimeDistributed
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">keras.layers</span> <span style="color: #006699; font-weight: bold">import</span> Bidirectional
+</pre></div>
+
+
+<hr />
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># define problem</span>
+n_timesteps <span style="color: #555555">=</span> <span style="color: #FF6600">10</span>
+<span style="color: #0099FF; font-style: italic"># define LSTM</span>
+model <span style="color: #555555">=</span> Sequential()
+model<span style="color: #555555">.</span>add(Bidirectional(LSTM(<span style="color: #FF6600">50</span>, return_sequences<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>), input_shape<span style="color: #555555">=</span>(n_timesteps, <span style="color: #FF6600">1</span>))) 
+model<span style="color: #555555">.</span>add(TimeDistributed(Dense(<span style="color: #FF6600">1</span>, activation<span style="color: #555555">=</span><span style="color: #CC3300">&#39;sigmoid&#39;</span>))) 
+model<span style="color: #555555">.</span>compile(loss<span style="color: #555555">=</span><span style="color: #CC3300">&#39;binary_crossentropy&#39;</span>, optimizer<span style="color: #555555">=</span><span style="color: #CC3300">&#39;adam&#39;</span>, metrics<span style="color: #555555">=</span>[<span style="color: #CC3300">&#39;acc&#39;</span>]) 
+<span style="color: #336666">print</span>(model<span style="color: #555555">.</span>summary())
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+bidirectional_1 (Bidirection (None, 10, 100)           20800     
+_________________________________________________________________
+time_distributed_1 (TimeDist (None, 10, 1)             101       
+=================================================================
+Total params: 20,901
+Trainable params: 20,901
+Non-trainable params: 0
+_________________________________________________________________
+None
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># train LSTM</span>
+X, y <span style="color: #555555">=</span> get_sequences(<span style="color: #FF6600">50000</span>, n_timesteps)
+model<span style="color: #555555">.</span>fit(X, y, epochs<span style="color: #555555">=</span><span style="color: #FF6600">1</span>, batch_size<span style="color: #555555">=</span><span style="color: #FF6600">10</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Epoch 1/1
+50000/50000 [==============================] - 120s - loss: 0.0505 - acc: 0.9820
+
+
+
+
+
+&lt;keras.callbacks.History at 0x11e90d550&gt;
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># evaluate LSTM</span>
+X, y <span style="color: #555555">=</span> get_sequences(<span style="color: #FF6600">100</span>, n_timesteps)
+loss, acc <span style="color: #555555">=</span> model<span style="color: #555555">.</span>evaluate(X, y, verbose<span style="color: #555555">=</span><span style="color: #FF6600">0</span>) 
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&#39;Loss: </span><span style="color: #AA0000">%f</span><span style="color: #CC3300">, Accuracy: </span><span style="color: #AA0000">%f</span><span style="color: #CC3300">&#39;</span> <span style="color: #555555">%</span> (loss, acc<span style="color: #555555">*</span><span style="color: #FF6600">100</span>))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Loss: 0.029906, Accuracy: 98.800002
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># make predictions</span>
+<span style="color: #006699; font-weight: bold">for</span> _ <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(<span style="color: #FF6600">10</span>):
+  X, y <span style="color: #555555">=</span> get_sequences(<span style="color: #FF6600">1</span>, n_timesteps)
+  yhat <span style="color: #555555">=</span> model<span style="color: #555555">.</span>predict_classes(X, verbose<span style="color: #555555">=</span><span style="color: #FF6600">0</span>)
+  exp, pred <span style="color: #555555">=</span> y<span style="color: #555555">.</span>reshape(n_timesteps), yhat<span style="color: #555555">.</span>reshape(n_timesteps) 
+  <span style="color: #336666">print</span>(<span style="color: #CC3300">&#39;y=</span><span style="color: #AA0000">%s</span><span style="color: #CC3300">, yhat=</span><span style="color: #AA0000">%s</span><span style="color: #CC3300">, correct=</span><span style="color: #AA0000">%s</span><span style="color: #CC3300">&#39;</span> <span style="color: #555555">%</span> (exp, pred, array_equal(exp,pred)))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>y=[0 0 1 1 1 1 1 1 1 1], yhat=[0 0 1 1 1 1 1 1 1 1], correct=True
+y=[0 0 0 1 1 1 1 1 1 1], yhat=[0 0 0 1 1 1 1 1 1 1], correct=True
+y=[0 0 0 1 1 1 1 1 1 1], yhat=[0 0 0 1 1 1 1 1 1 1], correct=True
+y=[0 0 0 0 0 1 1 1 1 1], yhat=[0 0 0 0 1 1 1 1 1 1], correct=False
+y=[0 0 0 0 0 0 1 1 1 1], yhat=[0 0 0 0 0 1 1 1 1 1], correct=False
+y=[0 0 0 0 0 0 1 1 1 1], yhat=[0 0 0 0 0 0 1 1 1 1], correct=True
+y=[0 0 0 0 1 1 1 1 1 1], yhat=[0 0 0 0 1 1 1 1 1 1], correct=True
+y=[0 0 0 0 0 1 1 1 1 1], yhat=[0 0 0 0 0 1 1 1 1 1], correct=True
+y=[0 0 0 1 1 1 1 1 1 1], yhat=[0 0 0 1 1 1 1 1 1 1], correct=True
+y=[0 0 0 1 1 1 1 1 1 1], yhat=[0 0 0 1 1 1 1 1 1 1], correct=True
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>
+</pre></div>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../rnn/RNN_project/" class="btn btn-neutral float-right" title="Recurrent Neural Network">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../stacked/2.Stacked-LSTM/" class="btn btn-neutral" title="Stacked LSTM"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../stacked/2.Stacked-LSTM/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../rnn/RNN_project/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../../search/main.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>Boston Housing - Machine Learning</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Boston Housing";
+    var mkdocs_page_input_path = "mlp/boston_housing/boston_housing.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> Machine Learning</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="tocbase current">
+    
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../..">Home</a>
+  </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Machine Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/LinearModels/Linear-models/">Linear Regression</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Classifiers/Logistic/Logistic/">Logistic Regression</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Classifiers/Tree/Tree/">Decision Tree</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Classifiers/Ensamble/ensamble/">Ensamble Methods</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Classifiers/SVM/svm/">Support Vector Machine</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/Kmeans/Kmeans/">Kmeans Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/Agglomerative/Agglomerative/">Agglomerative Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/AffinityPropagation/Affinity-Propagation/">Affinity Propagation</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/Spectral/Spectral/">Spectral Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/DBSCAN/DBSCAN/">DBSCAN Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/MeanShift/Mean-shift/">Mean Shift Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/Comparison/Comparison/">Cluster Comparison</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">ML Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  
+    
+    <li class="navtree toctree-l2 page current">
+      <a class="current" href="./">
+        Boston Housing
+          <span class="toctree-expand"></span>
+      </a>
+    </li>
+    
+      
+
+  <li class="toctree-l2 current with-children">
+    <a href="#machine-learning-engineer-nanodegree">
+      Machine Learning Engineer Nanodegree
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2 current">
+    <ul class="subnav-l2 current">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#model-evaluation-validation">Model Evaluation &amp; Validation</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#project-predicting-boston-housing-prices">Project: Predicting Boston Housing Prices</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#getting-started">Getting Started</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+
+  <li class="toctree-l2">
+    <a href="#part-i">
+      Part- I
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2">
+    <ul class="subnav-l2 toc-hidden">
+    
+      
+          
+
+  <li class="toctree-l3 current with-children">
+    <a href="#data-exploration">
+      Data Exploration
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3 current">
+    <ul class="subnav-l3 current">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#implementation-calculate-statistics">Implementation: Calculate Statistics</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-1-feature-observation">Question 1 - Feature Observation</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+      
+
+  <li class="toctree-l2">
+    <a href="#part-ii">
+      Part- II
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2">
+    <ul class="subnav-l2 toc-hidden">
+    
+      
+          
+
+  <li class="toctree-l3 current with-children">
+    <a href="#developing-a-model">
+      Developing a Model
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3 current">
+    <ul class="subnav-l3 current">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#implementation-define-a-performance-metric">Implementation: Define a Performance Metric</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-2-goodness-of-fit">Question 2 - Goodness of Fit</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#implementation-shuffle-and-split-data">Implementation: Shuffle and Split Data</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-3-training-and-testing">Question 3 - Training and Testing</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#analyzing-model-performance">
+      Analyzing Model Performance
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#learning-curves">Learning Curves</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-4-learning-the-data">Question 4 - Learning the Data</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#complexity-curves">Complexity Curves</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-5-bias-variance-tradeoff">Question 5 - Bias-Variance Tradeoff</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-6-best-guess-optimal-model">Question 6 - Best-Guess Optimal Model</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+      
+
+  <li class="toctree-l2">
+    <a href="#part-iii">
+      Part-III
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2">
+    <ul class="subnav-l2 toc-hidden">
+    
+      
+          
+
+  <li class="toctree-l3 current with-children">
+    <a href="#evaluating-model-performance">
+      Evaluating Model Performance
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3 current">
+    <ul class="subnav-l3 current">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-7-grid-search">Question 7 - Grid Search</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-8-cross-validation">Question 8 - Cross-Validation</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#implementation-fitting-a-model">Implementation: Fitting a Model</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#making-predictions">Making Predictions</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l4">
+    <a href="#question-9-optimal-model">
+      Question 9 - Optimal Model
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#answer">Answer:</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-10-predicting-selling-prices">Question 10 - Predicting Selling Prices</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#sensitivity">Sensitivity</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#question-11-applicability">Question 11 - Applicability</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+
+  
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Customer_segments/customer_segments/">Customer Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../finding_donors/finding_donors/">Finding Donors</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../vehicle-detection/CARND-Project-5/">Vehicle Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../perceptron/dlnd-your-first-neural-network/">Perceptron</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Deep Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/Vanila/1.Vanila-LSTM/">Vanila LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/stacked/2.Stacked-LSTM/">Stacked LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/bidirectional/5. BiDirectional-LSTM/">Bidirectional LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/rnn/RNN_project/">Recurrent Neural Network</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">DL Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/NMIST/NMIST/">Digit Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/CIFRT10/CIFR10/">Image Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/traffic-sign/Traffic_Sign_Classifier/">Traffic Sign Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/translator/dlnd_language_translation/">Language Translator</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Rinforcement Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../rl/smartcab/smartcab/">SmartCab</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">GAN Project</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/gan/dlnd_face_generation/">Face Generation</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../References/ref.md">References</a>
+  </li>
+    
+  </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">Machine Learning</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>ML Projects &raquo;</li>
+        
+      
+    
+    <li>Boston Housing</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="machine-learning-engineer-nanodegree">Machine Learning Engineer Nanodegree</h1>
+<h2 id="model-evaluation-validation">Model Evaluation &amp; Validation</h2>
+<h2 id="project-predicting-boston-housing-prices">Project: Predicting Boston Housing Prices</h2>
+<p>Welcome to the first project of the Machine Learning Engineer Nanodegree! In this notebook, some template code has already been provided for you, and you will need to implement additional functionality to successfully complete this project. You will not need to modify the included code beyond what is requested. Sections that begin with <strong>'Implementation'</strong> in the header indicate that the following block of code will require additional functionality which you must provide. Instructions will be provided for each section and the specifics of the implementation are marked in the code block with a 'TODO' statement. Please be sure to read the instructions carefully!</p>
+<p>In addition to implementing code, there will be questions that you must answer which relate to the project and your implementation. Each section where you will answer a question is preceded by a <strong>'Question X'</strong> header. Carefully read each question and provide thorough answers in the following text boxes that begin with <strong>'Answer:'</strong>. Your project submission will be evaluated based on your answers to each of the questions and the implementation you provide.  </p>
+<blockquote>
+<p><strong>Note:</strong> Code and Markdown cells can be executed using the <strong>Shift + Enter</strong> keyboard shortcut. In addition, Markdown cells can be edited by typically double-clicking the cell to enter edit mode.</p>
+</blockquote>
+<h2 id="getting-started">Getting Started</h2>
+<p>In this project, you will evaluate the performance and predictive power of a model that has been trained and tested on data collected from homes in suburbs of Boston, Massachusetts. A model trained on this data that is seen as a <em>good fit</em> could then be used to make certain predictions about a home — in particular, its monetary value. This model would prove to be invaluable for someone like a real estate agent who could make use of such information on a daily basis.</p>
+<p>The dataset for this project originates from the <a href="https://archive.ics.uci.edu/ml/datasets/Housing">UCI Machine Learning Repository</a>. The Boston housing data was collected in 1978 and each of the 506 entries represent aggregated data about 14 features for homes from various suburbs in Boston, Massachusetts. For the purposes of this project, the following preprocessing steps have been made to the dataset:
+- 16 data points have an <code>'MEDV'</code> value of 50.0. These data points likely contain <strong>missing or censored values</strong> and have been removed.
+- 1 data point has an <code>'RM'</code> value of 8.78. This data point can be considered an <strong>outlier</strong> and has been removed.
+- The features <code>'RM'</code>, <code>'LSTAT'</code>, <code>'PTRATIO'</code>, and <code>'MEDV'</code> are essential. The remaining <strong>non-relevant features</strong> have been excluded.
+- The feature <code>'MEDV'</code> has been <strong>multiplicatively scaled</strong> to account for 35 years of market inflation.</p>
+<p>Run the code cell below to load the Boston housing dataset, along with a few of the necessary Python libraries required for this project. You will know the dataset loaded successfully if the size of the dataset is reported.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Import libraries necessary for this project</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">pandas</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">pd</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.cross_validation</span> <span style="color: #006699; font-weight: bold">import</span> ShuffleSplit
+
+<span style="color: #0099FF; font-style: italic"># Import supplementary visualizations code visuals.py</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">visuals</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">vs</span>
+
+<span style="color: #0099FF; font-style: italic"># Pretty display for notebooks</span>
+<span style="color: #555555">%</span>matplotlib inline
+
+<span style="color: #0099FF; font-style: italic"># Load the Boston housing dataset</span>
+data <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>read_csv(<span style="color: #CC3300">&#39;housing.csv&#39;</span>)
+prices <span style="color: #555555">=</span> data[<span style="color: #CC3300">&#39;MEDV&#39;</span>]
+features <span style="color: #555555">=</span> data<span style="color: #555555">.</span>drop(<span style="color: #CC3300">&#39;MEDV&#39;</span>, axis <span style="color: #555555">=</span> <span style="color: #FF6600">1</span>)
+
+<span style="color: #0099FF; font-style: italic"># Success</span>
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;Boston housing dataset has </span><span style="color: #AA0000">{}</span><span style="color: #CC3300"> data points with </span><span style="color: #AA0000">{}</span><span style="color: #CC3300"> variables each.&quot;</span><span style="color: #555555">.</span>format(<span style="color: #555555">*</span>data<span style="color: #555555">.</span>shape))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Boston housing dataset has 489 data points with 4 variables each.
+</pre></div>
+
+
+<hr />
+<h1 id="part-i">Part- I</h1>
+<h2 id="data-exploration">Data Exploration</h2>
+<p>In this first section of this project, you will make a cursory investigation about the Boston housing data and provide your observations. Familiarizing yourself with the data through an explorative process is a fundamental practice to help you better understand and justify your results.</p>
+<p>Since the main goal of this project is to construct a working model which has the capability of predicting the value of houses, we will need to separate the dataset into <strong>features</strong> and the <strong>target variable</strong>. The <strong>features</strong>, <code>'RM'</code>, <code>'LSTAT'</code>, and <code>'PTRATIO'</code>, give us quantitative information about each data point. The <strong>target variable</strong>, <code>'MEDV'</code>, will be the variable we seek to predict. These are stored in <code>features</code> and <code>prices</code>, respectively.</p>
+<h3 id="implementation-calculate-statistics">Implementation: Calculate Statistics</h3>
+<p>For your very first coding implementation, you will calculate descriptive statistics about the Boston housing prices. Since <code>numpy</code> has already been imported for you, use this library to perform the necessary calculations. These statistics will be extremely important later on to analyze various prediction results from the constructed model.</p>
+<p>In the code cell below, you will need to implement the following:
+- Calculate the minimum, maximum, mean, median, and standard deviation of <code>'MEDV'</code>, which is stored in <code>prices</code>.
+  - Store each calculation in their respective variable.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># TODO: Minimum price of the data</span>
+minimum_price <span style="color: #555555">=</span> np<span style="color: #555555">.</span>min(prices)
+
+<span style="color: #0099FF; font-style: italic"># TODO: Maximum price of the data</span>
+maximum_price <span style="color: #555555">=</span> np<span style="color: #555555">.</span>max(prices)
+
+<span style="color: #0099FF; font-style: italic"># TODO: Mean price of the data</span>
+mean_price <span style="color: #555555">=</span> np<span style="color: #555555">.</span>mean(prices)
+
+<span style="color: #0099FF; font-style: italic"># TODO: Median price of the data</span>
+median_price <span style="color: #555555">=</span> np<span style="color: #555555">.</span>median(prices)
+
+<span style="color: #0099FF; font-style: italic"># Extra: First abd Third Quartile</span>
+first_quartile <span style="color: #555555">=</span> np<span style="color: #555555">.</span>percentile(prices, <span style="color: #FF6600">25</span>)
+third_quartile <span style="color: #555555">=</span> np<span style="color: #555555">.</span>percentile(prices, <span style="color: #FF6600">75</span>)
+
+<span style="color: #0099FF; font-style: italic"># TODO: Standard deviation of prices of the data</span>
+std_price <span style="color: #555555">=</span> np<span style="color: #555555">.</span>std(prices)
+
+<span style="color: #0099FF; font-style: italic"># Show the calculated statistics</span>
+<span style="color: #336666">print</span> (<span style="color: #CC3300">&quot;Statistics for Boston housing dataset:</span><span style="color: #CC3300; font-weight: bold">\n</span><span style="color: #CC3300">&quot;</span>)
+<span style="color: #336666">print</span> (<span style="color: #CC3300">&quot;Minimum price: $</span><span style="color: #AA0000">{:,.2f}</span><span style="color: #CC3300">&quot;</span><span style="color: #555555">.</span>format(minimum_price))
+<span style="color: #336666">print</span> (<span style="color: #CC3300">&quot;Maximum price: $</span><span style="color: #AA0000">{:,.2f}</span><span style="color: #CC3300">&quot;</span><span style="color: #555555">.</span>format(maximum_price))
+<span style="color: #336666">print</span> (<span style="color: #CC3300">&quot;Mean price: $</span><span style="color: #AA0000">{:,.2f}</span><span style="color: #CC3300">&quot;</span><span style="color: #555555">.</span>format(mean_price))
+<span style="color: #336666">print</span> (<span style="color: #CC3300">&quot;Median price $</span><span style="color: #AA0000">{:,.2f}</span><span style="color: #CC3300">&quot;</span><span style="color: #555555">.</span>format(median_price))
+<span style="color: #336666">print</span> (<span style="color: #CC3300">&quot;First Quartile: $</span><span style="color: #AA0000">{:,.2f}</span><span style="color: #CC3300">&quot;</span><span style="color: #555555">.</span>format(first_quartile ))
+<span style="color: #336666">print</span> (<span style="color: #CC3300">&quot;Third Quartile: $</span><span style="color: #AA0000">{:,.2f}</span><span style="color: #CC3300">&quot;</span><span style="color: #555555">.</span>format(third_quartile ))
+<span style="color: #336666">print</span> (<span style="color: #CC3300">&quot;Standard deviation of prices: $</span><span style="color: #AA0000">{:,.2f}</span><span style="color: #CC3300">&quot;</span><span style="color: #555555">.</span>format(std_price))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Statistics for Boston housing dataset:
+
+Minimum price: $105,000.00
+Maximum price: $1,024,800.00
+Mean price: $454,342.94
+Median price $438,900.00
+First Quartile: $350,700.00
+Third Quartile: $518,700.00
+Standard deviation of prices: $165,171.13
+</pre></div>
+
+
+<ul>
+<li>I love visualizing them</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">8</span>, <span style="color: #FF6600">6</span>))
+plt<span style="color: #555555">.</span>hist(prices, bins <span style="color: #555555">=</span> <span style="color: #FF6600">20</span>, color<span style="color: #555555">=</span> <span style="color: #CC3300">&#39;g&#39;</span>)
+plt<span style="color: #555555">.</span>axvline(mean_price, lw <span style="color: #555555">=</span> <span style="color: #FF6600">5</span>, c <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;b&#39;</span>, label <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;mean&#39;</span>)
+plt<span style="color: #555555">.</span>axvline(median_price, lw <span style="color: #555555">=</span> <span style="color: #FF6600">5</span>, c <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;y&#39;</span>, label <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;median&#39;</span>)
+plt<span style="color: #555555">.</span>axvline(first_quartile, lw <span style="color: #555555">=</span> <span style="color: #FF6600">5</span>, c <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;r&#39;</span>,label <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;first_quartile&#39;</span>)
+plt<span style="color: #555555">.</span>axvline(third_quartile, lw <span style="color: #555555">=</span> <span style="color: #FF6600">5</span>, c <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;m&#39;</span>, label <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;third_quartile&#39;</span>)
+plt<span style="color: #555555">.</span>legend(bbox_to_anchor<span style="color: #555555">=</span>(<span style="color: #FF6600">1.05</span>, <span style="color: #FF6600">0.05</span>),loc<span style="color: #555555">=</span><span style="color: #CC3300">&#39;lower left&#39;</span>,borderaxespad <span style="color: #555555">=</span> <span style="color: #FF6600">0.</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&lt;matplotlib.legend.Legend at 0x11b06b400&gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_9_1.png" /></p>
+<h3 id="question-1-feature-observation">Question 1 - Feature Observation</h3>
+<p>As a reminder, we are using three features from the Boston housing dataset: <code>'RM'</code>, <code>'LSTAT'</code>, and <code>'PTRATIO'</code>. For each data point (neighborhood):
+- <code>'RM'</code> is the average number of rooms among homes in the neighborhood.
+- <code>'LSTAT'</code> is the percentage of homeowners in the neighborhood considered "lower class" (working poor).
+- <code>'PTRATIO'</code> is the ratio of students to teachers in primary and secondary schools in the neighborhood.</p>
+<p><em>Using your intuition, for each of the three features above, do you think that an increase in the value of that feature would lead to an <strong>increase</strong> in the value of <code>'MEDV'</code> or a <strong>decrease</strong> in the value of <code>'MEDV'</code>? Justify your answer for each.</em><br />
+<strong>Hint:</strong> Would you expect a home that has an <code>'RM'</code> value of 6 be worth more or less than a home that has an <code>'RM'</code> value of 7?</p>
+<p><strong>Answer: </strong></p>
+<p>Increase in the value of a features sometime cross the limit for increase in the value of <code>MEDV</code>. Let me go one by one.</p>
+<ol>
+<li>
+<p>House with large <code>RM</code> (more rooms) is in general more likely to cost more for the larger space. But small houses with many rooms may not impose same type of contribution on decision making.</p>
+</li>
+<li>
+<p>High <code>LSTAT</code> means the house has a poor neighborhood and likely to reduce the value of <code>MEDV</code>. This is because houses in rich neighborhood is correlated with high standard of self paied local security network, transportation and other extra infrastructure.</p>
+</li>
+<li>
+<p>Low <code>PTRATIO</code> implies that the community has rich education resources. This will raise the value of the hosue. But this is correlated with the family members and chance of having baby in near future.</p>
+</li>
+<li>
+<p>Checking my intution</p>
+</li>
+</ol>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">20</span>, <span style="color: #FF6600">5</span>))
+<span style="color: #006699; font-weight: bold">for</span> i, col <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>(features<span style="color: #555555">.</span>columns):
+    plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">1</span>, <span style="color: #FF6600">4</span>, i<span style="color: #555555">+</span><span style="color: #FF6600">1</span>)
+    plt<span style="color: #555555">.</span>plot(data[col], prices, <span style="color: #CC3300">&#39;o&#39;</span>)
+    plt<span style="color: #555555">.</span>title(col)
+    plt<span style="color: #555555">.</span>xlabel(col)
+    plt<span style="color: #555555">.</span>ylabel(<span style="color: #CC3300">&#39;prices&#39;</span>)
+</pre></div>
+
+
+<p><img alt="png" src="../output_13_0.png" /></p>
+<p>Plot 1 and 2 are making a lot of sense. Plot 3 is  little complicated.</p>
+<hr />
+<h1 id="part-ii">Part- II</h1>
+<h2 id="developing-a-model">Developing a Model</h2>
+<p>In this second section of the project, you will develop the tools and techniques necessary for a model to make a prediction. Being able to make accurate evaluations of each model's performance through the use of these tools and techniques helps to greatly reinforce the confidence in your predictions.</p>
+<h3 id="implementation-define-a-performance-metric">Implementation: Define a Performance Metric</h3>
+<p>It is difficult to measure the quality of a given model without quantifying its performance over training and testing. This is typically done using some type of performance metric, whether it is through calculating some type of error, the goodness of fit, or some other useful measurement. For this project, you will be calculating the <a href="http://stattrek.com/statistics/dictionary.aspx?definition=coefficient_of_determination"><em>coefficient of determination</em></a>, R<sup>2</sup>, to quantify your model's performance. The coefficient of determination for a model is a useful statistic in regression analysis, as it often describes how "good" that model is at making predictions. </p>
+<p>The values for R<sup>2</sup> range from 0 to 1, which captures the percentage of squared correlation between the predicted and actual values of the <strong>target variable</strong>. A model with an R<sup>2</sup> of 0 is no better than a model that always predicts the <em>mean</em> of the target variable, whereas a model with an R<sup>2</sup> of 1 perfectly predicts the target variable. Any value between 0 and 1 indicates what percentage of the target variable, using this model, can be explained by the <strong>features</strong>. <em>A model can be given a negative R<sup>2</sup> as well, which indicates that the model is <strong>arbitrarily worse</strong> than one that always predicts the mean of the target variable.</em></p>
+<p>For the <code>performance_metric</code> function in the code cell below, you will need to implement the following:
+- Use <code>r2_score</code> from <code>sklearn.metrics</code> to perform a performance calculation between <code>y_true</code> and <code>y_predict</code>.
+- Assign the performance score to the <code>score</code> variable.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Import &#39;r2_score&#39;</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.metrics</span> <span style="color: #006699; font-weight: bold">import</span> r2_score
+
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">performance_metric</span>(y_true, y_predict):
+    <span style="color: #CC3300; font-style: italic">&quot;&quot;&quot; Calculates and returns the performance score between </span>
+<span style="color: #CC3300; font-style: italic">        true and predicted values based on the metric chosen. &quot;&quot;&quot;</span>
+
+    <span style="color: #0099FF; font-style: italic">#Calculate the performance score between &#39;y_true&#39; and &#39;y_predict&#39;</span>
+    score <span style="color: #555555">=</span> r2_score(y_true, y_predict)
+
+    <span style="color: #0099FF; font-style: italic"># Return the score</span>
+    <span style="color: #006699; font-weight: bold">return</span> score
+</pre></div>
+
+
+<h3 id="question-2-goodness-of-fit">Question 2 - Goodness of Fit</h3>
+<p>Assume that a dataset contains five data points and a model made the following predictions for the target variable:</p>
+<table>
+<thead>
+<tr>
+<th align="center">True Value</th>
+<th align="center">Prediction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">3.0</td>
+<td align="center">2.5</td>
+</tr>
+<tr>
+<td align="center">-0.5</td>
+<td align="center">0.0</td>
+</tr>
+<tr>
+<td align="center">2.0</td>
+<td align="center">2.1</td>
+</tr>
+<tr>
+<td align="center">7.0</td>
+<td align="center">7.8</td>
+</tr>
+<tr>
+<td align="center">4.2</td>
+<td align="center">5.3</td>
+</tr>
+<tr>
+<td align="center"><em>Would you consider this model to have successfully captured the variation of the target variable? Why or why not?</em></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p>Run the code cell below to use the <code>performance_metric</code> function and calculate this model's coefficient of determination.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Calculate the performance of this model</span>
+score <span style="color: #555555">=</span> performance_metric([<span style="color: #FF6600">3</span>, <span style="color: #555555">-</span><span style="color: #FF6600">0.5</span>, <span style="color: #FF6600">2</span>, <span style="color: #FF6600">7</span>, <span style="color: #FF6600">4.2</span>], [<span style="color: #FF6600">2.5</span>, <span style="color: #FF6600">0.0</span>, <span style="color: #FF6600">2.1</span>, <span style="color: #FF6600">7.8</span>, <span style="color: #FF6600">5.3</span>])
+<span style="color: #336666">print</span> (<span style="color: #CC3300">&quot;Model has a coefficient of determination, R^2, of </span><span style="color: #AA0000">{:.3f}</span><span style="color: #CC3300">.&quot;</span><span style="color: #555555">.</span>format(score))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Model has a coefficient of determination, R^2, of 0.923.
+</pre></div>
+
+
+<p><strong>Answer:</strong></p>
+<p><strong>Would you consider this model to have successfully captured the variation of the target variable?</strong></p>
+<p>Yes, this model have successfully captured the variation of the target variable. Since r2_score is 0.923, this implies that 92.3% of the variables are predictable.</p>
+<p><strong>Why or why not?</strong></p>
+<p>The r2_score provides a measure of how well future samples are likely to be predicted by the model compared to the case where all predictions are replaced by mean value of target variable. First of all, the meaning of different values of r2_score are :</p>
+<p>$ \huge{R^{2} (y,\hat{y}) = 1 - \frac{\sum <em>{i=0}^{n</em>{samples} -1} (y_{i} - \hat{y}<em>{i})^{2}}{\sum </em>{i=0}^{n_{samples} -1} (y_{i} - \bar{y})^{2}}}$</p>
+<p>Where $\hat{y}$ = prediction, $\bar{y}$ = mean value</p>
+<ul>
+<li>
+<p>Special case: $R^{2} =0$,
+     In this case model predictions are equivalent to all predictions replaced by mean value.</p>
+</li>
+<li>
+<p>Special case: $R^{2} =1$,
+     In this case model prediction is equal to the exact value. This is an ideal case and may lead us to overfitting.</p>
+</li>
+<li>
+<p>Special case: $R^{2} &lt; 0$,
+     In this case model predictions are more worst and could not even exceed the score if we roughly predict all value to mean value.</p>
+</li>
+</ul>
+<p>Thus, the value of $ R^{2}$ closer to 1 is the best value!</p>
+<p>Reference used: http://scikit-learn.org/stable/modules/model_evaluation.html#r2-score</p>
+<h3 id="implementation-shuffle-and-split-data">Implementation: Shuffle and Split Data</h3>
+<p>Your next implementation requires that you take the Boston housing dataset and split the data into training and testing subsets. Typically, the data is also shuffled into a random order when creating the training and testing subsets to remove any bias in the ordering of the dataset.</p>
+<p>For the code cell below, you will need to implement the following:
+- Use <code>train_test_split</code> from <code>sklearn.cross_validation</code> to shuffle and split the <code>features</code> and <code>prices</code> data into training and testing sets.
+  - Split the data into 80% training and 20% testing.
+  - Set the <code>random_state</code> for <code>train_test_split</code> to a value of your choice. This ensures results are consistent.
+- Assign the train and testing splits to <code>X_train</code>, <code>X_test</code>, <code>y_train</code>, and <code>y_test</code>.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Import &#39;train_test_split&#39;</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.cross_validation</span> <span style="color: #006699; font-weight: bold">import</span> train_test_split
+
+<span style="color: #0099FF; font-style: italic"># Shuffle and split the data into training and testing subsets</span>
+X_train, X_test, y_train, y_test <span style="color: #555555">=</span> train_test_split(features, prices, test_size<span style="color: #555555">=</span><span style="color: #FF6600">0.20</span>, random_state<span style="color: #555555">=</span><span style="color: #FF6600">31</span>) 
+
+<span style="color: #0099FF; font-style: italic"># Success</span>
+<span style="color: #336666">print</span> (<span style="color: #CC3300">&quot;Training and testing split was successful.&quot;</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Training and testing split was successful.
+</pre></div>
+
+
+<h3 id="question-3-training-and-testing">Question 3 - Training and Testing</h3>
+<p><em>What is the benefit to splitting a dataset into some ratio of training and testing subsets for a learning algorithm?</em><br />
+<strong>Hint:</strong> What could go wrong with not having a way to test your model?</p>
+<p><strong>Answer: </strong></p>
+<p>Theoretically, there could be infinite data and  the best model with 99.99% accuracy disregarding the computational cost and time. </p>
+<p>Practically, this is not feasible. For a given set of data, there exist infinitely many models withinh the certain range of accuricy. Our intention is to find that best model which will have less and less error based on computational cost. If we use whole data as training data in the search of the best model, we will hit that model which will predict all data in traing set with high accuracy but we are left with nothing to check our model. We will be unknown with the accuracy of the model with the data which exist out there in the Universal set(which has infinite data where training data is only a subset of it).</p>
+<p>In short, test set being independent from training set, helps us better evluate the algorithms by detecting overfitting or underfitting in training subsets. </p>
+<hr />
+<h2 id="analyzing-model-performance">Analyzing Model Performance</h2>
+<p>In this third section of the project, you'll take a look at several models' learning and testing performances on various subsets of training data. Additionally, you'll investigate one particular algorithm with an increasing <code>'max_depth'</code> parameter on the full training set to observe how model complexity affects performance. Graphing your model's performance based on varying criteria can be beneficial in the analysis process, such as visualizing behavior that may not have been apparent from the results alone.</p>
+<h3 id="learning-curves">Learning Curves</h3>
+<p>The following code cell produces four graphs for a decision tree model with different maximum depths. Each graph visualizes the learning curves of the model for both training and testing as the size of the training set is increased. Note that the shaded region of a learning curve denotes the uncertainty of that curve (measured as the standard deviation). The model is scored on both the training and testing sets using R<sup>2</sup>, the coefficient of determination.  </p>
+<p>Run the code cell below and use these graphs to answer the following question.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Produce learning curves for varying training set sizes and maximum depths</span>
+vs<span style="color: #555555">.</span>ModelLearning(features, prices)
+</pre></div>
+
+
+<p><img alt="png" src="../output_30_0.png" /></p>
+<h3 id="question-4-learning-the-data">Question 4 - Learning the Data</h3>
+<p><em>Choose one of the graphs above and state the maximum depth for the model. What happens to the score of the training curve as more training points are added? What about the testing curve? Would having more training points benefit the model?</em><br />
+<strong>Hint:</strong> Are the learning curves converging to particular scores?</p>
+<p><strong>Answer: </strong></p>
+<p>By looking gap between training and testing curves, as <code>max_depth</code> goes from <code>1</code> to <code>10</code>, this clearly indicates that algorithm goes from underfitting to overfitting. Graph with <code>max_depth = 3</code> seems to be the best fit in between. So my analysis goes for <code>max_depth = 3</code>.</p>
+<ol>
+<li>
+<p><strong>What happens to the score of the training curve as more training points are added?</strong></p>
+<p>Adding more training points may reduce the noise in training score plot and it will be more smooth and almost horizontal after crossing certain limit along x-axis(Number of Training Points). For example at <code>max_depth =3</code>, as training points increase, it does not suffer from overfitting or underfitting, so adding more training points will not affect the trend of convergence.</p>
+</li>
+<li>
+<p><strong>What about the testing curve?</strong></p>
+</li>
+</ol>
+<p>It will behave similar to training curves.</p>
+<ol>
+<li><strong>Would having more training points benefit the model?</strong></li>
+</ol>
+<p>Eventhough training curve becomes smooth on increasing training data, it is evident form the convergence of training and testing curves that after certain number of training points it may not have much siginificance to improve accuracy with respect to computation cost.</p>
+<h3 id="complexity-curves">Complexity Curves</h3>
+<p>The following code cell produces a graph for a decision tree model that has been trained and validated on the training data using different maximum depths. The graph produces two complexity curves — one for training and one for validation. Similar to the <strong>learning curves</strong>, the shaded regions of both the complexity curves denote the uncertainty in those curves, and the model is scored on both the training and validation sets using the <code>performance_metric</code> function.  </p>
+<p>Run the code cell below and use this graph to answer the following two questions.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>vs<span style="color: #555555">.</span>ModelComplexity(X_train, y_train)
+</pre></div>
+
+
+<p><img alt="png" src="../output_34_0.png" /></p>
+<h3 id="question-5-bias-variance-tradeoff">Question 5 - Bias-Variance Tradeoff</h3>
+<p><em>When the model is trained with a maximum depth of 1, does the model suffer from high bias or from high variance? How about when the model is trained with a maximum depth of 10? What visual cues in the graph justify your conclusions?</em><br />
+<strong>Hint:</strong> How do you know when a model is suffering from high bias or high variance?</p>
+<p><strong>Answer: </strong></p>
+<ol>
+<li>
+<p><strong>When the model is trained with a maximum depth of 1, does the model suffer from high bias or from high variance?</strong></p>
+<p>Yes, it suffers from high bias. First of all the validation score and training score both are lower than desired value (~0.8). Sconldly, both curve are close to each other on score value which indicates there is underfitting.</p>
+</li>
+<li>
+<p><strong>How about when the model is trained with a maximum depth of 10?</strong></p>
+<p>Now, it suffers from high variance. The gap between validation score and training score clearly indicates there is overfitting.</p>
+</li>
+<li>
+<p><strong>What visual cues in the graph justify your conclusions?</strong></p>
+</li>
+</ol>
+<p>Comparision with desired values (&gt;0.8) and gap between training and testing curves are the important cues for the conclusion.</p>
+<h3 id="question-6-best-guess-optimal-model">Question 6 - Best-Guess Optimal Model</h3>
+<p><em>Which maximum depth do you think results in a model that best generalizes to unseen data? What intuition lead you to this answer?</em></p>
+<p><strong>Answer: </strong></p>
+<p>The best maximum depth seems to be 3. Both training curve and validation curve reach maximum value of score with no sign of overfitting or underfitting.</p>
+<hr />
+<h1 id="part-iii">Part-III</h1>
+<hr />
+<h2 id="evaluating-model-performance">Evaluating Model Performance</h2>
+<p>In this final section of the project, you will construct a model and make a prediction on the client's feature set using an optimized model from <code>fit_model</code>.</p>
+<h3 id="question-7-grid-search">Question 7 - Grid Search</h3>
+<p><em>What is the grid search technique and how it can be applied to optimize a learning algorithm?</em></p>
+<p><strong>Answer: </strong></p>
+<p>Grid search is an exhaustive search algorithm which searches over all combinations of parameters we specify to find the optimum combination that yields the best performance. Due to its exhaustive search nature, grid search can be computationally expensive, especially when data size is large and model is complicated. Sometimes we resort to randomized search in this case to search only some combinations of the parameters. Following are the detail of two such algorithms:</p>
+<hr />
+<table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th>Detail</th>
+<th>Implementation</th>
+<th>Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GridSearchCV</code></td>
+<td><code>GridSearchCV</code> implements with exhaustive search over specified parameter values for an estimator. The parameters of the estimator used to apply these methods are optimized by cross-validated grid-search over a parameter grid.</td>
+<td><code>fit</code>, <code>score</code>, <code>predict</code>, <code>predict_proba</code>,<code>decision_function</code>,<code>transform</code> and <code>inverse_transform</code></td>
+<td>In <code>GridSearchCV</code>, all parameter values are tried out.</td>
+</tr>
+<tr>
+<td><code>RandomizedSearchCV</code></td>
+<td><code>RandomizedSearchCV</code> implements with Randomized search on hyper parameters. The parameters of the estimator used to apply these methods are optimized by cross-validated search over parameter settings.</td>
+<td><code>fit</code>, <code>score</code>, <code>predict</code>, <code>predict_proba</code>,<code>decision_function</code>,<code>transform</code> and <code>inverse_transform</code></td>
+<td>In contrast to <code>GridSearchCV</code>, not all parameter values are tried out, but rather a fixed number of parameter settings is sampled from the specified distributions. The number of parameter settings that are tried is given by <code>n_iter</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>References used to answer: 
+1. http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV
+2. http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV</p>
+<h3 id="question-8-cross-validation">Question 8 - Cross-Validation</h3>
+<p><em>What is the k-fold cross-validation training technique? What benefit does this technique provide for grid search when optimizing a model?</em><br />
+<strong>Hint:</strong> Much like the reasoning behind having a testing set, what could go wrong with using grid search without a cross-validated set?</p>
+<p><strong>Answer: </strong></p>
+<ol>
+<li>
+<p><strong>What is the k-fold cross-validation training technique?</strong></p>
+<p>Practically, this is a method to extract the data resources from multiple direction to insure that the model trained is robust over any possible noise. Technically, it is achived by taking all data as training sets and testing sets via roation and averaging.
+This includes the following steps:</p>
+<p>Step-I:  Data is divided into k folds of eqaully large chunks.</p>
+<p>Step-II: Iterated through the k chunks using the current chunk for validation and other k-1 chunks for training.</p>
+<p>Step -III: Average is taken over the validation scores to give a single validation score for the learning algorithm.</p>
+</li>
+<li>
+<p><strong>What benefit does this technique provide for grid search when optimizing a model?</strong></p>
+</li>
+</ol>
+<p>Using all the examples in the dataset for both training and testing is the main advantage of k-fold cross-validation. This makes it more robust to variations of parameters in grid search. Grid search may overfit the validation set if certain evaluation data points are outliers. It can be eliminated by averaging over k-times evaluations using all data points.</p>
+<h3 id="implementation-fitting-a-model">Implementation: Fitting a Model</h3>
+<p>Your final implementation requires that you bring everything together and train a model using the <strong>decision tree algorithm</strong>. To ensure that you are producing an optimized model, you will train the model using the grid search technique to optimize the <code>'max_depth'</code> parameter for the decision tree. The <code>'max_depth'</code> parameter can be thought of as how many questions the decision tree algorithm is allowed to ask about the data before making a prediction. Decision trees are part of a class of algorithms called <em>supervised learning algorithms</em>.</p>
+<p>In addition, you will find your implementation is using <code>ShuffleSplit()</code> for an alternative form of cross-validation (see the <code>'cv_sets'</code> variable). While it is not the K-Fold cross-validation technique you describe in <strong>Question 8</strong>, this type of cross-validation technique is just as useful!. The <code>ShuffleSplit()</code> implementation below will create 10 (<code>'n_iter'</code>) shuffled sets, and for each shuffle, 20% (<code>'test_size'</code>) of the data will be used as the <em>validation set</em>. While you're working on your implementation, think about the contrasts and similarities it has to the K-fold cross-validation technique.</p>
+<p>For the <code>fit_model</code> function in the code cell below, you will need to implement the following:
+- Use <a href="http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html"><code>DecisionTreeRegressor</code></a> from <code>sklearn.tree</code> to create a decision tree regressor object.
+  - Assign this object to the <code>'regressor'</code> variable.
+- Create a dictionary for <code>'max_depth'</code> with the values from 1 to 10, and assign this to the <code>'params'</code> variable.
+- Use <a href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.make_scorer.html"><code>make_scorer</code></a> from <code>sklearn.metrics</code> to create a scoring function object.
+  - Pass the <code>performance_metric</code> function as a parameter to the object.
+  - Assign this scoring function to the <code>'scoring_fnc'</code> variable.
+- Use <a href="http://scikit-learn.org/0.17/modules/generated/sklearn.grid_search.GridSearchCV.html"><code>GridSearchCV</code></a> from <code>sklearn.grid_search</code> to create a grid search object.
+  - Pass the variables <code>'regressor'</code>, <code>'params'</code>, <code>'scoring_fnc'</code>, and <code>'cv_sets'</code> as parameters to the object. 
+  - Assign the <code>GridSearchCV</code> object to the <code>'grid'</code> variable.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Import &#39;make_scorer&#39;, &#39;DecisionTreeRegressor&#39;, and &#39;GridSearchCV&#39;</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.metrics</span> <span style="color: #006699; font-weight: bold">import</span> make_scorer
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.tree</span> <span style="color: #006699; font-weight: bold">import</span> DecisionTreeRegressor
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.grid_search</span> <span style="color: #006699; font-weight: bold">import</span> GridSearchCV
+
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">fit_model</span>(X, y):
+    <span style="color: #CC3300; font-style: italic">&quot;&quot;&quot; Performs grid search over the &#39;max_depth&#39; parameter for a </span>
+<span style="color: #CC3300; font-style: italic">        decision tree regressor trained on the input data [X, y]. &quot;&quot;&quot;</span>
+
+    <span style="color: #0099FF; font-style: italic"># Create cross-validation sets from the training data</span>
+    cv_sets <span style="color: #555555">=</span> ShuffleSplit(X<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>], n_iter <span style="color: #555555">=</span> <span style="color: #FF6600">10</span>, test_size <span style="color: #555555">=</span> <span style="color: #FF6600">0.20</span>, random_state <span style="color: #555555">=</span> <span style="color: #FF6600">0</span>)
+
+    <span style="color: #0099FF; font-style: italic"># Create a decision tree regressor object</span>
+    regressor <span style="color: #555555">=</span> DecisionTreeRegressor()
+
+    <span style="color: #0099FF; font-style: italic"># Create a dictionary for the parameter &#39;max_depth&#39; with a range from 1 to 10</span>
+    params <span style="color: #555555">=</span> {<span style="color: #CC3300">&#39;max_depth&#39;</span>:(<span style="color: #FF6600">1</span>,<span style="color: #FF6600">2</span>,<span style="color: #FF6600">3</span>,<span style="color: #FF6600">4</span>,<span style="color: #FF6600">5</span>,<span style="color: #FF6600">6</span>,<span style="color: #FF6600">7</span>,<span style="color: #FF6600">8</span>,<span style="color: #FF6600">9</span>,<span style="color: #FF6600">10</span>)}
+
+    <span style="color: #0099FF; font-style: italic"># Transform &#39;performance_metric&#39; into a scoring function using &#39;make_scorer&#39; </span>
+    scoring_fnc <span style="color: #555555">=</span> make_scorer(performance_metric)
+
+    <span style="color: #0099FF; font-style: italic"># Create the grid search object</span>
+    grid <span style="color: #555555">=</span> GridSearchCV(regressor, params,scoring_fnc,cv<span style="color: #555555">=</span>cv_sets)
+
+    <span style="color: #0099FF; font-style: italic"># Fit the grid search object to the data to compute the optimal model</span>
+    grid <span style="color: #555555">=</span> grid<span style="color: #555555">.</span>fit(X, y)
+
+    <span style="color: #0099FF; font-style: italic"># Return the optimal model after fitting the data</span>
+    <span style="color: #006699; font-weight: bold">return</span> grid<span style="color: #555555">.</span>best_estimator_
+</pre></div>
+
+
+<h3 id="making-predictions">Making Predictions</h3>
+<p>Once a model has been trained on a given set of data, it can now be used to make predictions on new sets of input data. In the case of a <em>decision tree regressor</em>, the model has learned <em>what the best questions to ask about the input data are</em>, and can respond with a prediction for the <strong>target variable</strong>. You can use these predictions to gain information about data where the value of the target variable is unknown — such as data the model was not trained on.</p>
+<h3 id="question-9-optimal-model">Question 9 - Optimal Model</h3>
+<p><em>What maximum depth does the optimal model have? How does this result compare to your guess in <strong>Question 6</strong>?</em>  </p>
+<p>Run the code block below to fit the decision tree regressor to the training data and produce an optimal model.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Fit the training data to the model using grid search</span>
+reg <span style="color: #555555">=</span> fit_model(X_train, y_train)
+
+<span style="color: #0099FF; font-style: italic"># Produce the value for &#39;max_depth&#39;</span>
+<span style="color: #336666">print</span> (<span style="color: #CC3300">&quot;Parameter &#39;max_depth&#39; is </span><span style="color: #AA0000">{}</span><span style="color: #CC3300"> for the optimal model.&quot;</span>\
+                           <span style="color: #555555">.</span>format(reg<span style="color: #555555">.</span>get_params()[<span style="color: #CC3300">&#39;max_depth&#39;</span>]))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Parameter &#39;max_depth&#39; is 3 for the optimal model.
+</pre></div>
+
+
+<h4 id="answer"><strong>Answer: </strong></h4>
+<p>The optimal model has <code>max_depth=4</code>, it is close to the result <code>max_depth=3</code> in <strong>Question 6</strong>. This difference could be as a result of different data used for in the graphical representation and the grid search. Arguably grid search should be more reliable. </p>
+<p>Making life less complicated by following - Occam's Razor principle(https://simple.wikipedia.org/wiki/Occam's_razor), which favours a simpler model to more complicated ones. :)</p>
+<h3 id="question-10-predicting-selling-prices">Question 10 - Predicting Selling Prices</h3>
+<p>Imagine that you were a real estate agent in the Boston area looking to use this model to help price homes owned by your clients that they wish to sell. You have collected the following information from three of your clients:</p>
+<table>
+<thead>
+<tr>
+<th align="center">Feature</th>
+<th align="center">Client 1</th>
+<th align="center">Client 2</th>
+<th align="center">Client 3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Total number of rooms in home</td>
+<td align="center">5 rooms</td>
+<td align="center">4 rooms</td>
+<td align="center">8 rooms</td>
+</tr>
+<tr>
+<td align="center">Neighborhood poverty level (as %)</td>
+<td align="center">17%</td>
+<td align="center">32%</td>
+<td align="center">3%</td>
+</tr>
+<tr>
+<td align="center">Student-teacher ratio of nearby schools</td>
+<td align="center">15-to-1</td>
+<td align="center">22-to-1</td>
+<td align="center">12-to-1</td>
+</tr>
+<tr>
+<td align="center"><em>What price would you recommend each client sell his/her home at? Do these prices seem reasonable given the values for the respective features?</em></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>Hint:</strong> Use the statistics you calculated in the <strong>Data Exploration</strong> section to help justify your response.</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p>Run the code block below to have your optimized model make predictions for each client's home.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Produce a matrix for client data</span>
+client_data <span style="color: #555555">=</span> [[<span style="color: #FF6600">5</span>, <span style="color: #FF6600">17</span>, <span style="color: #FF6600">15</span>], <span style="color: #0099FF; font-style: italic"># Client 1</span>
+               [<span style="color: #FF6600">4</span>, <span style="color: #FF6600">32</span>, <span style="color: #FF6600">22</span>], <span style="color: #0099FF; font-style: italic"># Client 2</span>
+               [<span style="color: #FF6600">8</span>, <span style="color: #FF6600">3</span>, <span style="color: #FF6600">12</span>]]  <span style="color: #0099FF; font-style: italic"># Client 3</span>
+
+<span style="color: #0099FF; font-style: italic"># Show predictions</span>
+<span style="color: #006699; font-weight: bold">for</span> i, price <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>(reg<span style="color: #555555">.</span>predict(client_data)):
+    <span style="color: #336666">print</span> (<span style="color: #CC3300">&quot;Predicted selling price for Client </span><span style="color: #AA0000">{}</span><span style="color: #CC3300">&#39;s home: $</span><span style="color: #AA0000">{:,.2f}</span><span style="color: #CC3300">&quot;</span><span style="color: #555555">.</span>format(i<span style="color: #555555">+</span><span style="color: #FF6600">1</span>, price))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Predicted selling price for Client 1&#39;s home: $369,680.77
+Predicted selling price for Client 2&#39;s home: $274,568.97
+Predicted selling price for Client 3&#39;s home: $903,150.00
+</pre></div>
+
+
+<p><strong>Answer: </strong>
+1. <strong>What price would you recommend each client sell his/her home at?</strong></p>
+<p>Following are the prices recomended:</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Predicted selling price for Client 1&#39;s home: $410,792.31
+Predicted selling price for Client 2&#39;s home: $234,054.55
+Predicted selling price for Client 3&#39;s home: $920,010.00
+</pre></div>
+
+
+<ol>
+<li>
+<p><strong>Do these prices seem reasonable given the values for the respective features?</strong></p>
+<p>Yes. The above prices are for average house(~410k), cheap house(~234k), and costy house(~920k) respectively by their deviation from mean_price measured in std_price.This is evident from histogram plot of prices below. The predicated prices are reasonable considering dataset statistics and our observation in <strong>Question 1</strong>. The house price is likely to be in proportion to <code>RM</code>, and in inverse proportion to <code>LSTAT</code> or <code>PTRATIO</code>. As an example, for client 2  the deviations of three features all decrease the house price based on assumpution in Question 1 which cause it be cheaper than average house.</p>
+</li>
+</ol>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">8</span>, <span style="color: #FF6600">6</span>))
+plt<span style="color: #555555">.</span>hist(prices, bins <span style="color: #555555">=</span> <span style="color: #FF6600">20</span>)
+mean_price <span style="color: #555555">=</span> np<span style="color: #555555">.</span>mean(prices)
+plt<span style="color: #555555">.</span>axvline(mean_price, lw <span style="color: #555555">=</span> <span style="color: #FF6600">5</span>, c <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;g&#39;</span>,label <span style="color: #555555">=</span> <span style="color: #CC3300">&quot;mean&quot;</span>)
+
+<span style="color: #006699; font-weight: bold">for</span> price <span style="color: #000000; font-weight: bold">in</span> reg<span style="color: #555555">.</span>predict(client_data):
+    plt<span style="color: #555555">.</span>axvline(price, lw <span style="color: #555555">=</span> <span style="color: #FF6600">5</span>, c <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;r&#39;</span>, label <span style="color: #555555">=</span> <span style="color: #CC3300">&quot;client&quot;</span>)
+plt<span style="color: #555555">.</span>legend(bbox_to_anchor<span style="color: #555555">=</span>(<span style="color: #FF6600">1.05</span>, <span style="color: #FF6600">0.05</span>),loc<span style="color: #555555">=</span><span style="color: #CC3300">&#39;lower left&#39;</span>,borderaxespad <span style="color: #555555">=</span> <span style="color: #FF6600">0.</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&lt;matplotlib.legend.Legend at 0x11bf42ba8&gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_55_1.png" /></p>
+<h3 id="sensitivity">Sensitivity</h3>
+<p>An optimal model is not necessarily a robust model. Sometimes, a model is either too complex or too simple to sufficiently generalize to new data. Sometimes, a model could use a learning algorithm that is not appropriate for the structure of the data given. Other times, the data itself could be too noisy or contain too few samples to allow a model to adequately capture the target variable — i.e., the model is underfitted. Run the code cell below to run the <code>fit_model</code> function ten times with different training and testing sets to see how the prediction for a specific client changes with the data it's trained on.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>vs<span style="color: #555555">.</span>PredictTrials(features, prices, fit_model, client_data)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Trial 1: $391,183.33
+Trial 2: $419,700.00
+Trial 3: $415,800.00
+Trial 4: $420,622.22
+Trial 5: $418,377.27
+Trial 6: $411,931.58
+Trial 7: $399,663.16
+Trial 8: $407,232.00
+Trial 9: $351,577.61
+Trial 10: $413,700.00
+
+Range in prices: $69,044.61
+</pre></div>
+
+
+<p>The standard deviation of prices is 165,171.13 and range of price predicted is 69,044.61. This shows that the price predicted is consistent within 1 stadard deviation.</p>
+<h3 id="question-11-applicability">Question 11 - Applicability</h3>
+<p><em>In a few sentences, discuss whether the constructed model should or should not be used in a real-world setting.</em><br />
+<strong>Hint:</strong> Some questions to answering:
+- <em>How relevant today is data that was collected from 1978?</em>
+- <em>Are the features present in the data sufficient to describe a home?</em>
+- <em>Is the model robust enough to make consistent predictions?</em>
+- <em>Would data collected in an urban city like Boston be applicable in a rural city?</em></p>
+<p><strong>Answer: </strong></p>
+<p>The constructed model should not be used directly in a real-world setting. Following are the potential reasons:</p>
+<ol>
+<li>
+<p>This data is from 1978.So, this model can not capture the present day scenario and can be biased with time changing.</p>
+</li>
+<li>
+<p>Dataset has a small number of samples. This may cause the model not to be robust enough to make consistent predictions.</p>
+</li>
+<li>
+<p>The features such as location,security, transportation, population etc are also likly to affect the house price. The features in this dataset may be insufficient to avoid underfitting, apart from room numbers, local incoming and education resources.</p>
+</li>
+<li>
+<p>There could be different models in different areas such as urban city or rural city. Newly built smart homes or IOT add technology may add new features not seen before in house pricing.</p>
+</li>
+</ol>
+<hr />
+<blockquote>
+<p><strong>Note</strong>: Once you have completed all of the code implementations and successfully answered each question above, you may finalize your work by exporting the iPython Notebook as an HTML document. You can do this by using the menu above and navigating to<br />
+<strong>File -&gt; Download as -&gt; HTML (.html)</strong>. Include the finished document along with this notebook as your submission.</p>
+</blockquote>
+<hr />
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../Customer_segments/customer_segments/" class="btn btn-neutral float-right" title="Customer Clustering">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../intro/" class="btn btn-neutral" title="Introduction"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../intro/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../Customer_segments/customer_segments/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../../search/main.js" defer></script>
+
+</body>
+</html>

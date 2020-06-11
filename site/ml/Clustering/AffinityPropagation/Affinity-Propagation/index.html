@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../../../img/favicon.ico">
+  <title>Affinity Propagation - Machine Learning</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Affinity Propagation";
+    var mkdocs_page_input_path = "ml/Clustering/AffinityPropagation/Affinity-Propagation.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../../.." class="icon icon-home"> Machine Learning</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="tocbase current">
+    
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../..">Home</a>
+  </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Machine Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../LinearModels/Linear-models/">Linear Regression</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Classifiers/Logistic/Logistic/">Logistic Regression</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Classifiers/Tree/Tree/">Decision Tree</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Classifiers/Ensamble/ensamble/">Ensamble Methods</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Classifiers/SVM/svm/">Support Vector Machine</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Kmeans/Kmeans/">Kmeans Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Agglomerative/Agglomerative/">Agglomerative Clustering</a>
+  </li>
+        
+          
+
+
+  
+    
+    <li class="navtree toctree-l2 page current">
+      <a class="current" href="./">
+        Affinity Propagation
+          <span class="toctree-expand"></span>
+      </a>
+    </li>
+    
+      
+
+  <li class="toctree-l2 current with-children">
+    <a href="#clustering-affinity-propagation">
+      Clustering- Affinity Propagation
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2 current">
+    <ul class="subnav-l2 current">
+    
+      
+          
+
+  <li class="toctree-l3 current with-children">
+    <a href="#demo-of-affinity-propagation-clustering-algorithm">
+      Demo of affinity propagation clustering algorithm
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3 current">
+    <ul class="subnav-l3 current">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#compute-affinity-propagation">Compute Affinity Propagation</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#plot-result">Plot result</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+
+  
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Spectral/Spectral/">Spectral Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../DBSCAN/DBSCAN/">DBSCAN Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../MeanShift/Mean-shift/">Mean Shift Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Comparison/Comparison/">Cluster Comparison</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">ML Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/boston_housing/boston_housing/">Boston Housing</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/Customer_segments/customer_segments/">Customer Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/finding_donors/finding_donors/">Finding Donors</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/vehicle-detection/CARND-Project-5/">Vehicle Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/perceptron/dlnd-your-first-neural-network/">Perceptron</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Deep Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/Vanila/1.Vanila-LSTM/">Vanila LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/stacked/2.Stacked-LSTM/">Stacked LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/bidirectional/5. BiDirectional-LSTM/">Bidirectional LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/rnn/RNN_project/">Recurrent Neural Network</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">DL Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/NMIST/NMIST/">Digit Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/CIFRT10/CIFR10/">Image Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/traffic-sign/Traffic_Sign_Classifier/">Traffic Sign Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/translator/dlnd_language_translation/">Language Translator</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Rinforcement Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../rl/smartcab/smartcab/">SmartCab</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">GAN Project</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/gan/dlnd_face_generation/">Face Generation</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../../References/ref.md">References</a>
+  </li>
+    
+  </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../..">Machine Learning</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Machine Learning &raquo;</li>
+        
+      
+    
+    <li>Affinity Propagation</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="clustering-affinity-propagation">Clustering- Affinity Propagation</h2>
+<p><strong><em>These codes are imported from Scikit-Learn python package for learning purpose</em></strong></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">seaborn</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">sns</span>
+<span style="color: #555555">%</span>matplotlib inline
+sns<span style="color: #555555">.</span>set()
+</pre></div>
+
+
+<h3 id="demo-of-affinity-propagation-clustering-algorithm">Demo of affinity propagation clustering algorithm</h3>
+<p>Reference:
+* Brendan J. Frey and Delbert Dueck, "Clustering by Passing Messages
+* Between Data Points", Science Feb. 2007</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.cluster</span> <span style="color: #006699; font-weight: bold">import</span> AffinityPropagation
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn</span> <span style="color: #006699; font-weight: bold">import</span> metrics
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.datasets.samples_generator</span> <span style="color: #006699; font-weight: bold">import</span> make_blobs
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Generate sample data</span>
+centers <span style="color: #555555">=</span> [[<span style="color: #FF6600">1</span>, <span style="color: #FF6600">1</span>], [<span style="color: #555555">-</span><span style="color: #FF6600">1</span>, <span style="color: #555555">-</span><span style="color: #FF6600">1</span>], [<span style="color: #FF6600">1</span>, <span style="color: #555555">-</span><span style="color: #FF6600">1</span>]]
+X, labels_true <span style="color: #555555">=</span> make_blobs(n_samples<span style="color: #555555">=</span><span style="color: #FF6600">300</span>,\
+                            centers<span style="color: #555555">=</span>centers,\
+                            cluster_std<span style="color: #555555">=</span><span style="color: #FF6600">0.5</span>,\
+                            random_state<span style="color: #555555">=</span><span style="color: #FF6600">0</span>)
+</pre></div>
+
+
+<h4 id="compute-affinity-propagation">Compute Affinity Propagation</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>af <span style="color: #555555">=</span> AffinityPropagation(preference<span style="color: #555555">=-</span><span style="color: #FF6600">50</span>)<span style="color: #555555">.</span>fit(X)
+cluster_centers_indices <span style="color: #555555">=</span> af<span style="color: #555555">.</span>cluster_centers_indices_
+labels <span style="color: #555555">=</span> af<span style="color: #555555">.</span>labels_
+
+n_clusters_ <span style="color: #555555">=</span> <span style="color: #336666">len</span>(cluster_centers_indices)
+
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&#39;Estimated number of clusters: </span><span style="color: #AA0000">%d</span><span style="color: #CC3300">&#39;</span> <span style="color: #555555">%</span> n_clusters_)
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;Homogeneity: </span><span style="color: #AA0000">%0.3f</span><span style="color: #CC3300">&quot;</span> <span style="color: #555555">%</span> metrics<span style="color: #555555">.</span>homogeneity_score(labels_true, labels))
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;Completeness: </span><span style="color: #AA0000">%0.3f</span><span style="color: #CC3300">&quot;</span> <span style="color: #555555">%</span> metrics<span style="color: #555555">.</span>completeness_score(labels_true, labels))
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;V-measure: </span><span style="color: #AA0000">%0.3f</span><span style="color: #CC3300">&quot;</span> <span style="color: #555555">%</span> metrics<span style="color: #555555">.</span>v_measure_score(labels_true, labels))
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;Adjusted Rand Index: </span><span style="color: #AA0000">%0.3f</span><span style="color: #CC3300">&quot;</span>
+      <span style="color: #555555">%</span> metrics<span style="color: #555555">.</span>adjusted_rand_score(labels_true, labels))
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;Adjusted Mutual Information: </span><span style="color: #AA0000">%0.3f</span><span style="color: #CC3300">&quot;</span>
+      <span style="color: #555555">%</span> metrics<span style="color: #555555">.</span>adjusted_mutual_info_score(labels_true, labels))
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;Silhouette Coefficient: </span><span style="color: #AA0000">%0.3f</span><span style="color: #CC3300">&quot;</span>
+      <span style="color: #555555">%</span> metrics<span style="color: #555555">.</span>silhouette_score(X, labels, metric<span style="color: #555555">=</span><span style="color: #CC3300">&#39;sqeuclidean&#39;</span>))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Estimated number of clusters: 3
+Homogeneity: 0.872
+Completeness: 0.872
+V-measure: 0.872
+Adjusted Rand Index: 0.912
+Adjusted Mutual Information: 0.871
+Silhouette Coefficient: 0.753
+</pre></div>
+
+
+<h4 id="plot-result">Plot result</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">itertools</span> <span style="color: #006699; font-weight: bold">import</span> cycle
+
+plt<span style="color: #555555">.</span>close(<span style="color: #CC3300">&#39;all&#39;</span>)
+plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> [<span style="color: #FF6600">12</span>,<span style="color: #FF6600">10</span>])
+plt<span style="color: #555555">.</span>clf()
+
+colors <span style="color: #555555">=</span> cycle(<span style="color: #CC3300">&#39;bgrcmykbgrcmykbgrcmykbgrcmyk&#39;</span>)
+<span style="color: #006699; font-weight: bold">for</span> k, col <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">zip</span>(<span style="color: #336666">range</span>(n_clusters_), colors):
+    class_members <span style="color: #555555">=</span> labels <span style="color: #555555">==</span> k
+    cluster_center <span style="color: #555555">=</span> X[cluster_centers_indices[k]]
+    plt<span style="color: #555555">.</span>plot(X[class_members, <span style="color: #FF6600">0</span>], X[class_members, <span style="color: #FF6600">1</span>], col <span style="color: #555555">+</span> <span style="color: #CC3300">&#39;.&#39;</span>)
+    plt<span style="color: #555555">.</span>plot(cluster_center[<span style="color: #FF6600">0</span>], cluster_center[<span style="color: #FF6600">1</span>], <span style="color: #CC3300">&#39;o&#39;</span>, markerfacecolor<span style="color: #555555">=</span>col,
+             markeredgecolor<span style="color: #555555">=</span><span style="color: #CC3300">&#39;k&#39;</span>, markersize<span style="color: #555555">=</span><span style="color: #FF6600">14</span>)
+    <span style="color: #006699; font-weight: bold">for</span> x <span style="color: #000000; font-weight: bold">in</span> X[class_members]:
+        plt<span style="color: #555555">.</span>plot([cluster_center[<span style="color: #FF6600">0</span>], x[<span style="color: #FF6600">0</span>]], [cluster_center[<span style="color: #FF6600">1</span>], x[<span style="color: #FF6600">1</span>]], col)
+
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Estimated number of clusters: </span><span style="color: #AA0000">%d</span><span style="color: #CC3300">&#39;</span> <span style="color: #555555">%</span> n_clusters_)
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_10_0.png" /></p>
+<hr />
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../Spectral/Spectral/" class="btn btn-neutral float-right" title="Spectral Clustering">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../Agglomerative/Agglomerative/" class="btn btn-neutral" title="Agglomerative Clustering"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../Agglomerative/Agglomerative/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../Spectral/Spectral/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../../../..';</script>
+    <script src="../../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../../../search/main.js" defer></script>
+
+</body>
+</html>
