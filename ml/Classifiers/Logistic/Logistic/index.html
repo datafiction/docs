@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../../../img/favicon.ico">
+  <title>Logistic Regression - Machine Learning</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Logistic Regression";
+    var mkdocs_page_input_path = "ml/Classifiers/Logistic/Logistic.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../../.." class="icon icon-home"> Machine Learning</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="tocbase current">
+    
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../..">Home</a>
+  </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Machine Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../LinearModels/Linear-models/">Linear Regression</a>
+  </li>
+        
+          
+
+
+  
+    
+    <li class="navtree toctree-l2 page current">
+      <a class="current" href="./">
+        Logistic Regression
+          <span class="toctree-expand"></span>
+      </a>
+    </li>
+    
+      
+
+  <li class="toctree-l2 current with-children">
+    <a href="#classification">
+      Classification
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2 current">
+    <ul class="subnav-l2 current">
+    
+      
+          
+
+  <li class="toctree-l3 current with-children">
+    <a href="#probability-plot">
+      Probability plot
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3 current">
+    <ul class="subnav-l3 current">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#1-plot-classification-probability-source">1. Plot classification probability (source)</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#data">Data</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#decision-boundaries">
+      Decision boundaries
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#2-classifier-comparison-source">2. Classifier comparison (source)</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#data-preparation">Data preparation</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#assign-classifiers">Assign Classifiers</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#plot">Plot</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#digit-classifier">
+      Digit Classifier
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#3-recognizing-hand-written-digitssource">3. Recognizing hand-written digits(source)</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#discriminant-analysis">
+      Discriminant Analysis
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#4-normal-and-shrinkage-linear-discriminant-analysis-for-classificationsource">4. Normal and Shrinkage Linear Discriminant Analysis for classification(source)</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#discriminant-analysis_1">
+      Discriminant Analysis
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#5-linear-and-quadratic-discriminant-analysis-with-covariance-ellipsoid-source">5. Linear and Quadratic Discriminant Analysis with covariance ellipsoid (source)</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+
+  
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Tree/Tree/">Decision Tree</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Ensamble/ensamble/">Ensamble Methods</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../SVM/svm/">Support Vector Machine</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Clustering/Kmeans/Kmeans/">Kmeans Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Clustering/Agglomerative/Agglomerative/">Agglomerative Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Clustering/AffinityPropagation/Affinity-Propagation/">Affinity Propagation</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Clustering/Spectral/Spectral/">Spectral Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Clustering/DBSCAN/DBSCAN/">DBSCAN Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Clustering/MeanShift/Mean-shift/">Mean Shift Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Clustering/Comparison/Comparison/">Cluster Comparison</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">ML Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/boston_housing/boston_housing/">Boston Housing</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/Customer_segments/customer_segments/">Customer Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/finding_donors/finding_donors/">Finding Donors</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/vehicle-detection/CARND-Project-5/">Vehicle Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/perceptron/dlnd-your-first-neural-network/">Perceptron</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Deep Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/Vanila/1.Vanila-LSTM/">Vanila LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/stacked/2.Stacked-LSTM/">Stacked LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/bidirectional/5. BiDirectional-LSTM/">Bidirectional LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/rnn/RNN_project/">Recurrent Neural Network</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">DL Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/NMIST/NMIST/">Digit Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/CIFRT10/CIFR10/">Image Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/traffic-sign/Traffic_Sign_Classifier/">Traffic Sign Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/translator/dlnd_language_translation/">Language Translator</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Rinforcement Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../rl/smartcab/smartcab/">SmartCab</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">GAN Project</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/gan/dlnd_face_generation/">Face Generation</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../../References/ref.md">References</a>
+  </li>
+    
+  </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../..">Machine Learning</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Machine Learning &raquo;</li>
+        
+      
+    
+    <li>Logistic Regression</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="classification">Classification</h1>
+<hr />
+<h2 id="probability-plot">Probability plot</h2>
+<hr />
+<h3 id="1-plot-classification-probability-source">1. Plot classification probability (<a href="https://github.com/scikit-learn/scikit-learn/blob/master/examples/classification/plot_classification_probability.py">source</a>)</h3>
+<hr />
+<p>Plot the classification probability for different classifiers. We use a 3
+class dataset, and we classify it with </p>
+<ul>
+<li>a Support Vector classifier (<code>sklearn.svm.SVC</code>), </li>
+<li>L1 and L2 penalized logistic regression with either a One-Vs-Rest or multinomial setting (<code>sklearn.linear_model.LogisticRegression</code>), and </li>
+<li>Gaussian process classification (<code>sklearn.gaussian_process.kernels.RBF</code>)</li>
+</ul>
+<p>The logistic regression is not a multiclass classifier out of the box. As
+a result it can identify only the first class.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #0099FF; font-style: italic">#========Models===================</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.linear_model</span> <span style="color: #006699; font-weight: bold">import</span> LogisticRegression
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.svm</span> <span style="color: #006699; font-weight: bold">import</span> SVC
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.gaussian_process</span> <span style="color: #006699; font-weight: bold">import</span> GaussianProcessClassifier
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.gaussian_process.kernels</span> <span style="color: #006699; font-weight: bold">import</span> RBF
+<span style="color: #0099FF; font-style: italic">#======= data set ===============================</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn</span> <span style="color: #006699; font-weight: bold">import</span> datasets
+</pre></div>
+
+
+<h3 id="data">Data</h3>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>iris <span style="color: #555555">=</span> datasets<span style="color: #555555">.</span>load_iris()
+X <span style="color: #555555">=</span> iris<span style="color: #555555">.</span>data[:, <span style="color: #FF6600">0</span>:<span style="color: #FF6600">2</span>]  <span style="color: #0099FF; font-style: italic"># we only take the first two features for visualization</span>
+y <span style="color: #555555">=</span> iris<span style="color: #555555">.</span>target
+n_features <span style="color: #555555">=</span> X<span style="color: #555555">.</span>shape[<span style="color: #FF6600">1</span>]
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>C <span style="color: #555555">=</span> <span style="color: #FF6600">1.0</span>
+kernel <span style="color: #555555">=</span> <span style="color: #FF6600">1.0</span> <span style="color: #555555">*</span> RBF([<span style="color: #FF6600">1.0</span>, <span style="color: #FF6600">1.0</span>])  <span style="color: #0099FF; font-style: italic"># for GPC</span>
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Create different classifiers. The logistic regression cannot do</span>
+<span style="color: #0099FF; font-style: italic"># multiclass out of the box.</span>
+
+classifiers <span style="color: #555555">=</span> {<span style="color: #CC3300">&#39;L1 logistic&#39;</span>: LogisticRegression(C<span style="color: #555555">=</span>C, penalty<span style="color: #555555">=</span><span style="color: #CC3300">&#39;l1&#39;</span>),
+               <span style="color: #CC3300">&#39;L2 logistic (OvR)&#39;</span>: LogisticRegression(C<span style="color: #555555">=</span>C, penalty<span style="color: #555555">=</span><span style="color: #CC3300">&#39;l2&#39;</span>),
+               <span style="color: #CC3300">&#39;Linear SVC&#39;</span>: SVC(kernel<span style="color: #555555">=</span><span style="color: #CC3300">&#39;linear&#39;</span>, C<span style="color: #555555">=</span>C, probability<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>,
+                                 random_state<span style="color: #555555">=</span><span style="color: #FF6600">0</span>),
+               <span style="color: #CC3300">&#39;L2 logistic (Multinomial)&#39;</span>: LogisticRegression(
+                C<span style="color: #555555">=</span>C, solver<span style="color: #555555">=</span><span style="color: #CC3300">&#39;lbfgs&#39;</span>, multi_class<span style="color: #555555">=</span><span style="color: #CC3300">&#39;multinomial&#39;</span>),
+               <span style="color: #CC3300">&#39;GPC&#39;</span>: GaussianProcessClassifier(kernel)
+               }
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>n_classifiers <span style="color: #555555">=</span> <span style="color: #336666">len</span>(classifiers)
+
+plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">3</span> <span style="color: #555555">*</span> <span style="color: #FF6600">2</span>, n_classifiers <span style="color: #555555">*</span> <span style="color: #FF6600">2</span>))
+plt<span style="color: #555555">.</span>subplots_adjust(bottom<span style="color: #555555">=.</span><span style="color: #FF6600">2</span>, top<span style="color: #555555">=.</span><span style="color: #FF6600">95</span>)
+
+xx <span style="color: #555555">=</span> np<span style="color: #555555">.</span>linspace(<span style="color: #FF6600">3</span>, <span style="color: #FF6600">9</span>, <span style="color: #FF6600">100</span>)
+yy <span style="color: #555555">=</span> np<span style="color: #555555">.</span>linspace(<span style="color: #FF6600">1</span>, <span style="color: #FF6600">5</span>, <span style="color: #FF6600">100</span>)<span style="color: #555555">.</span>T
+xx, yy <span style="color: #555555">=</span> np<span style="color: #555555">.</span>meshgrid(xx, yy)
+Xfull <span style="color: #555555">=</span> np<span style="color: #555555">.</span>c_[xx<span style="color: #555555">.</span>ravel(), yy<span style="color: #555555">.</span>ravel()]
+
+<span style="color: #006699; font-weight: bold">for</span> index, (name, classifier) <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>(classifiers<span style="color: #555555">.</span>items()):
+    classifier<span style="color: #555555">.</span>fit(X, y)
+
+    y_pred <span style="color: #555555">=</span> classifier<span style="color: #555555">.</span>predict(X)
+    classif_rate <span style="color: #555555">=</span> np<span style="color: #555555">.</span>mean(y_pred<span style="color: #555555">.</span>ravel() <span style="color: #555555">==</span> y<span style="color: #555555">.</span>ravel()) <span style="color: #555555">*</span> <span style="color: #FF6600">100</span>
+    <span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;classif_rate for </span><span style="color: #AA0000">%s</span><span style="color: #CC3300"> : </span><span style="color: #AA0000">%f</span><span style="color: #CC3300"> &quot;</span> <span style="color: #555555">%</span> (name, classif_rate))
+
+    <span style="color: #0099FF; font-style: italic"># View probabilities=</span>
+    probas <span style="color: #555555">=</span> classifier<span style="color: #555555">.</span>predict_proba(Xfull)
+    n_classes <span style="color: #555555">=</span> np<span style="color: #555555">.</span>unique(y_pred)<span style="color: #555555">.</span>size
+    <span style="color: #006699; font-weight: bold">for</span> k <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(n_classes):
+        plt<span style="color: #555555">.</span>subplot(n_classifiers, n_classes, index <span style="color: #555555">*</span> n_classes <span style="color: #555555">+</span> k <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>)
+        plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&quot;Class </span><span style="color: #AA0000">%d</span><span style="color: #CC3300">&quot;</span> <span style="color: #555555">%</span> k)
+        <span style="color: #006699; font-weight: bold">if</span> k <span style="color: #555555">==</span> <span style="color: #FF6600">0</span>:
+            plt<span style="color: #555555">.</span>ylabel(name)
+        imshow_handle <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>imshow(probas[:, k]<span style="color: #555555">.</span>reshape((<span style="color: #FF6600">100</span>, <span style="color: #FF6600">100</span>)),
+                                   extent<span style="color: #555555">=</span>(<span style="color: #FF6600">3</span>, <span style="color: #FF6600">9</span>, <span style="color: #FF6600">1</span>, <span style="color: #FF6600">5</span>), origin<span style="color: #555555">=</span><span style="color: #CC3300">&#39;lower&#39;</span>)
+        plt<span style="color: #555555">.</span>xticks(())
+        plt<span style="color: #555555">.</span>yticks(())
+        idx <span style="color: #555555">=</span> (y_pred <span style="color: #555555">==</span> k)
+        <span style="color: #006699; font-weight: bold">if</span> idx<span style="color: #555555">.</span>any():
+            plt<span style="color: #555555">.</span>scatter(X[idx, <span style="color: #FF6600">0</span>], X[idx, <span style="color: #FF6600">1</span>], marker<span style="color: #555555">=</span><span style="color: #CC3300">&#39;o&#39;</span>, c<span style="color: #555555">=</span><span style="color: #CC3300">&#39;k&#39;</span>)
+
+ax <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>axes([<span style="color: #FF6600">0.15</span>, <span style="color: #FF6600">0.04</span>, <span style="color: #FF6600">0.7</span>, <span style="color: #FF6600">0.05</span>])
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&quot;Probability&quot;</span>)
+plt<span style="color: #555555">.</span>colorbar(imshow_handle, cax<span style="color: #555555">=</span>ax, orientation<span style="color: #555555">=</span><span style="color: #CC3300">&#39;horizontal&#39;</span>)
+
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>classif_rate for GPC : 82.666667 
+classif_rate for L2 logistic (OvR) : 76.666667 
+classif_rate for L1 logistic : 79.333333 
+classif_rate for L2 logistic (Multinomial) : 82.000000 
+classif_rate for Linear SVC : 82.000000
+</pre></div>
+
+
+<p><img alt="png" src="../output_8_1.png" /></p>
+<hr />
+<h2 id="decision-boundaries">Decision boundaries</h2>
+<hr />
+<h3 id="2-classifier-comparison-source">2. Classifier comparison (<a href="https://github.com/scikit-learn/scikit-learn/blob/master/examples/classification/plot_classifier_comparison.py">source</a>)</h3>
+<p>A comparison of a several classifiers in scikit-learn on synthetic datasets.
+The point of this example is to illustrate the nature of decision boundaries
+of different classifiers.
+This should be taken with a grain of salt, as the intuition conveyed by
+these examples does not necessarily carry over to real datasets.
+Particularly in high-dimensional spaces, data can more easily be separated
+linearly and the simplicity of classifiers such as naive Bayes and linear SVMs
+might lead to better generalization than is achieved by other classifiers.</p>
+<p>The plots show training points in solid colors and testing points
+semi-transparent. The lower right shows the classification accuracy on the test
+set.</p>
+<p>Models:</p>
+<ul>
+<li><code>sklearn.tree.DecisionTreeClassifier</code></li>
+<li><code>sklearn.naive_bayes.GaussianNB</code></li>
+<li><code>sklearn.neighbors.KNeighborsClassifier</code></li>
+<li><code>sklearn.gaussian_process.GaussianProcessClassifier</code></li>
+<li><code>sklearn.gaussian_process.kernels.RBF</code></li>
+<li><code>sklearn.svm.SVC</code></li>
+<li><code>sklearn.ensemble.RandomForestClassifier</code></li>
+<li><code>sklearn.ensemble.AdaBoostClassifier</code></li>
+<li><code>sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis</code></li>
+<li><code>sklearn.neural_network.MLPClassifier</code></li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.colors</span> <span style="color: #006699; font-weight: bold">import</span> ListedColormap
+
+<span style="color: #0099FF; font-style: italic">#============= preprocessing ===========================</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.model_selection</span> <span style="color: #006699; font-weight: bold">import</span> train_test_split
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.preprocessing</span> <span style="color: #006699; font-weight: bold">import</span> StandardScaler
+
+<span style="color: #0099FF; font-style: italic">#============= models====================================</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.neural_network</span> <span style="color: #006699; font-weight: bold">import</span> MLPClassifier
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.neighbors</span> <span style="color: #006699; font-weight: bold">import</span> KNeighborsClassifier
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.svm</span> <span style="color: #006699; font-weight: bold">import</span> SVC
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.gaussian_process</span> <span style="color: #006699; font-weight: bold">import</span> GaussianProcessClassifier
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.gaussian_process.kernels</span> <span style="color: #006699; font-weight: bold">import</span> RBF
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.tree</span> <span style="color: #006699; font-weight: bold">import</span> DecisionTreeClassifier
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.ensemble</span> <span style="color: #006699; font-weight: bold">import</span> RandomForestClassifier, AdaBoostClassifier
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.naive_bayes</span> <span style="color: #006699; font-weight: bold">import</span> GaussianNB
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.discriminant_analysis</span> <span style="color: #006699; font-weight: bold">import</span> QuadraticDiscriminantAnalysis
+<span style="color: #0099FF; font-style: italic">#========== data set=====================================================</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.datasets</span> <span style="color: #006699; font-weight: bold">import</span> make_moons, make_circles, make_classification
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>h <span style="color: #555555">=</span> <span style="color: #555555">.</span><span style="color: #FF6600">02</span>  <span style="color: #0099FF; font-style: italic"># step size in the mesh</span>
+</pre></div>
+
+
+<h3 id="data-preparation">Data preparation</h3>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>X, y <span style="color: #555555">=</span> make_classification(n_features<span style="color: #555555">=</span><span style="color: #FF6600">2</span>, n_redundant<span style="color: #555555">=</span><span style="color: #FF6600">0</span>, n_informative<span style="color: #555555">=</span><span style="color: #FF6600">2</span>,
+                           random_state<span style="color: #555555">=</span><span style="color: #FF6600">1</span>, n_clusters_per_class<span style="color: #555555">=</span><span style="color: #FF6600">1</span>)
+rng <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>RandomState(<span style="color: #FF6600">2</span>)
+X <span style="color: #555555">+=</span> <span style="color: #FF6600">2</span> <span style="color: #555555">*</span> rng<span style="color: #555555">.</span>uniform(size<span style="color: #555555">=</span>X<span style="color: #555555">.</span>shape)
+linearly_separable <span style="color: #555555">=</span> (X, y)
+
+datasets <span style="color: #555555">=</span> [make_moons(noise<span style="color: #555555">=</span><span style="color: #FF6600">0.3</span>, random_state<span style="color: #555555">=</span><span style="color: #FF6600">0</span>),
+            make_circles(noise<span style="color: #555555">=</span><span style="color: #FF6600">0.2</span>, factor<span style="color: #555555">=</span><span style="color: #FF6600">0.5</span>, random_state<span style="color: #555555">=</span><span style="color: #FF6600">1</span>),
+            linearly_separable
+            ]
+</pre></div>
+
+
+<h3 id="assign-classifiers">Assign Classifiers</h3>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>names <span style="color: #555555">=</span> [<span style="color: #CC3300">&quot;Nearest Neighbors&quot;</span>, <span style="color: #CC3300">&quot;Linear SVM&quot;</span>, <span style="color: #CC3300">&quot;RBF SVM&quot;</span>, <span style="color: #CC3300">&quot;Gaussian Process&quot;</span>,
+         <span style="color: #CC3300">&quot;Decision Tree&quot;</span>, <span style="color: #CC3300">&quot;Random Forest&quot;</span>, <span style="color: #CC3300">&quot;Neural Net&quot;</span>, <span style="color: #CC3300">&quot;AdaBoost&quot;</span>,
+         <span style="color: #CC3300">&quot;Naive Bayes&quot;</span>, <span style="color: #CC3300">&quot;QDA&quot;</span>]
+
+classifiers <span style="color: #555555">=</span> [
+    KNeighborsClassifier(<span style="color: #FF6600">3</span>),
+    SVC(kernel<span style="color: #555555">=</span><span style="color: #CC3300">&quot;linear&quot;</span>, C<span style="color: #555555">=</span><span style="color: #FF6600">0.025</span>),
+    SVC(gamma<span style="color: #555555">=</span><span style="color: #FF6600">2</span>, C<span style="color: #555555">=</span><span style="color: #FF6600">1</span>),
+    GaussianProcessClassifier(<span style="color: #FF6600">1.0</span> <span style="color: #555555">*</span> RBF(<span style="color: #FF6600">1.0</span>), warm_start<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>),
+    DecisionTreeClassifier(max_depth<span style="color: #555555">=</span><span style="color: #FF6600">5</span>),
+    RandomForestClassifier(max_depth<span style="color: #555555">=</span><span style="color: #FF6600">5</span>, n_estimators<span style="color: #555555">=</span><span style="color: #FF6600">10</span>, max_features<span style="color: #555555">=</span><span style="color: #FF6600">1</span>),
+    MLPClassifier(alpha<span style="color: #555555">=</span><span style="color: #FF6600">1</span>),
+    AdaBoostClassifier(),
+    GaussianNB(),
+    QuadraticDiscriminantAnalysis()]
+</pre></div>
+
+
+<h3 id="plot">Plot</h3>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>figure <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">27</span>, <span style="color: #FF6600">9</span>))
+i <span style="color: #555555">=</span> <span style="color: #FF6600">1</span>
+<span style="color: #0099FF; font-style: italic"># iterate over datasets</span>
+<span style="color: #006699; font-weight: bold">for</span> ds_cnt, ds <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>(datasets):
+    <span style="color: #0099FF; font-style: italic"># preprocess dataset, split into training and test part</span>
+    X, y <span style="color: #555555">=</span> ds
+    X <span style="color: #555555">=</span> StandardScaler()<span style="color: #555555">.</span>fit_transform(X)
+    X_train, X_test, y_train, y_test <span style="color: #555555">=</span> \
+        train_test_split(X, y, test_size<span style="color: #555555">=.</span><span style="color: #FF6600">4</span>, random_state<span style="color: #555555">=</span><span style="color: #FF6600">42</span>)
+
+    x_min, x_max <span style="color: #555555">=</span> X[:, <span style="color: #FF6600">0</span>]<span style="color: #555555">.</span>min() <span style="color: #555555">-</span> <span style="color: #555555">.</span><span style="color: #FF6600">5</span>, X[:, <span style="color: #FF6600">0</span>]<span style="color: #555555">.</span>max() <span style="color: #555555">+</span> <span style="color: #555555">.</span><span style="color: #FF6600">5</span>
+    y_min, y_max <span style="color: #555555">=</span> X[:, <span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>min() <span style="color: #555555">-</span> <span style="color: #555555">.</span><span style="color: #FF6600">5</span>, X[:, <span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>max() <span style="color: #555555">+</span> <span style="color: #555555">.</span><span style="color: #FF6600">5</span>
+    xx, yy <span style="color: #555555">=</span> np<span style="color: #555555">.</span>meshgrid(np<span style="color: #555555">.</span>arange(x_min, x_max, h),
+                         np<span style="color: #555555">.</span>arange(y_min, y_max, h))
+
+    <span style="color: #0099FF; font-style: italic"># just plot the dataset first</span>
+    cm <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>RdBu
+    cm_bright <span style="color: #555555">=</span> ListedColormap([<span style="color: #CC3300">&#39;#FF0000&#39;</span>, <span style="color: #CC3300">&#39;#0000FF&#39;</span>])
+    ax <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>subplot(<span style="color: #336666">len</span>(datasets), <span style="color: #336666">len</span>(classifiers) <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>, i)
+    <span style="color: #006699; font-weight: bold">if</span> ds_cnt <span style="color: #555555">==</span> <span style="color: #FF6600">0</span>:
+        ax<span style="color: #555555">.</span>set_title(<span style="color: #CC3300">&quot;Input data&quot;</span>)
+    <span style="color: #0099FF; font-style: italic"># Plot the training points</span>
+    ax<span style="color: #555555">.</span>scatter(X_train[:, <span style="color: #FF6600">0</span>], X_train[:, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span>y_train, cmap<span style="color: #555555">=</span>cm_bright)
+    <span style="color: #0099FF; font-style: italic"># and testing points</span>
+    ax<span style="color: #555555">.</span>scatter(X_test[:, <span style="color: #FF6600">0</span>], X_test[:, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span>y_test, cmap<span style="color: #555555">=</span>cm_bright, alpha<span style="color: #555555">=</span><span style="color: #FF6600">0.6</span>)
+    ax<span style="color: #555555">.</span>set_xlim(xx<span style="color: #555555">.</span>min(), xx<span style="color: #555555">.</span>max())
+    ax<span style="color: #555555">.</span>set_ylim(yy<span style="color: #555555">.</span>min(), yy<span style="color: #555555">.</span>max())
+    ax<span style="color: #555555">.</span>set_xticks(())
+    ax<span style="color: #555555">.</span>set_yticks(())
+    i <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+
+    <span style="color: #0099FF; font-style: italic"># iterate over classifiers</span>
+    <span style="color: #006699; font-weight: bold">for</span> name, clf <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">zip</span>(names, classifiers):
+        ax <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>subplot(<span style="color: #336666">len</span>(datasets), <span style="color: #336666">len</span>(classifiers) <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>, i)
+        clf<span style="color: #555555">.</span>fit(X_train, y_train)
+        score <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>score(X_test, y_test)
+
+        <span style="color: #0099FF; font-style: italic"># Plot the decision boundary. For that, we will assign a color to each</span>
+        <span style="color: #0099FF; font-style: italic"># point in the mesh [x_min, x_max]x[y_min, y_max].</span>
+        <span style="color: #006699; font-weight: bold">if</span> <span style="color: #336666">hasattr</span>(clf, <span style="color: #CC3300">&quot;decision_function&quot;</span>):
+            Z <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>decision_function(np<span style="color: #555555">.</span>c_[xx<span style="color: #555555">.</span>ravel(), yy<span style="color: #555555">.</span>ravel()])
+        <span style="color: #006699; font-weight: bold">else</span>:
+            Z <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>predict_proba(np<span style="color: #555555">.</span>c_[xx<span style="color: #555555">.</span>ravel(), yy<span style="color: #555555">.</span>ravel()])[:, <span style="color: #FF6600">1</span>]
+
+        <span style="color: #0099FF; font-style: italic"># Put the result into a color plot</span>
+        Z <span style="color: #555555">=</span> Z<span style="color: #555555">.</span>reshape(xx<span style="color: #555555">.</span>shape)
+        ax<span style="color: #555555">.</span>contourf(xx, yy, Z, cmap<span style="color: #555555">=</span>cm, alpha<span style="color: #555555">=.</span><span style="color: #FF6600">8</span>)
+
+        <span style="color: #0099FF; font-style: italic"># Plot also the training points</span>
+        ax<span style="color: #555555">.</span>scatter(X_train[:, <span style="color: #FF6600">0</span>], X_train[:, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span>y_train, cmap<span style="color: #555555">=</span>cm_bright)
+        <span style="color: #0099FF; font-style: italic"># and testing points</span>
+        ax<span style="color: #555555">.</span>scatter(X_test[:, <span style="color: #FF6600">0</span>], X_test[:, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span>y_test, cmap<span style="color: #555555">=</span>cm_bright,
+                   alpha<span style="color: #555555">=</span><span style="color: #FF6600">0.6</span>)
+
+        ax<span style="color: #555555">.</span>set_xlim(xx<span style="color: #555555">.</span>min(), xx<span style="color: #555555">.</span>max())
+        ax<span style="color: #555555">.</span>set_ylim(yy<span style="color: #555555">.</span>min(), yy<span style="color: #555555">.</span>max())
+        ax<span style="color: #555555">.</span>set_xticks(())
+        ax<span style="color: #555555">.</span>set_yticks(())
+        <span style="color: #006699; font-weight: bold">if</span> ds_cnt <span style="color: #555555">==</span> <span style="color: #FF6600">0</span>:
+            ax<span style="color: #555555">.</span>set_title(name)
+        ax<span style="color: #555555">.</span>text(xx<span style="color: #555555">.</span>max() <span style="color: #555555">-</span> <span style="color: #555555">.</span><span style="color: #FF6600">3</span>, yy<span style="color: #555555">.</span>min() <span style="color: #555555">+</span> <span style="color: #555555">.</span><span style="color: #FF6600">3</span>, (<span style="color: #CC3300">&#39;</span><span style="color: #AA0000">%.2f</span><span style="color: #CC3300">&#39;</span> <span style="color: #555555">%</span> score)<span style="color: #555555">.</span>lstrip(<span style="color: #CC3300">&#39;0&#39;</span>),
+                size<span style="color: #555555">=</span><span style="color: #FF6600">15</span>, horizontalalignment<span style="color: #555555">=</span><span style="color: #CC3300">&#39;right&#39;</span>)
+        i <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+
+plt<span style="color: #555555">.</span>tight_layout()
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_19_1.png" /></p>
+<hr />
+<h2 id="digit-classifier">Digit Classifier</h2>
+<hr />
+<h3 id="3-recognizing-hand-written-digitssource">3. Recognizing hand-written digits(<a href="https://github.com/scikit-learn/scikit-learn/blob/master/examples/classification/plot_digits_classification.py">source</a>)</h3>
+<hr />
+<p>An example showing how the scikit-learn can be used to recognize images of
+hand-written digits.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Standard scientific Python imports</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+
+<span style="color: #0099FF; font-style: italic"># Import datasets, classifiers and performance metrics</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn</span> <span style="color: #006699; font-weight: bold">import</span> datasets, svm, metrics
+</pre></div>
+
+
+<p>The data that we are interested in is made of 8x8 images of digits, let's
+have a look at the first 4 images, stored in the <code>images</code> attribute of the
+dataset.  If we were working from image files, we could load them using
+matplotlib.pyplot.imread.  Note that each image must have the same size. For these
+images, we know which digit they represent: it is given in the 'target' of
+the dataset.</p>
+<ul>
+<li>The digits dataset</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>digits <span style="color: #555555">=</span> datasets<span style="color: #555555">.</span>load_digits()
+</pre></div>
+
+
+<ul>
+<li>To apply a classifier on this data, we need to flatten the image, to turn the data in a (samples, feature) matrix:</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>n_samples <span style="color: #555555">=</span> <span style="color: #336666">len</span>(digits<span style="color: #555555">.</span>images)
+data <span style="color: #555555">=</span> digits<span style="color: #555555">.</span>images<span style="color: #555555">.</span>reshape((n_samples, <span style="color: #555555">-</span><span style="color: #FF6600">1</span>))
+</pre></div>
+
+
+<ul>
+<li>Create a classifier: a support vector classifier</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>classifier <span style="color: #555555">=</span> svm<span style="color: #555555">.</span>SVC(gamma<span style="color: #555555">=</span><span style="color: #FF6600">0.001</span>)
+</pre></div>
+
+
+<ul>
+<li>We learn the digits on the first half of the digits</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>classifier<span style="color: #555555">.</span>fit(data[:n_samples <span style="color: #555555">/</span> <span style="color: #FF6600">2</span>], digits<span style="color: #555555">.</span>target[:n_samples <span style="color: #555555">/</span> <span style="color: #FF6600">2</span>])
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma=0.001, kernel=&#39;rbf&#39;,
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+</pre></div>
+
+
+<ul>
+<li>Now predict the value of the digit on the second half:</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>expected <span style="color: #555555">=</span> digits<span style="color: #555555">.</span>target[n_samples <span style="color: #555555">/</span> <span style="color: #FF6600">2</span>:]
+predicted <span style="color: #555555">=</span> classifier<span style="color: #555555">.</span>predict(data[n_samples <span style="color: #555555">/</span> <span style="color: #FF6600">2</span>:])
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;Classification report for classifier </span><span style="color: #AA0000">%s</span><span style="color: #CC3300">:</span><span style="color: #CC3300; font-weight: bold">\n</span><span style="color: #AA0000">%s</span><span style="color: #CC3300; font-weight: bold">\n</span><span style="color: #CC3300">&quot;</span>
+      <span style="color: #555555">%</span> (classifier, metrics<span style="color: #555555">.</span>classification_report(expected, predicted)))
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;Confusion matrix:</span><span style="color: #CC3300; font-weight: bold">\n</span><span style="color: #AA0000">%s</span><span style="color: #CC3300">&quot;</span> <span style="color: #555555">%</span> metrics<span style="color: #555555">.</span>confusion_matrix(expected, predicted))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Classification report for classifier SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma=0.001, kernel=&#39;rbf&#39;,
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False):
+             precision    recall  f1-score   support
+
+          0       1.00      0.99      0.99        88
+          1       0.99      0.97      0.98        91
+          2       0.99      0.99      0.99        86
+          3       0.98      0.87      0.92        91
+          4       0.99      0.96      0.97        92
+          5       0.95      0.97      0.96        91
+          6       0.99      0.99      0.99        91
+          7       0.96      0.99      0.97        89
+          8       0.94      1.00      0.97        88
+          9       0.93      0.98      0.95        92
+
+avg / total       0.97      0.97      0.97       899
+
+
+Confusion matrix:
+[[87  0  0  0  1  0  0  0  0  0]
+ [ 0 88  1  0  0  0  0  0  1  1]
+ [ 0  0 85  1  0  0  0  0  0  0]
+ [ 0  0  0 79  0  3  0  4  5  0]
+ [ 0  0  0  0 88  0  0  0  0  4]
+ [ 0  0  0  0  0 88  1  0  0  2]
+ [ 0  1  0  0  0  0 90  0  0  0]
+ [ 0  0  0  0  0  1  0 88  0  0]
+ [ 0  0  0  0  0  0  0  0 88  0]
+ [ 0  0  0  1  0  1  0  0  0 90]]
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>images_and_labels <span style="color: #555555">=</span> <span style="color: #336666">list</span>(<span style="color: #336666">zip</span>(digits<span style="color: #555555">.</span>images, digits<span style="color: #555555">.</span>target))
+<span style="color: #006699; font-weight: bold">for</span> index, (image, label) <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>(images_and_labels[:<span style="color: #FF6600">4</span>]):
+    plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">2</span>, <span style="color: #FF6600">4</span>, index <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>)
+    plt<span style="color: #555555">.</span>axis(<span style="color: #CC3300">&#39;off&#39;</span>)
+    plt<span style="color: #555555">.</span>imshow(image, cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>gray_r, interpolation<span style="color: #555555">=</span><span style="color: #CC3300">&#39;nearest&#39;</span>)
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Training: </span><span style="color: #AA0000">%i</span><span style="color: #CC3300">&#39;</span> <span style="color: #555555">%</span> label)
+
+images_and_predictions <span style="color: #555555">=</span> <span style="color: #336666">list</span>(<span style="color: #336666">zip</span>(digits<span style="color: #555555">.</span>images[n_samples <span style="color: #555555">/</span> <span style="color: #FF6600">2</span>:], predicted))
+<span style="color: #006699; font-weight: bold">for</span> index, (image, prediction) <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>(images_and_predictions[:<span style="color: #FF6600">4</span>]):
+    plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">2</span>, <span style="color: #FF6600">4</span>, index <span style="color: #555555">+</span> <span style="color: #FF6600">5</span>)
+    plt<span style="color: #555555">.</span>axis(<span style="color: #CC3300">&#39;off&#39;</span>)
+    plt<span style="color: #555555">.</span>imshow(image, cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>gray_r, interpolation<span style="color: #555555">=</span><span style="color: #CC3300">&#39;nearest&#39;</span>)
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Prediction: </span><span style="color: #AA0000">%i</span><span style="color: #CC3300">&#39;</span> <span style="color: #555555">%</span> prediction)
+
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_35_1.png" /></p>
+<hr />
+<h2 id="discriminant-analysis">Discriminant Analysis</h2>
+<hr />
+<h3 id="4-normal-and-shrinkage-linear-discriminant-analysis-for-classificationsource">4. Normal and Shrinkage Linear Discriminant Analysis for classification(<a href="https://github.com/scikit-learn/scikit-learn/blob/master/examples/classification/plot_lda.py">source</a>)</h3>
+<hr />
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">__future__</span> <span style="color: #006699; font-weight: bold">import</span> division
+
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.datasets</span> <span style="color: #006699; font-weight: bold">import</span> make_blobs
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.discriminant_analysis</span> <span style="color: #006699; font-weight: bold">import</span> LinearDiscriminantAnalysis
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>n_train <span style="color: #555555">=</span> <span style="color: #FF6600">20</span>  <span style="color: #0099FF; font-style: italic"># samples for training</span>
+n_test <span style="color: #555555">=</span> <span style="color: #FF6600">200</span>  <span style="color: #0099FF; font-style: italic"># samples for testing</span>
+n_averages <span style="color: #555555">=</span> <span style="color: #FF6600">50</span>  <span style="color: #0099FF; font-style: italic"># how often to repeat classification</span>
+n_features_max <span style="color: #555555">=</span> <span style="color: #FF6600">75</span>  <span style="color: #0099FF; font-style: italic"># maximum number of features</span>
+step <span style="color: #555555">=</span> <span style="color: #FF6600">4</span>  <span style="color: #0099FF; font-style: italic"># step size for the calculation</span>
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">generate_data</span>(n_samples, n_features):
+    <span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;Generate random blob-ish data with noisy features.</span>
+<span style="color: #CC3300; font-style: italic">    This returns an array of input data with shape `(n_samples, n_features)`</span>
+<span style="color: #CC3300; font-style: italic">    and an array of `n_samples` target labels.</span>
+<span style="color: #CC3300; font-style: italic">    Only one feature contains discriminative information, the other features</span>
+<span style="color: #CC3300; font-style: italic">    contain only noise.</span>
+<span style="color: #CC3300; font-style: italic">    &quot;&quot;&quot;</span>
+    X, y <span style="color: #555555">=</span> make_blobs(n_samples<span style="color: #555555">=</span>n_samples, n_features<span style="color: #555555">=</span><span style="color: #FF6600">1</span>, centers<span style="color: #555555">=</span>[[<span style="color: #555555">-</span><span style="color: #FF6600">2</span>], [<span style="color: #FF6600">2</span>]])
+
+    <span style="color: #0099FF; font-style: italic"># add non-discriminative features</span>
+    <span style="color: #006699; font-weight: bold">if</span> n_features <span style="color: #555555">&gt;</span> <span style="color: #FF6600">1</span>:
+        X <span style="color: #555555">=</span> np<span style="color: #555555">.</span>hstack([X, np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randn(n_samples, n_features <span style="color: #555555">-</span> <span style="color: #FF6600">1</span>)])
+    <span style="color: #006699; font-weight: bold">return</span> X, y
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>acc_clf1, acc_clf2 <span style="color: #555555">=</span> [], []
+n_features_range <span style="color: #555555">=</span> <span style="color: #336666">range</span>(<span style="color: #FF6600">1</span>, n_features_max <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>, step)
+<span style="color: #006699; font-weight: bold">for</span> n_features <span style="color: #000000; font-weight: bold">in</span> n_features_range:
+    score_clf1, score_clf2 <span style="color: #555555">=</span> <span style="color: #FF6600">0</span>, <span style="color: #FF6600">0</span>
+    <span style="color: #006699; font-weight: bold">for</span> _ <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(n_averages):
+        X, y <span style="color: #555555">=</span> generate_data(n_train, n_features)
+
+        clf1 <span style="color: #555555">=</span> LinearDiscriminantAnalysis(solver<span style="color: #555555">=</span><span style="color: #CC3300">&#39;lsqr&#39;</span>, shrinkage<span style="color: #555555">=</span><span style="color: #CC3300">&#39;auto&#39;</span>)<span style="color: #555555">.</span>fit(X, y)
+        clf2 <span style="color: #555555">=</span> LinearDiscriminantAnalysis(solver<span style="color: #555555">=</span><span style="color: #CC3300">&#39;lsqr&#39;</span>, shrinkage<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">None</span>)<span style="color: #555555">.</span>fit(X, y)
+
+        X, y <span style="color: #555555">=</span> generate_data(n_test, n_features)
+        score_clf1 <span style="color: #555555">+=</span> clf1<span style="color: #555555">.</span>score(X, y)
+        score_clf2 <span style="color: #555555">+=</span> clf2<span style="color: #555555">.</span>score(X, y)
+
+    acc_clf1<span style="color: #555555">.</span>append(score_clf1 <span style="color: #555555">/</span> n_averages)
+    acc_clf2<span style="color: #555555">.</span>append(score_clf2 <span style="color: #555555">/</span> n_averages)
+
+features_samples_ratio <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array(n_features_range) <span style="color: #555555">/</span> n_train
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>plt<span style="color: #555555">.</span>plot(features_samples_ratio, acc_clf1, linewidth<span style="color: #555555">=</span><span style="color: #FF6600">2</span>,
+         label<span style="color: #555555">=</span><span style="color: #CC3300">&quot;Linear Discriminant Analysis with shrinkage&quot;</span>, color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;navy&#39;</span>)
+plt<span style="color: #555555">.</span>plot(features_samples_ratio, acc_clf2, linewidth<span style="color: #555555">=</span><span style="color: #FF6600">2</span>,
+         label<span style="color: #555555">=</span><span style="color: #CC3300">&quot;Linear Discriminant Analysis&quot;</span>, color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;gold&#39;</span>)
+
+plt<span style="color: #555555">.</span>xlabel(<span style="color: #CC3300">&#39;n_features / n_samples&#39;</span>)
+plt<span style="color: #555555">.</span>ylabel(<span style="color: #CC3300">&#39;Classification accuracy&#39;</span>)
+
+plt<span style="color: #555555">.</span>legend(loc<span style="color: #555555">=</span><span style="color: #FF6600">1</span>, prop<span style="color: #555555">=</span>{<span style="color: #CC3300">&#39;size&#39;</span>: <span style="color: #FF6600">12</span>})
+plt<span style="color: #555555">.</span>suptitle(<span style="color: #CC3300">&#39;Linear Discriminant Analysis vs. </span><span style="color: #CC3300; font-weight: bold">\</span>
+<span style="color: #CC3300">shrinkage Linear Discriminant Analysis (1 discriminative feature)&#39;</span>)
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_42_0.png" /></p>
+<hr />
+<h2 id="discriminant-analysis_1">Discriminant Analysis</h2>
+<hr />
+<h3 id="5-linear-and-quadratic-discriminant-analysis-with-covariance-ellipsoid-source">5. Linear and Quadratic Discriminant Analysis with covariance ellipsoid (<a href="https://github.com/scikit-learn/scikit-learn/blob/master/examples/classification/plot_lda_qda.py">source</a>)</h3>
+<hr />
+<p>This example plots the covariance ellipsoids of each class and
+decision boundary learned by LDA and QDA. The ellipsoids display
+the double standard deviation for each class. With LDA, the
+standard deviation is the same for all the classes, while each
+class has its own standard deviation with QDA.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">scipy</span> <span style="color: #006699; font-weight: bold">import</span> linalg
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">mpl</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">matplotlib</span> <span style="color: #006699; font-weight: bold">import</span> colors
+
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.discriminant_analysis</span> <span style="color: #006699; font-weight: bold">import</span> LinearDiscriminantAnalysis
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.discriminant_analysis</span> <span style="color: #006699; font-weight: bold">import</span> QuadraticDiscriminantAnalysis
+</pre></div>
+
+
+<ul>
+<li>colormap</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>cmap <span style="color: #555555">=</span> colors<span style="color: #555555">.</span>LinearSegmentedColormap(
+    <span style="color: #CC3300">&#39;red_blue_classes&#39;</span>,
+    {<span style="color: #CC3300">&#39;red&#39;</span>: [(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">1</span>, <span style="color: #FF6600">1</span>), (<span style="color: #FF6600">1</span>, <span style="color: #FF6600">0.7</span>, <span style="color: #FF6600">0.7</span>)],
+     <span style="color: #CC3300">&#39;green&#39;</span>: [(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">0.7</span>, <span style="color: #FF6600">0.7</span>), (<span style="color: #FF6600">1</span>, <span style="color: #FF6600">0.7</span>, <span style="color: #FF6600">0.7</span>)],
+     <span style="color: #CC3300">&#39;blue&#39;</span>: [(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">0.7</span>, <span style="color: #FF6600">0.7</span>), (<span style="color: #FF6600">1</span>, <span style="color: #FF6600">1</span>, <span style="color: #FF6600">1</span>)]})
+plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>register_cmap(cmap<span style="color: #555555">=</span>cmap)
+</pre></div>
+
+
+<ul>
+<li>generate datasets</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">dataset_fixed_cov</span>():
+    <span style="color: #CC3300; font-style: italic">&#39;&#39;&#39;Generate 2 Gaussians samples with the same covariance matrix&#39;&#39;&#39;</span>
+    n, dim <span style="color: #555555">=</span> <span style="color: #FF6600">300</span>, <span style="color: #FF6600">2</span>
+    np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>seed(<span style="color: #FF6600">0</span>)
+    C <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array([[<span style="color: #FF6600">0.</span>, <span style="color: #555555">-</span><span style="color: #FF6600">0.23</span>], [<span style="color: #FF6600">0.83</span>, <span style="color: #555555">.</span><span style="color: #FF6600">23</span>]])
+    X <span style="color: #555555">=</span> np<span style="color: #555555">.</span>r_[np<span style="color: #555555">.</span>dot(np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randn(n, dim), C),
+              np<span style="color: #555555">.</span>dot(np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randn(n, dim), C) <span style="color: #555555">+</span> np<span style="color: #555555">.</span>array([<span style="color: #FF6600">1</span>, <span style="color: #FF6600">1</span>])]
+    y <span style="color: #555555">=</span> np<span style="color: #555555">.</span>hstack((np<span style="color: #555555">.</span>zeros(n), np<span style="color: #555555">.</span>ones(n)))
+    <span style="color: #006699; font-weight: bold">return</span> X, y
+
+
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">dataset_cov</span>():
+    <span style="color: #CC3300; font-style: italic">&#39;&#39;&#39;Generate 2 Gaussians samples with different covariance matrices&#39;&#39;&#39;</span>
+    n, dim <span style="color: #555555">=</span> <span style="color: #FF6600">300</span>, <span style="color: #FF6600">2</span>
+    np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>seed(<span style="color: #FF6600">0</span>)
+    C <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array([[<span style="color: #FF6600">0.</span>, <span style="color: #555555">-</span><span style="color: #FF6600">1.</span>], [<span style="color: #FF6600">2.5</span>, <span style="color: #555555">.</span><span style="color: #FF6600">7</span>]]) <span style="color: #555555">*</span> <span style="color: #FF6600">2.</span>
+    X <span style="color: #555555">=</span> np<span style="color: #555555">.</span>r_[np<span style="color: #555555">.</span>dot(np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randn(n, dim), C),
+              np<span style="color: #555555">.</span>dot(np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randn(n, dim), C<span style="color: #555555">.</span>T) <span style="color: #555555">+</span> np<span style="color: #555555">.</span>array([<span style="color: #FF6600">1</span>, <span style="color: #FF6600">4</span>])]
+    y <span style="color: #555555">=</span> np<span style="color: #555555">.</span>hstack((np<span style="color: #555555">.</span>zeros(n), np<span style="color: #555555">.</span>ones(n)))
+    <span style="color: #006699; font-weight: bold">return</span> X, y
+</pre></div>
+
+
+<ul>
+<li>plot functions</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">plot_data</span>(lda, X, y, y_pred, fig_index):
+    splot <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">2</span>, <span style="color: #FF6600">2</span>, fig_index)
+    <span style="color: #006699; font-weight: bold">if</span> fig_index <span style="color: #555555">==</span> <span style="color: #FF6600">1</span>:
+        plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Linear Discriminant Analysis&#39;</span>)
+        plt<span style="color: #555555">.</span>ylabel(<span style="color: #CC3300">&#39;Data with fixed covariance&#39;</span>)
+    <span style="color: #006699; font-weight: bold">elif</span> fig_index <span style="color: #555555">==</span> <span style="color: #FF6600">2</span>:
+        plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Quadratic Discriminant Analysis&#39;</span>)
+    <span style="color: #006699; font-weight: bold">elif</span> fig_index <span style="color: #555555">==</span> <span style="color: #FF6600">3</span>:
+        plt<span style="color: #555555">.</span>ylabel(<span style="color: #CC3300">&#39;Data with varying covariances&#39;</span>)
+
+    tp <span style="color: #555555">=</span> (y <span style="color: #555555">==</span> y_pred)  <span style="color: #0099FF; font-style: italic"># True Positive</span>
+    tp0, tp1 <span style="color: #555555">=</span> tp[y <span style="color: #555555">==</span> <span style="color: #FF6600">0</span>], tp[y <span style="color: #555555">==</span> <span style="color: #FF6600">1</span>]
+    X0, X1 <span style="color: #555555">=</span> X[y <span style="color: #555555">==</span> <span style="color: #FF6600">0</span>], X[y <span style="color: #555555">==</span> <span style="color: #FF6600">1</span>]
+    X0_tp, X0_fp <span style="color: #555555">=</span> X0[tp0], X0[<span style="color: #555555">~</span>tp0]
+    X1_tp, X1_fp <span style="color: #555555">=</span> X1[tp1], X1[<span style="color: #555555">~</span>tp1]
+
+    alpha <span style="color: #555555">=</span> <span style="color: #FF6600">0.5</span>
+
+    <span style="color: #0099FF; font-style: italic"># class 0: dots</span>
+    plt<span style="color: #555555">.</span>plot(X0_tp[:, <span style="color: #FF6600">0</span>], X0_tp[:, <span style="color: #FF6600">1</span>], <span style="color: #CC3300">&#39;o&#39;</span>, alpha<span style="color: #555555">=</span>alpha,
+             color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;red&#39;</span>)
+    plt<span style="color: #555555">.</span>plot(X0_fp[:, <span style="color: #FF6600">0</span>], X0_fp[:, <span style="color: #FF6600">1</span>], <span style="color: #CC3300">&#39;*&#39;</span>, alpha<span style="color: #555555">=</span>alpha,
+             color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;#990000&#39;</span>)  <span style="color: #0099FF; font-style: italic"># dark red</span>
+
+    <span style="color: #0099FF; font-style: italic"># class 1: dots</span>
+    plt<span style="color: #555555">.</span>plot(X1_tp[:, <span style="color: #FF6600">0</span>], X1_tp[:, <span style="color: #FF6600">1</span>], <span style="color: #CC3300">&#39;o&#39;</span>, alpha<span style="color: #555555">=</span>alpha,
+             color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;blue&#39;</span>)
+    plt<span style="color: #555555">.</span>plot(X1_fp[:, <span style="color: #FF6600">0</span>], X1_fp[:, <span style="color: #FF6600">1</span>], <span style="color: #CC3300">&#39;*&#39;</span>, alpha<span style="color: #555555">=</span>alpha,
+             color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;#000099&#39;</span>)  <span style="color: #0099FF; font-style: italic"># dark blue</span>
+
+    <span style="color: #0099FF; font-style: italic"># class 0 and 1 : areas</span>
+    nx, ny <span style="color: #555555">=</span> <span style="color: #FF6600">200</span>, <span style="color: #FF6600">100</span>
+    x_min, x_max <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>xlim()
+    y_min, y_max <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>ylim()
+    xx, yy <span style="color: #555555">=</span> np<span style="color: #555555">.</span>meshgrid(np<span style="color: #555555">.</span>linspace(x_min, x_max, nx),
+                         np<span style="color: #555555">.</span>linspace(y_min, y_max, ny))
+    Z <span style="color: #555555">=</span> lda<span style="color: #555555">.</span>predict_proba(np<span style="color: #555555">.</span>c_[xx<span style="color: #555555">.</span>ravel(), yy<span style="color: #555555">.</span>ravel()])
+    Z <span style="color: #555555">=</span> Z[:, <span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>reshape(xx<span style="color: #555555">.</span>shape)
+    plt<span style="color: #555555">.</span>pcolormesh(xx, yy, Z, cmap<span style="color: #555555">=</span><span style="color: #CC3300">&#39;red_blue_classes&#39;</span>,
+                   norm<span style="color: #555555">=</span>colors<span style="color: #555555">.</span>Normalize(<span style="color: #FF6600">0.</span>, <span style="color: #FF6600">1.</span>))
+    plt<span style="color: #555555">.</span>contour(xx, yy, Z, [<span style="color: #FF6600">0.5</span>], linewidths<span style="color: #555555">=</span><span style="color: #FF6600">2.</span>, colors<span style="color: #555555">=</span><span style="color: #CC3300">&#39;k&#39;</span>)
+
+    <span style="color: #0099FF; font-style: italic"># means</span>
+    plt<span style="color: #555555">.</span>plot(lda<span style="color: #555555">.</span>means_[<span style="color: #FF6600">0</span>][<span style="color: #FF6600">0</span>], lda<span style="color: #555555">.</span>means_[<span style="color: #FF6600">0</span>][<span style="color: #FF6600">1</span>],
+             <span style="color: #CC3300">&#39;o&#39;</span>, color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;black&#39;</span>, markersize<span style="color: #555555">=</span><span style="color: #FF6600">10</span>)
+    plt<span style="color: #555555">.</span>plot(lda<span style="color: #555555">.</span>means_[<span style="color: #FF6600">1</span>][<span style="color: #FF6600">0</span>], lda<span style="color: #555555">.</span>means_[<span style="color: #FF6600">1</span>][<span style="color: #FF6600">1</span>],
+             <span style="color: #CC3300">&#39;o&#39;</span>, color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;black&#39;</span>, markersize<span style="color: #555555">=</span><span style="color: #FF6600">10</span>)
+
+    <span style="color: #006699; font-weight: bold">return</span> splot
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">plot_ellipse</span>(splot, mean, cov, color):
+    v, w <span style="color: #555555">=</span> linalg<span style="color: #555555">.</span>eigh(cov)
+    u <span style="color: #555555">=</span> w[<span style="color: #FF6600">0</span>] <span style="color: #555555">/</span> linalg<span style="color: #555555">.</span>norm(w[<span style="color: #FF6600">0</span>])
+    angle <span style="color: #555555">=</span> np<span style="color: #555555">.</span>arctan(u[<span style="color: #FF6600">1</span>] <span style="color: #555555">/</span> u[<span style="color: #FF6600">0</span>])
+    angle <span style="color: #555555">=</span> <span style="color: #FF6600">180</span> <span style="color: #555555">*</span> angle <span style="color: #555555">/</span> np<span style="color: #555555">.</span>pi  <span style="color: #0099FF; font-style: italic"># convert to degrees</span>
+    <span style="color: #0099FF; font-style: italic"># filled Gaussian at 2 standard deviation</span>
+    ell <span style="color: #555555">=</span> mpl<span style="color: #555555">.</span>patches<span style="color: #555555">.</span>Ellipse(mean, <span style="color: #FF6600">2</span> <span style="color: #555555">*</span> v[<span style="color: #FF6600">0</span>] <span style="color: #555555">**</span> <span style="color: #FF6600">0.5</span>, <span style="color: #FF6600">2</span> <span style="color: #555555">*</span> v[<span style="color: #FF6600">1</span>] <span style="color: #555555">**</span> <span style="color: #FF6600">0.5</span>,
+                              <span style="color: #FF6600">180</span> <span style="color: #555555">+</span> angle, facecolor<span style="color: #555555">=</span>color, edgecolor<span style="color: #555555">=</span><span style="color: #CC3300">&#39;yellow&#39;</span>,
+                              linewidth<span style="color: #555555">=</span><span style="color: #FF6600">2</span>, zorder<span style="color: #555555">=</span><span style="color: #FF6600">2</span>)
+    ell<span style="color: #555555">.</span>set_clip_box(splot<span style="color: #555555">.</span>bbox)
+    ell<span style="color: #555555">.</span>set_alpha(<span style="color: #FF6600">0.5</span>)
+    splot<span style="color: #555555">.</span>add_artist(ell)
+    splot<span style="color: #555555">.</span>set_xticks(())
+    splot<span style="color: #555555">.</span>set_yticks(())
+
+
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">plot_lda_cov</span>(lda, splot):
+    plot_ellipse(splot, lda<span style="color: #555555">.</span>means_[<span style="color: #FF6600">0</span>], lda<span style="color: #555555">.</span>covariance_, <span style="color: #CC3300">&#39;red&#39;</span>)
+    plot_ellipse(splot, lda<span style="color: #555555">.</span>means_[<span style="color: #FF6600">1</span>], lda<span style="color: #555555">.</span>covariance_, <span style="color: #CC3300">&#39;blue&#39;</span>)
+
+
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">plot_qda_cov</span>(qda, splot):
+    plot_ellipse(splot, qda<span style="color: #555555">.</span>means_[<span style="color: #FF6600">0</span>], qda<span style="color: #555555">.</span>covariances_[<span style="color: #FF6600">0</span>], <span style="color: #CC3300">&#39;red&#39;</span>)
+    plot_ellipse(splot, qda<span style="color: #555555">.</span>means_[<span style="color: #FF6600">1</span>], qda<span style="color: #555555">.</span>covariances_[<span style="color: #FF6600">1</span>], <span style="color: #CC3300">&#39;blue&#39;</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">for</span> i, (X, y) <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>([dataset_fixed_cov(), dataset_cov()]):
+    <span style="color: #0099FF; font-style: italic"># Linear Discriminant Analysis</span>
+    lda <span style="color: #555555">=</span> LinearDiscriminantAnalysis(solver<span style="color: #555555">=</span><span style="color: #CC3300">&quot;svd&quot;</span>, store_covariance<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>)
+    y_pred <span style="color: #555555">=</span> lda<span style="color: #555555">.</span>fit(X, y)<span style="color: #555555">.</span>predict(X)
+    splot <span style="color: #555555">=</span> plot_data(lda, X, y, y_pred, fig_index<span style="color: #555555">=</span><span style="color: #FF6600">2</span> <span style="color: #555555">*</span> i <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>)
+    plot_lda_cov(lda, splot)
+    plt<span style="color: #555555">.</span>axis(<span style="color: #CC3300">&#39;tight&#39;</span>)
+
+    <span style="color: #0099FF; font-style: italic"># Quadratic Discriminant Analysis</span>
+    qda <span style="color: #555555">=</span> QuadraticDiscriminantAnalysis(store_covariances<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>)
+    y_pred <span style="color: #555555">=</span> qda<span style="color: #555555">.</span>fit(X, y)<span style="color: #555555">.</span>predict(X)
+    splot <span style="color: #555555">=</span> plot_data(qda, X, y, y_pred, fig_index<span style="color: #555555">=</span><span style="color: #FF6600">2</span> <span style="color: #555555">*</span> i <span style="color: #555555">+</span> <span style="color: #FF6600">2</span>)
+    plot_qda_cov(qda, splot)
+    plt<span style="color: #555555">.</span>axis(<span style="color: #CC3300">&#39;tight&#39;</span>)
+plt<span style="color: #555555">.</span>suptitle(<span style="color: #CC3300">&#39;Linear Discriminant Analysis vs Quadratic Discriminant Analysis&#39;</span>)
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_53_0.png" /></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../Tree/Tree/" class="btn btn-neutral float-right" title="Decision Tree">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../../LinearModels/Linear-models/" class="btn btn-neutral" title="Linear Regression"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../../LinearModels/Linear-models/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../Tree/Tree/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../../../..';</script>
+    <script src="../../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../../../search/main.js" defer></script>
+
+</body>
+</html>

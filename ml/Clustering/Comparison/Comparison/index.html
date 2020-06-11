@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../../../img/favicon.ico">
+  <title>Cluster Comparison - Machine Learning</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Cluster Comparison";
+    var mkdocs_page_input_path = "ml/Clustering/Comparison/Comparison.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../../.." class="icon icon-home"> Machine Learning</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="tocbase current">
+    
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../..">Home</a>
+  </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Machine Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../LinearModels/Linear-models/">Linear Regression</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Classifiers/Logistic/Logistic/">Logistic Regression</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Classifiers/Tree/Tree/">Decision Tree</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Classifiers/Ensamble/ensamble/">Ensamble Methods</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Classifiers/SVM/svm/">Support Vector Machine</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Kmeans/Kmeans/">Kmeans Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Agglomerative/Agglomerative/">Agglomerative Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../AffinityPropagation/Affinity-Propagation/">Affinity Propagation</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Spectral/Spectral/">Spectral Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../DBSCAN/DBSCAN/">DBSCAN Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../MeanShift/Mean-shift/">Mean Shift Clustering</a>
+  </li>
+        
+          
+
+
+  
+    
+    <li class="navtree toctree-l2 page current">
+      <a class="current" href="./">
+        Cluster Comparison
+          <span class="toctree-expand"></span>
+      </a>
+    </li>
+    
+      
+
+  <li class="toctree-l2 current with-children">
+    <a href="#clustering-comparison">
+      Clustering Comparison
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2 current">
+    <ul class="subnav-l2 current">
+    
+      
+          
+
+  <li class="toctree-l3 current with-children">
+    <a href="#1-comparing-different-clustering-algorithms-on-toy-datasets">
+      1. Comparing different clustering algorithms on toy datasets
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3 current">
+    <ul class="subnav-l3 current">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#data">Data</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#cluster-comparison">Cluster Comparison</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#comparison-of-the-k-means-and-minibatchkmeans-clustering-algorithms">Comparison of the K-Means and MiniBatchKMeans clustering algorithms</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#3-compare-birch-and-minibatchkmeans">
+      3. Compare BIRCH and MiniBatchKMeans
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#data_1">Data</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#result">Result</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+
+  
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">ML Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/boston_housing/boston_housing/">Boston Housing</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/Customer_segments/customer_segments/">Customer Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/finding_donors/finding_donors/">Finding Donors</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/vehicle-detection/CARND-Project-5/">Vehicle Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/perceptron/dlnd-your-first-neural-network/">Perceptron</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Deep Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/Vanila/1.Vanila-LSTM/">Vanila LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/stacked/2.Stacked-LSTM/">Stacked LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/bidirectional/5. BiDirectional-LSTM/">Bidirectional LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/rnn/RNN_project/">Recurrent Neural Network</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">DL Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/NMIST/NMIST/">Digit Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/CIFRT10/CIFR10/">Image Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/traffic-sign/Traffic_Sign_Classifier/">Traffic Sign Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/translator/dlnd_language_translation/">Language Translator</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Rinforcement Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../rl/smartcab/smartcab/">SmartCab</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">GAN Project</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/gan/dlnd_face_generation/">Face Generation</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../../References/ref.md">References</a>
+  </li>
+    
+  </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../..">Machine Learning</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Machine Learning &raquo;</li>
+        
+      
+    
+    <li>Cluster Comparison</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="clustering-comparison">Clustering Comparison</h2>
+<p><strong><em>These codes are imported from Scikit-Learn python package for learning purpose</em></strong></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">seaborn</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">sns</span>
+<span style="color: #555555">%</span>matplotlib inline
+sns<span style="color: #555555">.</span>set()
+</pre></div>
+
+
+<h3 id="1-comparing-different-clustering-algorithms-on-toy-datasets">1. Comparing different clustering algorithms on toy datasets</h3>
+<p>This example aims at showing characteristics of different
+clustering algorithms on datasets that are "interesting"
+but still in 2D. The last dataset is an example of a 'null'
+situation for clustering: the data is homogeneous, and
+there is no good clustering.</p>
+<p>While these examples give some intuition about the algorithms,
+this intuition might not apply to very high dimensional data.</p>
+<p>The results could be improved by tweaking the parameters for
+each clustering strategy, for instance setting the number of
+clusters for the methods that needs this parameter
+specified. Note that affinity propagation has a tendency to
+create many clusters. Thus in this example its two parameters
+(damping and per-point preference) were set to mitigate this
+behavior.</p>
+<hr />
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">time</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn</span> <span style="color: #006699; font-weight: bold">import</span> cluster, datasets
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.neighbors</span> <span style="color: #006699; font-weight: bold">import</span> kneighbors_graph
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.preprocessing</span> <span style="color: #006699; font-weight: bold">import</span> StandardScaler
+</pre></div>
+
+
+<h4 id="data">Data</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>seed(<span style="color: #FF6600">0</span>)
+
+<span style="color: #0099FF; font-style: italic"># Generate datasets. We choose the size big enough to see the scalability</span>
+<span style="color: #0099FF; font-style: italic"># of the algorithms, but not too big to avoid too long running times</span>
+n_samples <span style="color: #555555">=</span> <span style="color: #FF6600">1500</span>
+noisy_circles <span style="color: #555555">=</span> datasets<span style="color: #555555">.</span>make_circles(n_samples<span style="color: #555555">=</span>n_samples, factor<span style="color: #555555">=.</span><span style="color: #FF6600">5</span>,
+                                      noise<span style="color: #555555">=.</span><span style="color: #FF6600">05</span>)
+noisy_moons <span style="color: #555555">=</span> datasets<span style="color: #555555">.</span>make_moons(n_samples<span style="color: #555555">=</span>n_samples, noise<span style="color: #555555">=.</span><span style="color: #FF6600">05</span>)
+blobs <span style="color: #555555">=</span> datasets<span style="color: #555555">.</span>make_blobs(n_samples<span style="color: #555555">=</span>n_samples, random_state<span style="color: #555555">=</span><span style="color: #FF6600">8</span>)
+no_structure <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>rand(n_samples, <span style="color: #FF6600">2</span>), <span style="color: #006699; font-weight: bold">None</span>
+
+colors <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array([x <span style="color: #006699; font-weight: bold">for</span> x <span style="color: #000000; font-weight: bold">in</span> <span style="color: #CC3300">&#39;bgrcmykbgrcmykbgrcmykbgrcmyk&#39;</span>])
+colors <span style="color: #555555">=</span> np<span style="color: #555555">.</span>hstack([colors] <span style="color: #555555">*</span> <span style="color: #FF6600">20</span>)
+
+clustering_names <span style="color: #555555">=</span> [
+    <span style="color: #CC3300">&#39;MiniBatchKMeans&#39;</span>, <span style="color: #CC3300">&#39;AffinityPropagation&#39;</span>, <span style="color: #CC3300">&#39;MeanShift&#39;</span>,
+    <span style="color: #CC3300">&#39;SpectralClustering&#39;</span>, <span style="color: #CC3300">&#39;Ward&#39;</span>, <span style="color: #CC3300">&#39;AgglomerativeClustering&#39;</span>,
+    <span style="color: #CC3300">&#39;DBSCAN&#39;</span>, <span style="color: #CC3300">&#39;Birch&#39;</span>]
+</pre></div>
+
+
+<h4 id="cluster-comparison">Cluster Comparison</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #336666">len</span>(clustering_names) <span style="color: #555555">*</span> <span style="color: #FF6600">2</span> <span style="color: #555555">+</span> <span style="color: #FF6600">3</span>, <span style="color: #FF6600">9.5</span>))
+plt<span style="color: #555555">.</span>subplots_adjust(left<span style="color: #555555">=.</span><span style="color: #FF6600">02</span>, right<span style="color: #555555">=.</span><span style="color: #FF6600">98</span>, bottom<span style="color: #555555">=.</span><span style="color: #FF6600">001</span>, top<span style="color: #555555">=.</span><span style="color: #FF6600">96</span>, wspace<span style="color: #555555">=.</span><span style="color: #FF6600">05</span>,
+                    hspace<span style="color: #555555">=.</span><span style="color: #FF6600">01</span>)
+
+plot_num <span style="color: #555555">=</span> <span style="color: #FF6600">1</span>
+
+datasets <span style="color: #555555">=</span> [noisy_circles, noisy_moons, blobs, no_structure]
+<span style="color: #006699; font-weight: bold">for</span> i_dataset, dataset <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>(datasets):
+    X, y <span style="color: #555555">=</span> dataset
+    <span style="color: #0099FF; font-style: italic"># normalize dataset for easier parameter selection</span>
+    X <span style="color: #555555">=</span> StandardScaler()<span style="color: #555555">.</span>fit_transform(X)
+
+    <span style="color: #0099FF; font-style: italic"># estimate bandwidth for mean shift</span>
+    bandwidth <span style="color: #555555">=</span> cluster<span style="color: #555555">.</span>estimate_bandwidth(X, quantile<span style="color: #555555">=</span><span style="color: #FF6600">0.3</span>)
+
+    <span style="color: #0099FF; font-style: italic"># connectivity matrix for structured Ward</span>
+    connectivity <span style="color: #555555">=</span> kneighbors_graph(X, n_neighbors<span style="color: #555555">=</span><span style="color: #FF6600">10</span>, include_self<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">False</span>)
+    <span style="color: #0099FF; font-style: italic"># make connectivity symmetric</span>
+    connectivity <span style="color: #555555">=</span> <span style="color: #FF6600">0.5</span> <span style="color: #555555">*</span> (connectivity <span style="color: #555555">+</span> connectivity<span style="color: #555555">.</span>T)
+
+    <span style="color: #0099FF; font-style: italic"># create clustering estimators</span>
+    ms <span style="color: #555555">=</span> cluster<span style="color: #555555">.</span>MeanShift(bandwidth<span style="color: #555555">=</span>bandwidth, bin_seeding<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>)
+    two_means <span style="color: #555555">=</span> cluster<span style="color: #555555">.</span>MiniBatchKMeans(n_clusters<span style="color: #555555">=</span><span style="color: #FF6600">2</span>)
+    ward <span style="color: #555555">=</span> cluster<span style="color: #555555">.</span>AgglomerativeClustering(n_clusters<span style="color: #555555">=</span><span style="color: #FF6600">2</span>, linkage<span style="color: #555555">=</span><span style="color: #CC3300">&#39;ward&#39;</span>,
+                                           connectivity<span style="color: #555555">=</span>connectivity)
+    spectral <span style="color: #555555">=</span> cluster<span style="color: #555555">.</span>SpectralClustering(n_clusters<span style="color: #555555">=</span><span style="color: #FF6600">2</span>,
+                                          eigen_solver<span style="color: #555555">=</span><span style="color: #CC3300">&#39;arpack&#39;</span>,
+                                          affinity<span style="color: #555555">=</span><span style="color: #CC3300">&quot;nearest_neighbors&quot;</span>)
+    dbscan <span style="color: #555555">=</span> cluster<span style="color: #555555">.</span>DBSCAN(eps<span style="color: #555555">=.</span><span style="color: #FF6600">2</span>)
+    affinity_propagation <span style="color: #555555">=</span> cluster<span style="color: #555555">.</span>AffinityPropagation(damping<span style="color: #555555">=.</span><span style="color: #FF6600">9</span>,
+                                                       preference<span style="color: #555555">=-</span><span style="color: #FF6600">200</span>)
+
+    average_linkage <span style="color: #555555">=</span> cluster<span style="color: #555555">.</span>AgglomerativeClustering(
+        linkage<span style="color: #555555">=</span><span style="color: #CC3300">&quot;average&quot;</span>, affinity<span style="color: #555555">=</span><span style="color: #CC3300">&quot;cityblock&quot;</span>, n_clusters<span style="color: #555555">=</span><span style="color: #FF6600">2</span>,
+        connectivity<span style="color: #555555">=</span>connectivity)
+
+    birch <span style="color: #555555">=</span> cluster<span style="color: #555555">.</span>Birch(n_clusters<span style="color: #555555">=</span><span style="color: #FF6600">2</span>)
+    clustering_algorithms <span style="color: #555555">=</span> [
+        two_means, affinity_propagation, ms, spectral, ward, average_linkage,
+        dbscan, birch]
+
+    <span style="color: #006699; font-weight: bold">for</span> name, algorithm <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">zip</span>(clustering_names, clustering_algorithms):
+        <span style="color: #0099FF; font-style: italic"># predict cluster memberships</span>
+        t0 <span style="color: #555555">=</span> time<span style="color: #555555">.</span>time()
+        algorithm<span style="color: #555555">.</span>fit(X)
+        t1 <span style="color: #555555">=</span> time<span style="color: #555555">.</span>time()
+        <span style="color: #006699; font-weight: bold">if</span> <span style="color: #336666">hasattr</span>(algorithm, <span style="color: #CC3300">&#39;labels_&#39;</span>):
+            y_pred <span style="color: #555555">=</span> algorithm<span style="color: #555555">.</span>labels_<span style="color: #555555">.</span>astype(np<span style="color: #555555">.</span>int)
+        <span style="color: #006699; font-weight: bold">else</span>:
+            y_pred <span style="color: #555555">=</span> algorithm<span style="color: #555555">.</span>predict(X)
+
+        <span style="color: #0099FF; font-style: italic"># plot</span>
+        plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">4</span>, <span style="color: #336666">len</span>(clustering_algorithms), plot_num)
+        <span style="color: #006699; font-weight: bold">if</span> i_dataset <span style="color: #555555">==</span> <span style="color: #FF6600">0</span>:
+            plt<span style="color: #555555">.</span>title(name, size<span style="color: #555555">=</span><span style="color: #FF6600">18</span>)
+        plt<span style="color: #555555">.</span>scatter(X[:, <span style="color: #FF6600">0</span>], X[:, <span style="color: #FF6600">1</span>], color<span style="color: #555555">=</span>colors[y_pred]<span style="color: #555555">.</span>tolist(), s<span style="color: #555555">=</span><span style="color: #FF6600">10</span>)
+
+        <span style="color: #006699; font-weight: bold">if</span> <span style="color: #336666">hasattr</span>(algorithm, <span style="color: #CC3300">&#39;cluster_centers_&#39;</span>):
+            centers <span style="color: #555555">=</span> algorithm<span style="color: #555555">.</span>cluster_centers_
+            center_colors <span style="color: #555555">=</span> colors[:<span style="color: #336666">len</span>(centers)]
+            plt<span style="color: #555555">.</span>scatter(centers[:, <span style="color: #FF6600">0</span>], centers[:, <span style="color: #FF6600">1</span>], s<span style="color: #555555">=</span><span style="color: #FF6600">100</span>, c<span style="color: #555555">=</span>center_colors)
+        plt<span style="color: #555555">.</span>xlim(<span style="color: #555555">-</span><span style="color: #FF6600">2</span>, <span style="color: #FF6600">2</span>)
+        plt<span style="color: #555555">.</span>ylim(<span style="color: #555555">-</span><span style="color: #FF6600">2</span>, <span style="color: #FF6600">2</span>)
+        plt<span style="color: #555555">.</span>xticks(())
+        plt<span style="color: #555555">.</span>yticks(())
+        plt<span style="color: #555555">.</span>text(<span style="color: #555555">.</span><span style="color: #FF6600">99</span>, <span style="color: #555555">.</span><span style="color: #FF6600">01</span>, (<span style="color: #CC3300">&#39;</span><span style="color: #AA0000">%.2f</span><span style="color: #CC3300">s&#39;</span> <span style="color: #555555">%</span> (t1 <span style="color: #555555">-</span> t0))<span style="color: #555555">.</span>lstrip(<span style="color: #CC3300">&#39;0&#39;</span>),
+                 transform<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>gca()<span style="color: #555555">.</span>transAxes, size<span style="color: #555555">=</span><span style="color: #FF6600">15</span>,
+                 horizontalalignment<span style="color: #555555">=</span><span style="color: #CC3300">&#39;right&#39;</span>)
+        plot_num <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span>
+
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_10_1.png" /></p>
+<hr />
+<h3 id="comparison-of-the-k-means-and-minibatchkmeans-clustering-algorithms">Comparison of the K-Means and MiniBatchKMeans clustering algorithms</h3>
+<p>We want to compare the performance of the MiniBatchKMeans and KMeans:
+the MiniBatchKMeans is faster, but gives slightly different results (see
+:ref:<code>mini_batch_kmeans</code>).</p>
+<p>We will cluster a set of data, first with KMeans and then with
+MiniBatchKMeans, and plot the results.
+We will also plot the points that are labelled differently between the two
+algorithms.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">time</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.cluster</span> <span style="color: #006699; font-weight: bold">import</span> MiniBatchKMeans, KMeans
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.metrics.pairwise</span> <span style="color: #006699; font-weight: bold">import</span> pairwise_distances_argmin
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.datasets.samples_generator</span> <span style="color: #006699; font-weight: bold">import</span> make_blobs
+</pre></div>
+
+
+<p>#### Data</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Generate sample data</span>
+np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>seed(<span style="color: #FF6600">0</span>)
+
+batch_size <span style="color: #555555">=</span> <span style="color: #FF6600">45</span>
+centers <span style="color: #555555">=</span> [[<span style="color: #FF6600">1</span>, <span style="color: #FF6600">1</span>], [<span style="color: #555555">-</span><span style="color: #FF6600">1</span>, <span style="color: #555555">-</span><span style="color: #FF6600">1</span>], [<span style="color: #FF6600">1</span>, <span style="color: #555555">-</span><span style="color: #FF6600">1</span>]]
+n_clusters <span style="color: #555555">=</span> <span style="color: #336666">len</span>(centers)
+X, labels_true <span style="color: #555555">=</span> make_blobs(n_samples<span style="color: #555555">=</span><span style="color: #FF6600">3000</span>, centers<span style="color: #555555">=</span>centers, cluster_std<span style="color: #555555">=</span><span style="color: #FF6600">0.7</span>)
+</pre></div>
+
+
+<p>#### Kmeans</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Compute clustering with Means</span>
+
+k_means <span style="color: #555555">=</span> KMeans(init<span style="color: #555555">=</span><span style="color: #CC3300">&#39;k-means++&#39;</span>, n_clusters<span style="color: #555555">=</span><span style="color: #FF6600">3</span>, n_init<span style="color: #555555">=</span><span style="color: #FF6600">10</span>)
+t0 <span style="color: #555555">=</span> time<span style="color: #555555">.</span>time()
+k_means<span style="color: #555555">.</span>fit(X)
+t_batch <span style="color: #555555">=</span> time<span style="color: #555555">.</span>time() <span style="color: #555555">-</span> t0
+</pre></div>
+
+
+<p>#### MiniBatchKMeans</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Compute clustering with MiniBatchKMeans</span>
+
+mbk <span style="color: #555555">=</span> MiniBatchKMeans(init<span style="color: #555555">=</span><span style="color: #CC3300">&#39;k-means++&#39;</span>, n_clusters<span style="color: #555555">=</span><span style="color: #FF6600">3</span>, batch_size<span style="color: #555555">=</span>batch_size,
+                      n_init<span style="color: #555555">=</span><span style="color: #FF6600">10</span>, max_no_improvement<span style="color: #555555">=</span><span style="color: #FF6600">10</span>, verbose<span style="color: #555555">=</span><span style="color: #FF6600">0</span>)
+t0 <span style="color: #555555">=</span> time<span style="color: #555555">.</span>time()
+mbk<span style="color: #555555">.</span>fit(X)
+t_mini_batch <span style="color: #555555">=</span> time<span style="color: #555555">.</span>time() <span style="color: #555555">-</span> t0
+</pre></div>
+
+
+<p>#### Plot</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Plot result</span>
+
+fig <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">12</span>, <span style="color: #FF6600">30</span>))
+fig<span style="color: #555555">.</span>subplots_adjust(left<span style="color: #555555">=</span><span style="color: #FF6600">0.02</span>, right<span style="color: #555555">=</span><span style="color: #FF6600">0.98</span>, bottom<span style="color: #555555">=</span><span style="color: #FF6600">0.05</span>, top<span style="color: #555555">=</span><span style="color: #FF6600">0.9</span>)
+colors <span style="color: #555555">=</span> [<span style="color: #CC3300">&#39;#4EACC5&#39;</span>, <span style="color: #CC3300">&#39;#FF9C34&#39;</span>, <span style="color: #CC3300">&#39;#4E9A06&#39;</span>]
+
+<span style="color: #0099FF; font-style: italic"># We want to have the same colors for the same cluster from the</span>
+<span style="color: #0099FF; font-style: italic"># MiniBatchKMeans and the KMeans algorithm. Let&#39;s pair the cluster centers per</span>
+<span style="color: #0099FF; font-style: italic"># closest one.</span>
+k_means_cluster_centers <span style="color: #555555">=</span> np<span style="color: #555555">.</span>sort(k_means<span style="color: #555555">.</span>cluster_centers_, axis<span style="color: #555555">=</span><span style="color: #FF6600">0</span>)
+mbk_means_cluster_centers <span style="color: #555555">=</span> np<span style="color: #555555">.</span>sort(mbk<span style="color: #555555">.</span>cluster_centers_, axis<span style="color: #555555">=</span><span style="color: #FF6600">0</span>)
+k_means_labels <span style="color: #555555">=</span> pairwise_distances_argmin(X, k_means_cluster_centers)
+mbk_means_labels <span style="color: #555555">=</span> pairwise_distances_argmin(X, mbk_means_cluster_centers)
+order <span style="color: #555555">=</span> pairwise_distances_argmin(k_means_cluster_centers,
+                                  mbk_means_cluster_centers)
+
+<span style="color: #0099FF; font-style: italic"># KMeans</span>
+ax <span style="color: #555555">=</span> fig<span style="color: #555555">.</span>add_subplot(<span style="color: #FF6600">3</span>, <span style="color: #FF6600">1</span>, <span style="color: #FF6600">1</span>)
+<span style="color: #006699; font-weight: bold">for</span> k, col <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">zip</span>(<span style="color: #336666">range</span>(n_clusters), colors):
+    my_members <span style="color: #555555">=</span> k_means_labels <span style="color: #555555">==</span> k
+    cluster_center <span style="color: #555555">=</span> k_means_cluster_centers[k]
+    ax<span style="color: #555555">.</span>plot(X[my_members, <span style="color: #FF6600">0</span>], X[my_members, <span style="color: #FF6600">1</span>], <span style="color: #CC3300">&#39;w&#39;</span>,
+            markerfacecolor<span style="color: #555555">=</span>col, marker<span style="color: #555555">=</span><span style="color: #CC3300">&#39;.&#39;</span>)
+    ax<span style="color: #555555">.</span>plot(cluster_center[<span style="color: #FF6600">0</span>], cluster_center[<span style="color: #FF6600">1</span>], <span style="color: #CC3300">&#39;o&#39;</span>, markerfacecolor<span style="color: #555555">=</span>col,
+            markeredgecolor<span style="color: #555555">=</span><span style="color: #CC3300">&#39;k&#39;</span>, markersize<span style="color: #555555">=</span><span style="color: #FF6600">6</span>)
+ax<span style="color: #555555">.</span>set_title(<span style="color: #CC3300">&#39;KMeans&#39;</span>)
+ax<span style="color: #555555">.</span>set_xticks(())
+ax<span style="color: #555555">.</span>set_yticks(())
+plt<span style="color: #555555">.</span>text(<span style="color: #555555">-</span><span style="color: #FF6600">3.5</span>, <span style="color: #FF6600">1.8</span>,  <span style="color: #CC3300">&#39;train time: </span><span style="color: #AA0000">%.2f</span><span style="color: #CC3300">s</span><span style="color: #CC3300; font-weight: bold">\n</span><span style="color: #CC3300">inertia: </span><span style="color: #AA0000">%f</span><span style="color: #CC3300">&#39;</span> <span style="color: #555555">%</span> (
+    t_batch, k_means<span style="color: #555555">.</span>inertia_))
+
+<span style="color: #0099FF; font-style: italic"># MiniBatchKMeans</span>
+ax <span style="color: #555555">=</span> fig<span style="color: #555555">.</span>add_subplot(<span style="color: #FF6600">3</span>, <span style="color: #FF6600">1</span>, <span style="color: #FF6600">2</span>)
+<span style="color: #006699; font-weight: bold">for</span> k, col <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">zip</span>(<span style="color: #336666">range</span>(n_clusters), colors):
+    my_members <span style="color: #555555">=</span> mbk_means_labels <span style="color: #555555">==</span> order[k]
+    cluster_center <span style="color: #555555">=</span> mbk_means_cluster_centers[order[k]]
+    ax<span style="color: #555555">.</span>plot(X[my_members, <span style="color: #FF6600">0</span>], X[my_members, <span style="color: #FF6600">1</span>], <span style="color: #CC3300">&#39;w&#39;</span>,
+            markerfacecolor<span style="color: #555555">=</span>col, marker<span style="color: #555555">=</span><span style="color: #CC3300">&#39;.&#39;</span>)
+    ax<span style="color: #555555">.</span>plot(cluster_center[<span style="color: #FF6600">0</span>], cluster_center[<span style="color: #FF6600">1</span>], <span style="color: #CC3300">&#39;o&#39;</span>, markerfacecolor<span style="color: #555555">=</span>col,
+            markeredgecolor<span style="color: #555555">=</span><span style="color: #CC3300">&#39;k&#39;</span>, markersize<span style="color: #555555">=</span><span style="color: #FF6600">6</span>)
+ax<span style="color: #555555">.</span>set_title(<span style="color: #CC3300">&#39;MiniBatchKMeans&#39;</span>)
+ax<span style="color: #555555">.</span>set_xticks(())
+ax<span style="color: #555555">.</span>set_yticks(())
+plt<span style="color: #555555">.</span>text(<span style="color: #555555">-</span><span style="color: #FF6600">3.5</span>, <span style="color: #FF6600">1.8</span>, <span style="color: #CC3300">&#39;train time: </span><span style="color: #AA0000">%.2f</span><span style="color: #CC3300">s</span><span style="color: #CC3300; font-weight: bold">\n</span><span style="color: #CC3300">inertia: </span><span style="color: #AA0000">%f</span><span style="color: #CC3300">&#39;</span> <span style="color: #555555">%</span>
+         (t_mini_batch, mbk<span style="color: #555555">.</span>inertia_))
+
+<span style="color: #0099FF; font-style: italic"># Initialise the different array to all False</span>
+different <span style="color: #555555">=</span> (mbk_means_labels <span style="color: #555555">==</span> <span style="color: #FF6600">4</span>)
+ax <span style="color: #555555">=</span> fig<span style="color: #555555">.</span>add_subplot(<span style="color: #FF6600">3</span>, <span style="color: #FF6600">1</span>, <span style="color: #FF6600">3</span>)
+
+<span style="color: #006699; font-weight: bold">for</span> k <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(n_clusters):
+    different <span style="color: #555555">+=</span> ((k_means_labels <span style="color: #555555">==</span> k) <span style="color: #555555">!=</span> (mbk_means_labels <span style="color: #555555">==</span> order[k]))
+
+identic <span style="color: #555555">=</span> np<span style="color: #555555">.</span>logical_not(different)
+ax<span style="color: #555555">.</span>plot(X[identic, <span style="color: #FF6600">0</span>], X[identic, <span style="color: #FF6600">1</span>], <span style="color: #CC3300">&#39;w&#39;</span>,
+        markerfacecolor<span style="color: #555555">=</span><span style="color: #CC3300">&#39;#bbbbbb&#39;</span>, marker<span style="color: #555555">=</span><span style="color: #CC3300">&#39;.&#39;</span>)
+ax<span style="color: #555555">.</span>plot(X[different, <span style="color: #FF6600">0</span>], X[different, <span style="color: #FF6600">1</span>], <span style="color: #CC3300">&#39;w&#39;</span>,
+        markerfacecolor<span style="color: #555555">=</span><span style="color: #CC3300">&#39;m&#39;</span>, marker<span style="color: #555555">=</span><span style="color: #CC3300">&#39;.&#39;</span>)
+ax<span style="color: #555555">.</span>set_title(<span style="color: #CC3300">&#39;Difference&#39;</span>)
+ax<span style="color: #555555">.</span>set_xticks(())
+ax<span style="color: #555555">.</span>set_yticks(())
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_22_0.png" /></p>
+<hr />
+<h3 id="3-compare-birch-and-minibatchkmeans">3. Compare BIRCH and MiniBatchKMeans</h3>
+<hr />
+<p>This example compares the timing of Birch (with and without the global
+clustering step) and MiniBatchKMeans on a synthetic dataset having
+100,000 samples and 2 features generated using make_blobs.</p>
+<p>If <code>n_clusters</code> is set to None, the data is reduced from 100,000
+samples to a set of 158 clusters. This can be viewed as a preprocessing
+step before the final (global) clustering step that further reduces these
+158 clusters to 100 clusters.</p>
+<ul>
+<li>Authors: Manoj Kumar &lt;manojkumarsivaraj334@gmail.com Alexandre Gramfort <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#108;&#101;&#120;&#97;&#110;&#100;&#114;&#101;&#46;&#103;&#114;&#97;&#109;&#102;&#111;&#114;&#116;&#64;&#116;&#101;&#108;&#101;&#99;&#111;&#109;&#45;&#112;&#97;&#114;&#105;&#115;&#116;&#101;&#99;&#104;&#46;&#102;&#114;">&#97;&#108;&#101;&#120;&#97;&#110;&#100;&#114;&#101;&#46;&#103;&#114;&#97;&#109;&#102;&#111;&#114;&#116;&#64;&#116;&#101;&#108;&#101;&#99;&#111;&#109;&#45;&#112;&#97;&#114;&#105;&#115;&#116;&#101;&#99;&#104;&#46;&#102;&#114;</a></li>
+<li>License: BSD 3 clause</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">itertools</span> <span style="color: #006699; font-weight: bold">import</span> cycle
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">time</span> <span style="color: #006699; font-weight: bold">import</span> time
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.colors</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">colors</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.preprocessing</span> <span style="color: #006699; font-weight: bold">import</span> StandardScaler
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.cluster</span> <span style="color: #006699; font-weight: bold">import</span> Birch, MiniBatchKMeans
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.datasets.samples_generator</span> <span style="color: #006699; font-weight: bold">import</span> make_blobs
+</pre></div>
+
+
+<h4 id="data_1">Data</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Generate centers for the blobs so that it forms a 10 X 10 grid.</span>
+xx <span style="color: #555555">=</span> np<span style="color: #555555">.</span>linspace(<span style="color: #555555">-</span><span style="color: #FF6600">22</span>, <span style="color: #FF6600">22</span>, <span style="color: #FF6600">10</span>)
+yy <span style="color: #555555">=</span> np<span style="color: #555555">.</span>linspace(<span style="color: #555555">-</span><span style="color: #FF6600">22</span>, <span style="color: #FF6600">22</span>, <span style="color: #FF6600">10</span>)
+xx, yy <span style="color: #555555">=</span> np<span style="color: #555555">.</span>meshgrid(xx, yy)
+n_centres <span style="color: #555555">=</span> np<span style="color: #555555">.</span>hstack((np<span style="color: #555555">.</span>ravel(xx)[:, np<span style="color: #555555">.</span>newaxis],
+                       np<span style="color: #555555">.</span>ravel(yy)[:, np<span style="color: #555555">.</span>newaxis]))
+
+<span style="color: #0099FF; font-style: italic"># Generate blobs to do a comparison between MiniBatchKMeans and Birch.</span>
+X, y <span style="color: #555555">=</span> make_blobs(n_samples<span style="color: #555555">=</span><span style="color: #FF6600">100000</span>, centers<span style="color: #555555">=</span>n_centres, random_state<span style="color: #555555">=</span><span style="color: #FF6600">0</span>)
+
+
+<span style="color: #0099FF; font-style: italic"># Use all colors that matplotlib provides by default.</span>
+colors_ <span style="color: #555555">=</span> cycle(colors<span style="color: #555555">.</span>cnames<span style="color: #555555">.</span>keys())
+</pre></div>
+
+
+<h4 id="result">Result</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>fig <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">12</span>, <span style="color: #FF6600">4</span>))
+fig<span style="color: #555555">.</span>subplots_adjust(left<span style="color: #555555">=</span><span style="color: #FF6600">0.04</span>, right<span style="color: #555555">=</span><span style="color: #FF6600">0.98</span>, bottom<span style="color: #555555">=</span><span style="color: #FF6600">0.1</span>, top<span style="color: #555555">=</span><span style="color: #FF6600">0.9</span>)
+
+<span style="color: #0099FF; font-style: italic"># Compute clustering with Birch with and without the final clustering step</span>
+<span style="color: #0099FF; font-style: italic"># and plot.</span>
+birch_models <span style="color: #555555">=</span> [Birch(threshold<span style="color: #555555">=</span><span style="color: #FF6600">1.7</span>, n_clusters<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">None</span>),
+                Birch(threshold<span style="color: #555555">=</span><span style="color: #FF6600">1.7</span>, n_clusters<span style="color: #555555">=</span><span style="color: #FF6600">100</span>)]
+final_step <span style="color: #555555">=</span> [<span style="color: #CC3300">&#39;without global clustering&#39;</span>, <span style="color: #CC3300">&#39;with global clustering&#39;</span>]
+
+
+<span style="color: #006699; font-weight: bold">for</span> ind, (birch_model, info) <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>(<span style="color: #336666">zip</span>(birch_models, final_step)):
+    t <span style="color: #555555">=</span> time()
+    birch_model<span style="color: #555555">.</span>fit(X)
+    time_ <span style="color: #555555">=</span> time() <span style="color: #555555">-</span> t
+    <span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;Birch </span><span style="color: #AA0000">%s</span><span style="color: #CC3300"> as the final step took </span><span style="color: #AA0000">%0.2f</span><span style="color: #CC3300"> seconds&quot;</span> <span style="color: #555555">%</span> (
+          info, (time() <span style="color: #555555">-</span> t)))
+
+    <span style="color: #0099FF; font-style: italic"># Plot result</span>
+    labels <span style="color: #555555">=</span> birch_model<span style="color: #555555">.</span>labels_
+    centroids <span style="color: #555555">=</span> birch_model<span style="color: #555555">.</span>subcluster_centers_
+    n_clusters <span style="color: #555555">=</span> np<span style="color: #555555">.</span>unique(labels)<span style="color: #555555">.</span>size
+    <span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;n_clusters : </span><span style="color: #AA0000">%d</span><span style="color: #CC3300">&quot;</span> <span style="color: #555555">%</span> n_clusters)
+
+    ax <span style="color: #555555">=</span> fig<span style="color: #555555">.</span>add_subplot(<span style="color: #FF6600">1</span>, <span style="color: #FF6600">3</span>, ind <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>)
+    <span style="color: #006699; font-weight: bold">for</span> this_centroid, k, col <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">zip</span>(centroids, <span style="color: #336666">range</span>(n_clusters), colors_):
+        mask <span style="color: #555555">=</span> labels <span style="color: #555555">==</span> k
+        ax<span style="color: #555555">.</span>plot(X[mask, <span style="color: #FF6600">0</span>], X[mask, <span style="color: #FF6600">1</span>], <span style="color: #CC3300">&#39;w&#39;</span>,
+                markerfacecolor<span style="color: #555555">=</span>col, marker<span style="color: #555555">=</span><span style="color: #CC3300">&#39;.&#39;</span>)
+        <span style="color: #006699; font-weight: bold">if</span> birch_model<span style="color: #555555">.</span>n_clusters <span style="color: #000000; font-weight: bold">is</span> <span style="color: #006699; font-weight: bold">None</span>:
+            ax<span style="color: #555555">.</span>plot(this_centroid[<span style="color: #FF6600">0</span>], this_centroid[<span style="color: #FF6600">1</span>], <span style="color: #CC3300">&#39;+&#39;</span>, markerfacecolor<span style="color: #555555">=</span>col,
+                    markeredgecolor<span style="color: #555555">=</span><span style="color: #CC3300">&#39;k&#39;</span>, markersize<span style="color: #555555">=</span><span style="color: #FF6600">5</span>)
+    ax<span style="color: #555555">.</span>set_ylim([<span style="color: #555555">-</span><span style="color: #FF6600">25</span>, <span style="color: #FF6600">25</span>])
+    ax<span style="color: #555555">.</span>set_xlim([<span style="color: #555555">-</span><span style="color: #FF6600">25</span>, <span style="color: #FF6600">25</span>])
+    ax<span style="color: #555555">.</span>set_autoscaley_on(<span style="color: #006699; font-weight: bold">False</span>)
+    ax<span style="color: #555555">.</span>set_title(<span style="color: #CC3300">&#39;Birch </span><span style="color: #AA0000">%s</span><span style="color: #CC3300">&#39;</span> <span style="color: #555555">%</span> info)
+
+<span style="color: #0099FF; font-style: italic"># Compute clustering with MiniBatchKMeans.</span>
+mbk <span style="color: #555555">=</span> MiniBatchKMeans(init<span style="color: #555555">=</span><span style="color: #CC3300">&#39;k-means++&#39;</span>, n_clusters<span style="color: #555555">=</span><span style="color: #FF6600">100</span>, batch_size<span style="color: #555555">=</span><span style="color: #FF6600">100</span>,
+                      n_init<span style="color: #555555">=</span><span style="color: #FF6600">10</span>, max_no_improvement<span style="color: #555555">=</span><span style="color: #FF6600">10</span>, verbose<span style="color: #555555">=</span><span style="color: #FF6600">0</span>,
+                      random_state<span style="color: #555555">=</span><span style="color: #FF6600">0</span>)
+t0 <span style="color: #555555">=</span> time()
+mbk<span style="color: #555555">.</span>fit(X)
+t_mini_batch <span style="color: #555555">=</span> time() <span style="color: #555555">-</span> t0
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;Time taken to run MiniBatchKMeans </span><span style="color: #AA0000">%0.2f</span><span style="color: #CC3300"> seconds&quot;</span> <span style="color: #555555">%</span> t_mini_batch)
+mbk_means_labels_unique <span style="color: #555555">=</span> np<span style="color: #555555">.</span>unique(mbk<span style="color: #555555">.</span>labels_)
+
+ax <span style="color: #555555">=</span> fig<span style="color: #555555">.</span>add_subplot(<span style="color: #FF6600">1</span>, <span style="color: #FF6600">3</span>, <span style="color: #FF6600">3</span>)
+<span style="color: #006699; font-weight: bold">for</span> this_centroid, k, col <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">zip</span>(mbk<span style="color: #555555">.</span>cluster_centers_,
+                                 <span style="color: #336666">range</span>(n_clusters), colors_):
+    mask <span style="color: #555555">=</span> mbk<span style="color: #555555">.</span>labels_ <span style="color: #555555">==</span> k
+    ax<span style="color: #555555">.</span>plot(X[mask, <span style="color: #FF6600">0</span>], X[mask, <span style="color: #FF6600">1</span>], <span style="color: #CC3300">&#39;w&#39;</span>, markerfacecolor<span style="color: #555555">=</span>col, marker<span style="color: #555555">=</span><span style="color: #CC3300">&#39;.&#39;</span>)
+    ax<span style="color: #555555">.</span>plot(this_centroid[<span style="color: #FF6600">0</span>], this_centroid[<span style="color: #FF6600">1</span>], <span style="color: #CC3300">&#39;+&#39;</span>, markeredgecolor<span style="color: #555555">=</span><span style="color: #CC3300">&#39;k&#39;</span>,
+            markersize<span style="color: #555555">=</span><span style="color: #FF6600">5</span>)
+ax<span style="color: #555555">.</span>set_xlim([<span style="color: #555555">-</span><span style="color: #FF6600">25</span>, <span style="color: #FF6600">25</span>])
+ax<span style="color: #555555">.</span>set_ylim([<span style="color: #555555">-</span><span style="color: #FF6600">25</span>, <span style="color: #FF6600">25</span>])
+ax<span style="color: #555555">.</span>set_title(<span style="color: #CC3300">&quot;MiniBatchKMeans&quot;</span>)
+ax<span style="color: #555555">.</span>set_autoscaley_on(<span style="color: #006699; font-weight: bold">False</span>)
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Birch without global clustering as the final step took 5.98 seconds
+n_clusters : 158
+Birch with global clustering as the final step took 6.06 seconds
+n_clusters : 100
+Time taken to run MiniBatchKMeans 5.78 seconds
+</pre></div>
+
+
+<p><img alt="png" src="../output_31_1.png" /></p>
+<hr />
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../../../mlp/intro/" class="btn btn-neutral float-right" title="Introduction">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../MeanShift/Mean-shift/" class="btn btn-neutral" title="Mean Shift Clustering"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../MeanShift/Mean-shift/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../../../mlp/intro/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../../../..';</script>
+    <script src="../../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../../../search/main.js" defer></script>
+
+</body>
+</html>

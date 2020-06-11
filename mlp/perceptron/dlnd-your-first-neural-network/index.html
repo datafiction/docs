@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>Perceptron - Machine Learning</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Perceptron";
+    var mkdocs_page_input_path = "mlp/perceptron/dlnd-your-first-neural-network.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> Machine Learning</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="tocbase current">
+    
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../..">Home</a>
+  </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Machine Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/LinearModels/Linear-models/">Linear Regression</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Classifiers/Logistic/Logistic/">Logistic Regression</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Classifiers/Tree/Tree/">Decision Tree</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Classifiers/Ensamble/ensamble/">Ensamble Methods</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Classifiers/SVM/svm/">Support Vector Machine</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/Kmeans/Kmeans/">Kmeans Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/Agglomerative/Agglomerative/">Agglomerative Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/AffinityPropagation/Affinity-Propagation/">Affinity Propagation</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/Spectral/Spectral/">Spectral Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/DBSCAN/DBSCAN/">DBSCAN Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/MeanShift/Mean-shift/">Mean Shift Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../ml/Clustering/Comparison/Comparison/">Cluster Comparison</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">ML Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../boston_housing/boston_housing/">Boston Housing</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Customer_segments/customer_segments/">Customer Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../finding_donors/finding_donors/">Finding Donors</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../vehicle-detection/CARND-Project-5/">Vehicle Detection</a>
+  </li>
+        
+          
+
+
+  
+    
+    <li class="navtree toctree-l2 page current">
+      <a class="current" href="./">
+        Perceptron
+          <span class="toctree-expand"></span>
+      </a>
+    </li>
+    
+      
+
+  <li class="toctree-l2 current with-children">
+    <a href="#your-first-neural-network">
+      Your first neural network
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2 current">
+    <ul class="subnav-l2 current">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#load-and-prepare-the-data">Load and prepare the data</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#checking-out-the-data">
+      Checking out the data
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#dummy-variables">Dummy variables</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#scaling-target-variables">Scaling target variables</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#splitting-the-data-into-training-testing-and-validation-sets">Splitting the data into training, testing, and validation sets</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#time-to-build-the-network">
+      Time to build the network
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+          
+
+  <li class="toctree-l4 current with-children">
+    <a href="#my-network-checker">
+      My Network Checker
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4 current">
+    <ul class="subnav-l4 current">
+    
+      
+          
+
+  <li class="toctree-l5 current with-children">
+    <a href="#feed-farward">
+      Feed farward:
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l5 current">
+    <ul class="subnav-l5 current">
+    
+      
+        <li class="toctree-l6">
+          <a class="toctree-l7" href="#1-hidden-input-input_to_hidden_weights-input">1. Hidden input = input_to_hidden_weights * input</a>
+        </li>
+    
+      
+        <li class="toctree-l6">
+          <a class="toctree-l7" href="#2-hidden-output-activationhidden-input">2. Hidden Output  = activation(hidden input)</a>
+        </li>
+    
+      
+        <li class="toctree-l6">
+          <a class="toctree-l7" href="#3-final-input-hidden_to_output_weights-hidden-output">3. Final input   = hidden_to_output_weights* hidden output</a>
+        </li>
+    
+      
+        <li class="toctree-l6">
+          <a class="toctree-l7" href="#4-final-output-activationfinal-input">4. Final output = activation(final input)</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#training-the-network">
+      Training the network
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#choose-the-number-of-epochs">Choose the number of epochs</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#choose-the-learning-rate">Choose the learning rate</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#choose-the-number-of-hidden-nodes">Choose the number of hidden nodes</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#check-out-your-predictions">Check out your predictions</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#thinking-about-your-results">
+      Thinking about your results
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#your-answer-below">Your answer below</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#unit-tests">
+      Unit tests
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#some-fun-resources">Some Fun Resources:</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#following-is-the-detail-of-input-3-hidden2output-1">Following is the detail of (input =3, hidden=2,output =1)</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+
+  
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Deep Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/Vanila/1.Vanila-LSTM/">Vanila LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/stacked/2.Stacked-LSTM/">Stacked LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/bidirectional/5. BiDirectional-LSTM/">Bidirectional LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/rnn/RNN_project/">Recurrent Neural Network</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">DL Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/NMIST/NMIST/">Digit Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/CIFRT10/CIFR10/">Image Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/traffic-sign/Traffic_Sign_Classifier/">Traffic Sign Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/translator/dlnd_language_translation/">Language Translator</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Rinforcement Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../rl/smartcab/smartcab/">SmartCab</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">GAN Project</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../dl/gan/dlnd_face_generation/">Face Generation</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../References/ref.md">References</a>
+  </li>
+    
+  </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">Machine Learning</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>ML Projects &raquo;</li>
+        
+      
+    
+    <li>Perceptron</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="your-first-neural-network">Your first neural network</h1>
+<p>In this project, you'll build your first neural network and use it to predict daily bike rental ridership. We've provided some of the code, but left the implementation of the neural network up to you (for the most part). After you've submitted this project, feel free to explore the data and the model more.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #555555">%</span>matplotlib inline
+<span style="color: #555555">%</span>config InlineBackend<span style="color: #555555">.</span>figure_format <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;retina&#39;</span>
+
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">pandas</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">pd</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+</pre></div>
+
+
+<h2 id="load-and-prepare-the-data">Load and prepare the data</h2>
+<p>A critical step in working with neural networks is preparing the data correctly. Variables on different scales make it difficult for the network to efficiently learn the correct weights. Below, we've written the code to load and prepare the data. You'll learn more about this soon!</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>data_path <span style="color: #555555">=</span> <span style="color: #CC3300">&#39;Bike-Sharing-Dataset/hour.csv&#39;</span>
+
+rides <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>read_csv(data_path)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>rides<span style="color: #555555">.</span>head()
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>instant</th>
+      <th>dteday</th>
+      <th>season</th>
+      <th>yr</th>
+      <th>mnth</th>
+      <th>hr</th>
+      <th>holiday</th>
+      <th>weekday</th>
+      <th>workingday</th>
+      <th>weathersit</th>
+      <th>temp</th>
+      <th>atemp</th>
+      <th>hum</th>
+      <th>windspeed</th>
+      <th>casual</th>
+      <th>registered</th>
+      <th>cnt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>2011-01-01</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>6</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0.24</td>
+      <td>0.2879</td>
+      <td>0.81</td>
+      <td>0.0</td>
+      <td>3</td>
+      <td>13</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>2011-01-01</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>6</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0.22</td>
+      <td>0.2727</td>
+      <td>0.80</td>
+      <td>0.0</td>
+      <td>8</td>
+      <td>32</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>2011-01-01</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>6</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0.22</td>
+      <td>0.2727</td>
+      <td>0.80</td>
+      <td>0.0</td>
+      <td>5</td>
+      <td>27</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>2011-01-01</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+      <td>6</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0.24</td>
+      <td>0.2879</td>
+      <td>0.75</td>
+      <td>0.0</td>
+      <td>3</td>
+      <td>10</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>2011-01-01</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>4</td>
+      <td>0</td>
+      <td>6</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0.24</td>
+      <td>0.2879</td>
+      <td>0.75</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="checking-out-the-data">Checking out the data</h2>
+<p>This dataset has the number of riders for each hour of each day from January 1 2011 to December 31 2012. The number of riders is split between casual and registered, summed up in the <code>cnt</code> column. You can see the first few rows of the data above.</p>
+<p>Below is a plot showing the number of bike riders over the first 10 days in the data set. You can see the hourly rentals here. This data is pretty complicated! The weekends have lower over all ridership and there are spikes when people are biking to and from work during the week. Looking at the data above, we also have information about temperature, humidity, and windspeed, all of these likely affecting the number of riders. You'll be trying to capture all this with your model.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>rides[:<span style="color: #FF6600">24</span><span style="color: #555555">*</span><span style="color: #FF6600">10</span>]<span style="color: #555555">.</span>plot(x<span style="color: #555555">=</span><span style="color: #CC3300">&#39;dteday&#39;</span>, y<span style="color: #555555">=</span><span style="color: #CC3300">&#39;cnt&#39;</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x10cfe1dd8&gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_6_1.png" /></p>
+<h3 id="dummy-variables">Dummy variables</h3>
+<p>Here we have some categorical variables like season, weather, month. To include these in our model, we'll need to make binary dummy variables. This is simple to do with Pandas thanks to <code>get_dummies()</code>.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>dummy_fields <span style="color: #555555">=</span> [<span style="color: #CC3300">&#39;season&#39;</span>, <span style="color: #CC3300">&#39;weathersit&#39;</span>, <span style="color: #CC3300">&#39;mnth&#39;</span>, <span style="color: #CC3300">&#39;hr&#39;</span>, <span style="color: #CC3300">&#39;weekday&#39;</span>]
+<span style="color: #006699; font-weight: bold">for</span> each <span style="color: #000000; font-weight: bold">in</span> dummy_fields:
+    dummies <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>get_dummies(rides[each], prefix<span style="color: #555555">=</span>each, drop_first<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">False</span>)
+    rides <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>concat([rides, dummies], axis<span style="color: #555555">=</span><span style="color: #FF6600">1</span>)
+
+fields_to_drop <span style="color: #555555">=</span> [<span style="color: #CC3300">&#39;instant&#39;</span>, <span style="color: #CC3300">&#39;dteday&#39;</span>, <span style="color: #CC3300">&#39;season&#39;</span>, <span style="color: #CC3300">&#39;weathersit&#39;</span>, 
+                  <span style="color: #CC3300">&#39;weekday&#39;</span>, <span style="color: #CC3300">&#39;atemp&#39;</span>, <span style="color: #CC3300">&#39;mnth&#39;</span>, <span style="color: #CC3300">&#39;workingday&#39;</span>, <span style="color: #CC3300">&#39;hr&#39;</span>]
+data <span style="color: #555555">=</span> rides<span style="color: #555555">.</span>drop(fields_to_drop, axis<span style="color: #555555">=</span><span style="color: #FF6600">1</span>)
+data<span style="color: #555555">.</span>head()
+</pre></div>
+
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>yr</th>
+      <th>holiday</th>
+      <th>temp</th>
+      <th>hum</th>
+      <th>windspeed</th>
+      <th>casual</th>
+      <th>registered</th>
+      <th>cnt</th>
+      <th>season_1</th>
+      <th>season_2</th>
+      <th>...</th>
+      <th>hr_21</th>
+      <th>hr_22</th>
+      <th>hr_23</th>
+      <th>weekday_0</th>
+      <th>weekday_1</th>
+      <th>weekday_2</th>
+      <th>weekday_3</th>
+      <th>weekday_4</th>
+      <th>weekday_5</th>
+      <th>weekday_6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0.24</td>
+      <td>0.81</td>
+      <td>0.0</td>
+      <td>3</td>
+      <td>13</td>
+      <td>16</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0.22</td>
+      <td>0.80</td>
+      <td>0.0</td>
+      <td>8</td>
+      <td>32</td>
+      <td>40</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0.22</td>
+      <td>0.80</td>
+      <td>0.0</td>
+      <td>5</td>
+      <td>27</td>
+      <td>32</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0.24</td>
+      <td>0.75</td>
+      <td>0.0</td>
+      <td>3</td>
+      <td>10</td>
+      <td>13</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0.24</td>
+      <td>0.75</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 59 columns</p>
+</div>
+
+<h3 id="scaling-target-variables">Scaling target variables</h3>
+<p>To make training the network easier, we'll standardize each of the continuous variables. That is, we'll shift and scale the variables such that they have zero mean and a standard deviation of 1.</p>
+<p>The scaling factors are saved so we can go backwards when we use the network for predictions.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>quant_features <span style="color: #555555">=</span> [<span style="color: #CC3300">&#39;casual&#39;</span>, <span style="color: #CC3300">&#39;registered&#39;</span>, <span style="color: #CC3300">&#39;cnt&#39;</span>, <span style="color: #CC3300">&#39;temp&#39;</span>, <span style="color: #CC3300">&#39;hum&#39;</span>, <span style="color: #CC3300">&#39;windspeed&#39;</span>]
+<span style="color: #0099FF; font-style: italic"># Store scalings in a dictionary so we can convert back later</span>
+scaled_features <span style="color: #555555">=</span> {}
+<span style="color: #006699; font-weight: bold">for</span> each <span style="color: #000000; font-weight: bold">in</span> quant_features:
+    mean, std <span style="color: #555555">=</span> data[each]<span style="color: #555555">.</span>mean(), data[each]<span style="color: #555555">.</span>std()
+    scaled_features[each] <span style="color: #555555">=</span> [mean, std]
+    data<span style="color: #555555">.</span>loc[:, each] <span style="color: #555555">=</span> (data[each] <span style="color: #555555">-</span> mean)<span style="color: #555555">/</span>std
+</pre></div>
+
+
+<h3 id="splitting-the-data-into-training-testing-and-validation-sets">Splitting the data into training, testing, and validation sets</h3>
+<p>We'll save the last 21 days of the data to use as a test set after we've trained the network. We'll use this set to make predictions and compare them with the actual number of riders.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Save the last 21 days </span>
+test_data <span style="color: #555555">=</span> data[<span style="color: #555555">-</span><span style="color: #FF6600">21</span><span style="color: #555555">*</span><span style="color: #FF6600">24</span>:]
+data <span style="color: #555555">=</span> data[:<span style="color: #555555">-</span><span style="color: #FF6600">21</span><span style="color: #555555">*</span><span style="color: #FF6600">24</span>]
+
+<span style="color: #0099FF; font-style: italic"># Separate the data into features and targets</span>
+target_fields <span style="color: #555555">=</span> [<span style="color: #CC3300">&#39;cnt&#39;</span>, <span style="color: #CC3300">&#39;casual&#39;</span>, <span style="color: #CC3300">&#39;registered&#39;</span>]
+features, targets <span style="color: #555555">=</span> data<span style="color: #555555">.</span>drop(target_fields, axis<span style="color: #555555">=</span><span style="color: #FF6600">1</span>), data[target_fields]
+test_features, test_targets <span style="color: #555555">=</span> test_data<span style="color: #555555">.</span>drop(target_fields, axis<span style="color: #555555">=</span><span style="color: #FF6600">1</span>), test_data[target_fields]
+</pre></div>
+
+
+<p>We'll split the data into two sets, one for training and one for validating as the network is being trained. Since this is time series data, we'll train on historical data, then try to predict on future data (the validation set).</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Hold out the last 60 days of the remaining data as a validation set</span>
+train_features, train_targets <span style="color: #555555">=</span> features[:<span style="color: #555555">-</span><span style="color: #FF6600">60</span><span style="color: #555555">*</span><span style="color: #FF6600">24</span>], targets[:<span style="color: #555555">-</span><span style="color: #FF6600">60</span><span style="color: #555555">*</span><span style="color: #FF6600">24</span>]
+val_features, val_targets <span style="color: #555555">=</span> features[<span style="color: #555555">-</span><span style="color: #FF6600">60</span><span style="color: #555555">*</span><span style="color: #FF6600">24</span>:], targets[<span style="color: #555555">-</span><span style="color: #FF6600">60</span><span style="color: #555555">*</span><span style="color: #FF6600">24</span>:]
+</pre></div>
+
+
+<h2 id="time-to-build-the-network">Time to build the network</h2>
+<p>Below you'll build your network. We've built out the structure and the backwards pass. You'll implement the forward pass through the network. You'll also set the hyperparameters: the learning rate, the number of hidden units, and the number of training passes.</p>
+<p>The network has two layers, a hidden layer and an output layer. The hidden layer will use the sigmoid function for activations. The output layer has only one node and is used for the regression, the output of the node is the same as the input of the node. That is, the activation function is $f(x)=x$. A function that takes the input signal and generates an output signal, but takes into account the threshold, is called an activation function. We work through each layer of our network calculating the outputs for each neuron. All of the outputs from one layer become inputs to the neurons on the next layer. This process is called <em>forward propagation</em>.</p>
+<p>We use the weights to propagate signals forward from the input to the output layers in a neural network. We use the weights to also propagate error backwards from the output back into the network to update our weights. This is called <em>backpropagation</em>.</p>
+<blockquote>
+<p><strong>Hint:</strong> You'll need the derivative of the output activation function ($f(x) = x$) for the backpropagation implementation. If you aren't familiar with calculus, this function is equivalent to the equation $y = x$. What is the slope of that equation? That is the derivative of $f(x)$.</p>
+</blockquote>
+<p>Below, you have these tasks:
+1. Implement the sigmoid function to use as the activation function. Set <code>self.activation_function</code> in <code>__init__</code> to your sigmoid function.
+2. Implement the forward pass in the <code>train</code> method.
+3. Implement the backpropagation algorithm in the <code>train</code> method, including calculating the output error.
+4. Implement the forward pass in the <code>run</code> method.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">sigmoid</span>(x):
+    <span style="color: #006699; font-weight: bold">return</span> <span style="color: #FF6600">1</span> <span style="color: #555555">/</span> ( <span style="color: #FF6600">1</span> <span style="color: #555555">+</span> np<span style="color: #555555">.</span>exp(<span style="color: #555555">-</span>x))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">MSE</span>(y, Y):
+    <span style="color: #006699; font-weight: bold">return</span> np<span style="color: #555555">.</span>mean((y<span style="color: #555555">-</span>Y)<span style="color: #555555">**</span><span style="color: #FF6600">2</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">class</span> <span style="color: #00AA88; font-weight: bold">NeuralNetwork</span>(<span style="color: #336666">object</span>):
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">__init__</span>(<span style="color: #336666">self</span>, input_nodes, hidden_nodes, output_nodes, learning_rate):
+
+        <span style="color: #0099FF; font-style: italic"># Set number of nodes in input, hidden and output layers.</span>
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>input_nodes <span style="color: #555555">=</span> input_nodes
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>hidden_nodes <span style="color: #555555">=</span> hidden_nodes
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>output_nodes <span style="color: #555555">=</span> output_nodes
+
+        <span style="color: #0099FF; font-style: italic"># Initialize weights</span>
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>weights_input_to_hidden <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>normal(<span style="color: #FF6600">0.0</span>, <span style="color: #336666">self</span><span style="color: #555555">.</span>hidden_nodes<span style="color: #555555">**-</span><span style="color: #FF6600">0.5</span>, 
+                                       (<span style="color: #336666">self</span><span style="color: #555555">.</span>hidden_nodes, <span style="color: #336666">self</span><span style="color: #555555">.</span>input_nodes))
+
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>weights_hidden_to_output <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>normal(<span style="color: #FF6600">0.0</span>, <span style="color: #336666">self</span><span style="color: #555555">.</span>output_nodes<span style="color: #555555">**-</span><span style="color: #FF6600">0.5</span>, 
+                                       (<span style="color: #336666">self</span><span style="color: #555555">.</span>output_nodes, <span style="color: #336666">self</span><span style="color: #555555">.</span>hidden_nodes))
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>lr <span style="color: #555555">=</span> learning_rate
+
+        <span style="color: #0099FF; font-style: italic">#### Set this to your implemented sigmoid function ####</span>
+        <span style="color: #0099FF; font-style: italic"># Activation function is the sigmoid function</span>
+
+
+        <span style="color: #0099FF; font-style: italic">#self.activation_function = lambda x: 1 / ( 1 + np.exp(-x))</span>
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>activation_function <span style="color: #555555">=</span> sigmoid 
+
+
+    <span style="color: #0099FF; font-style: italic"># Gradient of Sigmoid curve</span>
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">sigmoid_derivative</span>(<span style="color: #336666">self</span>, z):
+        <span style="color: #006699; font-weight: bold">return</span> z<span style="color: #555555">*</span>(<span style="color: #FF6600">1</span><span style="color: #555555">-</span>z)
+
+
+
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">train</span>(<span style="color: #336666">self</span>, inputs_list, targets_list, verbose):
+
+        <span style="color: #0099FF; font-style: italic"># Convert inputs list to 2d array</span>
+        inputs <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array(inputs_list, ndmin<span style="color: #555555">=</span><span style="color: #FF6600">2</span>)<span style="color: #555555">.</span>T
+        targets <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array(targets_list, ndmin<span style="color: #555555">=</span><span style="color: #FF6600">2</span>)<span style="color: #555555">.</span>T
+
+        results <span style="color: #555555">=</span> {}
+        <span style="color: #006699; font-weight: bold">if</span> verbose:
+            results[<span style="color: #CC3300">&quot;inputs&quot;</span>] <span style="color: #555555">=</span> inputs
+            results[<span style="color: #CC3300">&quot;targets&quot;</span>] <span style="color: #555555">=</span> targets
+            results[<span style="color: #CC3300">&quot;o-weights_input_to_hidden&quot;</span>] <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>weights_input_to_hidden
+            results[<span style="color: #CC3300">&quot;o-weights_hidden_to_output&quot;</span>] <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>weights_hidden_to_output
+
+
+        <span style="color: #0099FF; font-style: italic">#### Implement the forward pass here ####</span>
+        <span style="color: #0099FF; font-style: italic">### Forward pass ###</span>
+
+        <span style="color: #0099FF; font-style: italic"># TODO: Hidden layer</span>
+        hidden_inputs <span style="color: #555555">=</span>  np<span style="color: #555555">.</span>dot(<span style="color: #336666">self</span><span style="color: #555555">.</span>weights_input_to_hidden,inputs)<span style="color: #0099FF; font-style: italic"># signals into hidden layer</span>
+        hidden_outputs <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>activation_function(hidden_inputs)<span style="color: #0099FF; font-style: italic"># signals from hidden layer   </span>
+
+        <span style="color: #0099FF; font-style: italic"># TODO: Output layer</span>
+        final_inputs <span style="color: #555555">=</span> np<span style="color: #555555">.</span>dot(<span style="color: #336666">self</span><span style="color: #555555">.</span>weights_hidden_to_output,hidden_outputs)<span style="color: #0099FF; font-style: italic"># signals into final output layer</span>
+        final_outputs <span style="color: #555555">=</span> final_inputs <span style="color: #0099FF; font-style: italic"># signals from final output layer</span>
+
+
+
+        <span style="color: #006699; font-weight: bold">if</span> verbose:
+            results[<span style="color: #CC3300">&quot;hidden_inputs&quot;</span>] <span style="color: #555555">=</span> hidden_inputs
+            results[<span style="color: #CC3300">&quot;hidden_outputs&quot;</span>] <span style="color: #555555">=</span> hidden_outputs
+            results[<span style="color: #CC3300">&quot;final_inputs&quot;</span>] <span style="color: #555555">=</span> final_inputs
+            results[<span style="color: #CC3300">&quot;final_outputs&quot;</span>] <span style="color: #555555">=</span> final_outputs
+
+
+
+        <span style="color: #0099FF; font-style: italic">#### Implement the backward pass here ####</span>
+        <span style="color: #0099FF; font-style: italic">### Backward pass ###</span>
+
+
+        <span style="color: #0099FF; font-style: italic"># TODO: Output error</span>
+        <span style="color: #0099FF; font-style: italic"># Output layer error is the difference between desired target and actual output.</span>
+        output_errors <span style="color: #555555">=</span> (targets <span style="color: #555555">-</span> final_outputs ) 
+
+        <span style="color: #0099FF; font-style: italic"># TODO: Backpropagated error</span>
+        <span style="color: #0099FF; font-style: italic"># errors propagated to the hidden layer</span>
+        hidden_grad <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>sigmoid_derivative(hidden_outputs) <span style="color: #0099FF; font-style: italic"># hidden layer gradients</span>
+        hidden_errors <span style="color: #555555">=</span> np<span style="color: #555555">.</span>dot(<span style="color: #336666">self</span><span style="color: #555555">.</span>weights_hidden_to_output<span style="color: #555555">.</span>T,output_errors)
+
+
+        <span style="color: #006699; font-weight: bold">if</span> verbose:
+            results[<span style="color: #CC3300">&quot;output_errors&quot;</span>]<span style="color: #555555">=</span>output_errors
+            results[<span style="color: #CC3300">&quot;hidden_grad&quot;</span>] <span style="color: #555555">=</span> hidden_grad
+            results[<span style="color: #CC3300">&quot;hidden_errors&quot;</span>] <span style="color: #555555">=</span> hidden_errors
+
+
+
+        <span style="color: #0099FF; font-style: italic"># TODO: Update the weights</span>
+        <span style="color: #0099FF; font-style: italic"># update hidden-to-output weights with gradient descent step</span>
+
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>weights_hidden_to_output <span style="color: #555555">+=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>lr<span style="color: #555555">*</span>\
+            np<span style="color: #555555">.</span>dot(output_errors,hidden_outputs<span style="color: #555555">.</span>T)
+
+
+        <span style="color: #0099FF; font-style: italic"># update input-to-hidden weights with gradient descent step</span>
+
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>weights_input_to_hidden <span style="color: #555555">+=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>lr<span style="color: #555555">*</span>\
+             np<span style="color: #555555">.</span>dot(hidden_errors<span style="color: #555555">*</span>hidden_grad,inputs<span style="color: #555555">.</span>T)
+
+
+        <span style="color: #006699; font-weight: bold">if</span> verbose:
+            results[<span style="color: #CC3300">&quot;weights_hidden_to_output&quot;</span>] <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>weights_hidden_to_output
+            results[<span style="color: #CC3300">&quot;weights_input_to_hidden&quot;</span>] <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>weights_input_to_hidden
+            results[<span style="color: #CC3300">&quot;Error&quot;</span>]<span style="color: #555555">=</span> MSE(final_outputs,targets)
+            <span style="color: #006699; font-weight: bold">return</span> results      
+
+
+
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">run</span>(<span style="color: #336666">self</span>, inputs_list):
+        <span style="color: #0099FF; font-style: italic"># Run a forward pass through the network</span>
+        inputs <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array(inputs_list, ndmin<span style="color: #555555">=</span><span style="color: #FF6600">2</span>)<span style="color: #555555">.</span>T
+
+
+
+        <span style="color: #0099FF; font-style: italic">#### Implement the forward pass here ####</span>
+
+        <span style="color: #0099FF; font-style: italic"># TODO: Hidden layer</span>
+        hidden_inputs <span style="color: #555555">=</span>  np<span style="color: #555555">.</span>dot(<span style="color: #336666">self</span><span style="color: #555555">.</span>weights_input_to_hidden,inputs)<span style="color: #0099FF; font-style: italic"># signals into hidden layer</span>
+        hidden_outputs <span style="color: #555555">=</span> <span style="color: #336666">self</span><span style="color: #555555">.</span>activation_function(hidden_inputs)<span style="color: #0099FF; font-style: italic"># signals from hidden layer</span>
+
+        <span style="color: #0099FF; font-style: italic"># TODO: Output layer</span>
+        final_inputs <span style="color: #555555">=</span> np<span style="color: #555555">.</span>dot(<span style="color: #336666">self</span><span style="color: #555555">.</span>weights_hidden_to_output,hidden_outputs)<span style="color: #0099FF; font-style: italic"># signals into final output layer</span>
+        final_outputs <span style="color: #555555">=</span> final_inputs <span style="color: #0099FF; font-style: italic"># signals from final output layer</span>
+
+        <span style="color: #0099FF; font-style: italic">#print(self.weights_input_to_hidden)</span>
+
+
+
+        <span style="color: #006699; font-weight: bold">return</span> final_outputs
+</pre></div>
+
+
+<hr />
+<h3 id="my-network-checker">My Network Checker</h3>
+<p>Following is the detail theory for input dim =3, hidden layer = 2 and output layer = 1</p>
+<h4 id="feed-farward">Feed farward:</h4>
+<h5 id="1-hidden-input-input_to_hidden_weights-input">1. Hidden input = input_to_hidden_weights * input</h5>
+<p>$$\left[ {\begin{array}{c}
+   z_{1}^{2} \
+   z_{2}^{2} \   <br />
+   \end{array} } \right]  = \left[ {\begin{array}{cc}
+   W_{11}^{1} &amp; W_{12}^{1} &amp; W_{13}^{1} \
+   W_{21}^{1} &amp; W_{22}^{1} &amp; W_{23}^{1}\   <br />
+   \end{array} } \right]\left[ {\begin{array}{c}
+   x_{1} \
+   x_{2} \ 
+   x_{3}\
+   \end{array} } \right] = \left[ {\begin{array}{c}
+   W_{11}^{1}x_1 +  W_{12}^{1}x_2 +  W_{13}^{1}x_3 \
+    W_{21}^{1}x_1 +  W_{22}^{1}x_2 +  W_{23}^{1}x_3 \ <br />
+   \end{array} } \right] $$   </p>
+<h5 id="2-hidden-output-activationhidden-input">2. Hidden Output  = activation(hidden input)</h5>
+<p>$$ \left[ {\begin{array}{c}
+   a_{1}^{2} \
+   a_{2}^{2} \  <br />
+    \end{array} } \right] = 
+  \left[ {\begin{array}{c}
+   \sigma(z^{2}<em>{1}) \
+   \sigma(z^{2}</em>{2}) \   <br />
+   \end{array} } \right] $$   </p>
+<h5 id="3-final-input-hidden_to_output_weights-hidden-output">3. Final input   = hidden_to_output_weights* hidden output</h5>
+<p>$$ z_{1}^{3} = \left[ {\begin{array}{c}
+   W_{11}^{2} &amp; W_{12}^{2} \  <br />
+    \end{array} } \right]\left[ {\begin{array}{c}
+   a_{1}^{2} \
+   a_{2}^{2} \  <br />
+    \end{array} } \right] = [ W_{11}^{2}a_1^{2} +  W_{12}^{2}a_2^{2}] $$</p>
+<h5 id="4-final-output-activationfinal-input">4. Final output = activation(final input)</h5>
+<p>$$ a^{3}<em>{1} = \sigma(z</em>{1}^{3}) $$</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>inputs <span style="color: #555555">=</span> [<span style="color: #FF6600">0.5</span>, <span style="color: #555555">-</span><span style="color: #FF6600">0.2</span>, <span style="color: #FF6600">0.1</span>]
+targets <span style="color: #555555">=</span> [<span style="color: #FF6600">0.4</span>]
+
+test_w_i_h <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array([[<span style="color: #FF6600">0.1</span>, <span style="color: #FF6600">0.4</span>, <span style="color: #555555">-</span><span style="color: #FF6600">0.3</span>], 
+                       [<span style="color: #555555">-</span><span style="color: #FF6600">0.2</span>, <span style="color: #FF6600">0.5</span>, <span style="color: #FF6600">0.2</span>]])
+test_w_h_o <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array([[<span style="color: #FF6600">0.3</span>, <span style="color: #555555">-</span><span style="color: #FF6600">0.1</span>]])
+
+NN <span style="color: #555555">=</span> NeuralNetwork(<span style="color: #FF6600">3</span>, <span style="color: #FF6600">2</span>, <span style="color: #FF6600">1</span>, <span style="color: #FF6600">0.5</span>)
+
+NN<span style="color: #555555">.</span>weights_input_to_hidden <span style="color: #555555">=</span> test_w_i_h<span style="color: #555555">.</span>copy()
+NN<span style="color: #555555">.</span>weights_hidden_to_output <span style="color: #555555">=</span> test_w_h_o<span style="color: #555555">.</span>copy()
+
+NN<span style="color: #555555">.</span>train(inputs, targets, verbose <span style="color: #555555">=</span> <span style="color: #006699; font-weight: bold">True</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>{&#39;Error&#39;: 0.090006456864883497,
+ &#39;final_inputs&#39;: array([[ 0.09998924]]),
+ &#39;final_outputs&#39;: array([[ 0.09998924]]),
+ &#39;hidden_errors&#39;: array([[ 0.09000323],
+        [-0.03000108]]),
+ &#39;hidden_grad&#39;: array([[ 0.24977513],
+        [ 0.24798589]]),
+ &#39;hidden_inputs&#39;: array([[-0.06],
+        [-0.18]]),
+ &#39;hidden_outputs&#39;: array([[ 0.4850045 ],
+        [ 0.45512111]]),
+ &#39;inputs&#39;: array([[ 0.5],
+        [-0.2],
+        [ 0.1]]),
+ &#39;o-weights_hidden_to_output&#39;: array([[ 0.37275328, -0.03172939]]),
+ &#39;o-weights_input_to_hidden&#39;: array([[ 0.10562014,  0.39775194, -0.29887597],
+        [-0.20185996,  0.50074398,  0.19962801]]),
+ &#39;output_errors&#39;: array([[ 0.30001076]]),
+ &#39;targets&#39;: array([[ 0.4]]),
+ &#39;weights_hidden_to_output&#39;: array([[ 0.37275328, -0.03172939]]),
+ &#39;weights_input_to_hidden&#39;: array([[ 0.10562014,  0.39775194, -0.29887597],
+        [-0.20185996,  0.50074398,  0.19962801]])}
+</pre></div>
+
+
+<hr />
+<h2 id="training-the-network">Training the network</h2>
+<p>Here you'll set the hyperparameters for the network. The strategy here is to find hyperparameters such that the error on the training set is low, but you're not overfitting to the data. If you train the network too long or have too many hidden nodes, it can become overly specific to the training set and will fail to generalize to the validation set. That is, the loss on the validation set will start increasing as the training set loss drops.</p>
+<p>You'll also be using a method know as Stochastic Gradient Descent (SGD) to train the network. The idea is that for each training pass, you grab a random sample of the data instead of using the whole data set. You use many more training passes than with normal gradient descent, but each pass is much faster. This ends up training the network more efficiently. You'll learn more about SGD later.</p>
+<h3 id="choose-the-number-of-epochs">Choose the number of epochs</h3>
+<p>This is the number of times the dataset will pass through the network, each time updating the weights. As the number of epochs increases, the network becomes better and better at predicting the targets in the training set. You'll need to choose enough epochs to train the network well but not too many or you'll be overfitting.</p>
+<h3 id="choose-the-learning-rate">Choose the learning rate</h3>
+<p>This scales the size of weight updates. If this is too big, the weights tend to explode and the network fails to fit the data. A good choice to start at is 0.1. If the network has problems fitting the data, try reducing the learning rate. Note that the lower the learning rate, the smaller the steps are in the weight updates and the longer it takes for the neural network to converge.</p>
+<h3 id="choose-the-number-of-hidden-nodes">Choose the number of hidden nodes</h3>
+<p>The more hidden nodes you have, the more accurate predictions the model will make. Try a few different numbers and see how it affects the performance. You can look at the losses dictionary for a metric of the network performance. If the number of hidden units is too low, then the model won't have enough space to learn and if it is too high there are too many options for the direction that the learning can take. The trick here is to find the right balance in number of hidden units you choose.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>train_features<span style="color: #555555">.</span>shape
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>(15435, 56)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">sys</span>
+
+<span style="color: #0099FF; font-style: italic">### Set the hyperparameters here ###</span>
+epochs <span style="color: #555555">=</span> <span style="color: #FF6600">1000</span>
+learning_rate <span style="color: #555555">=</span> <span style="color: #FF6600">0.1</span>
+hidden_nodes <span style="color: #555555">=</span> <span style="color: #FF6600">28</span>
+output_nodes <span style="color: #555555">=</span> <span style="color: #FF6600">1</span>
+
+N_i <span style="color: #555555">=</span> train_features<span style="color: #555555">.</span>shape[<span style="color: #FF6600">1</span>]
+
+network <span style="color: #555555">=</span> NeuralNetwork(N_i, hidden_nodes, output_nodes, learning_rate)
+
+losses <span style="color: #555555">=</span> {<span style="color: #CC3300">&#39;train&#39;</span>:[], <span style="color: #CC3300">&#39;validation&#39;</span>:[]}
+
+
+<span style="color: #006699; font-weight: bold">for</span> e <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(epochs):
+    <span style="color: #0099FF; font-style: italic"># Go through a random batch of 128 records from the training data set</span>
+
+    batch <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>choice(train_features<span style="color: #555555">.</span>index, size<span style="color: #555555">=</span><span style="color: #FF6600">128</span>)
+
+    <span style="color: #006699; font-weight: bold">for</span> record, target <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">zip</span>(train_features<span style="color: #555555">.</span>ix[batch]<span style="color: #555555">.</span>values, 
+                              train_targets<span style="color: #555555">.</span>ix[batch][<span style="color: #CC3300">&#39;cnt&#39;</span>]):
+
+        network<span style="color: #555555">.</span>train(record, target, verbose <span style="color: #555555">=</span> <span style="color: #006699; font-weight: bold">False</span>)
+
+
+
+    <span style="color: #0099FF; font-style: italic"># Printing out the training progress</span>
+    train_loss <span style="color: #555555">=</span> MSE(network<span style="color: #555555">.</span>run(train_features), train_targets[<span style="color: #CC3300">&#39;cnt&#39;</span>]<span style="color: #555555">.</span>values)
+
+    val_loss <span style="color: #555555">=</span> MSE(network<span style="color: #555555">.</span>run(val_features), val_targets[<span style="color: #CC3300">&#39;cnt&#39;</span>]<span style="color: #555555">.</span>values)
+
+    <span style="color: #0099FF; font-style: italic">#print(epochs,train_loss,val_loss)</span>
+
+    sys<span style="color: #555555">.</span>stdout<span style="color: #555555">.</span>write(<span style="color: #CC3300">&quot;</span><span style="color: #CC3300; font-weight: bold">\r</span><span style="color: #CC3300">Progress: &quot;</span> <span style="color: #555555">+</span> <span style="color: #336666">str</span>(<span style="color: #FF6600">100</span> <span style="color: #555555">*</span> e<span style="color: #555555">/</span><span style="color: #336666">float</span>(epochs))[:<span style="color: #FF6600">4</span>] \
+                     <span style="color: #555555">+</span> <span style="color: #CC3300">&quot;% ... Training loss: &quot;</span> <span style="color: #555555">+</span> <span style="color: #336666">str</span>(train_loss)[:<span style="color: #FF6600">5</span>] \
+                     <span style="color: #555555">+</span> <span style="color: #CC3300">&quot; ... Validation loss: &quot;</span> <span style="color: #555555">+</span> <span style="color: #336666">str</span>(val_loss)[:<span style="color: #FF6600">5</span>])
+
+
+
+    losses[<span style="color: #CC3300">&#39;train&#39;</span>]<span style="color: #555555">.</span>append(train_loss)
+    losses[<span style="color: #CC3300">&#39;validation&#39;</span>]<span style="color: #555555">.</span>append(val_loss)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Progress: 99.9% ... Training loss: 0.058 ... Validation loss: 0.147
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>plt<span style="color: #555555">.</span>plot(losses[<span style="color: #CC3300">&#39;train&#39;</span>], label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Training loss&#39;</span>)
+plt<span style="color: #555555">.</span>plot(losses[<span style="color: #CC3300">&#39;validation&#39;</span>], label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Validation loss&#39;</span>)
+plt<span style="color: #555555">.</span>legend()
+plt<span style="color: #555555">.</span>ylim(ymax<span style="color: #555555">=</span><span style="color: #FF6600">1.5</span>)
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_27_0.png" /></p>
+<h2 id="check-out-your-predictions">Check out your predictions</h2>
+<p>Here, use the test data to view how well your network is modeling the data. If something is completely wrong here, make sure each step in your network is implemented correctly.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>fig, ax <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>subplots(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">8</span>,<span style="color: #FF6600">4</span>))
+
+mean, std <span style="color: #555555">=</span> scaled_features[<span style="color: #CC3300">&#39;cnt&#39;</span>]
+predictions <span style="color: #555555">=</span> network<span style="color: #555555">.</span>run(test_features)<span style="color: #555555">*</span>std <span style="color: #555555">+</span> mean
+ax<span style="color: #555555">.</span>plot(predictions[<span style="color: #FF6600">0</span>], label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Prediction&#39;</span>)
+ax<span style="color: #555555">.</span>plot((test_targets[<span style="color: #CC3300">&#39;cnt&#39;</span>]<span style="color: #555555">*</span>std <span style="color: #555555">+</span> mean)<span style="color: #555555">.</span>values, label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Data&#39;</span>)
+ax<span style="color: #555555">.</span>set_xlim(right<span style="color: #555555">=</span><span style="color: #336666">len</span>(predictions))
+ax<span style="color: #555555">.</span>legend()
+
+dates <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>to_datetime(rides<span style="color: #555555">.</span>ix[test_data<span style="color: #555555">.</span>index][<span style="color: #CC3300">&#39;dteday&#39;</span>])
+dates <span style="color: #555555">=</span> dates<span style="color: #555555">.</span>apply(<span style="color: #006699; font-weight: bold">lambda</span> d: d<span style="color: #555555">.</span>strftime(<span style="color: #CC3300">&#39;%b </span><span style="color: #AA0000">%d</span><span style="color: #CC3300">&#39;</span>))
+ax<span style="color: #555555">.</span>set_xticks(np<span style="color: #555555">.</span>arange(<span style="color: #336666">len</span>(dates))[<span style="color: #FF6600">12</span>::<span style="color: #FF6600">24</span>])
+_ <span style="color: #555555">=</span> ax<span style="color: #555555">.</span>set_xticklabels(dates[<span style="color: #FF6600">12</span>::<span style="color: #FF6600">24</span>], rotation<span style="color: #555555">=</span><span style="color: #FF6600">45</span>)
+</pre></div>
+
+
+<p><img alt="png" src="../output_29_0.png" /></p>
+<h2 id="thinking-about-your-results">Thinking about your results</h2>
+<p>Answer these questions about your results. How well does the model predict the data? Where does it fail? Why does it fail where it does?</p>
+<blockquote>
+<p><strong>Note:</strong> You can edit the text in this cell by double clicking on it. When you want to render the text, press control + enter</p>
+</blockquote>
+<h4 id="your-answer-below">Your answer below</h4>
+<h2 id="unit-tests">Unit tests</h2>
+<p>Run these unit tests to check the correctness of your network implementation. These tests must all be successful to pass the project.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">unittest</span>
+
+inputs <span style="color: #555555">=</span> [<span style="color: #FF6600">0.5</span>, <span style="color: #555555">-</span><span style="color: #FF6600">0.2</span>, <span style="color: #FF6600">0.1</span>]
+targets <span style="color: #555555">=</span> [<span style="color: #FF6600">0.4</span>]
+test_w_i_h <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array([[<span style="color: #FF6600">0.1</span>, <span style="color: #FF6600">0.4</span>, <span style="color: #555555">-</span><span style="color: #FF6600">0.3</span>], 
+                       [<span style="color: #555555">-</span><span style="color: #FF6600">0.2</span>, <span style="color: #FF6600">0.5</span>, <span style="color: #FF6600">0.2</span>]])
+test_w_h_o <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array([[<span style="color: #FF6600">0.3</span>, <span style="color: #555555">-</span><span style="color: #FF6600">0.1</span>]])
+
+<span style="color: #006699; font-weight: bold">class</span> <span style="color: #00AA88; font-weight: bold">TestMethods</span>(unittest<span style="color: #555555">.</span>TestCase):
+
+    <span style="color: #0099FF; font-style: italic">##########</span>
+    <span style="color: #0099FF; font-style: italic"># Unit tests for data loading</span>
+    <span style="color: #0099FF; font-style: italic">##########</span>
+
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">test_data_path</span>(<span style="color: #336666">self</span>):
+        <span style="color: #0099FF; font-style: italic"># Test that file path to dataset has been unaltered</span>
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>assertTrue(data_path<span style="color: #555555">.</span>lower() <span style="color: #555555">==</span> <span style="color: #CC3300">&#39;bike-sharing-dataset/hour.csv&#39;</span>)
+
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">test_data_loaded</span>(<span style="color: #336666">self</span>):
+        <span style="color: #0099FF; font-style: italic"># Test that data frame loaded</span>
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>assertTrue(<span style="color: #336666">isinstance</span>(rides, pd<span style="color: #555555">.</span>DataFrame))
+
+    <span style="color: #0099FF; font-style: italic">##########</span>
+    <span style="color: #0099FF; font-style: italic"># Unit tests for network functionality</span>
+    <span style="color: #0099FF; font-style: italic">##########</span>
+
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">test_activation</span>(<span style="color: #336666">self</span>):
+        network <span style="color: #555555">=</span> NeuralNetwork(<span style="color: #FF6600">3</span>, <span style="color: #FF6600">2</span>, <span style="color: #FF6600">1</span>, <span style="color: #FF6600">0.5</span>)
+        <span style="color: #0099FF; font-style: italic"># Test that the activation function is a sigmoid</span>
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>assertTrue(np<span style="color: #555555">.</span>all(network<span style="color: #555555">.</span>activation_function(<span style="color: #FF6600">0.5</span>) <span style="color: #555555">==</span> <span style="color: #FF6600">1</span><span style="color: #555555">/</span>(<span style="color: #FF6600">1</span><span style="color: #555555">+</span>np<span style="color: #555555">.</span>exp(<span style="color: #555555">-</span><span style="color: #FF6600">0.5</span>))))
+
+
+
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">test_train</span>(<span style="color: #336666">self</span>):
+
+        <span style="color: #0099FF; font-style: italic"># Test that weights are updated correctly on training</span>
+
+        network <span style="color: #555555">=</span> NeuralNetwork(<span style="color: #FF6600">3</span>, <span style="color: #FF6600">2</span>, <span style="color: #FF6600">1</span>, <span style="color: #FF6600">0.5</span>)
+
+        network<span style="color: #555555">.</span>weights_input_to_hidden <span style="color: #555555">=</span> test_w_i_h<span style="color: #555555">.</span>copy()
+        network<span style="color: #555555">.</span>weights_hidden_to_output <span style="color: #555555">=</span> test_w_h_o<span style="color: #555555">.</span>copy()
+
+        network<span style="color: #555555">.</span>train(inputs, targets,verbose <span style="color: #555555">=</span> <span style="color: #006699; font-weight: bold">False</span>)
+
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>assertTrue(np<span style="color: #555555">.</span>allclose(network<span style="color: #555555">.</span>weights_hidden_to_output, 
+                                    np<span style="color: #555555">.</span>array([[ <span style="color: #FF6600">0.37275328</span>, <span style="color: #555555">-</span><span style="color: #FF6600">0.03172939</span>]])))
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>assertTrue(np<span style="color: #555555">.</span>allclose(network<span style="color: #555555">.</span>weights_input_to_hidden,
+                                    np<span style="color: #555555">.</span>array([[ <span style="color: #FF6600">0.10562014</span>,  <span style="color: #FF6600">0.39775194</span>, <span style="color: #555555">-</span><span style="color: #FF6600">0.29887597</span>],
+                                              [<span style="color: #555555">-</span><span style="color: #FF6600">0.20185996</span>,  <span style="color: #FF6600">0.50074398</span>,  <span style="color: #FF6600">0.19962801</span>]])))
+
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">test_run</span>(<span style="color: #336666">self</span>):
+
+        <span style="color: #0099FF; font-style: italic"># Test correctness of run method</span>
+
+        network <span style="color: #555555">=</span> NeuralNetwork(<span style="color: #FF6600">3</span>, <span style="color: #FF6600">2</span>, <span style="color: #FF6600">1</span>, <span style="color: #FF6600">0.5</span>)
+
+        network<span style="color: #555555">.</span>weights_input_to_hidden <span style="color: #555555">=</span> test_w_i_h<span style="color: #555555">.</span>copy()
+        network<span style="color: #555555">.</span>weights_hidden_to_output <span style="color: #555555">=</span> test_w_h_o<span style="color: #555555">.</span>copy()
+
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>assertTrue(np<span style="color: #555555">.</span>allclose(network<span style="color: #555555">.</span>run(inputs), <span style="color: #FF6600">0.09998924</span>))
+
+suite <span style="color: #555555">=</span> unittest<span style="color: #555555">.</span>TestLoader()<span style="color: #555555">.</span>loadTestsFromModule(TestMethods())
+unittest<span style="color: #555555">.</span>TextTestRunner()<span style="color: #555555">.</span>run(suite)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.006s
+
+OK
+
+
+
+
+
+&lt;unittest.runner.TextTestResult run=5 errors=0 failures=0&gt;
+</pre></div>
+
+
+<hr />
+<h3 id="some-fun-resources">Some Fun Resources:</h3>
+<p><img alt="a" src="../pic1/perceptron.jpg" />
+Image:Neural Networks by Simon  </p>
+<hr />
+<h3 id="following-is-the-detail-of-input-3-hidden2output-1">Following is the detail of (input =3, hidden=2,output =1)</h3>
+<p><img alt="a" src="../pic1/output.png" /></p>
+<p><img alt="a" src="../pic1/hidden.png" /></p>
+<p><img alt="a" src="../pic1/final.png" /></p>
+<p><strong><em> THANK YOU! </em></strong></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../../dl/intro/" class="btn btn-neutral float-right" title="Introduction">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../vehicle-detection/CARND-Project-5/" class="btn btn-neutral" title="Vehicle Detection"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../vehicle-detection/CARND-Project-5/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../../dl/intro/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../../search/main.js" defer></script>
+
+</body>
+</html>

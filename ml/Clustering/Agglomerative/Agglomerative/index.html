@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../../../img/favicon.ico">
+  <title>Agglomerative Clustering - Machine Learning</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Agglomerative Clustering";
+    var mkdocs_page_input_path = "ml/Clustering/Agglomerative/Agglomerative.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../../.." class="icon icon-home"> Machine Learning</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="tocbase current">
+    
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../..">Home</a>
+  </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Machine Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../LinearModels/Linear-models/">Linear Regression</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Classifiers/Logistic/Logistic/">Logistic Regression</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Classifiers/Tree/Tree/">Decision Tree</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Classifiers/Ensamble/ensamble/">Ensamble Methods</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Classifiers/SVM/svm/">Support Vector Machine</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Kmeans/Kmeans/">Kmeans Clustering</a>
+  </li>
+        
+          
+
+
+  
+    
+    <li class="navtree toctree-l2 page current">
+      <a class="current" href="./">
+        Agglomerative Clustering
+          <span class="toctree-expand"></span>
+      </a>
+    </li>
+    
+      
+
+  <li class="toctree-l2 current with-children">
+    <a href="#clustering-algglomerative">
+      Clustering- Algglomerative
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2 current">
+    <ul class="subnav-l2 current">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#1-feature-agglomeration">1. Feature agglomeration</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#2-various-agglomerative-clustering-on-a-2d-embedding-of-digits">
+      2. Various Agglomerative Clustering on a 2D embedding of digits
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#linkage-wardaverage-complete">LInkage: Ward,Average, Complete</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#4-hierarchical-clustering-structured-vs-unstructured-ward">
+      4. Hierarchical clustering: structured vs unstructured ward
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#generate-data-swiss-roll-dataset">Generate data (swiss roll dataset)</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#compute-clustering">Compute clustering</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#results">Results</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#5-feature-agglomeration-vs-univariate-selection">
+      5. Feature agglomeration vs. univariate selection
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#generate-data">Generate data</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#compute-the-coefs-of-a-bayesian-ridge-with-gridsearch">Compute the coefs of a Bayesian Ridge with GridSearch</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#ward-agglomeration-followed-by-bayesianridge">Ward agglomeration followed by BayesianRidge</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#select-the-optimal-number-of-parcels-with-grid-search">Select the optimal number of parcels with grid search</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#anova-univariate-feature-selection-followed-by-bayesianridge">Anova univariate feature selection followed by BayesianRidge</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#results_1">Results</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#6-agglomerative-clustering-with-and-without-structure">
+      6. Agglomerative clustering with and without structure
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#generate-sample-data">Generate sample data</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#results_2">Results</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#7-agglomerative-clustering-with-different-metrics">
+      7. Agglomerative clustering with different metrics
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#generate-waveform-data">Generate waveform data</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#results_3">Results</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+
+  
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../AffinityPropagation/Affinity-Propagation/">Affinity Propagation</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Spectral/Spectral/">Spectral Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../DBSCAN/DBSCAN/">DBSCAN Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../MeanShift/Mean-shift/">Mean Shift Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Comparison/Comparison/">Cluster Comparison</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">ML Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/boston_housing/boston_housing/">Boston Housing</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/Customer_segments/customer_segments/">Customer Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/finding_donors/finding_donors/">Finding Donors</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/vehicle-detection/CARND-Project-5/">Vehicle Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/perceptron/dlnd-your-first-neural-network/">Perceptron</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Deep Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/Vanila/1.Vanila-LSTM/">Vanila LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/stacked/2.Stacked-LSTM/">Stacked LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/bidirectional/5. BiDirectional-LSTM/">Bidirectional LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/rnn/RNN_project/">Recurrent Neural Network</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">DL Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/NMIST/NMIST/">Digit Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/CIFRT10/CIFR10/">Image Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/traffic-sign/Traffic_Sign_Classifier/">Traffic Sign Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/translator/dlnd_language_translation/">Language Translator</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Rinforcement Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../rl/smartcab/smartcab/">SmartCab</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">GAN Project</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/gan/dlnd_face_generation/">Face Generation</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../../References/ref.md">References</a>
+  </li>
+    
+  </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../..">Machine Learning</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Machine Learning &raquo;</li>
+        
+      
+    
+    <li>Agglomerative Clustering</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="clustering-algglomerative">Clustering- Algglomerative</h1>
+<ol>
+<li>Agglomerative-hierarchical</li>
+<li>DBSCAN</li>
+</ol>
+<p><strong><em>These codes are imported from Scikit-Learn python package for learning purpose</em></strong></p>
+<hr />
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">seaborn</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">sns</span>
+<span style="color: #555555">%</span>matplotlib inline
+sns<span style="color: #555555">.</span>set()
+</pre></div>
+
+
+<h3 id="1-feature-agglomeration">1. Feature agglomeration</h3>
+<p>These images how similar features are merged together using
+feature agglomeration.</p>
+<ul>
+<li>Code source: Gaël Varoquaux</li>
+<li>Modified for documentation by Jaques Grobler</li>
+<li>License: BSD 3 clause</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn</span> <span style="color: #006699; font-weight: bold">import</span> datasets, cluster
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.feature_extraction.image</span> <span style="color: #006699; font-weight: bold">import</span> grid_to_graph
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>digits <span style="color: #555555">=</span> datasets<span style="color: #555555">.</span>load_digits()
+images <span style="color: #555555">=</span> digits<span style="color: #555555">.</span>images
+X <span style="color: #555555">=</span> np<span style="color: #555555">.</span>reshape(images, (<span style="color: #336666">len</span>(images), <span style="color: #555555">-</span><span style="color: #FF6600">1</span>))
+connectivity <span style="color: #555555">=</span> grid_to_graph(<span style="color: #555555">*</span>images[<span style="color: #FF6600">0</span>]<span style="color: #555555">.</span>shape)
+
+agglo <span style="color: #555555">=</span> cluster<span style="color: #555555">.</span>FeatureAgglomeration(connectivity<span style="color: #555555">=</span>connectivity,
+                                     n_clusters<span style="color: #555555">=</span><span style="color: #FF6600">32</span>)
+
+agglo<span style="color: #555555">.</span>fit(X)
+X_reduced <span style="color: #555555">=</span> agglo<span style="color: #555555">.</span>transform(X)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>X_restored <span style="color: #555555">=</span> agglo<span style="color: #555555">.</span>inverse_transform(X_reduced)
+images_restored <span style="color: #555555">=</span> np<span style="color: #555555">.</span>reshape(X_restored, images<span style="color: #555555">.</span>shape)
+
+
+plt<span style="color: #555555">.</span>figure(<span style="color: #FF6600">1</span>, figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">12</span>, <span style="color: #FF6600">10</span>))
+plt<span style="color: #555555">.</span>clf()
+plt<span style="color: #555555">.</span>subplots_adjust(left<span style="color: #555555">=.</span><span style="color: #FF6600">01</span>, right<span style="color: #555555">=.</span><span style="color: #FF6600">99</span>, bottom<span style="color: #555555">=.</span><span style="color: #FF6600">01</span>, top<span style="color: #555555">=.</span><span style="color: #FF6600">91</span>)
+<span style="color: #006699; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(<span style="color: #FF6600">4</span>):
+    plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">3</span>, <span style="color: #FF6600">4</span>, i <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>)
+    plt<span style="color: #555555">.</span>imshow(images[i], cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>gray, vmax<span style="color: #555555">=</span><span style="color: #FF6600">16</span>, interpolation<span style="color: #555555">=</span><span style="color: #CC3300">&#39;nearest&#39;</span>)
+    plt<span style="color: #555555">.</span>xticks(())
+    plt<span style="color: #555555">.</span>yticks(())
+    <span style="color: #006699; font-weight: bold">if</span> i <span style="color: #555555">==</span> <span style="color: #FF6600">1</span>:
+        plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Original data&#39;</span>)
+    plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">3</span>, <span style="color: #FF6600">4</span>, <span style="color: #FF6600">4</span> <span style="color: #555555">+</span> i <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>)
+    plt<span style="color: #555555">.</span>imshow(images_restored[i], cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>gray, vmax<span style="color: #555555">=</span><span style="color: #FF6600">16</span>,
+               interpolation<span style="color: #555555">=</span><span style="color: #CC3300">&#39;nearest&#39;</span>)
+    <span style="color: #006699; font-weight: bold">if</span> i <span style="color: #555555">==</span> <span style="color: #FF6600">1</span>:
+        plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Agglomerated data&#39;</span>)
+    plt<span style="color: #555555">.</span>xticks(())
+    plt<span style="color: #555555">.</span>yticks(())
+
+plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">3</span>, <span style="color: #FF6600">4</span>, <span style="color: #FF6600">10</span>)
+plt<span style="color: #555555">.</span>imshow(np<span style="color: #555555">.</span>reshape(agglo<span style="color: #555555">.</span>labels_, images[<span style="color: #FF6600">0</span>]<span style="color: #555555">.</span>shape),
+           interpolation<span style="color: #555555">=</span><span style="color: #CC3300">&#39;nearest&#39;</span>, cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>spectral)
+plt<span style="color: #555555">.</span>xticks(())
+plt<span style="color: #555555">.</span>yticks(())
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Labels&#39;</span>)
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_8_0.png" /></p>
+<hr />
+<h3 id="2-various-agglomerative-clustering-on-a-2d-embedding-of-digits">2. Various Agglomerative Clustering on a 2D embedding of digits</h3>
+<h4 id="linkage-wardaverage-complete">LInkage: Ward,Average, Complete</h4>
+<p>An illustration of various linkage option for agglomerative clustering on
+a 2D embedding of the digits dataset.</p>
+<p>The goal of this example is to show intuitively how the metrics behave, and
+not to find good clusters for the digits. This is why the example works on a
+2D embedding.</p>
+<p>What this example shows us is the behavior "rich getting richer" of
+agglomerative clustering that tends to create uneven cluster sizes.
+This behavior is especially pronounced for the average linkage strategy,
+that ends up with a couple of singleton clusters.</p>
+<ul>
+<li>Authors: Gael Varoquaux</li>
+<li>License: BSD 3 clause (C) INRIA 2014</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">time</span> <span style="color: #006699; font-weight: bold">import</span> time
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">scipy</span> <span style="color: #006699; font-weight: bold">import</span> ndimage
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn</span> <span style="color: #006699; font-weight: bold">import</span> manifold, datasets
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>digits <span style="color: #555555">=</span> datasets<span style="color: #555555">.</span>load_digits(n_class<span style="color: #555555">=</span><span style="color: #FF6600">10</span>)
+X <span style="color: #555555">=</span> digits<span style="color: #555555">.</span>data
+y <span style="color: #555555">=</span> digits<span style="color: #555555">.</span>target
+n_samples, n_features <span style="color: #555555">=</span> X<span style="color: #555555">.</span>shape
+
+np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>seed(<span style="color: #FF6600">0</span>)
+
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">nudge_images</span>(X, y):
+
+    <span style="color: #0099FF; font-style: italic"># Having a larger dataset shows more clearly the behavior of the</span>
+    <span style="color: #0099FF; font-style: italic"># methods, but we multiply the size of the dataset only by 2, as the</span>
+    <span style="color: #0099FF; font-style: italic"># cost of the hierarchical clustering methods are strongly</span>
+    <span style="color: #0099FF; font-style: italic"># super-linear in n_samples</span>
+
+    shift <span style="color: #555555">=</span> <span style="color: #006699; font-weight: bold">lambda</span> x: ndimage<span style="color: #555555">.</span>shift(x<span style="color: #555555">.</span>reshape((<span style="color: #FF6600">8</span>, <span style="color: #FF6600">8</span>)),
+                                  <span style="color: #555555">.</span><span style="color: #FF6600">3</span> <span style="color: #555555">*</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>normal(size<span style="color: #555555">=</span><span style="color: #FF6600">2</span>),
+                                  mode<span style="color: #555555">=</span><span style="color: #CC3300">&#39;constant&#39;</span>,
+                                  )<span style="color: #555555">.</span>ravel()
+
+    X <span style="color: #555555">=</span> np<span style="color: #555555">.</span>concatenate([X, np<span style="color: #555555">.</span>apply_along_axis(shift, <span style="color: #FF6600">1</span>, X)])
+
+    Y <span style="color: #555555">=</span> np<span style="color: #555555">.</span>concatenate([y, y], axis<span style="color: #555555">=</span><span style="color: #FF6600">0</span>)
+    <span style="color: #006699; font-weight: bold">return</span> X, Y
+
+
+X, y <span style="color: #555555">=</span> nudge_images(X, y)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic">#----------------------------------------------------------------------</span>
+<span style="color: #0099FF; font-style: italic"># Visualize the clustering</span>
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">plot_clustering</span>(X_red, X, labels, title<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">None</span>):
+    x_min, x_max <span style="color: #555555">=</span> np<span style="color: #555555">.</span>min(X_red, axis<span style="color: #555555">=</span><span style="color: #FF6600">0</span>), np<span style="color: #555555">.</span>max(X_red, axis<span style="color: #555555">=</span><span style="color: #FF6600">0</span>)
+    X_red <span style="color: #555555">=</span> (X_red <span style="color: #555555">-</span> x_min) <span style="color: #555555">/</span> (x_max <span style="color: #555555">-</span> x_min)
+
+    plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">12</span>, <span style="color: #FF6600">10</span>))
+    <span style="color: #006699; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(X_red<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>]):
+        plt<span style="color: #555555">.</span>text(X_red[i, <span style="color: #FF6600">0</span>], X_red[i, <span style="color: #FF6600">1</span>], <span style="color: #336666">str</span>(y[i]),
+                 color<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>spectral(labels[i] <span style="color: #555555">/</span> <span style="color: #FF6600">10.</span>),
+                 fontdict<span style="color: #555555">=</span>{<span style="color: #CC3300">&#39;weight&#39;</span>: <span style="color: #CC3300">&#39;bold&#39;</span>, <span style="color: #CC3300">&#39;size&#39;</span>: <span style="color: #FF6600">9</span>})
+
+    plt<span style="color: #555555">.</span>xticks([])
+    plt<span style="color: #555555">.</span>yticks([])
+    <span style="color: #006699; font-weight: bold">if</span> title <span style="color: #000000; font-weight: bold">is</span> <span style="color: #000000; font-weight: bold">not</span> <span style="color: #006699; font-weight: bold">None</span>:
+        plt<span style="color: #555555">.</span>title(title, size<span style="color: #555555">=</span><span style="color: #FF6600">17</span>)
+    plt<span style="color: #555555">.</span>axis(<span style="color: #CC3300">&#39;off&#39;</span>)
+    plt<span style="color: #555555">.</span>tight_layout()
+
+<span style="color: #0099FF; font-style: italic">#----------------------------------------------------------------------</span>
+<span style="color: #0099FF; font-style: italic"># 2D embedding of the digits dataset</span>
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;Computing embedding&quot;</span>)
+X_red <span style="color: #555555">=</span> manifold<span style="color: #555555">.</span>SpectralEmbedding(n_components<span style="color: #555555">=</span><span style="color: #FF6600">2</span>)<span style="color: #555555">.</span>fit_transform(X)
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;Done.&quot;</span>)
+
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.cluster</span> <span style="color: #006699; font-weight: bold">import</span> AgglomerativeClustering
+
+<span style="color: #006699; font-weight: bold">for</span> linkage <span style="color: #000000; font-weight: bold">in</span> (<span style="color: #CC3300">&#39;ward&#39;</span>, <span style="color: #CC3300">&#39;average&#39;</span>, <span style="color: #CC3300">&#39;complete&#39;</span>):
+    clustering <span style="color: #555555">=</span> AgglomerativeClustering(linkage<span style="color: #555555">=</span>linkage, n_clusters<span style="color: #555555">=</span><span style="color: #FF6600">10</span>)
+    t0 <span style="color: #555555">=</span> time()
+    clustering<span style="color: #555555">.</span>fit(X_red)
+    <span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;</span><span style="color: #AA0000">%s</span><span style="color: #CC3300"> : </span><span style="color: #AA0000">%.2f</span><span style="color: #CC3300">s&quot;</span> <span style="color: #555555">%</span> (linkage, time() <span style="color: #555555">-</span> t0))
+
+    plot_clustering(X_red, X, clustering<span style="color: #555555">.</span>labels_, <span style="color: #CC3300">&quot;</span><span style="color: #AA0000">%s</span><span style="color: #CC3300"> linkage&quot;</span> <span style="color: #555555">%</span> linkage)
+
+
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Computing embedding
+Done.
+ward : 0.41s
+average : 0.37s
+complete : 0.33s
+</pre></div>
+
+
+<p><img alt="png" src="../output_14_1.png" /></p>
+<p><img alt="png" src="../output_14_2.png" /></p>
+<p><img alt="png" src="../output_14_3.png" /></p>
+<hr />
+<h3 id="4-hierarchical-clustering-structured-vs-unstructured-ward">4. Hierarchical clustering: structured vs unstructured ward</h3>
+<p>Example builds a swiss roll dataset and runs
+hierarchical clustering on their position.</p>
+<p>For more information, see :ref:<code>hierarchical_clustering</code>.</p>
+<p>In a first step, the hierarchical clustering is performed without connectivity
+constraints on the structure and is solely based on distance, whereas in
+a second step the clustering is restricted to the k-Nearest Neighbors
+graph: it's a hierarchical clustering with structure prior.</p>
+<p>Some of the clusters learned without connectivity constraints do not
+respect the structure of the swiss roll and extend across different folds of
+the manifolds. On the opposite, when opposing connectivity constraints,
+the clusters form a nice parcellation of the swiss roll.</p>
+<ul>
+<li>
+<p>Authors : Vincent Michel, 2010
+           Alexandre Gramfort, 2010
+           Gael Varoquaux, 2010</p>
+</li>
+<li>
+<p>License: BSD 3 clause</p>
+</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">time</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">time</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">mpl_toolkits.mplot3d.axes3d</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">p3</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.cluster</span> <span style="color: #006699; font-weight: bold">import</span> AgglomerativeClustering
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.datasets.samples_generator</span> <span style="color: #006699; font-weight: bold">import</span> make_swiss_roll
+</pre></div>
+
+
+<h4 id="generate-data-swiss-roll-dataset">Generate data (swiss roll dataset)</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>n_samples <span style="color: #555555">=</span> <span style="color: #FF6600">1500</span>
+noise <span style="color: #555555">=</span> <span style="color: #FF6600">0.05</span>
+X, _ <span style="color: #555555">=</span> make_swiss_roll(n_samples, noise)
+<span style="color: #0099FF; font-style: italic"># Make it thinner</span>
+X[:, <span style="color: #FF6600">1</span>] <span style="color: #555555">*=</span> <span style="color: #555555">.</span><span style="color: #FF6600">5</span>
+</pre></div>
+
+
+<h4 id="compute-clustering">Compute clustering</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;Compute unstructured hierarchical clustering...&quot;</span>)
+st <span style="color: #555555">=</span> time<span style="color: #555555">.</span>time()
+ward <span style="color: #555555">=</span> AgglomerativeClustering(n_clusters<span style="color: #555555">=</span><span style="color: #FF6600">6</span>, linkage<span style="color: #555555">=</span><span style="color: #CC3300">&#39;ward&#39;</span>)<span style="color: #555555">.</span>fit(X)
+elapsed_time <span style="color: #555555">=</span> time<span style="color: #555555">.</span>time() <span style="color: #555555">-</span> st
+label <span style="color: #555555">=</span> ward<span style="color: #555555">.</span>labels_
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;Elapsed time: </span><span style="color: #AA0000">%.2f</span><span style="color: #CC3300">s&quot;</span> <span style="color: #555555">%</span> elapsed_time)
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;Number of points: </span><span style="color: #AA0000">%i</span><span style="color: #CC3300">&quot;</span> <span style="color: #555555">%</span> label<span style="color: #555555">.</span>size)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Compute unstructured hierarchical clustering...
+Elapsed time: 0.08s
+Number of points: 1500
+</pre></div>
+
+
+<h4 id="results">Results</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Plot result</span>
+fig <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> [<span style="color: #FF6600">12</span>,<span style="color: #FF6600">10</span>])
+ax <span style="color: #555555">=</span> p3<span style="color: #555555">.</span>Axes3D(fig)
+ax<span style="color: #555555">.</span>view_init(<span style="color: #FF6600">7</span>, <span style="color: #555555">-</span><span style="color: #FF6600">80</span>)
+<span style="color: #006699; font-weight: bold">for</span> l <span style="color: #000000; font-weight: bold">in</span> np<span style="color: #555555">.</span>unique(label):
+    ax<span style="color: #555555">.</span>plot3D(X[label <span style="color: #555555">==</span> l, <span style="color: #FF6600">0</span>], X[label <span style="color: #555555">==</span> l, <span style="color: #FF6600">1</span>], X[label <span style="color: #555555">==</span> l, <span style="color: #FF6600">2</span>],
+              <span style="color: #CC3300">&#39;o&#39;</span>, color<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>jet(np<span style="color: #555555">.</span>float(l) <span style="color: #555555">/</span> np<span style="color: #555555">.</span>max(label <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>)))
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Without connectivity constraints (time </span><span style="color: #AA0000">%.2f</span><span style="color: #CC3300">s)&#39;</span> <span style="color: #555555">%</span> elapsed_time)
+
+<span style="color: #0099FF; font-style: italic"># Define the structure A of the data. Here a 10 nearest neighbors</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.neighbors</span> <span style="color: #006699; font-weight: bold">import</span> kneighbors_graph
+connectivity <span style="color: #555555">=</span> kneighbors_graph(X, n_neighbors<span style="color: #555555">=</span><span style="color: #FF6600">10</span>, include_self<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">False</span>)
+
+
+<span style="color: #0099FF; font-style: italic"># Compute clustering</span>
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;Compute structured hierarchical clustering...&quot;</span>)
+st <span style="color: #555555">=</span> time<span style="color: #555555">.</span>time()
+ward <span style="color: #555555">=</span> AgglomerativeClustering(n_clusters<span style="color: #555555">=</span><span style="color: #FF6600">6</span>, connectivity<span style="color: #555555">=</span>connectivity,
+                               linkage<span style="color: #555555">=</span><span style="color: #CC3300">&#39;ward&#39;</span>)<span style="color: #555555">.</span>fit(X)
+elapsed_time <span style="color: #555555">=</span> time<span style="color: #555555">.</span>time() <span style="color: #555555">-</span> st
+label <span style="color: #555555">=</span> ward<span style="color: #555555">.</span>labels_
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;Elapsed time: </span><span style="color: #AA0000">%.2f</span><span style="color: #CC3300">s&quot;</span> <span style="color: #555555">%</span> elapsed_time)
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;Number of points: </span><span style="color: #AA0000">%i</span><span style="color: #CC3300">&quot;</span> <span style="color: #555555">%</span> label<span style="color: #555555">.</span>size)
+
+
+<span style="color: #0099FF; font-style: italic"># Plot result</span>
+fig <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> [<span style="color: #FF6600">12</span>,<span style="color: #FF6600">10</span>])
+ax <span style="color: #555555">=</span> p3<span style="color: #555555">.</span>Axes3D(fig)
+ax<span style="color: #555555">.</span>view_init(<span style="color: #FF6600">7</span>, <span style="color: #555555">-</span><span style="color: #FF6600">80</span>)
+<span style="color: #006699; font-weight: bold">for</span> l <span style="color: #000000; font-weight: bold">in</span> np<span style="color: #555555">.</span>unique(label):
+    ax<span style="color: #555555">.</span>plot3D(X[label <span style="color: #555555">==</span> l, <span style="color: #FF6600">0</span>], X[label <span style="color: #555555">==</span> l, <span style="color: #FF6600">1</span>], X[label <span style="color: #555555">==</span> l, <span style="color: #FF6600">2</span>],
+              <span style="color: #CC3300">&#39;o&#39;</span>, color<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>jet(<span style="color: #336666">float</span>(l) <span style="color: #555555">/</span> np<span style="color: #555555">.</span>max(label <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>)))
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;With connectivity constraints (time </span><span style="color: #AA0000">%.2f</span><span style="color: #CC3300">s)&#39;</span> <span style="color: #555555">%</span> elapsed_time)
+
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Compute structured hierarchical clustering...
+Elapsed time: 0.13s
+Number of points: 1500
+</pre></div>
+
+
+<p><img alt="png" src="../output_24_1.png" /></p>
+<p><img alt="png" src="../output_24_2.png" /></p>
+<hr />
+<h3 id="5-feature-agglomeration-vs-univariate-selection">5. Feature agglomeration vs. univariate selection</h3>
+<p>This example compares 2 dimensionality reduction strategies:</p>
+<ul>
+<li>
+<p>univariate feature selection with Anova</p>
+</li>
+<li>
+<p>feature agglomeration with Ward hierarchical clustering</p>
+</li>
+</ul>
+<p>Both methods are compared in a regression problem using
+a BayesianRidge as supervised estimator.</p>
+<ul>
+<li>Author: Alexandre Gramfort <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#108;&#101;&#120;&#97;&#110;&#100;&#114;&#101;&#46;&#103;&#114;&#97;&#109;&#102;&#111;&#114;&#116;&#64;&#105;&#110;&#114;&#105;&#97;&#46;&#102;&#114;">&#97;&#108;&#101;&#120;&#97;&#110;&#100;&#114;&#101;&#46;&#103;&#114;&#97;&#109;&#102;&#111;&#114;&#116;&#64;&#105;&#110;&#114;&#105;&#97;&#46;&#102;&#114;</a></li>
+<li>License: BSD 3 clause</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">shutil</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">tempfile</span>
+
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">scipy</span> <span style="color: #006699; font-weight: bold">import</span> linalg, ndimage
+
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.feature_extraction.image</span> <span style="color: #006699; font-weight: bold">import</span> grid_to_graph
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn</span> <span style="color: #006699; font-weight: bold">import</span> feature_selection
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.cluster</span> <span style="color: #006699; font-weight: bold">import</span> FeatureAgglomeration
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.linear_model</span> <span style="color: #006699; font-weight: bold">import</span> BayesianRidge
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.pipeline</span> <span style="color: #006699; font-weight: bold">import</span> Pipeline
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.externals.joblib</span> <span style="color: #006699; font-weight: bold">import</span> Memory
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.model_selection</span> <span style="color: #006699; font-weight: bold">import</span> GridSearchCV
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.model_selection</span> <span style="color: #006699; font-weight: bold">import</span> KFold
+</pre></div>
+
+
+<h4 id="generate-data">Generate data</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>n_samples <span style="color: #555555">=</span> <span style="color: #FF6600">200</span>
+size <span style="color: #555555">=</span> <span style="color: #FF6600">40</span>  <span style="color: #0099FF; font-style: italic"># image size</span>
+roi_size <span style="color: #555555">=</span> <span style="color: #FF6600">15</span>
+snr <span style="color: #555555">=</span> <span style="color: #FF6600">5.</span>
+np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>seed(<span style="color: #FF6600">0</span>)
+mask <span style="color: #555555">=</span> np<span style="color: #555555">.</span>ones([size, size], dtype<span style="color: #555555">=</span>np<span style="color: #555555">.</span>bool)
+
+coef <span style="color: #555555">=</span> np<span style="color: #555555">.</span>zeros((size, size))
+coef[<span style="color: #FF6600">0</span>:roi_size, <span style="color: #FF6600">0</span>:roi_size] <span style="color: #555555">=</span> <span style="color: #555555">-</span><span style="color: #FF6600">1.</span>
+coef[<span style="color: #555555">-</span>roi_size:, <span style="color: #555555">-</span>roi_size:] <span style="color: #555555">=</span> <span style="color: #FF6600">1.</span>
+
+X <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randn(n_samples, size <span style="color: #555555">**</span> <span style="color: #FF6600">2</span>)
+<span style="color: #006699; font-weight: bold">for</span> x <span style="color: #000000; font-weight: bold">in</span> X:  <span style="color: #0099FF; font-style: italic"># smooth data</span>
+    x[:] <span style="color: #555555">=</span> ndimage<span style="color: #555555">.</span>gaussian_filter(x<span style="color: #555555">.</span>reshape(size, size), sigma<span style="color: #555555">=</span><span style="color: #FF6600">1.0</span>)<span style="color: #555555">.</span>ravel()
+X <span style="color: #555555">-=</span> X<span style="color: #555555">.</span>mean(axis<span style="color: #555555">=</span><span style="color: #FF6600">0</span>)
+X <span style="color: #555555">/=</span> X<span style="color: #555555">.</span>std(axis<span style="color: #555555">=</span><span style="color: #FF6600">0</span>)
+
+y <span style="color: #555555">=</span> np<span style="color: #555555">.</span>dot(X, coef<span style="color: #555555">.</span>ravel())
+noise <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randn(y<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>])
+noise_coef <span style="color: #555555">=</span> (linalg<span style="color: #555555">.</span>norm(y, <span style="color: #FF6600">2</span>) <span style="color: #555555">/</span> np<span style="color: #555555">.</span>exp(snr <span style="color: #555555">/</span> <span style="color: #FF6600">20.</span>)) <span style="color: #555555">/</span> linalg<span style="color: #555555">.</span>norm(noise, <span style="color: #FF6600">2</span>)
+y <span style="color: #555555">+=</span> noise_coef <span style="color: #555555">*</span> noise  <span style="color: #0099FF; font-style: italic"># add noise</span>
+</pre></div>
+
+
+<h4 id="compute-the-coefs-of-a-bayesian-ridge-with-gridsearch">Compute the coefs of a Bayesian Ridge with GridSearch</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>cv <span style="color: #555555">=</span> KFold(<span style="color: #FF6600">2</span>)  <span style="color: #0099FF; font-style: italic"># cross-validation generator for model selection</span>
+ridge <span style="color: #555555">=</span> BayesianRidge()
+cachedir <span style="color: #555555">=</span> tempfile<span style="color: #555555">.</span>mkdtemp()
+mem <span style="color: #555555">=</span> Memory(cachedir<span style="color: #555555">=</span>cachedir, verbose<span style="color: #555555">=</span><span style="color: #FF6600">1</span>)
+</pre></div>
+
+
+<h4 id="ward-agglomeration-followed-by-bayesianridge">Ward agglomeration followed by BayesianRidge</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>connectivity <span style="color: #555555">=</span> grid_to_graph(n_x<span style="color: #555555">=</span>size, n_y<span style="color: #555555">=</span>size)
+ward <span style="color: #555555">=</span> FeatureAgglomeration(n_clusters<span style="color: #555555">=</span><span style="color: #FF6600">10</span>, connectivity<span style="color: #555555">=</span>connectivity,
+                            memory<span style="color: #555555">=</span>mem)
+clf <span style="color: #555555">=</span> Pipeline([(<span style="color: #CC3300">&#39;ward&#39;</span>, ward), (<span style="color: #CC3300">&#39;ridge&#39;</span>, ridge)])
+</pre></div>
+
+
+<h4 id="select-the-optimal-number-of-parcels-with-grid-search">Select the optimal number of parcels with grid search</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>clf <span style="color: #555555">=</span> GridSearchCV(clf, {<span style="color: #CC3300">&#39;ward__n_clusters&#39;</span>: [<span style="color: #FF6600">10</span>, <span style="color: #FF6600">20</span>, <span style="color: #FF6600">30</span>]}, n_jobs<span style="color: #555555">=</span><span style="color: #FF6600">1</span>, cv<span style="color: #555555">=</span>cv)
+clf<span style="color: #555555">.</span>fit(X, y)  <span style="color: #0099FF; font-style: italic"># set the best parameters</span>
+coef_ <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>best_estimator_<span style="color: #555555">.</span>steps[<span style="color: #555555">-</span><span style="color: #FF6600">1</span>][<span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>coef_
+coef_ <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>best_estimator_<span style="color: #555555">.</span>steps[<span style="color: #FF6600">0</span>][<span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>inverse_transform(coef_)
+coef_agglomeration_ <span style="color: #555555">=</span> coef_<span style="color: #555555">.</span>reshape(size, size)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>________________________________________________________________________________
+[Memory] Calling sklearn.cluster.hierarchical.ward_tree...
+ward_tree(array([[-0.451933, ..., -0.675318],
+       ...,
+       [ 0.275706, ..., -1.085711]]), 
+&lt;1600x1600 sparse matrix of type &#39;&lt;class &#39;numpy.int64&#39;&gt;&#39;
+    with 7840 stored elements in COOrdinate format&gt;, n_clusters=None)
+________________________________________________________ward_tree - 0.1s, 0.0min
+________________________________________________________________________________
+[Memory] Calling sklearn.cluster.hierarchical.ward_tree...
+ward_tree(array([[ 0.905206, ...,  0.161245],
+       ...,
+       [-0.849835, ..., -1.091621]]), 
+&lt;1600x1600 sparse matrix of type &#39;&lt;class &#39;numpy.int64&#39;&gt;&#39;
+    with 7840 stored elements in COOrdinate format&gt;, n_clusters=None)
+________________________________________________________ward_tree - 0.1s, 0.0min
+________________________________________________________________________________
+[Memory] Calling sklearn.cluster.hierarchical.ward_tree...
+ward_tree(array([[ 0.905206, ..., -0.675318],
+       ...,
+       [-0.849835, ..., -1.085711]]), 
+&lt;1600x1600 sparse matrix of type &#39;&lt;class &#39;numpy.int64&#39;&gt;&#39;
+    with 7840 stored elements in COOrdinate format&gt;, n_clusters=None)
+________________________________________________________ward_tree - 0.1s, 0.0min
+</pre></div>
+
+
+<h4 id="anova-univariate-feature-selection-followed-by-bayesianridge">Anova univariate feature selection followed by BayesianRidge</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>f_regression <span style="color: #555555">=</span> mem<span style="color: #555555">.</span>cache(feature_selection<span style="color: #555555">.</span>f_regression)  <span style="color: #0099FF; font-style: italic"># caching function</span>
+anova <span style="color: #555555">=</span> feature_selection<span style="color: #555555">.</span>SelectPercentile(f_regression)
+clf <span style="color: #555555">=</span> Pipeline([(<span style="color: #CC3300">&#39;anova&#39;</span>, anova), (<span style="color: #CC3300">&#39;ridge&#39;</span>, ridge)])
+<span style="color: #0099FF; font-style: italic"># Select the optimal percentage of features with grid search</span>
+clf <span style="color: #555555">=</span> GridSearchCV(clf, {<span style="color: #CC3300">&#39;anova__percentile&#39;</span>: [<span style="color: #FF6600">5</span>, <span style="color: #FF6600">10</span>, <span style="color: #FF6600">20</span>]}, cv<span style="color: #555555">=</span>cv)
+clf<span style="color: #555555">.</span>fit(X, y)  <span style="color: #0099FF; font-style: italic"># set the best parameters</span>
+coef_ <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>best_estimator_<span style="color: #555555">.</span>steps[<span style="color: #555555">-</span><span style="color: #FF6600">1</span>][<span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>coef_
+coef_ <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>best_estimator_<span style="color: #555555">.</span>steps[<span style="color: #FF6600">0</span>][<span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>inverse_transform(coef_<span style="color: #555555">.</span>reshape(<span style="color: #FF6600">1</span>, <span style="color: #555555">-</span><span style="color: #FF6600">1</span>))
+coef_selection_ <span style="color: #555555">=</span> coef_<span style="color: #555555">.</span>reshape(size, size)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>________________________________________________________________________________
+[Memory] Calling sklearn.feature_selection.univariate_selection.f_regression...
+f_regression(array([[-0.451933, ...,  0.275706],
+       ...,
+       [-0.675318, ..., -1.085711]]), 
+array([ 25.267703, ..., -25.026711]))
+_____________________________________________________f_regression - 0.0s, 0.0min
+________________________________________________________________________________
+[Memory] Calling sklearn.feature_selection.univariate_selection.f_regression...
+f_regression(array([[ 0.905206, ..., -0.849835],
+       ...,
+       [ 0.161245, ..., -1.091621]]), 
+array([ -27.447268, ..., -112.638768]))
+_____________________________________________________f_regression - 0.0s, 0.0min
+________________________________________________________________________________
+[Memory] Calling sklearn.feature_selection.univariate_selection.f_regression...
+f_regression(array([[ 0.905206, ..., -0.849835],
+       ...,
+       [-0.675318, ..., -1.085711]]), 
+array([-27.447268, ..., -25.026711]))
+_____________________________________________________f_regression - 0.0s, 0.0min
+</pre></div>
+
+
+<h4 id="results_1">Results</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Inverse the transformation to plot the results on an image</span>
+plt<span style="color: #555555">.</span>close(<span style="color: #CC3300">&#39;all&#39;</span>)
+plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">20</span>, <span style="color: #FF6600">8</span>))
+plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">1</span>, <span style="color: #FF6600">3</span>, <span style="color: #FF6600">1</span>)
+plt<span style="color: #555555">.</span>imshow(coef, interpolation<span style="color: #555555">=</span><span style="color: #CC3300">&quot;nearest&quot;</span>, cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>RdBu_r)
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&quot;True weights&quot;</span>)
+plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">1</span>, <span style="color: #FF6600">3</span>, <span style="color: #FF6600">2</span>)
+plt<span style="color: #555555">.</span>imshow(coef_selection_, interpolation<span style="color: #555555">=</span><span style="color: #CC3300">&quot;nearest&quot;</span>, cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>RdBu_r)
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&quot;Feature Selection&quot;</span>)
+plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">1</span>, <span style="color: #FF6600">3</span>, <span style="color: #FF6600">3</span>)
+plt<span style="color: #555555">.</span>imshow(coef_agglomeration_, interpolation<span style="color: #555555">=</span><span style="color: #CC3300">&quot;nearest&quot;</span>, cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>RdBu_r)
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&quot;Feature Agglomeration&quot;</span>)
+plt<span style="color: #555555">.</span>subplots_adjust(<span style="color: #FF6600">0.04</span>, <span style="color: #FF6600">0.0</span>, <span style="color: #FF6600">0.98</span>, <span style="color: #FF6600">0.94</span>, <span style="color: #FF6600">0.16</span>, <span style="color: #FF6600">0.26</span>)
+plt<span style="color: #555555">.</span>show()
+
+<span style="color: #0099FF; font-style: italic"># Attempt to remove the temporary cachedir, but don&#39;t worry if it fails</span>
+shutil<span style="color: #555555">.</span>rmtree(cachedir, ignore_errors<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>)
+</pre></div>
+
+
+<p><img alt="png" src="../output_40_0.png" /></p>
+<hr />
+<h3 id="6-agglomerative-clustering-with-and-without-structure">6. Agglomerative clustering with and without structure</h3>
+<p>This example shows the effect of imposing a connectivity graph to capture
+local structure in the data. The graph is simply the graph of 20 nearest
+neighbors.</p>
+<p>Two consequences of imposing a connectivity can be seen. First clustering
+with a connectivity matrix is much faster.</p>
+<p>Second, when using a connectivity matrix, average and complete linkage are
+unstable and tend to create a few clusters that grow very quickly. Indeed,
+average and complete linkage fight this percolation behavior by considering all
+the distances between two clusters when merging them. The connectivity
+graph breaks this mechanism. This effect is more pronounced for very
+sparse graphs (try decreasing the number of neighbors in
+kneighbors_graph) and with complete linkage. In particular, having a very
+small number of neighbors in the graph, imposes a geometry that is
+close to that of single linkage, which is well known to have this
+percolation instability.</p>
+<ul>
+<li>Authors: Gael Varoquaux, Nelle Varoquaux</li>
+<li>License: BSD 3 clause</li>
+</ul>
+<hr />
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">time</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.cluster</span> <span style="color: #006699; font-weight: bold">import</span> AgglomerativeClustering
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.neighbors</span> <span style="color: #006699; font-weight: bold">import</span> kneighbors_graph
+</pre></div>
+
+
+<h4 id="generate-sample-data">Generate sample data</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>n_samples <span style="color: #555555">=</span> <span style="color: #FF6600">1500</span>
+np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>seed(<span style="color: #FF6600">0</span>)
+t <span style="color: #555555">=</span> <span style="color: #FF6600">1.5</span> <span style="color: #555555">*</span> np<span style="color: #555555">.</span>pi <span style="color: #555555">*</span> (<span style="color: #FF6600">1</span> <span style="color: #555555">+</span> <span style="color: #FF6600">3</span> <span style="color: #555555">*</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>rand(<span style="color: #FF6600">1</span>, n_samples))
+x <span style="color: #555555">=</span> t <span style="color: #555555">*</span> np<span style="color: #555555">.</span>cos(t)
+y <span style="color: #555555">=</span> t <span style="color: #555555">*</span> np<span style="color: #555555">.</span>sin(t)
+
+
+X <span style="color: #555555">=</span> np<span style="color: #555555">.</span>concatenate((x, y))
+X <span style="color: #555555">+=</span> <span style="color: #555555">.</span><span style="color: #FF6600">7</span> <span style="color: #555555">*</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randn(<span style="color: #FF6600">2</span>, n_samples)
+X <span style="color: #555555">=</span> X<span style="color: #555555">.</span>T
+</pre></div>
+
+
+<h4 id="results_2">Results</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Create a graph capturing local connectivity. Larger number of neighbors</span>
+<span style="color: #0099FF; font-style: italic"># will give more homogeneous clusters to the cost of computation</span>
+<span style="color: #0099FF; font-style: italic"># time. A very large number of neighbors gives more evenly distributed</span>
+<span style="color: #0099FF; font-style: italic"># cluster sizes, but may not impose the local manifold structure of</span>
+<span style="color: #0099FF; font-style: italic"># the data</span>
+knn_graph <span style="color: #555555">=</span> kneighbors_graph(X, <span style="color: #FF6600">30</span>, include_self<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">False</span>)
+
+<span style="color: #006699; font-weight: bold">for</span> connectivity <span style="color: #000000; font-weight: bold">in</span> (<span style="color: #006699; font-weight: bold">None</span>, knn_graph):
+    <span style="color: #006699; font-weight: bold">for</span> n_clusters <span style="color: #000000; font-weight: bold">in</span> (<span style="color: #FF6600">30</span>, <span style="color: #FF6600">3</span>):
+        plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">10</span>, <span style="color: #FF6600">4</span>))
+        <span style="color: #006699; font-weight: bold">for</span> index, linkage <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>((<span style="color: #CC3300">&#39;average&#39;</span>, <span style="color: #CC3300">&#39;complete&#39;</span>, <span style="color: #CC3300">&#39;ward&#39;</span>)):
+            plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">1</span>, <span style="color: #FF6600">3</span>, index <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>)
+            model <span style="color: #555555">=</span> AgglomerativeClustering(linkage<span style="color: #555555">=</span>linkage,
+                                            connectivity<span style="color: #555555">=</span>connectivity,
+                                            n_clusters<span style="color: #555555">=</span>n_clusters)
+            t0 <span style="color: #555555">=</span> time<span style="color: #555555">.</span>time()
+            model<span style="color: #555555">.</span>fit(X)
+            elapsed_time <span style="color: #555555">=</span> time<span style="color: #555555">.</span>time() <span style="color: #555555">-</span> t0
+            plt<span style="color: #555555">.</span>scatter(X[:, <span style="color: #FF6600">0</span>], X[:, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span>model<span style="color: #555555">.</span>labels_,
+                        cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>spectral)
+            plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;linkage=</span><span style="color: #AA0000">%s</span><span style="color: #CC3300"> (time </span><span style="color: #AA0000">%.2f</span><span style="color: #CC3300">s)&#39;</span> <span style="color: #555555">%</span> (linkage, elapsed_time),
+                      fontdict<span style="color: #555555">=</span><span style="color: #336666">dict</span>(verticalalignment<span style="color: #555555">=</span><span style="color: #CC3300">&#39;top&#39;</span>))
+            plt<span style="color: #555555">.</span>axis(<span style="color: #CC3300">&#39;equal&#39;</span>)
+            plt<span style="color: #555555">.</span>axis(<span style="color: #CC3300">&#39;off&#39;</span>)
+
+            plt<span style="color: #555555">.</span>subplots_adjust(bottom<span style="color: #555555">=</span><span style="color: #FF6600">0</span>, top<span style="color: #555555">=.</span><span style="color: #FF6600">89</span>, wspace<span style="color: #555555">=</span><span style="color: #FF6600">0</span>,
+                                left<span style="color: #555555">=</span><span style="color: #FF6600">0</span>, right<span style="color: #555555">=</span><span style="color: #FF6600">1</span>)
+            plt<span style="color: #555555">.</span>suptitle(<span style="color: #CC3300">&#39;n_cluster=</span><span style="color: #AA0000">%i</span><span style="color: #CC3300">, connectivity=</span><span style="color: #AA0000">%r</span><span style="color: #CC3300">&#39;</span> <span style="color: #555555">%</span>
+                         (n_clusters, connectivity <span style="color: #000000; font-weight: bold">is</span> <span style="color: #000000; font-weight: bold">not</span> <span style="color: #006699; font-weight: bold">None</span>), size<span style="color: #555555">=</span><span style="color: #FF6600">17</span>)
+
+
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_49_0.png" /></p>
+<p><img alt="png" src="../output_49_1.png" /></p>
+<p><img alt="png" src="../output_49_2.png" /></p>
+<p><img alt="png" src="../output_49_3.png" /></p>
+<hr />
+<h3 id="7-agglomerative-clustering-with-different-metrics">7. Agglomerative clustering with different metrics</h3>
+<p>Demonstrates the effect of different metrics on the hierarchical clustering.</p>
+<p>The example is engineered to show the effect of the choice of different
+metrics. It is applied to waveforms, which can be seen as
+high-dimensional vector. Indeed, the difference between metrics is
+usually more pronounced in high dimension (in particular for euclidean
+and cityblock).</p>
+<p>We generate data from three groups of waveforms. Two of the waveforms
+(waveform 1 and waveform 2) are proportional one to the other. The cosine
+distance is invariant to a scaling of the data, as a result, it cannot
+distinguish these two waveforms. Thus even with no noise, clustering
+using this distance will not separate out waveform 1 and 2.</p>
+<p>We add observation noise to these waveforms. We generate very sparse
+noise: only 6% of the time points contain noise. As a result, the
+l1 norm of this noise (ie "cityblock" distance) is much smaller than it's
+l2 norm ("euclidean" distance). This can be seen on the inter-class
+distance matrices: the values on the diagonal, that characterize the
+spread of the class, are much bigger for the Euclidean distance than for
+the cityblock distance.</p>
+<p>When we apply clustering to the data, we find that the clustering
+reflects what was in the distance matrices. Indeed, for the Euclidean
+distance, the classes are ill-separated because of the noise, and thus
+the clustering does not separate the waveforms. For the cityblock
+distance, the separation is good and the waveform classes are recovered.
+Finally, the cosine distance does not separate at all waveform 1 and 2,
+thus the clustering puts them in the same cluster.</p>
+<ul>
+<li>Author: Gael Varoquaux</li>
+<li>License: BSD 3-Clause or CC-0</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.cluster</span> <span style="color: #006699; font-weight: bold">import</span> AgglomerativeClustering
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.metrics</span> <span style="color: #006699; font-weight: bold">import</span> pairwise_distances
+
+np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>seed(<span style="color: #FF6600">0</span>)
+</pre></div>
+
+
+<h5 id="generate-waveform-data">Generate waveform data</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>n_features <span style="color: #555555">=</span> <span style="color: #FF6600">2000</span>
+t <span style="color: #555555">=</span> np<span style="color: #555555">.</span>pi <span style="color: #555555">*</span> np<span style="color: #555555">.</span>linspace(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">1</span>, n_features)
+
+
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">sqr</span>(x):
+    <span style="color: #006699; font-weight: bold">return</span> np<span style="color: #555555">.</span>sign(np<span style="color: #555555">.</span>cos(x))
+
+X <span style="color: #555555">=</span> <span style="color: #336666">list</span>()
+y <span style="color: #555555">=</span> <span style="color: #336666">list</span>()
+<span style="color: #006699; font-weight: bold">for</span> i, (phi, a) <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>([(<span style="color: #555555">.</span><span style="color: #FF6600">5</span>, <span style="color: #555555">.</span><span style="color: #FF6600">15</span>), (<span style="color: #555555">.</span><span style="color: #FF6600">5</span>, <span style="color: #555555">.</span><span style="color: #FF6600">6</span>), (<span style="color: #555555">.</span><span style="color: #FF6600">3</span>, <span style="color: #555555">.</span><span style="color: #FF6600">2</span>)]):
+    <span style="color: #006699; font-weight: bold">for</span> _ <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(<span style="color: #FF6600">30</span>):
+        phase_noise <span style="color: #555555">=</span> <span style="color: #555555">.</span><span style="color: #FF6600">01</span> <span style="color: #555555">*</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>normal()
+        amplitude_noise <span style="color: #555555">=</span> <span style="color: #555555">.</span><span style="color: #FF6600">04</span> <span style="color: #555555">*</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>normal()
+        additional_noise <span style="color: #555555">=</span> <span style="color: #FF6600">1</span> <span style="color: #555555">-</span> <span style="color: #FF6600">2</span> <span style="color: #555555">*</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>rand(n_features)
+        <span style="color: #0099FF; font-style: italic"># Make the noise sparse</span>
+        additional_noise[np<span style="color: #555555">.</span>abs(additional_noise) <span style="color: #555555">&lt;</span> <span style="color: #555555">.</span><span style="color: #FF6600">997</span>] <span style="color: #555555">=</span> <span style="color: #FF6600">0</span>
+
+        X<span style="color: #555555">.</span>append(<span style="color: #FF6600">12</span> <span style="color: #555555">*</span> ((a <span style="color: #555555">+</span> amplitude_noise)
+                 <span style="color: #555555">*</span> (sqr(<span style="color: #FF6600">6</span> <span style="color: #555555">*</span> (t <span style="color: #555555">+</span> phi <span style="color: #555555">+</span> phase_noise)))
+                 <span style="color: #555555">+</span> additional_noise))
+        y<span style="color: #555555">.</span>append(i)
+
+X <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array(X)
+y <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array(y)
+
+n_clusters <span style="color: #555555">=</span> <span style="color: #FF6600">3</span>
+
+labels <span style="color: #555555">=</span> (<span style="color: #CC3300">&#39;Waveform 1&#39;</span>, <span style="color: #CC3300">&#39;Waveform 2&#39;</span>, <span style="color: #CC3300">&#39;Waveform 3&#39;</span>)
+</pre></div>
+
+
+<h4 id="results_3">Results</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Plot the ground-truth labelling</span>
+plt<span style="color: #555555">.</span>figure()
+plt<span style="color: #555555">.</span>axes([<span style="color: #FF6600">0</span>, <span style="color: #FF6600">0</span>, <span style="color: #FF6600">1</span>, <span style="color: #FF6600">1</span>])
+<span style="color: #006699; font-weight: bold">for</span> l, c, n <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">zip</span>(<span style="color: #336666">range</span>(n_clusters), <span style="color: #CC3300">&#39;rgb&#39;</span>,
+                   labels):
+    lines <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>plot(X[y <span style="color: #555555">==</span> l]<span style="color: #555555">.</span>T, c<span style="color: #555555">=</span>c, alpha<span style="color: #555555">=.</span><span style="color: #FF6600">5</span>)
+    lines[<span style="color: #FF6600">0</span>]<span style="color: #555555">.</span>set_label(n)
+
+plt<span style="color: #555555">.</span>legend(loc<span style="color: #555555">=</span><span style="color: #CC3300">&#39;best&#39;</span>)
+
+plt<span style="color: #555555">.</span>axis(<span style="color: #CC3300">&#39;tight&#39;</span>)
+plt<span style="color: #555555">.</span>axis(<span style="color: #CC3300">&#39;off&#39;</span>)
+plt<span style="color: #555555">.</span>suptitle(<span style="color: #CC3300">&quot;Ground truth&quot;</span>, size<span style="color: #555555">=</span><span style="color: #FF6600">20</span>)
+<span style="color: #0099FF; font-style: italic"># Plot the distances</span>
+<span style="color: #006699; font-weight: bold">for</span> index, metric <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>([<span style="color: #CC3300">&quot;cosine&quot;</span>, <span style="color: #CC3300">&quot;euclidean&quot;</span>, <span style="color: #CC3300">&quot;cityblock&quot;</span>]):
+    avg_dist <span style="color: #555555">=</span> np<span style="color: #555555">.</span>zeros((n_clusters, n_clusters))
+    plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">5</span>, <span style="color: #FF6600">4.5</span>))
+    <span style="color: #006699; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(n_clusters):
+        <span style="color: #006699; font-weight: bold">for</span> j <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(n_clusters):
+            avg_dist[i, j] <span style="color: #555555">=</span> pairwise_distances(X[y <span style="color: #555555">==</span> i], X[y <span style="color: #555555">==</span> j],
+                                                metric<span style="color: #555555">=</span>metric)<span style="color: #555555">.</span>mean()
+    avg_dist <span style="color: #555555">/=</span> avg_dist<span style="color: #555555">.</span>max()
+    <span style="color: #006699; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(n_clusters):
+        <span style="color: #006699; font-weight: bold">for</span> j <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(n_clusters):
+            plt<span style="color: #555555">.</span>text(i, j, <span style="color: #CC3300">&#39;</span><span style="color: #AA0000">%5.3f</span><span style="color: #CC3300">&#39;</span> <span style="color: #555555">%</span> avg_dist[i, j],
+                     verticalalignment<span style="color: #555555">=</span><span style="color: #CC3300">&#39;center&#39;</span>,
+                     horizontalalignment<span style="color: #555555">=</span><span style="color: #CC3300">&#39;center&#39;</span>)
+
+    plt<span style="color: #555555">.</span>imshow(avg_dist, interpolation<span style="color: #555555">=</span><span style="color: #CC3300">&#39;nearest&#39;</span>, cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>gnuplot2,
+               vmin<span style="color: #555555">=</span><span style="color: #FF6600">0</span>)
+    plt<span style="color: #555555">.</span>xticks(<span style="color: #336666">range</span>(n_clusters), labels, rotation<span style="color: #555555">=</span><span style="color: #FF6600">45</span>)
+    plt<span style="color: #555555">.</span>yticks(<span style="color: #336666">range</span>(n_clusters), labels)
+    plt<span style="color: #555555">.</span>colorbar()
+    plt<span style="color: #555555">.</span>suptitle(<span style="color: #CC3300">&quot;Interclass </span><span style="color: #AA0000">%s</span><span style="color: #CC3300"> distances&quot;</span> <span style="color: #555555">%</span> metric, size<span style="color: #555555">=</span><span style="color: #FF6600">18</span>)
+    plt<span style="color: #555555">.</span>tight_layout()
+
+
+<span style="color: #0099FF; font-style: italic"># Plot clustering results</span>
+<span style="color: #006699; font-weight: bold">for</span> index, metric <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>([<span style="color: #CC3300">&quot;cosine&quot;</span>, <span style="color: #CC3300">&quot;euclidean&quot;</span>, <span style="color: #CC3300">&quot;cityblock&quot;</span>]):
+    model <span style="color: #555555">=</span> AgglomerativeClustering(n_clusters<span style="color: #555555">=</span>n_clusters,
+                                    linkage<span style="color: #555555">=</span><span style="color: #CC3300">&quot;average&quot;</span>, affinity<span style="color: #555555">=</span>metric)
+    model<span style="color: #555555">.</span>fit(X)
+    plt<span style="color: #555555">.</span>figure()
+    plt<span style="color: #555555">.</span>axes([<span style="color: #FF6600">0</span>, <span style="color: #FF6600">0</span>, <span style="color: #FF6600">1</span>, <span style="color: #FF6600">1</span>])
+    <span style="color: #006699; font-weight: bold">for</span> l, c <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">zip</span>(np<span style="color: #555555">.</span>arange(model<span style="color: #555555">.</span>n_clusters), <span style="color: #CC3300">&#39;rgbk&#39;</span>):
+        plt<span style="color: #555555">.</span>plot(X[model<span style="color: #555555">.</span>labels_ <span style="color: #555555">==</span> l]<span style="color: #555555">.</span>T, c<span style="color: #555555">=</span>c, alpha<span style="color: #555555">=.</span><span style="color: #FF6600">5</span>)
+    plt<span style="color: #555555">.</span>axis(<span style="color: #CC3300">&#39;tight&#39;</span>)
+    plt<span style="color: #555555">.</span>axis(<span style="color: #CC3300">&#39;off&#39;</span>)
+    plt<span style="color: #555555">.</span>suptitle(<span style="color: #CC3300">&quot;AgglomerativeClustering(affinity=</span><span style="color: #AA0000">%s</span><span style="color: #CC3300">)&quot;</span> <span style="color: #555555">%</span> metric, size<span style="color: #555555">=</span><span style="color: #FF6600">20</span>)
+
+
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_57_0.png" /></p>
+<p><img alt="png" src="../output_57_1.png" /></p>
+<p><img alt="png" src="../output_57_2.png" /></p>
+<p><img alt="png" src="../output_57_3.png" /></p>
+<p><img alt="png" src="../output_57_4.png" /></p>
+<p><img alt="png" src="../output_57_5.png" /></p>
+<p><img alt="png" src="../output_57_6.png" /></p>
+<hr />
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../AffinityPropagation/Affinity-Propagation/" class="btn btn-neutral float-right" title="Affinity Propagation">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../Kmeans/Kmeans/" class="btn btn-neutral" title="Kmeans Clustering"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../Kmeans/Kmeans/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../AffinityPropagation/Affinity-Propagation/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../../../..';</script>
+    <script src="../../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../../../search/main.js" defer></script>
+
+</body>
+</html>

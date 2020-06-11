@@ -1,0 +1,2143 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../../../img/favicon.ico">
+  <title>Support Vector Machine - Machine Learning</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Support Vector Machine";
+    var mkdocs_page_input_path = "ml/Classifiers/SVM/svm.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../../.." class="icon icon-home"> Machine Learning</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="tocbase current">
+    
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../..">Home</a>
+  </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Machine Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../LinearModels/Linear-models/">Linear Regression</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Logistic/Logistic/">Logistic Regression</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Tree/Tree/">Decision Tree</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Ensamble/ensamble/">Ensamble Methods</a>
+  </li>
+        
+          
+
+
+  
+    
+    <li class="navtree toctree-l2 page current">
+      <a class="current" href="./">
+        Support Vector Machine
+          <span class="toctree-expand"></span>
+      </a>
+    </li>
+    
+      
+
+  <li class="toctree-l2 current with-children">
+    <a href="#support-vector-mechanics-svm">
+      Support Vector Mechanics (SVM)
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2 current">
+    <ul class="subnav-l2 current">
+    
+      
+          
+
+  <li class="toctree-l3 current with-children">
+    <a href="#introduction">
+      Introduction
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3 current">
+    <ul class="subnav-l3 current">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#fit">Fit</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l4">
+    <a href="#predict">
+      Predict
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#support-vectors">Support vectors</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+      
+
+  <li class="toctree-l2">
+    <a href="#examples">
+      Examples:
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2">
+    <ul class="subnav-l2 toc-hidden">
+    
+      
+          
+
+  <li class="toctree-l3 current with-children">
+    <a href="#plot-iris-svm">
+      Plot Iris SVM
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3 current">
+    <ul class="subnav-l3 current">
+    
+      
+          
+
+  <li class="toctree-l4 current with-children">
+    <a href="#1-plot-different-svm-classifiers-in-the-iris-dataset-source">
+      1. Plot different SVM classifiers in the iris dataset (source)
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4 current">
+    <ul class="subnav-l4 current">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#data-set">Data Set</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l5">
+    <a href="#train-the-model">
+      Train the model
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l5">
+    <ul class="subnav-l5 toc-hidden">
+    
+      
+        <li class="toctree-l6">
+          <a class="toctree-l7" href="#plot">Plot</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l4">
+    <a href="#2-svm-with-custom-kernel-source">
+      2. SVM with custom kernel (source)
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#data-set_1">Data Set</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#define-kernel">Define Kernel</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l5">
+    <a href="#fit-the-model">
+      Fit the model
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l5">
+    <ul class="subnav-l5 toc-hidden">
+    
+      
+        <li class="toctree-l6">
+          <a class="toctree-l7" href="#plot_1">Plot</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l4">
+    <a href="#3-one-class-svm-with-non-linear-kernel-rbf-source">
+      3. One-class SVM with non-linear kernel (RBF) (source)
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#generate-train-data">Generate train data</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l5">
+    <a href="#fit-the-model-sklearnsvmoneclasssvm">
+      Fit the Model (sklearn.svm.OneClassSVM)
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l5">
+    <ul class="subnav-l5 toc-hidden">
+    
+      
+        <li class="toctree-l6">
+          <a class="toctree-l7" href="#plot_2">Plot</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+      
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#4-rbf-svm-parameters-source">4. RBF SVM parameters (source)</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l4">
+    <a href="#5-svm-separating-hyperplane-for-unbalanced-classes-source">
+      5. SVM: Separating hyperplane for unbalanced classes (source)
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#data">Data</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l5">
+    <a href="#model">
+      Model
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l5">
+    <ul class="subnav-l5 toc-hidden">
+    
+      
+        <li class="toctree-l6">
+          <a class="toctree-l7" href="#get-the-separating-hyperplane-using-weighted-classes">Get the separating hyperplane using weighted classes</a>
+        </li>
+    
+      
+        <li class="toctree-l6">
+          <a class="toctree-l7" href="#plot_3">Plot</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+      
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#6-svm-maximum-margin-separating-hyperplane-source">6. SVM: Maximum margin separating hyperplane (source)</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#7-svm-anova-svm-with-univariate-feature-selection-source">7. SVM-Anova: SVM with univariate feature selection (source)</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#8-svm-kernels-source">8. SVM-Kernels (source)</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#9-svm-margins-example-source">9. SVM Margins Example (source)</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#10-non-linear-svm-source">10. Non-linear SVM (source)</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#11-support-vector-regression-svr-using-linear-and-non-linear-kernels-source">11. Support Vector Regression (SVR) using linear and non-linear kernels (source)</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#13-scaling-the-regularization-parameter-for-svcs-source">13. Scaling the regularization parameter for SVCs (source)</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#l1-penalty-case">l1-penalty case</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#l2-penalty-case">l2-penalty case</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#simulations">
+      Simulations
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#14-svm-weighted-samples-source">14. SVM: Weighted samples (source)</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+
+  
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Clustering/Kmeans/Kmeans/">Kmeans Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Clustering/Agglomerative/Agglomerative/">Agglomerative Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Clustering/AffinityPropagation/Affinity-Propagation/">Affinity Propagation</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Clustering/Spectral/Spectral/">Spectral Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Clustering/DBSCAN/DBSCAN/">DBSCAN Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Clustering/MeanShift/Mean-shift/">Mean Shift Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Clustering/Comparison/Comparison/">Cluster Comparison</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">ML Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/boston_housing/boston_housing/">Boston Housing</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/Customer_segments/customer_segments/">Customer Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/finding_donors/finding_donors/">Finding Donors</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/vehicle-detection/CARND-Project-5/">Vehicle Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/perceptron/dlnd-your-first-neural-network/">Perceptron</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Deep Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/Vanila/1.Vanila-LSTM/">Vanila LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/stacked/2.Stacked-LSTM/">Stacked LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/bidirectional/5. BiDirectional-LSTM/">Bidirectional LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/rnn/RNN_project/">Recurrent Neural Network</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">DL Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/NMIST/NMIST/">Digit Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/CIFRT10/CIFR10/">Image Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/traffic-sign/Traffic_Sign_Classifier/">Traffic Sign Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/translator/dlnd_language_translation/">Language Translator</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Rinforcement Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../rl/smartcab/smartcab/">SmartCab</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">GAN Project</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/gan/dlnd_face_generation/">Face Generation</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../../References/ref.md">References</a>
+  </li>
+    
+  </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../..">Machine Learning</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Machine Learning &raquo;</li>
+        
+      
+    
+    <li>Support Vector Machine</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="support-vector-mechanics-svm">Support Vector Mechanics (SVM)</h2>
+<hr />
+<h3 id="introduction">Introduction</h3>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn</span> <span style="color: #006699; font-weight: bold">import</span> svm
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>X <span style="color: #555555">=</span> [[<span style="color: #FF6600">0</span>, <span style="color: #FF6600">0</span>], [<span style="color: #FF6600">1</span>, <span style="color: #FF6600">1</span>]]
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>y <span style="color: #555555">=</span> [<span style="color: #FF6600">0</span>, <span style="color: #FF6600">1</span>]
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>clf <span style="color: #555555">=</span> svm<span style="color: #555555">.</span>SVC()
+</pre></div>
+
+
+<h5 id="fit">Fit</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>clf<span style="color: #555555">.</span>fit(X, y) 
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=&#39;ovr&#39;, degree=3, gamma=&#39;auto&#39;, kernel=&#39;rbf&#39;,
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+</pre></div>
+
+
+<h5 id="predict">Predict</h5>
+<p>After being fitted, the model can then be used to predict new values:</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>clf<span style="color: #555555">.</span>predict([[<span style="color: #FF6600">2.</span>, <span style="color: #FF6600">2.</span>]])
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>array([1])
+</pre></div>
+
+
+<p>SVMs decision function depends on some subset of the training data, called the support vectors. Some properties of these support vectors can be found in members support_vectors_, support_ and n_support:</p>
+<h6 id="support-vectors">Support vectors</h6>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>clf<span style="color: #555555">.</span>support_vectors_
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>array([[0., 0.],
+       [1., 1.]])
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># get indices of support vectors</span>
+clf<span style="color: #555555">.</span>support_ 
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>array([0, 1], dtype=int32)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># get number of support vectors for each class</span>
+clf<span style="color: #555555">.</span>n_support_ 
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>array([1, 1], dtype=int32)
+</pre></div>
+
+
+<h1 id="examples">Examples:</h1>
+<hr />
+<h2 id="plot-iris-svm">Plot Iris SVM</h2>
+<hr />
+<h3 id="1-plot-different-svm-classifiers-in-the-iris-dataset-source">1. Plot different SVM classifiers in the iris dataset (<a href="https://github.com/scikit-learn/scikit-learn/tree/master/examples/svm">source</a>)</h3>
+<p>Comparison of different linear SVM classifiers on a 2D projection of the iris
+dataset. We only consider the first 2 features of this dataset:</p>
+<ul>
+<li>Sepal length</li>
+<li>Sepal width</li>
+</ul>
+<p>This example shows how to plot the decision surface for four SVM classifiers
+with different kernels.</p>
+<p>The linear models <code>LinearSVC()</code> and <code>SVC(kernel='linear')</code> yield slightly
+different decision boundaries. This can be a consequence of the following
+differences:</p>
+<ul>
+<li>
+<p><code>LinearSVC</code> minimizes the squared hinge loss while <code>SVC</code> minimizes the
+  regular hinge loss.</p>
+</li>
+<li>
+<p><code>LinearSVC</code> uses the One-vs-All (also known as One-vs-Rest) multiclass
+  reduction while <code>SVC</code> uses the One-vs-One multiclass reduction.</p>
+</li>
+</ul>
+<p>Both linear models have linear decision boundaries (intersecting hyperplanes)
+while the non-linear kernel models (polynomial or Gaussian RBF) have more
+flexible non-linear decision boundaries with shapes that depend on the kind of
+kernel and its parameters.</p>
+<p>.. NOTE:: while plotting the decision function of classifiers for toy 2D
+   datasets can help get an intuitive understanding of their respective
+   expressive power, be aware that those intuitions don't always generalize to
+   more realistic high-dimensional problems.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #555555">%</span>matplotlib inline
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #0099FF; font-style: italic">#=====model and data set ==========</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn</span> <span style="color: #006699; font-weight: bold">import</span> svm, datasets
+</pre></div>
+
+
+<h5 id="data-set">Data Set</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># import some data to play with</span>
+iris <span style="color: #555555">=</span> datasets<span style="color: #555555">.</span>load_iris()
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>iris<span style="color: #555555">.</span>data[<span style="color: #FF6600">0</span>:<span style="color: #FF6600">10</span>]
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>array([[5.1, 3.5, 1.4, 0.2],
+       [4.9, 3. , 1.4, 0.2],
+       [4.7, 3.2, 1.3, 0.2],
+       [4.6, 3.1, 1.5, 0.2],
+       [5. , 3.6, 1.4, 0.2],
+       [5.4, 3.9, 1.7, 0.4],
+       [4.6, 3.4, 1.4, 0.3],
+       [5. , 3.4, 1.5, 0.2],
+       [4.4, 2.9, 1.4, 0.2],
+       [4.9, 3.1, 1.5, 0.1]])
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>iris<span style="color: #555555">.</span>target[<span style="color: #FF6600">0</span>:<span style="color: #FF6600">10</span>]
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+</pre></div>
+
+
+<ul>
+<li>We only take the first two features. We could avoid this ugly slicing by using a two-dim dataset</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>X <span style="color: #555555">=</span> iris<span style="color: #555555">.</span>data[:, :<span style="color: #FF6600">2</span>]  
+y <span style="color: #555555">=</span> iris<span style="color: #555555">.</span>target
+</pre></div>
+
+
+<h5 id="train-the-model">Train the model</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>h <span style="color: #555555">=</span> <span style="color: #555555">.</span><span style="color: #FF6600">02</span>  <span style="color: #0099FF; font-style: italic"># step size in the mesh</span>
+</pre></div>
+
+
+<ul>
+<li>We create an instance of SVM and fit out data. We do not scale our
+data since we want to plot the support vectors</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>C <span style="color: #555555">=</span> <span style="color: #FF6600">1.0</span>  <span style="color: #0099FF; font-style: italic"># SVM regularization parameter</span>
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>svc <span style="color: #555555">=</span> svm<span style="color: #555555">.</span>SVC(kernel<span style="color: #555555">=</span><span style="color: #CC3300">&#39;linear&#39;</span>, C<span style="color: #555555">=</span>C)<span style="color: #555555">.</span>fit(X, y)
+rbf_svc <span style="color: #555555">=</span> svm<span style="color: #555555">.</span>SVC(kernel<span style="color: #555555">=</span><span style="color: #CC3300">&#39;rbf&#39;</span>, gamma<span style="color: #555555">=</span><span style="color: #FF6600">0.7</span>, C<span style="color: #555555">=</span>C)<span style="color: #555555">.</span>fit(X, y)
+poly_svc <span style="color: #555555">=</span> svm<span style="color: #555555">.</span>SVC(kernel<span style="color: #555555">=</span><span style="color: #CC3300">&#39;poly&#39;</span>, degree<span style="color: #555555">=</span><span style="color: #FF6600">3</span>, C<span style="color: #555555">=</span>C)<span style="color: #555555">.</span>fit(X, y)
+lin_svc <span style="color: #555555">=</span> svm<span style="color: #555555">.</span>LinearSVC(C<span style="color: #555555">=</span>C)<span style="color: #555555">.</span>fit(X, y)
+</pre></div>
+
+
+<h6 id="plot">Plot</h6>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># create a mesh to plot in</span>
+x_min, x_max <span style="color: #555555">=</span> X[:, <span style="color: #FF6600">0</span>]<span style="color: #555555">.</span>min() <span style="color: #555555">-</span> <span style="color: #FF6600">1</span>, X[:, <span style="color: #FF6600">0</span>]<span style="color: #555555">.</span>max() <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>
+y_min, y_max <span style="color: #555555">=</span> X[:, <span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>min() <span style="color: #555555">-</span> <span style="color: #FF6600">1</span>, X[:, <span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>max() <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>
+xx, yy <span style="color: #555555">=</span> np<span style="color: #555555">.</span>meshgrid(np<span style="color: #555555">.</span>arange(x_min, x_max, h),
+                     np<span style="color: #555555">.</span>arange(y_min, y_max, h))
+
+plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> [<span style="color: #FF6600">12</span>,<span style="color: #FF6600">12</span>])
+<span style="color: #0099FF; font-style: italic"># title for the plots</span>
+titles <span style="color: #555555">=</span> [<span style="color: #CC3300">&#39;SVC with linear kernel&#39;</span>,
+          <span style="color: #CC3300">&#39;LinearSVC (linear kernel)&#39;</span>,
+          <span style="color: #CC3300">&#39;SVC with RBF kernel&#39;</span>,
+          <span style="color: #CC3300">&#39;SVC with polynomial (degree 3) kernel&#39;</span>]
+
+
+<span style="color: #006699; font-weight: bold">for</span> i, clf <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>((svc, lin_svc, rbf_svc, poly_svc)):
+
+    <span style="color: #0099FF; font-style: italic"># Plot the decision boundary. For that, we will assign a color to each</span>
+    <span style="color: #0099FF; font-style: italic"># point in the mesh [x_min, m_max]x[y_min, y_max].</span>
+
+    plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">2</span>, <span style="color: #FF6600">2</span>, i <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>)
+    plt<span style="color: #555555">.</span>subplots_adjust(wspace<span style="color: #555555">=</span><span style="color: #FF6600">0.4</span>, hspace<span style="color: #555555">=</span><span style="color: #FF6600">0.4</span>)
+
+    Z <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>predict(np<span style="color: #555555">.</span>c_[xx<span style="color: #555555">.</span>ravel(), yy<span style="color: #555555">.</span>ravel()])
+
+    <span style="color: #0099FF; font-style: italic"># Put the result into a color plot</span>
+    Z <span style="color: #555555">=</span> Z<span style="color: #555555">.</span>reshape(xx<span style="color: #555555">.</span>shape)
+    plt<span style="color: #555555">.</span>contourf(xx, yy, Z, cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>Paired, alpha<span style="color: #555555">=</span><span style="color: #FF6600">0.8</span>)
+
+    <span style="color: #0099FF; font-style: italic"># Plot also the training points</span>
+    plt<span style="color: #555555">.</span>scatter(X[:, <span style="color: #FF6600">0</span>], X[:, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span>y, cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>Paired)
+    plt<span style="color: #555555">.</span>xlabel(<span style="color: #CC3300">&#39;Sepal length&#39;</span>)
+    plt<span style="color: #555555">.</span>ylabel(<span style="color: #CC3300">&#39;Sepal width&#39;</span>)
+    plt<span style="color: #555555">.</span>xlim(xx<span style="color: #555555">.</span>min(), xx<span style="color: #555555">.</span>max())
+    plt<span style="color: #555555">.</span>ylim(yy<span style="color: #555555">.</span>min(), yy<span style="color: #555555">.</span>max())
+    plt<span style="color: #555555">.</span>xticks(())
+    plt<span style="color: #555555">.</span>yticks(())
+    plt<span style="color: #555555">.</span>title(titles[i])
+
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_35_0.png" /></p>
+<hr />
+<h3 id="2-svm-with-custom-kernel-source">2. SVM with custom kernel (<a href="https://github.com/scikit-learn/scikit-learn/tree/master/examples/svm">source</a>)</h3>
+<hr />
+<p>Simple usage of Support Vector Machines to classify a sample. It will
+plot the decision surface and the support vectors.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn</span> <span style="color: #006699; font-weight: bold">import</span> svm, datasets
+</pre></div>
+
+
+<h5 id="data-set_1">Data Set</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># import some data to play with</span>
+iris <span style="color: #555555">=</span> datasets<span style="color: #555555">.</span>load_iris()
+X <span style="color: #555555">=</span> iris<span style="color: #555555">.</span>data[:, :<span style="color: #FF6600">2</span>]  <span style="color: #0099FF; font-style: italic"># we only take the first two features. We could</span>
+                      <span style="color: #0099FF; font-style: italic"># avoid this ugly slicing by using a two-dim dataset</span>
+Y <span style="color: #555555">=</span> iris<span style="color: #555555">.</span>target
+</pre></div>
+
+
+<h5 id="define-kernel">Define Kernel</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">my_kernel</span>(X, Y):
+    <span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #CC3300; font-style: italic">    We create a custom kernel:</span>
+
+<span style="color: #CC3300; font-style: italic">                 (2  0)</span>
+<span style="color: #CC3300; font-style: italic">    k(X, Y) = X  (    ) Y.T</span>
+<span style="color: #CC3300; font-style: italic">                 (0  1)</span>
+<span style="color: #CC3300; font-style: italic">    &quot;&quot;&quot;</span>
+    M <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array([[<span style="color: #FF6600">2</span>, <span style="color: #FF6600">0</span>], [<span style="color: #FF6600">0</span>, <span style="color: #FF6600">1.0</span>]])
+    <span style="color: #006699; font-weight: bold">return</span> np<span style="color: #555555">.</span>dot(np<span style="color: #555555">.</span>dot(X, M), Y<span style="color: #555555">.</span>T)
+</pre></div>
+
+
+<h5 id="fit-the-model">Fit the model</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># we create an instance of SVM and fit out data.</span>
+clf <span style="color: #555555">=</span> svm<span style="color: #555555">.</span>SVC(kernel<span style="color: #555555">=</span>my_kernel)
+clf<span style="color: #555555">.</span>fit(X, Y)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=&#39;ovr&#39;, degree=3, gamma=&#39;auto&#39;,
+  kernel=&lt;function my_kernel at 0x7f3ae7845620&gt;, max_iter=-1,
+  probability=False, random_state=None, shrinking=True, tol=0.001,
+  verbose=False)
+</pre></div>
+
+
+<h6 id="plot_1">Plot</h6>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>h <span style="color: #555555">=</span> <span style="color: #555555">.</span><span style="color: #FF6600">02</span>  <span style="color: #0099FF; font-style: italic"># step size in the mesh</span>
+<span style="color: #0099FF; font-style: italic"># Plot the decision boundary. For that, we will assign a color to each</span>
+<span style="color: #0099FF; font-style: italic"># point in the mesh [x_min, m_max]x[y_min, y_max].</span>
+
+x_min, x_max <span style="color: #555555">=</span> X[:, <span style="color: #FF6600">0</span>]<span style="color: #555555">.</span>min() <span style="color: #555555">-</span> <span style="color: #FF6600">1</span>, X[:, <span style="color: #FF6600">0</span>]<span style="color: #555555">.</span>max() <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>
+y_min, y_max <span style="color: #555555">=</span> X[:, <span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>min() <span style="color: #555555">-</span> <span style="color: #FF6600">1</span>, X[:, <span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>max() <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>
+
+xx, yy <span style="color: #555555">=</span> np<span style="color: #555555">.</span>meshgrid(np<span style="color: #555555">.</span>arange(x_min, x_max, h), np<span style="color: #555555">.</span>arange(y_min, y_max, h))
+
+Z <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>predict(np<span style="color: #555555">.</span>c_[xx<span style="color: #555555">.</span>ravel(), yy<span style="color: #555555">.</span>ravel()])
+
+<span style="color: #0099FF; font-style: italic"># Put the result into a color plot</span>
+Z <span style="color: #555555">=</span> Z<span style="color: #555555">.</span>reshape(xx<span style="color: #555555">.</span>shape)
+plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> [<span style="color: #FF6600">8</span>,<span style="color: #FF6600">8</span>])
+plt<span style="color: #555555">.</span>pcolormesh(xx, yy, Z, cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>Paired)
+
+<span style="color: #0099FF; font-style: italic"># Plot also the training points</span>
+plt<span style="color: #555555">.</span>scatter(X[:, <span style="color: #FF6600">0</span>], X[:, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span>Y, cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>Paired)
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;3-Class classification using Support Vector Machine with custom&#39;</span>
+          <span style="color: #CC3300">&#39; kernel&#39;</span>)
+plt<span style="color: #555555">.</span>axis(<span style="color: #CC3300">&#39;tight&#39;</span>)
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_48_0.png" /></p>
+<hr />
+<h3 id="3-one-class-svm-with-non-linear-kernel-rbf-source">3. One-class SVM with non-linear kernel (RBF) (<a href="https://github.com/scikit-learn/scikit-learn/tree/master/examples/svm">source</a>)</h3>
+<hr />
+<p>An example using a one-class SVM for novelty detection.</p>
+<p><code>One-class SVM</code> is an unsupervised algorithm that learns a decision function for novelty detection:
+classifying new data as similar or different to the training set.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.font_manager</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn</span> <span style="color: #006699; font-weight: bold">import</span> svm
+</pre></div>
+
+
+<h5 id="generate-train-data">Generate train data</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Generate train data</span>
+X <span style="color: #555555">=</span> <span style="color: #FF6600">0.3</span> <span style="color: #555555">*</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randn(<span style="color: #FF6600">100</span>, <span style="color: #FF6600">2</span>)
+X_train <span style="color: #555555">=</span> np<span style="color: #555555">.</span>r_[X <span style="color: #555555">+</span> <span style="color: #FF6600">2</span>, X <span style="color: #555555">-</span> <span style="color: #FF6600">2</span>]
+<span style="color: #0099FF; font-style: italic"># Generate some regular novel observations</span>
+X <span style="color: #555555">=</span> <span style="color: #FF6600">0.3</span> <span style="color: #555555">*</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randn(<span style="color: #FF6600">20</span>, <span style="color: #FF6600">2</span>)
+X_test <span style="color: #555555">=</span> np<span style="color: #555555">.</span>r_[X <span style="color: #555555">+</span> <span style="color: #FF6600">2</span>, X <span style="color: #555555">-</span> <span style="color: #FF6600">2</span>]
+<span style="color: #0099FF; font-style: italic"># Generate some abnormal novel observations</span>
+X_outliers <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>uniform(low<span style="color: #555555">=-</span><span style="color: #FF6600">4</span>, high<span style="color: #555555">=</span><span style="color: #FF6600">4</span>, size<span style="color: #555555">=</span>(<span style="color: #FF6600">20</span>, <span style="color: #FF6600">2</span>))
+</pre></div>
+
+
+<h5 id="fit-the-model-sklearnsvmoneclasssvm">Fit the Model (sklearn.svm.OneClassSVM)</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>xx, yy <span style="color: #555555">=</span> np<span style="color: #555555">.</span>meshgrid(np<span style="color: #555555">.</span>linspace(<span style="color: #555555">-</span><span style="color: #FF6600">5</span>, <span style="color: #FF6600">5</span>, <span style="color: #FF6600">500</span>), np<span style="color: #555555">.</span>linspace(<span style="color: #555555">-</span><span style="color: #FF6600">5</span>, <span style="color: #FF6600">5</span>, <span style="color: #FF6600">500</span>))
+
+<span style="color: #0099FF; font-style: italic"># fit the model</span>
+clf <span style="color: #555555">=</span> svm<span style="color: #555555">.</span>OneClassSVM(nu<span style="color: #555555">=</span><span style="color: #FF6600">0.1</span>, kernel<span style="color: #555555">=</span><span style="color: #CC3300">&quot;rbf&quot;</span>, gamma<span style="color: #555555">=</span><span style="color: #FF6600">0.1</span>)
+clf<span style="color: #555555">.</span>fit(X_train)
+
+<span style="color: #0099FF; font-style: italic">#predict</span>
+y_pred_train <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>predict(X_train)
+y_pred_test <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>predict(X_test)
+y_pred_outliers <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>predict(X_outliers)
+
+<span style="color: #0099FF; font-style: italic">#Error</span>
+n_error_train <span style="color: #555555">=</span> y_pred_train[y_pred_train <span style="color: #555555">==</span> <span style="color: #555555">-</span><span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>size
+n_error_test <span style="color: #555555">=</span> y_pred_test[y_pred_test <span style="color: #555555">==</span> <span style="color: #555555">-</span><span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>size
+n_error_outliers <span style="color: #555555">=</span> y_pred_outliers[y_pred_outliers <span style="color: #555555">==</span> <span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>size
+
+<span style="color: #0099FF; font-style: italic"># plot the line, the points, and the nearest vectors to the plane</span>
+Z <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>decision_function(np<span style="color: #555555">.</span>c_[xx<span style="color: #555555">.</span>ravel(), yy<span style="color: #555555">.</span>ravel()])
+Z <span style="color: #555555">=</span> Z<span style="color: #555555">.</span>reshape(xx<span style="color: #555555">.</span>shape)
+</pre></div>
+
+
+<h6 id="plot_2">Plot</h6>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> [<span style="color: #FF6600">12</span>,<span style="color: #FF6600">12</span>])
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&quot;Novelty Detection&quot;</span>)
+plt<span style="color: #555555">.</span>contourf(xx, yy, Z, levels<span style="color: #555555">=</span>np<span style="color: #555555">.</span>linspace(Z<span style="color: #555555">.</span>min(), <span style="color: #FF6600">0</span>, <span style="color: #FF6600">7</span>), cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>PuBu)
+a <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>contour(xx, yy, Z, levels<span style="color: #555555">=</span>[<span style="color: #FF6600">0</span>], linewidths<span style="color: #555555">=</span><span style="color: #FF6600">2</span>, colors<span style="color: #555555">=</span><span style="color: #CC3300">&#39;darkred&#39;</span>)
+plt<span style="color: #555555">.</span>contourf(xx, yy, Z, levels<span style="color: #555555">=</span>[<span style="color: #FF6600">0</span>, Z<span style="color: #555555">.</span>max()], colors<span style="color: #555555">=</span><span style="color: #CC3300">&#39;palevioletred&#39;</span>)
+
+s <span style="color: #555555">=</span> <span style="color: #FF6600">40</span>
+b1 <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>scatter(X_train[:, <span style="color: #FF6600">0</span>], X_train[:, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span><span style="color: #CC3300">&#39;white&#39;</span>, s<span style="color: #555555">=</span>s)
+b2 <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>scatter(X_test[:, <span style="color: #FF6600">0</span>], X_test[:, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span><span style="color: #CC3300">&#39;blueviolet&#39;</span>, s<span style="color: #555555">=</span>s)
+c <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>scatter(X_outliers[:, <span style="color: #FF6600">0</span>], X_outliers[:, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span><span style="color: #CC3300">&#39;gold&#39;</span>, s<span style="color: #555555">=</span>s)
+
+
+plt<span style="color: #555555">.</span>axis(<span style="color: #CC3300">&#39;tight&#39;</span>)
+plt<span style="color: #555555">.</span>xlim((<span style="color: #555555">-</span><span style="color: #FF6600">5</span>, <span style="color: #FF6600">5</span>))
+plt<span style="color: #555555">.</span>ylim((<span style="color: #555555">-</span><span style="color: #FF6600">5</span>, <span style="color: #FF6600">5</span>))
+plt<span style="color: #555555">.</span>legend([a<span style="color: #555555">.</span>collections[<span style="color: #FF6600">0</span>], b1, b2, c],
+           [<span style="color: #CC3300">&quot;learned frontier&quot;</span>, <span style="color: #CC3300">&quot;training observations&quot;</span>,
+            <span style="color: #CC3300">&quot;new regular observations&quot;</span>, <span style="color: #CC3300">&quot;new abnormal observations&quot;</span>],
+           loc<span style="color: #555555">=</span><span style="color: #CC3300">&quot;upper left&quot;</span>,
+           prop<span style="color: #555555">=</span>matplotlib<span style="color: #555555">.</span>font_manager<span style="color: #555555">.</span>FontProperties(size<span style="color: #555555">=</span><span style="color: #FF6600">11</span>))
+plt<span style="color: #555555">.</span>xlabel(
+    <span style="color: #CC3300">&quot;error train: </span><span style="color: #AA0000">%d</span><span style="color: #CC3300">/200 ; errors novel regular: </span><span style="color: #AA0000">%d</span><span style="color: #CC3300">/40 ; &quot;</span>
+    <span style="color: #CC3300">&quot;errors novel abnormal: </span><span style="color: #AA0000">%d</span><span style="color: #CC3300">/40&quot;</span>
+    <span style="color: #555555">%</span> (n_error_train, n_error_test, n_error_outliers))
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_59_0.png" /></p>
+<hr />
+<h3 id="4-rbf-svm-parameters-source">4. RBF SVM parameters (<a href="https://github.com/scikit-learn/scikit-learn/tree/master/examples/svm">source</a>)</h3>
+<p><strong> This example illustrates the effect of the parameters <code>gamma</code> and <code>C</code> of
+the Radial Basis Function (RBF) kernel SVM.</strong></p>
+<ul>
+<li>
+<p>Intuitively, the <code>gamma</code> parameter defines how far the influence of a single
+training example reaches, with low values meaning 'far' and high values meaning
+'close'. The <code>gamma</code> parameters can be seen as the inverse of the radius of
+influence of samples selected by the model as support vectors.</p>
+</li>
+<li>
+<p>The <code>C</code> parameter trades off misclassification of training examples against
+simplicity of the decision surface. A low <code>C</code> makes the decision surface
+smooth, while a high <code>C</code> aims at classifying all training examples correctly
+by giving the model freedom to select more samples as support vectors.</p>
+</li>
+<li>
+<p>The first plot is a visualization of the decision function for a variety of
+parameter values on a simplified classification problem involving only 2 input
+features and 2 possible target classes (binary classification). Note that this
+kind of plot is not possible to do for problems with more features or target
+classes.</p>
+</li>
+<li>
+<p>The second plot is a heatmap of the classifier's cross-validation accuracy as a
+function of <code>C</code> and <code>gamma</code>. For this example we explore a relatively large
+grid for illustration purposes. In practice, a logarithmic grid from
+:math:<code>10^{-3}</code> to :math:<code>10^3</code> is usually sufficient. If the best parameters
+lie on the boundaries of the grid, it can be extended in that direction in a
+subsequent search.</p>
+</li>
+<li>
+<p>Note that the heat map plot has a special colorbar with a midpoint value close
+to the score values of the best performing models so as to make it easy to tell
+them appart in the blink of an eye.</p>
+</li>
+<li>
+<p>The behavior of the model is very sensitive to the <code>gamma</code> parameter. If
+<code>gamma</code> is too large, the radius of the area of influence of the support
+vectors only includes the support vector itself and no amount of
+regularization with <code>C</code> will be able to prevent overfitting.</p>
+</li>
+<li>
+<p>When <code>gamma</code> is very small, the model is too constrained and cannot capture
+the complexity or "shape" of the data. The region of influence of any selected
+support vector would include the whole training set. The resulting model will
+behave similarly to a linear model with a set of hyperplanes that separate the
+centers of high density of any pair of two classes.</p>
+</li>
+<li>
+<p>For intermediate values, we can see on the second plot that good models can
+be found on a diagonal of <code>C</code> and <code>gamma</code>. Smooth models (lower <code>gamma</code>
+values) can be made more complex by selecting a larger number of support
+vectors (larger <code>C</code> values) hence the diagonal of good performing models.</p>
+</li>
+<li>
+<p>Finally one can also observe that for some intermediate values of <code>gamma</code> we
+get equally performing models when <code>C</code> becomes very large: it is not
+necessary to regularize by limiting the number of support vectors. The radius of
+the RBF kernel alone acts as a good structural regularizer. In practice though
+it might still be interesting to limit the number of support vectors with a
+lower value of <code>C</code> so as to favor models that use less memory and that are
+faster to predict.</p>
+</li>
+<li>
+<p>We should also note that small differences in scores results from the random
+splits of the cross-validation procedure. Those spurious variations can be
+smoothed out by increasing the number of CV iterations <code>n_iter</code> at the
+expense of compute time. Increasing the value number of <code>C_range</code> and
+<code>gamma_range</code> steps will increase the resolution of the hyper-parameter heat
+map.</p>
+</li>
+</ul>
+<hr />
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.colors</span> <span style="color: #006699; font-weight: bold">import</span> Normalize
+<span style="color: #0099FF; font-style: italic">#======== preprocessing ==========</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.preprocessing</span> <span style="color: #006699; font-weight: bold">import</span> StandardScaler
+<span style="color: #0099FF; font-style: italic">#===models=====================</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.svm</span> <span style="color: #006699; font-weight: bold">import</span> SVC
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.cross_validation</span> <span style="color: #006699; font-weight: bold">import</span> StratifiedShuffleSplit
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.model_selection</span> <span style="color: #006699; font-weight: bold">import</span> GridSearchCV
+<span style="color: #0099FF; font-style: italic">#======== data ==========================</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.datasets</span> <span style="color: #006699; font-weight: bold">import</span> load_iris
+</pre></div>
+
+
+<ul>
+<li>Utility function to move the midpoint of a colormap to be around the values of interest.</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">class</span> <span style="color: #00AA88; font-weight: bold">MidpointNormalize</span>(Normalize):
+
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">__init__</span>(<span style="color: #336666">self</span>, vmin<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">None</span>, vmax<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">None</span>, midpoint<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">None</span>, clip<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">False</span>):
+        <span style="color: #336666">self</span><span style="color: #555555">.</span>midpoint <span style="color: #555555">=</span> midpoint
+        Normalize<span style="color: #555555">.</span><span style="color: #CC00FF">__init__</span>(<span style="color: #336666">self</span>, vmin, vmax, clip)
+
+    <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">__call__</span>(<span style="color: #336666">self</span>, value, clip<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">None</span>):
+        x, y <span style="color: #555555">=</span> [<span style="color: #336666">self</span><span style="color: #555555">.</span>vmin, <span style="color: #336666">self</span><span style="color: #555555">.</span>midpoint, <span style="color: #336666">self</span><span style="color: #555555">.</span>vmax], [<span style="color: #FF6600">0</span>, <span style="color: #FF6600">0.5</span>, <span style="color: #FF6600">1</span>]
+        <span style="color: #006699; font-weight: bold">return</span> np<span style="color: #555555">.</span>ma<span style="color: #555555">.</span>masked_array(np<span style="color: #555555">.</span>interp(value, x, y))
+</pre></div>
+
+
+<ul>
+<li>Load and prepare data set dataset for grid search</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>iris <span style="color: #555555">=</span> load_iris()
+X <span style="color: #555555">=</span> iris<span style="color: #555555">.</span>data
+y <span style="color: #555555">=</span> iris<span style="color: #555555">.</span>target
+</pre></div>
+
+
+<ul>
+<li>Dataset for decision function visualization: we only keep the first two
+features in X and sub-sample the dataset to keep only 2 classes and
+make it a binary classification problem.</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>X_2d <span style="color: #555555">=</span> X[:, :<span style="color: #FF6600">2</span>]
+X_2d <span style="color: #555555">=</span> X_2d[y <span style="color: #555555">&gt;</span> <span style="color: #FF6600">0</span>]
+y_2d <span style="color: #555555">=</span> y[y <span style="color: #555555">&gt;</span> <span style="color: #FF6600">0</span>]
+y_2d <span style="color: #555555">-=</span> <span style="color: #FF6600">1</span>
+</pre></div>
+
+
+<ul>
+<li>It is usually a good idea to scale the data for SVM training.
+We are cheating a bit in this example in scaling all of the data,
+instead of fitting the transformation on the training set and
+just applying it on the test set.</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>scaler <span style="color: #555555">=</span> StandardScaler()
+X <span style="color: #555555">=</span> scaler<span style="color: #555555">.</span>fit_transform(X)
+X_2d <span style="color: #555555">=</span> scaler<span style="color: #555555">.</span>fit_transform(X_2d)
+</pre></div>
+
+
+<ul>
+<li>Train classifiers, For an initial search, a logarithmic grid with basis 10 is often helpful. Using a basis of 2, a finer tuning can be achieved but at a much higher cost.</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>C_range <span style="color: #555555">=</span> np<span style="color: #555555">.</span>logspace(<span style="color: #555555">-</span><span style="color: #FF6600">2</span>, <span style="color: #FF6600">10</span>, <span style="color: #FF6600">13</span>)
+gamma_range <span style="color: #555555">=</span> np<span style="color: #555555">.</span>logspace(<span style="color: #555555">-</span><span style="color: #FF6600">9</span>, <span style="color: #FF6600">3</span>, <span style="color: #FF6600">13</span>)
+param_grid <span style="color: #555555">=</span> <span style="color: #336666">dict</span>(gamma<span style="color: #555555">=</span>gamma_range, C<span style="color: #555555">=</span>C_range)
+cv <span style="color: #555555">=</span> StratifiedShuffleSplit(n_splits<span style="color: #555555">=</span><span style="color: #FF6600">5</span>, test_size<span style="color: #555555">=</span><span style="color: #FF6600">0.2</span>, random_state<span style="color: #555555">=</span><span style="color: #FF6600">42</span>)
+grid <span style="color: #555555">=</span> GridSearchCV(SVC(), param_grid<span style="color: #555555">=</span>param_grid, cv<span style="color: #555555">=</span>cv)
+grid<span style="color: #555555">.</span>fit(X, y)
+
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;The best parameters are </span><span style="color: #AA0000">%s</span><span style="color: #CC3300"> with a score of </span><span style="color: #AA0000">%0.2f</span><span style="color: #CC3300">&quot;</span>
+      <span style="color: #555555">%</span> (grid<span style="color: #555555">.</span>best_params_, grid<span style="color: #555555">.</span>best_score_))
+</pre></div>
+
+
+<ul>
+<li>Now we need to fit a classifier for all parameters in the 2d version
+(we use a smaller set of parameters here because it takes a while to train)</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>C_2d_range <span style="color: #555555">=</span> [<span style="color: #FF6600">1e-2</span>, <span style="color: #FF6600">1</span>, <span style="color: #FF6600">1e2</span>]
+gamma_2d_range <span style="color: #555555">=</span> [<span style="color: #FF6600">1e-1</span>, <span style="color: #FF6600">1</span>, <span style="color: #FF6600">1e1</span>]
+classifiers <span style="color: #555555">=</span> []
+<span style="color: #006699; font-weight: bold">for</span> C <span style="color: #000000; font-weight: bold">in</span> C_2d_range:
+    <span style="color: #006699; font-weight: bold">for</span> gamma <span style="color: #000000; font-weight: bold">in</span> gamma_2d_range:
+        clf <span style="color: #555555">=</span> SVC(C<span style="color: #555555">=</span>C, gamma<span style="color: #555555">=</span>gamma)
+        clf<span style="color: #555555">.</span>fit(X_2d, y_2d)
+        classifiers<span style="color: #555555">.</span>append((C, gamma, clf))
+</pre></div>
+
+
+<ul>
+<li>visualization</li>
+</ul>
+<p>draw visualization of parameter effects</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">8</span>, <span style="color: #FF6600">6</span>))
+xx, yy <span style="color: #555555">=</span> np<span style="color: #555555">.</span>meshgrid(np<span style="color: #555555">.</span>linspace(<span style="color: #555555">-</span><span style="color: #FF6600">3</span>, <span style="color: #FF6600">3</span>, <span style="color: #FF6600">200</span>), np<span style="color: #555555">.</span>linspace(<span style="color: #555555">-</span><span style="color: #FF6600">3</span>, <span style="color: #FF6600">3</span>, <span style="color: #FF6600">200</span>))
+<span style="color: #006699; font-weight: bold">for</span> (k, (C, gamma, clf)) <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>(classifiers):
+    <span style="color: #0099FF; font-style: italic"># evaluate decision function in a grid</span>
+    Z <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>decision_function(np<span style="color: #555555">.</span>c_[xx<span style="color: #555555">.</span>ravel(), yy<span style="color: #555555">.</span>ravel()])
+    Z <span style="color: #555555">=</span> Z<span style="color: #555555">.</span>reshape(xx<span style="color: #555555">.</span>shape)
+
+    <span style="color: #0099FF; font-style: italic"># visualize decision function for these parameters</span>
+    plt<span style="color: #555555">.</span>subplot(<span style="color: #336666">len</span>(C_2d_range), <span style="color: #336666">len</span>(gamma_2d_range), k <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>)
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&quot;gamma=10^</span><span style="color: #AA0000">%d</span><span style="color: #CC3300">, C=10^</span><span style="color: #AA0000">%d</span><span style="color: #CC3300">&quot;</span> <span style="color: #555555">%</span> (np<span style="color: #555555">.</span>log10(gamma), np<span style="color: #555555">.</span>log10(C)),
+              size<span style="color: #555555">=</span><span style="color: #CC3300">&#39;medium&#39;</span>)
+
+    <span style="color: #0099FF; font-style: italic"># visualize parameter&#39;s effect on decision function</span>
+    plt<span style="color: #555555">.</span>pcolormesh(xx, yy, <span style="color: #555555">-</span>Z, cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>RdBu)
+    plt<span style="color: #555555">.</span>scatter(X_2d[:, <span style="color: #FF6600">0</span>], X_2d[:, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span>y_2d, cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>RdBu_r)
+    plt<span style="color: #555555">.</span>xticks(())
+    plt<span style="color: #555555">.</span>yticks(())
+    plt<span style="color: #555555">.</span>axis(<span style="color: #CC3300">&#39;tight&#39;</span>)
+
+<span style="color: #0099FF; font-style: italic"># plot the scores of the grid</span>
+<span style="color: #0099FF; font-style: italic"># grid_scores_ contains parameter settings and scores</span>
+<span style="color: #0099FF; font-style: italic"># We extract just the scores</span>
+scores <span style="color: #555555">=</span> [x[<span style="color: #FF6600">1</span>] <span style="color: #006699; font-weight: bold">for</span> x <span style="color: #000000; font-weight: bold">in</span> grid<span style="color: #555555">.</span>grid_scores_]
+scores <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array(scores)<span style="color: #555555">.</span>reshape(<span style="color: #336666">len</span>(C_range), <span style="color: #336666">len</span>(gamma_range))
+
+<span style="color: #0099FF; font-style: italic"># Draw heatmap of the validation accuracy as a function of gamma and C</span>
+<span style="color: #0099FF; font-style: italic">#</span>
+<span style="color: #0099FF; font-style: italic"># The score are encoded as colors with the hot colormap which varies from dark</span>
+<span style="color: #0099FF; font-style: italic"># red to bright yellow. As the most interesting scores are all located in the</span>
+<span style="color: #0099FF; font-style: italic"># 0.92 to 0.97 range we use a custom normalizer to set the mid-point to 0.92 so</span>
+<span style="color: #0099FF; font-style: italic"># as to make it easier to visualize the small variations of score values in the</span>
+<span style="color: #0099FF; font-style: italic"># interesting range while not brutally collapsing all the low score values to</span>
+<span style="color: #0099FF; font-style: italic"># the same color.</span>
+
+plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">8</span>, <span style="color: #FF6600">6</span>))
+plt<span style="color: #555555">.</span>subplots_adjust(left<span style="color: #555555">=.</span><span style="color: #FF6600">2</span>, right<span style="color: #555555">=</span><span style="color: #FF6600">0.95</span>, bottom<span style="color: #555555">=</span><span style="color: #FF6600">0.15</span>, top<span style="color: #555555">=</span><span style="color: #FF6600">0.95</span>)
+plt<span style="color: #555555">.</span>imshow(scores, interpolation<span style="color: #555555">=</span><span style="color: #CC3300">&#39;nearest&#39;</span>, cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>hot,
+           norm<span style="color: #555555">=</span>MidpointNormalize(vmin<span style="color: #555555">=</span><span style="color: #FF6600">0.2</span>, midpoint<span style="color: #555555">=</span><span style="color: #FF6600">0.92</span>))
+plt<span style="color: #555555">.</span>xlabel(<span style="color: #CC3300">&#39;gamma&#39;</span>)
+plt<span style="color: #555555">.</span>ylabel(<span style="color: #CC3300">&#39;C&#39;</span>)
+plt<span style="color: #555555">.</span>colorbar()
+plt<span style="color: #555555">.</span>xticks(np<span style="color: #555555">.</span>arange(<span style="color: #336666">len</span>(gamma_range)), gamma_range, rotation<span style="color: #555555">=</span><span style="color: #FF6600">45</span>)
+plt<span style="color: #555555">.</span>yticks(np<span style="color: #555555">.</span>arange(<span style="color: #336666">len</span>(C_range)), C_range)
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Validation accuracy&#39;</span>)
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<hr />
+<h3 id="5-svm-separating-hyperplane-for-unbalanced-classes-source">5. SVM: Separating hyperplane for unbalanced classes (<a href="https://github.com/scikit-learn/scikit-learn/tree/master/examples/svm">source</a>)</h3>
+<hr />
+<p>Find the optimal separating hyperplane using an SVC for classes that
+are unbalanced.</p>
+<p>We first find the separating plane with a plain SVC and then plot
+(dashed) the separating hyperplane with automatically correction for
+unbalanced classes.</p>
+<p>This example will also work by replacing <code>SVC(kernel="linear")</code>
+ with <code>SGDClassifier(loss="hinge")</code>. Setting the <code>loss</code> parameter
+ of the :class:<code>SGDClassifier</code> equal to <code>hinge</code> will yield behaviour
+ such as that of a SVC with a linear kernel.</p>
+<p>For example try instead of the <code>SVC</code>::</p>
+<p><code>clf = SGDClassifier(n_iter=100, alpha=0.01)</code></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn</span> <span style="color: #006699; font-weight: bold">import</span> svm
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.linear_model</span> <span style="color: #006699; font-weight: bold">import</span> SGDClassifier
+</pre></div>
+
+
+<h6 id="data">Data</h6>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># we create 40 separable points</span>
+rng <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>RandomState(<span style="color: #FF6600">0</span>)
+n_samples_1 <span style="color: #555555">=</span> <span style="color: #FF6600">1000</span>
+n_samples_2 <span style="color: #555555">=</span> <span style="color: #FF6600">100</span>
+X <span style="color: #555555">=</span> np<span style="color: #555555">.</span>r_[<span style="color: #FF6600">1.5</span> <span style="color: #555555">*</span> rng<span style="color: #555555">.</span>randn(n_samples_1, <span style="color: #FF6600">2</span>),
+          <span style="color: #FF6600">0.5</span> <span style="color: #555555">*</span> rng<span style="color: #555555">.</span>randn(n_samples_2, <span style="color: #FF6600">2</span>) <span style="color: #555555">+</span> [<span style="color: #FF6600">2</span>, <span style="color: #FF6600">2</span>]]
+y <span style="color: #555555">=</span> [<span style="color: #FF6600">0</span>] <span style="color: #555555">*</span> (n_samples_1) <span style="color: #555555">+</span> [<span style="color: #FF6600">1</span>] <span style="color: #555555">*</span> (n_samples_2)
+</pre></div>
+
+
+<h5 id="model">Model</h5>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># fit the model and get the separating hyperplane</span>
+clf <span style="color: #555555">=</span> svm<span style="color: #555555">.</span>SVC(kernel<span style="color: #555555">=</span><span style="color: #CC3300">&#39;linear&#39;</span>, C<span style="color: #555555">=</span><span style="color: #FF6600">1.0</span>)
+clf<span style="color: #555555">.</span>fit(X, y)
+
+w <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>coef_[<span style="color: #FF6600">0</span>]
+a <span style="color: #555555">=</span> <span style="color: #555555">-</span>w[<span style="color: #FF6600">0</span>] <span style="color: #555555">/</span> w[<span style="color: #FF6600">1</span>]
+xx <span style="color: #555555">=</span> np<span style="color: #555555">.</span>linspace(<span style="color: #555555">-</span><span style="color: #FF6600">5</span>, <span style="color: #FF6600">5</span>)
+yy <span style="color: #555555">=</span> a <span style="color: #555555">*</span> xx <span style="color: #555555">-</span> clf<span style="color: #555555">.</span>intercept_[<span style="color: #FF6600">0</span>] <span style="color: #555555">/</span> w[<span style="color: #FF6600">1</span>]
+</pre></div>
+
+
+<h6 id="get-the-separating-hyperplane-using-weighted-classes">Get the separating hyperplane using weighted classes</h6>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># get the separating hyperplane using weighted classes</span>
+wclf <span style="color: #555555">=</span> svm<span style="color: #555555">.</span>SVC(kernel<span style="color: #555555">=</span><span style="color: #CC3300">&#39;linear&#39;</span>, class_weight<span style="color: #555555">=</span>{<span style="color: #FF6600">1</span>: <span style="color: #FF6600">10</span>})
+wclf<span style="color: #555555">.</span>fit(X, y)
+
+ww <span style="color: #555555">=</span> wclf<span style="color: #555555">.</span>coef_[<span style="color: #FF6600">0</span>]
+wa <span style="color: #555555">=</span> <span style="color: #555555">-</span>ww[<span style="color: #FF6600">0</span>] <span style="color: #555555">/</span> ww[<span style="color: #FF6600">1</span>]
+wyy <span style="color: #555555">=</span> wa <span style="color: #555555">*</span> xx <span style="color: #555555">-</span> wclf<span style="color: #555555">.</span>intercept_[<span style="color: #FF6600">0</span>] <span style="color: #555555">/</span> ww[<span style="color: #FF6600">1</span>]
+</pre></div>
+
+
+<h6 id="plot_3">Plot</h6>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># plot separating hyperplanes and samples</span>
+h0 <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>plot(xx, yy, <span style="color: #CC3300">&#39;k-&#39;</span>, label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;no weights&#39;</span>)
+h1 <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>plot(xx, wyy, <span style="color: #CC3300">&#39;k--&#39;</span>, label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;with weights&#39;</span>)
+plt<span style="color: #555555">.</span>scatter(X[:, <span style="color: #FF6600">0</span>], X[:, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span>y, cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>Paired)
+plt<span style="color: #555555">.</span>legend()
+
+plt<span style="color: #555555">.</span>axis(<span style="color: #CC3300">&#39;tight&#39;</span>)
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_92_0.png" /></p>
+<hr />
+<h3 id="6-svm-maximum-margin-separating-hyperplane-source">6. SVM: Maximum margin separating hyperplane (<a href="https://github.com/scikit-learn/scikit-learn/tree/master/examples/svm">source</a>)</h3>
+<hr />
+<p>Plot the maximum margin separating hyperplane within a two-class
+separable dataset using a Support Vector Machine classifier with
+linear kernel.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn</span> <span style="color: #006699; font-weight: bold">import</span> svm
+</pre></div>
+
+
+<ul>
+<li>data</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># we create 40 separable points</span>
+np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>seed(<span style="color: #FF6600">0</span>)
+X <span style="color: #555555">=</span> np<span style="color: #555555">.</span>r_[np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randn(<span style="color: #FF6600">20</span>, <span style="color: #FF6600">2</span>) <span style="color: #555555">-</span> [<span style="color: #FF6600">2</span>, <span style="color: #FF6600">2</span>], np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randn(<span style="color: #FF6600">20</span>, <span style="color: #FF6600">2</span>) <span style="color: #555555">+</span> [<span style="color: #FF6600">2</span>, <span style="color: #FF6600">2</span>]]
+Y <span style="color: #555555">=</span> [<span style="color: #FF6600">0</span>] <span style="color: #555555">*</span> <span style="color: #FF6600">20</span> <span style="color: #555555">+</span> [<span style="color: #FF6600">1</span>] <span style="color: #555555">*</span> <span style="color: #FF6600">20</span>
+</pre></div>
+
+
+<ul>
+<li>Model </li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># fit the model</span>
+clf <span style="color: #555555">=</span> svm<span style="color: #555555">.</span>SVC(kernel<span style="color: #555555">=</span><span style="color: #CC3300">&#39;linear&#39;</span>)
+clf<span style="color: #555555">.</span>fit(X, Y)
+
+<span style="color: #0099FF; font-style: italic"># get the separating hyperplane</span>
+w <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>coef_[<span style="color: #FF6600">0</span>]
+a <span style="color: #555555">=</span> <span style="color: #555555">-</span>w[<span style="color: #FF6600">0</span>] <span style="color: #555555">/</span> w[<span style="color: #FF6600">1</span>]
+xx <span style="color: #555555">=</span> np<span style="color: #555555">.</span>linspace(<span style="color: #555555">-</span><span style="color: #FF6600">5</span>, <span style="color: #FF6600">5</span>)
+yy <span style="color: #555555">=</span> a <span style="color: #555555">*</span> xx <span style="color: #555555">-</span> (clf<span style="color: #555555">.</span>intercept_[<span style="color: #FF6600">0</span>]) <span style="color: #555555">/</span> w[<span style="color: #FF6600">1</span>]
+</pre></div>
+
+
+<ul>
+<li>Separating hyperplane </li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># plot the parallels to the separating hyperplane that pass through the</span>
+<span style="color: #0099FF; font-style: italic"># support vectors</span>
+b <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>support_vectors_[<span style="color: #FF6600">0</span>]
+yy_down <span style="color: #555555">=</span> a <span style="color: #555555">*</span> xx <span style="color: #555555">+</span> (b[<span style="color: #FF6600">1</span>] <span style="color: #555555">-</span> a <span style="color: #555555">*</span> b[<span style="color: #FF6600">0</span>])
+b <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>support_vectors_[<span style="color: #555555">-</span><span style="color: #FF6600">1</span>]
+yy_up <span style="color: #555555">=</span> a <span style="color: #555555">*</span> xx <span style="color: #555555">+</span> (b[<span style="color: #FF6600">1</span>] <span style="color: #555555">-</span> a <span style="color: #555555">*</span> b[<span style="color: #FF6600">0</span>])
+</pre></div>
+
+
+<ul>
+<li>Plot</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># plot the line, the points, and the nearest vectors to the plane</span>
+plt<span style="color: #555555">.</span>plot(xx, yy, <span style="color: #CC3300">&#39;k-&#39;</span>)
+plt<span style="color: #555555">.</span>plot(xx, yy_down, <span style="color: #CC3300">&#39;k--&#39;</span>)
+plt<span style="color: #555555">.</span>plot(xx, yy_up, <span style="color: #CC3300">&#39;k--&#39;</span>)
+
+plt<span style="color: #555555">.</span>scatter(clf<span style="color: #555555">.</span>support_vectors_[:, <span style="color: #FF6600">0</span>], clf<span style="color: #555555">.</span>support_vectors_[:, <span style="color: #FF6600">1</span>],
+            s<span style="color: #555555">=</span><span style="color: #FF6600">80</span>, facecolors<span style="color: #555555">=</span><span style="color: #CC3300">&#39;none&#39;</span>)
+plt<span style="color: #555555">.</span>scatter(X[:, <span style="color: #FF6600">0</span>], X[:, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span>Y, cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>Paired)
+
+plt<span style="color: #555555">.</span>axis(<span style="color: #CC3300">&#39;tight&#39;</span>)
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_105_0.png" /></p>
+<hr />
+<h3 id="7-svm-anova-svm-with-univariate-feature-selection-source">7. SVM-Anova: SVM with univariate feature selection (<a href="https://github.com/scikit-learn/scikit-learn/tree/master/examples/svm">source</a>)</h3>
+<hr />
+<p>This example shows how to perform univariate feature selection before running a
+SVC (support vector classifier) to improve the classification scores.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn</span> <span style="color: #006699; font-weight: bold">import</span> svm, datasets, feature_selection
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.cross_validation</span> <span style="color: #006699; font-weight: bold">import</span> cross_val_score
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.pipeline</span> <span style="color: #006699; font-weight: bold">import</span> Pipeline
+</pre></div>
+
+
+<ul>
+<li>Data</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Import some data to play with</span>
+digits <span style="color: #555555">=</span> datasets<span style="color: #555555">.</span>load_digits()
+y <span style="color: #555555">=</span> digits<span style="color: #555555">.</span>target
+<span style="color: #0099FF; font-style: italic"># Throw away data, to be in the curse of dimension settings</span>
+y <span style="color: #555555">=</span> y[:<span style="color: #FF6600">200</span>]
+X <span style="color: #555555">=</span> digits<span style="color: #555555">.</span>data[:<span style="color: #FF6600">200</span>]
+n_samples <span style="color: #555555">=</span> <span style="color: #336666">len</span>(y)
+X <span style="color: #555555">=</span> X<span style="color: #555555">.</span>reshape((n_samples, <span style="color: #555555">-</span><span style="color: #FF6600">1</span>))
+<span style="color: #0099FF; font-style: italic"># add 200 non-informative features</span>
+X <span style="color: #555555">=</span> np<span style="color: #555555">.</span>hstack((X, <span style="color: #FF6600">2</span> <span style="color: #555555">*</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>random((n_samples, <span style="color: #FF6600">200</span>))))
+</pre></div>
+
+
+<ul>
+<li>Feature-selection transform</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Create a feature-selection transform and </span>
+transform <span style="color: #555555">=</span> feature_selection<span style="color: #555555">.</span>SelectPercentile(feature_selection<span style="color: #555555">.</span>f_classif)
+</pre></div>
+
+
+<ul>
+<li>instance of SVM </li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Instance of SVM that we combine together to have an full-blown estimator</span>
+clf <span style="color: #555555">=</span> Pipeline([(<span style="color: #CC3300">&#39;anova&#39;</span>, transform), (<span style="color: #CC3300">&#39;svc&#39;</span>, svm<span style="color: #555555">.</span>SVC(C<span style="color: #555555">=</span><span style="color: #FF6600">1.0</span>))])
+</pre></div>
+
+
+<ul>
+<li>cross-validation score as a function of percentile of features</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic">#the cross-validation score as a function of percentile of features</span>
+score_means <span style="color: #555555">=</span> <span style="color: #336666">list</span>()
+score_stds <span style="color: #555555">=</span> <span style="color: #336666">list</span>()
+percentiles <span style="color: #555555">=</span> (<span style="color: #FF6600">1</span>, <span style="color: #FF6600">3</span>, <span style="color: #FF6600">6</span>, <span style="color: #FF6600">10</span>, <span style="color: #FF6600">15</span>, <span style="color: #FF6600">20</span>, <span style="color: #FF6600">30</span>, <span style="color: #FF6600">40</span>, <span style="color: #FF6600">60</span>, <span style="color: #FF6600">80</span>, <span style="color: #FF6600">100</span>)
+
+<span style="color: #006699; font-weight: bold">for</span> percentile <span style="color: #000000; font-weight: bold">in</span> percentiles:
+    clf<span style="color: #555555">.</span>set_params(anova__percentile<span style="color: #555555">=</span>percentile)
+    <span style="color: #0099FF; font-style: italic"># Compute cross-validation score using 1 CPU</span>
+    this_scores <span style="color: #555555">=</span> cross_val_score(clf, X, y, n_jobs<span style="color: #555555">=</span><span style="color: #FF6600">1</span>)
+    score_means<span style="color: #555555">.</span>append(this_scores<span style="color: #555555">.</span>mean())
+    score_stds<span style="color: #555555">.</span>append(this_scores<span style="color: #555555">.</span>std())
+</pre></div>
+
+
+<ul>
+<li>Plot</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>plt<span style="color: #555555">.</span>errorbar(percentiles, score_means, np<span style="color: #555555">.</span>array(score_stds))
+
+plt<span style="color: #555555">.</span>title(
+    <span style="color: #CC3300">&#39;Performance of the SVM-Anova varying the percentile of features selected&#39;</span>)
+plt<span style="color: #555555">.</span>xlabel(<span style="color: #CC3300">&#39;Percentile&#39;</span>)
+plt<span style="color: #555555">.</span>ylabel(<span style="color: #CC3300">&#39;Prediction rate&#39;</span>)
+
+plt<span style="color: #555555">.</span>axis(<span style="color: #CC3300">&#39;tight&#39;</span>)
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_120_0.png" /></p>
+<hr />
+<h3 id="8-svm-kernels-source">8. SVM-Kernels (<a href="https://github.com/scikit-learn/scikit-learn/tree/master/examples/svm">source</a>)</h3>
+<hr />
+<p>Three different types of SVM-Kernels are displayed below.
+The polynomial and RBF are especially useful when the
+data-points are not linearly separable.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn</span> <span style="color: #006699; font-weight: bold">import</span> svm
+</pre></div>
+
+
+<ul>
+<li>Data</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Our dataset and targets</span>
+X <span style="color: #555555">=</span> np<span style="color: #555555">.</span>c_[(<span style="color: #555555">.</span><span style="color: #FF6600">4</span>, <span style="color: #555555">-.</span><span style="color: #FF6600">7</span>),
+          (<span style="color: #555555">-</span><span style="color: #FF6600">1.5</span>, <span style="color: #555555">-</span><span style="color: #FF6600">1</span>),
+          (<span style="color: #555555">-</span><span style="color: #FF6600">1.4</span>, <span style="color: #555555">-.</span><span style="color: #FF6600">9</span>),
+          (<span style="color: #555555">-</span><span style="color: #FF6600">1.3</span>, <span style="color: #555555">-</span><span style="color: #FF6600">1.2</span>),
+          (<span style="color: #555555">-</span><span style="color: #FF6600">1.1</span>, <span style="color: #555555">-.</span><span style="color: #FF6600">2</span>),
+          (<span style="color: #555555">-</span><span style="color: #FF6600">1.2</span>, <span style="color: #555555">-.</span><span style="color: #FF6600">4</span>),
+          (<span style="color: #555555">-.</span><span style="color: #FF6600">5</span>, <span style="color: #FF6600">1.2</span>),
+          (<span style="color: #555555">-</span><span style="color: #FF6600">1.5</span>, <span style="color: #FF6600">2.1</span>),
+          (<span style="color: #FF6600">1</span>, <span style="color: #FF6600">1</span>),
+          <span style="color: #0099FF; font-style: italic"># --</span>
+          (<span style="color: #FF6600">1.3</span>, <span style="color: #555555">.</span><span style="color: #FF6600">8</span>),
+          (<span style="color: #FF6600">1.2</span>, <span style="color: #555555">.</span><span style="color: #FF6600">5</span>),
+          (<span style="color: #555555">.</span><span style="color: #FF6600">2</span>, <span style="color: #555555">-</span><span style="color: #FF6600">2</span>),
+          (<span style="color: #555555">.</span><span style="color: #FF6600">5</span>, <span style="color: #555555">-</span><span style="color: #FF6600">2.4</span>),
+          (<span style="color: #555555">.</span><span style="color: #FF6600">2</span>, <span style="color: #555555">-</span><span style="color: #FF6600">2.3</span>),
+          (<span style="color: #FF6600">0</span>, <span style="color: #555555">-</span><span style="color: #FF6600">2.7</span>),
+          (<span style="color: #FF6600">1.3</span>, <span style="color: #FF6600">2.1</span>)]<span style="color: #555555">.</span>T
+Y <span style="color: #555555">=</span> [<span style="color: #FF6600">0</span>] <span style="color: #555555">*</span> <span style="color: #FF6600">8</span> <span style="color: #555555">+</span> [<span style="color: #FF6600">1</span>] <span style="color: #555555">*</span> <span style="color: #FF6600">8</span>
+</pre></div>
+
+
+<ul>
+<li>plot</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># figure number</span>
+fignum <span style="color: #555555">=</span> <span style="color: #FF6600">1</span>
+
+<span style="color: #0099FF; font-style: italic"># fit the model</span>
+<span style="color: #006699; font-weight: bold">for</span> kernel <span style="color: #000000; font-weight: bold">in</span> (<span style="color: #CC3300">&#39;linear&#39;</span>, <span style="color: #CC3300">&#39;poly&#39;</span>, <span style="color: #CC3300">&#39;rbf&#39;</span>):
+    clf <span style="color: #555555">=</span> svm<span style="color: #555555">.</span>SVC(kernel<span style="color: #555555">=</span>kernel, gamma<span style="color: #555555">=</span><span style="color: #FF6600">2</span>)
+    clf<span style="color: #555555">.</span>fit(X, Y)
+
+    <span style="color: #0099FF; font-style: italic"># plot the line, the points, and the nearest vectors to the plane</span>
+    plt<span style="color: #555555">.</span>figure(fignum, figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">4</span>, <span style="color: #FF6600">3</span>))
+    plt<span style="color: #555555">.</span>clf()
+
+    plt<span style="color: #555555">.</span>scatter(clf<span style="color: #555555">.</span>support_vectors_[:, <span style="color: #FF6600">0</span>], clf<span style="color: #555555">.</span>support_vectors_[:, <span style="color: #FF6600">1</span>], s<span style="color: #555555">=</span><span style="color: #FF6600">80</span>,
+                facecolors<span style="color: #555555">=</span><span style="color: #CC3300">&#39;none&#39;</span>, zorder<span style="color: #555555">=</span><span style="color: #FF6600">10</span>)
+    plt<span style="color: #555555">.</span>scatter(X[:, <span style="color: #FF6600">0</span>], X[:, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span>Y, zorder<span style="color: #555555">=</span><span style="color: #FF6600">10</span>, cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>Paired)
+
+    plt<span style="color: #555555">.</span>axis(<span style="color: #CC3300">&#39;tight&#39;</span>)
+    x_min <span style="color: #555555">=</span> <span style="color: #555555">-</span><span style="color: #FF6600">3</span>
+    x_max <span style="color: #555555">=</span> <span style="color: #FF6600">3</span>
+    y_min <span style="color: #555555">=</span> <span style="color: #555555">-</span><span style="color: #FF6600">3</span>
+    y_max <span style="color: #555555">=</span> <span style="color: #FF6600">3</span>
+
+    XX, YY <span style="color: #555555">=</span> np<span style="color: #555555">.</span>mgrid[x_min:x_max:<span style="color: #FF6600">200</span>j, y_min:y_max:<span style="color: #FF6600">200</span>j]
+    Z <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>decision_function(np<span style="color: #555555">.</span>c_[XX<span style="color: #555555">.</span>ravel(), YY<span style="color: #555555">.</span>ravel()])
+
+    <span style="color: #0099FF; font-style: italic"># Put the result into a color plot</span>
+    Z <span style="color: #555555">=</span> Z<span style="color: #555555">.</span>reshape(XX<span style="color: #555555">.</span>shape)
+    plt<span style="color: #555555">.</span>figure(fignum, figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">4</span>, <span style="color: #FF6600">3</span>))
+    plt<span style="color: #555555">.</span>pcolormesh(XX, YY, Z <span style="color: #555555">&gt;</span> <span style="color: #FF6600">0</span>, cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>Paired)
+    plt<span style="color: #555555">.</span>contour(XX, YY, Z, colors<span style="color: #555555">=</span>[<span style="color: #CC3300">&#39;k&#39;</span>, <span style="color: #CC3300">&#39;k&#39;</span>, <span style="color: #CC3300">&#39;k&#39;</span>], linestyles<span style="color: #555555">=</span>[<span style="color: #CC3300">&#39;--&#39;</span>, <span style="color: #CC3300">&#39;-&#39;</span>, <span style="color: #CC3300">&#39;--&#39;</span>],
+                levels<span style="color: #555555">=</span>[<span style="color: #555555">-.</span><span style="color: #FF6600">5</span>, <span style="color: #FF6600">0</span>, <span style="color: #555555">.</span><span style="color: #FF6600">5</span>])
+
+    plt<span style="color: #555555">.</span>xlim(x_min, x_max)
+    plt<span style="color: #555555">.</span>ylim(y_min, y_max)
+
+    plt<span style="color: #555555">.</span>xticks(())
+    plt<span style="color: #555555">.</span>yticks(())
+    fignum <span style="color: #555555">=</span> fignum <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_129_0.png" /></p>
+<p><img alt="png" src="../output_129_1.png" /></p>
+<p><img alt="png" src="../output_129_2.png" /></p>
+<hr />
+<h3 id="9-svm-margins-example-source">9. SVM Margins Example (<a href="https://github.com/scikit-learn/scikit-learn/tree/master/examples/svm">source</a>)</h3>
+<hr />
+<p>The plots below illustrate the effect the parameter <code>C</code> has
+on the separation line. A large value of <code>C</code> basically tells
+our model that we do not have that much faith in our data's
+distribution, and will only consider points close to line
+of separation.</p>
+<p>A small value of <code>C</code> includes more/all the observations, allowing
+the margins to be calculated using all the data in the area.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn</span> <span style="color: #006699; font-weight: bold">import</span> svm
+</pre></div>
+
+
+<ul>
+<li>Data</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># we create 40 separable points</span>
+np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>seed(<span style="color: #FF6600">0</span>)
+X <span style="color: #555555">=</span> np<span style="color: #555555">.</span>r_[np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randn(<span style="color: #FF6600">20</span>, <span style="color: #FF6600">2</span>) <span style="color: #555555">-</span> [<span style="color: #FF6600">2</span>, <span style="color: #FF6600">2</span>], np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randn(<span style="color: #FF6600">20</span>, <span style="color: #FF6600">2</span>) <span style="color: #555555">+</span> [<span style="color: #FF6600">2</span>, <span style="color: #FF6600">2</span>]]
+Y <span style="color: #555555">=</span> [<span style="color: #FF6600">0</span>] <span style="color: #555555">*</span> <span style="color: #FF6600">20</span> <span style="color: #555555">+</span> [<span style="color: #FF6600">1</span>] <span style="color: #555555">*</span> <span style="color: #FF6600">20</span>
+</pre></div>
+
+
+<ul>
+<li>Plot</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># figure number</span>
+fignum <span style="color: #555555">=</span> <span style="color: #FF6600">1</span>
+
+<span style="color: #0099FF; font-style: italic"># fit the model</span>
+<span style="color: #006699; font-weight: bold">for</span> name, penalty <span style="color: #000000; font-weight: bold">in</span> ((<span style="color: #CC3300">&#39;unreg&#39;</span>, <span style="color: #FF6600">1</span>), (<span style="color: #CC3300">&#39;reg&#39;</span>, <span style="color: #FF6600">0.05</span>)):
+
+    clf <span style="color: #555555">=</span> svm<span style="color: #555555">.</span>SVC(kernel<span style="color: #555555">=</span><span style="color: #CC3300">&#39;linear&#39;</span>, C<span style="color: #555555">=</span>penalty)
+    clf<span style="color: #555555">.</span>fit(X, Y)
+
+    <span style="color: #0099FF; font-style: italic"># get the separating hyperplane</span>
+    w <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>coef_[<span style="color: #FF6600">0</span>]
+    a <span style="color: #555555">=</span> <span style="color: #555555">-</span>w[<span style="color: #FF6600">0</span>] <span style="color: #555555">/</span> w[<span style="color: #FF6600">1</span>]
+    xx <span style="color: #555555">=</span> np<span style="color: #555555">.</span>linspace(<span style="color: #555555">-</span><span style="color: #FF6600">5</span>, <span style="color: #FF6600">5</span>)
+    yy <span style="color: #555555">=</span> a <span style="color: #555555">*</span> xx <span style="color: #555555">-</span> (clf<span style="color: #555555">.</span>intercept_[<span style="color: #FF6600">0</span>]) <span style="color: #555555">/</span> w[<span style="color: #FF6600">1</span>]
+
+    <span style="color: #0099FF; font-style: italic"># plot the parallels to the separating hyperplane that pass through the</span>
+    <span style="color: #0099FF; font-style: italic"># support vectors</span>
+    margin <span style="color: #555555">=</span> <span style="color: #FF6600">1</span> <span style="color: #555555">/</span> np<span style="color: #555555">.</span>sqrt(np<span style="color: #555555">.</span>sum(clf<span style="color: #555555">.</span>coef_ <span style="color: #555555">**</span> <span style="color: #FF6600">2</span>))
+    yy_down <span style="color: #555555">=</span> yy <span style="color: #555555">+</span> a <span style="color: #555555">*</span> margin
+    yy_up <span style="color: #555555">=</span> yy <span style="color: #555555">-</span> a <span style="color: #555555">*</span> margin
+
+    <span style="color: #0099FF; font-style: italic"># plot the line, the points, and the nearest vectors to the plane</span>
+    plt<span style="color: #555555">.</span>figure(fignum, figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">4</span>, <span style="color: #FF6600">3</span>))
+    plt<span style="color: #555555">.</span>clf()
+    plt<span style="color: #555555">.</span>plot(xx, yy, <span style="color: #CC3300">&#39;k-&#39;</span>)
+    plt<span style="color: #555555">.</span>plot(xx, yy_down, <span style="color: #CC3300">&#39;k--&#39;</span>)
+    plt<span style="color: #555555">.</span>plot(xx, yy_up, <span style="color: #CC3300">&#39;k--&#39;</span>)
+
+    plt<span style="color: #555555">.</span>scatter(clf<span style="color: #555555">.</span>support_vectors_[:, <span style="color: #FF6600">0</span>], clf<span style="color: #555555">.</span>support_vectors_[:, <span style="color: #FF6600">1</span>], s<span style="color: #555555">=</span><span style="color: #FF6600">80</span>,
+                facecolors<span style="color: #555555">=</span><span style="color: #CC3300">&#39;none&#39;</span>, zorder<span style="color: #555555">=</span><span style="color: #FF6600">10</span>)
+    plt<span style="color: #555555">.</span>scatter(X[:, <span style="color: #FF6600">0</span>], X[:, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span>Y, zorder<span style="color: #555555">=</span><span style="color: #FF6600">10</span>, cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>Paired)
+
+    plt<span style="color: #555555">.</span>axis(<span style="color: #CC3300">&#39;tight&#39;</span>)
+    x_min <span style="color: #555555">=</span> <span style="color: #555555">-</span><span style="color: #FF6600">4.8</span>
+    x_max <span style="color: #555555">=</span> <span style="color: #FF6600">4.2</span>
+    y_min <span style="color: #555555">=</span> <span style="color: #555555">-</span><span style="color: #FF6600">6</span>
+    y_max <span style="color: #555555">=</span> <span style="color: #FF6600">6</span>
+
+    XX, YY <span style="color: #555555">=</span> np<span style="color: #555555">.</span>mgrid[x_min:x_max:<span style="color: #FF6600">200</span>j, y_min:y_max:<span style="color: #FF6600">200</span>j]
+    Z <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>predict(np<span style="color: #555555">.</span>c_[XX<span style="color: #555555">.</span>ravel(), YY<span style="color: #555555">.</span>ravel()])
+
+    <span style="color: #0099FF; font-style: italic"># Put the result into a color plot</span>
+    Z <span style="color: #555555">=</span> Z<span style="color: #555555">.</span>reshape(XX<span style="color: #555555">.</span>shape)
+    plt<span style="color: #555555">.</span>figure(fignum, figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">4</span>, <span style="color: #FF6600">3</span>))
+    plt<span style="color: #555555">.</span>pcolormesh(XX, YY, Z, cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>Paired)
+
+    plt<span style="color: #555555">.</span>xlim(x_min, x_max)
+    plt<span style="color: #555555">.</span>ylim(y_min, y_max)
+
+    plt<span style="color: #555555">.</span>xticks(())
+    plt<span style="color: #555555">.</span>yticks(())
+    fignum <span style="color: #555555">=</span> fignum <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>
+
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_138_0.png" /></p>
+<p><img alt="png" src="../output_138_1.png" /></p>
+<hr />
+<h3 id="10-non-linear-svm-source">10. Non-linear SVM (<a href="https://github.com/scikit-learn/scikit-learn/tree/master/examples/svm">source</a>)</h3>
+<hr />
+<p>Perform binary classification using non-linear SVC
+with RBF kernel. The target to predict is a XOR of the
+inputs.</p>
+<p>The color map illustrates the decision function learned by the SVC.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn</span> <span style="color: #006699; font-weight: bold">import</span> svm
+</pre></div>
+
+
+<ul>
+<li>Data</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>xx, yy <span style="color: #555555">=</span> np<span style="color: #555555">.</span>meshgrid(np<span style="color: #555555">.</span>linspace(<span style="color: #555555">-</span><span style="color: #FF6600">3</span>, <span style="color: #FF6600">3</span>, <span style="color: #FF6600">500</span>),
+                     np<span style="color: #555555">.</span>linspace(<span style="color: #555555">-</span><span style="color: #FF6600">3</span>, <span style="color: #FF6600">3</span>, <span style="color: #FF6600">500</span>))
+np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>seed(<span style="color: #FF6600">0</span>)
+X <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randn(<span style="color: #FF6600">300</span>, <span style="color: #FF6600">2</span>)
+Y <span style="color: #555555">=</span> np<span style="color: #555555">.</span>logical_xor(X[:, <span style="color: #FF6600">0</span>] <span style="color: #555555">&gt;</span> <span style="color: #FF6600">0</span>, X[:, <span style="color: #FF6600">1</span>] <span style="color: #555555">&gt;</span> <span style="color: #FF6600">0</span>)
+</pre></div>
+
+
+<ul>
+<li>Model</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># fit the model</span>
+clf <span style="color: #555555">=</span> svm<span style="color: #555555">.</span>NuSVC()
+clf<span style="color: #555555">.</span>fit(X, Y)
+
+<span style="color: #0099FF; font-style: italic"># plot the decision function for each datapoint on the grid</span>
+Z <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>decision_function(np<span style="color: #555555">.</span>c_[xx<span style="color: #555555">.</span>ravel(), yy<span style="color: #555555">.</span>ravel()])
+Z <span style="color: #555555">=</span> Z<span style="color: #555555">.</span>reshape(xx<span style="color: #555555">.</span>shape)
+</pre></div>
+
+
+<ul>
+<li>Plot</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>plt<span style="color: #555555">.</span>imshow(Z, interpolation<span style="color: #555555">=</span><span style="color: #CC3300">&#39;nearest&#39;</span>,
+           extent<span style="color: #555555">=</span>(xx<span style="color: #555555">.</span>min(), xx<span style="color: #555555">.</span>max(), yy<span style="color: #555555">.</span>min(), yy<span style="color: #555555">.</span>max()), aspect<span style="color: #555555">=</span><span style="color: #CC3300">&#39;auto&#39;</span>,
+           origin<span style="color: #555555">=</span><span style="color: #CC3300">&#39;lower&#39;</span>, cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>PuOr_r)
+contours <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>contour(xx, yy, Z, levels<span style="color: #555555">=</span>[<span style="color: #FF6600">0</span>], linewidths<span style="color: #555555">=</span><span style="color: #FF6600">2</span>,
+                       linetypes<span style="color: #555555">=</span><span style="color: #CC3300">&#39;--&#39;</span>)
+plt<span style="color: #555555">.</span>scatter(X[:, <span style="color: #FF6600">0</span>], X[:, <span style="color: #FF6600">1</span>], s<span style="color: #555555">=</span><span style="color: #FF6600">30</span>, c<span style="color: #555555">=</span>Y, cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>Paired)
+plt<span style="color: #555555">.</span>xticks(())
+plt<span style="color: #555555">.</span>yticks(())
+plt<span style="color: #555555">.</span>axis([<span style="color: #555555">-</span><span style="color: #FF6600">3</span>, <span style="color: #FF6600">3</span>, <span style="color: #555555">-</span><span style="color: #FF6600">3</span>, <span style="color: #FF6600">3</span>])
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_149_0.png" /></p>
+<hr />
+<h3 id="11-support-vector-regression-svr-using-linear-and-non-linear-kernels-source">11. Support Vector Regression (SVR) using linear and non-linear kernels (<a href="https://github.com/scikit-learn/scikit-learn/tree/master/examples/svm">source</a>)</h3>
+<hr />
+<p>Toy example of 1D regression using linear, polynomial and RBF kernels.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.svm</span> <span style="color: #006699; font-weight: bold">import</span> SVR
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+</pre></div>
+
+
+<ul>
+<li>Data</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Generate sample data</span>
+X <span style="color: #555555">=</span> np<span style="color: #555555">.</span>sort(<span style="color: #FF6600">5</span> <span style="color: #555555">*</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>rand(<span style="color: #FF6600">40</span>, <span style="color: #FF6600">1</span>), axis<span style="color: #555555">=</span><span style="color: #FF6600">0</span>)
+y <span style="color: #555555">=</span> np<span style="color: #555555">.</span>sin(X)<span style="color: #555555">.</span>ravel()
+
+
+<span style="color: #0099FF; font-style: italic"># Add noise to targets</span>
+y[::<span style="color: #FF6600">5</span>] <span style="color: #555555">+=</span> <span style="color: #FF6600">3</span> <span style="color: #555555">*</span> (<span style="color: #FF6600">0.5</span> <span style="color: #555555">-</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>rand(<span style="color: #FF6600">8</span>))
+</pre></div>
+
+
+<ul>
+<li>Model</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Fit regression model</span>
+svr_rbf <span style="color: #555555">=</span> SVR(kernel<span style="color: #555555">=</span><span style="color: #CC3300">&#39;rbf&#39;</span>, C<span style="color: #555555">=</span><span style="color: #FF6600">1e3</span>, gamma<span style="color: #555555">=</span><span style="color: #FF6600">0.1</span>)
+svr_lin <span style="color: #555555">=</span> SVR(kernel<span style="color: #555555">=</span><span style="color: #CC3300">&#39;linear&#39;</span>, C<span style="color: #555555">=</span><span style="color: #FF6600">1e3</span>)
+svr_poly <span style="color: #555555">=</span> SVR(kernel<span style="color: #555555">=</span><span style="color: #CC3300">&#39;poly&#39;</span>, C<span style="color: #555555">=</span><span style="color: #FF6600">1e3</span>, degree<span style="color: #555555">=</span><span style="color: #FF6600">2</span>)
+y_rbf <span style="color: #555555">=</span> svr_rbf<span style="color: #555555">.</span>fit(X, y)<span style="color: #555555">.</span>predict(X)
+y_lin <span style="color: #555555">=</span> svr_lin<span style="color: #555555">.</span>fit(X, y)<span style="color: #555555">.</span>predict(X)
+y_poly <span style="color: #555555">=</span> svr_poly<span style="color: #555555">.</span>fit(X, y)<span style="color: #555555">.</span>predict(X)
+</pre></div>
+
+
+<ul>
+<li>Plot</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># look at the results</span>
+lw <span style="color: #555555">=</span> <span style="color: #FF6600">2</span>
+plt<span style="color: #555555">.</span>scatter(X, y, color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;darkorange&#39;</span>, label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;data&#39;</span>)
+plt<span style="color: #555555">.</span>hold(<span style="color: #CC3300">&#39;on&#39;</span>)
+plt<span style="color: #555555">.</span>plot(X, y_rbf, color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;navy&#39;</span>, lw<span style="color: #555555">=</span>lw, label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;RBF model&#39;</span>)
+plt<span style="color: #555555">.</span>plot(X, y_lin, color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;c&#39;</span>, lw<span style="color: #555555">=</span>lw, label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Linear model&#39;</span>)
+plt<span style="color: #555555">.</span>plot(X, y_poly, color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;cornflowerblue&#39;</span>, lw<span style="color: #555555">=</span>lw, label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Polynomial model&#39;</span>)
+plt<span style="color: #555555">.</span>xlabel(<span style="color: #CC3300">&#39;data&#39;</span>)
+plt<span style="color: #555555">.</span>ylabel(<span style="color: #CC3300">&#39;target&#39;</span>)
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;Support Vector Regression&#39;</span>)
+plt<span style="color: #555555">.</span>legend()
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_160_0.png" /></p>
+<hr />
+<h3 id="13-scaling-the-regularization-parameter-for-svcs-source">13. Scaling the regularization parameter for SVCs (<a href="https://github.com/scikit-learn/scikit-learn/tree/master/examples/svm">source</a>)</h3>
+<hr />
+<p>The following example illustrates the effect of scaling the
+regularization parameter when using :ref:<code>svm</code> for <code>classification</code>.
+For SVC classification, we are interested in a risk minimization for the
+equation:</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>$ C \sum_{i=1, n} \mathcal{L} (f(x_i), y_i) + \Omega (w)$
+</pre></div>
+
+
+<p>where</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>- `C` is used to set the amount of regularization
+- `\mathcal{L}` is a `loss` function of our samples
+  and our model parameters.
+- `\Omega` is a `penalty` function of our model parameters
+</pre></div>
+
+
+<p>If we consider the loss function to be the individual error per
+sample, then the data-fit term, or the sum of the error for each sample, will
+increase as we add more samples. The penalization term, however, will not
+increase.</p>
+<p>When using, for example, :ref:<code>cross validation &lt;cross_validation&gt;</code>, to
+set the amount of regularization with <code>C</code>, there will be a
+different amount of samples between the main problem and the smaller problems
+within the folds of the cross validation.</p>
+<p>Since our loss function is dependent on the amount of samples, the latter
+will influence the selected value of <code>C</code>.
+The question that arises is <code>How do we optimally adjust C to
+account for the different amount of training samples?</code></p>
+<p>The figures below are used to illustrate the effect of scaling our
+<code>C</code> to compensate for the change in the number of samples, in the
+case of using an <code>l1</code> penalty, as well as the <code>l2</code> penalty.</p>
+<h2 id="l1-penalty-case">l1-penalty case</h2>
+<p>In the <code>l1</code> case, theory says that prediction consistency
+(i.e. that under given hypothesis, the estimator
+learned predicts as well as a model knowing the true distribution)
+is not possible because of the bias of the <code>l1</code>. It does say, however,
+that model consistency, in terms of finding the right set of non-zero
+parameters as well as their signs, can be achieved by scaling
+<code>C1</code>.</p>
+<h2 id="l2-penalty-case">l2-penalty case</h2>
+<p>The theory says that in order to achieve prediction consistency, the
+penalty parameter should be kept constant
+as the number of samples grow.</p>
+<h2 id="simulations">Simulations</h2>
+<p>The two figures below plot the values of <code>C</code> on the <code>x-axis</code> and the
+corresponding cross-validation scores on the <code>y-axis</code>, for several different
+fractions of a generated data-set.</p>
+<p>In the <code>l1</code> penalty case, the cross-validation-error correlates best with
+the test-error, when scaling our <code>C</code> with the number of samples, <code>n</code>,
+which can be seen in the first figure.</p>
+<p>For the <code>l2</code> penalty case, the best result comes from the case where <code>C</code>
+is not scaled.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Two separate datasets are used for the two different plots. The reason
+behind this is the `l1` case works better on sparse data, while `l2`
+is better suited to the non-sparse case.
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.svm</span> <span style="color: #006699; font-weight: bold">import</span> LinearSVC
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.model_selection</span> <span style="color: #006699; font-weight: bold">import</span> ShuffleSplit
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.model_selection</span> <span style="color: #006699; font-weight: bold">import</span> GridSearchCV
+
+
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.utils</span> <span style="color: #006699; font-weight: bold">import</span> check_random_state
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn</span> <span style="color: #006699; font-weight: bold">import</span> datasets
+</pre></div>
+
+
+<ul>
+<li>Data,Model,Plot</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>rnd <span style="color: #555555">=</span> check_random_state(<span style="color: #FF6600">1</span>)
+
+<span style="color: #0099FF; font-style: italic"># set up dataset</span>
+n_samples <span style="color: #555555">=</span> <span style="color: #FF6600">100</span>
+n_features <span style="color: #555555">=</span> <span style="color: #FF6600">300</span>
+
+<span style="color: #0099FF; font-style: italic"># l1 data (only 5 informative features)</span>
+X_1, y_1 <span style="color: #555555">=</span> datasets<span style="color: #555555">.</span>make_classification(n_samples<span style="color: #555555">=</span>n_samples,
+                                        n_features<span style="color: #555555">=</span>n_features, n_informative<span style="color: #555555">=</span><span style="color: #FF6600">5</span>,
+                                        random_state<span style="color: #555555">=</span><span style="color: #FF6600">1</span>)
+
+<span style="color: #0099FF; font-style: italic"># l2 data: non sparse, but less features</span>
+y_2 <span style="color: #555555">=</span> np<span style="color: #555555">.</span>sign(<span style="color: #555555">.</span><span style="color: #FF6600">5</span> <span style="color: #555555">-</span> rnd<span style="color: #555555">.</span>rand(n_samples))
+X_2 <span style="color: #555555">=</span> rnd<span style="color: #555555">.</span>randn(n_samples, n_features <span style="color: #555555">/</span> <span style="color: #FF6600">5</span>) <span style="color: #555555">+</span> y_2[:, np<span style="color: #555555">.</span>newaxis]
+X_2 <span style="color: #555555">+=</span> <span style="color: #FF6600">5</span> <span style="color: #555555">*</span> rnd<span style="color: #555555">.</span>randn(n_samples, n_features <span style="color: #555555">/</span> <span style="color: #FF6600">5</span>)
+
+clf_sets <span style="color: #555555">=</span> [(LinearSVC(penalty<span style="color: #555555">=</span><span style="color: #CC3300">&#39;l1&#39;</span>, loss<span style="color: #555555">=</span><span style="color: #CC3300">&#39;squared_hinge&#39;</span>, dual<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">False</span>,
+                       tol<span style="color: #555555">=</span><span style="color: #FF6600">1e-3</span>),
+             np<span style="color: #555555">.</span>logspace(<span style="color: #555555">-</span><span style="color: #FF6600">2.3</span>, <span style="color: #555555">-</span><span style="color: #FF6600">1.3</span>, <span style="color: #FF6600">10</span>), X_1, y_1),
+            (LinearSVC(penalty<span style="color: #555555">=</span><span style="color: #CC3300">&#39;l2&#39;</span>, loss<span style="color: #555555">=</span><span style="color: #CC3300">&#39;squared_hinge&#39;</span>, dual<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>,
+                       tol<span style="color: #555555">=</span><span style="color: #FF6600">1e-4</span>),
+             np<span style="color: #555555">.</span>logspace(<span style="color: #555555">-</span><span style="color: #FF6600">4.5</span>, <span style="color: #555555">-</span><span style="color: #FF6600">2</span>, <span style="color: #FF6600">10</span>), X_2, y_2)]
+
+colors <span style="color: #555555">=</span> [<span style="color: #CC3300">&#39;navy&#39;</span>, <span style="color: #CC3300">&#39;cyan&#39;</span>, <span style="color: #CC3300">&#39;darkorange&#39;</span>]
+lw <span style="color: #555555">=</span> <span style="color: #FF6600">2</span>
+
+<span style="color: #006699; font-weight: bold">for</span> fignum, (clf, cs, X, y) <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>(clf_sets):
+    <span style="color: #0099FF; font-style: italic"># set up the plot for each regressor</span>
+    plt<span style="color: #555555">.</span>figure(fignum, figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">9</span>, <span style="color: #FF6600">10</span>))
+
+    <span style="color: #006699; font-weight: bold">for</span> k, train_size <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>(np<span style="color: #555555">.</span>linspace(<span style="color: #FF6600">0.3</span>, <span style="color: #FF6600">0.7</span>, <span style="color: #FF6600">3</span>)[::<span style="color: #555555">-</span><span style="color: #FF6600">1</span>]):
+        param_grid <span style="color: #555555">=</span> <span style="color: #336666">dict</span>(C<span style="color: #555555">=</span>cs)
+        <span style="color: #0099FF; font-style: italic"># To get nice curve, we need a large number of iterations to</span>
+        <span style="color: #0099FF; font-style: italic"># reduce the variance</span>
+        grid <span style="color: #555555">=</span> GridSearchCV(clf, refit<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">False</span>, param_grid<span style="color: #555555">=</span>param_grid,
+                            cv<span style="color: #555555">=</span>ShuffleSplit(train_size<span style="color: #555555">=</span>train_size, n_iter<span style="color: #555555">=</span><span style="color: #FF6600">250</span>,
+                                            random_state<span style="color: #555555">=</span><span style="color: #FF6600">1</span>))
+        grid<span style="color: #555555">.</span>fit(X, y)
+        scores <span style="color: #555555">=</span> [x[<span style="color: #FF6600">1</span>] <span style="color: #006699; font-weight: bold">for</span> x <span style="color: #000000; font-weight: bold">in</span> grid<span style="color: #555555">.</span>grid_scores_]
+
+        scales <span style="color: #555555">=</span> [(<span style="color: #FF6600">1</span>, <span style="color: #CC3300">&#39;No scaling&#39;</span>),
+                  ((n_samples <span style="color: #555555">*</span> train_size), <span style="color: #CC3300">&#39;1/n_samples&#39;</span>),
+                  ]
+
+        <span style="color: #006699; font-weight: bold">for</span> subplotnum, (scaler, name) <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>(scales):
+            plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">2</span>, <span style="color: #FF6600">1</span>, subplotnum <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>)
+            plt<span style="color: #555555">.</span>xlabel(<span style="color: #CC3300">&#39;C&#39;</span>)
+            plt<span style="color: #555555">.</span>ylabel(<span style="color: #CC3300">&#39;CV Score&#39;</span>)
+            grid_cs <span style="color: #555555">=</span> cs <span style="color: #555555">*</span> <span style="color: #336666">float</span>(scaler)  <span style="color: #0099FF; font-style: italic"># scale the C&#39;s</span>
+            plt<span style="color: #555555">.</span>semilogx(grid_cs, scores, label<span style="color: #555555">=</span><span style="color: #CC3300">&quot;fraction </span><span style="color: #AA0000">%.2f</span><span style="color: #CC3300">&quot;</span> <span style="color: #555555">%</span>
+                         train_size, color<span style="color: #555555">=</span>colors[k], lw<span style="color: #555555">=</span>lw)
+            plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;scaling=</span><span style="color: #AA0000">%s</span><span style="color: #CC3300">, penalty=</span><span style="color: #AA0000">%s</span><span style="color: #CC3300">, loss=</span><span style="color: #AA0000">%s</span><span style="color: #CC3300">&#39;</span> <span style="color: #555555">%</span>
+                      (name, clf<span style="color: #555555">.</span>penalty, clf<span style="color: #555555">.</span>loss))
+
+    plt<span style="color: #555555">.</span>legend(loc<span style="color: #555555">=</span><span style="color: #CC3300">&quot;best&quot;</span>)
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<hr />
+<h3 id="14-svm-weighted-samples-source">14. SVM: Weighted samples (<a href="https://github.com/scikit-learn/scikit-learn/tree/master/examples/svm">source</a>)</h3>
+<hr />
+<p>Plot decision function of a weighted dataset, where the size of points
+is proportional to its weight.</p>
+<p>The sample weighting rescales the C parameter, which means that the classifier
+puts more emphasis on getting these points right. The effect might often be
+subtle.
+To emphasize the effect here, we particularly weight outliers, making the
+deformation of the decision boundary very visible.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn</span> <span style="color: #006699; font-weight: bold">import</span> svm
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">plot_decision_function</span>(classifier, sample_weight, axis, title):
+    <span style="color: #0099FF; font-style: italic"># plot the decision function</span>
+    xx, yy <span style="color: #555555">=</span> np<span style="color: #555555">.</span>meshgrid(np<span style="color: #555555">.</span>linspace(<span style="color: #555555">-</span><span style="color: #FF6600">4</span>, <span style="color: #FF6600">5</span>, <span style="color: #FF6600">500</span>), np<span style="color: #555555">.</span>linspace(<span style="color: #555555">-</span><span style="color: #FF6600">4</span>, <span style="color: #FF6600">5</span>, <span style="color: #FF6600">500</span>))
+
+    Z <span style="color: #555555">=</span> classifier<span style="color: #555555">.</span>decision_function(np<span style="color: #555555">.</span>c_[xx<span style="color: #555555">.</span>ravel(), yy<span style="color: #555555">.</span>ravel()])
+    Z <span style="color: #555555">=</span> Z<span style="color: #555555">.</span>reshape(xx<span style="color: #555555">.</span>shape)
+
+    <span style="color: #0099FF; font-style: italic"># plot the line, the points, and the nearest vectors to the plane</span>
+    axis<span style="color: #555555">.</span>contourf(xx, yy, Z, alpha<span style="color: #555555">=</span><span style="color: #FF6600">0.75</span>, cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>bone)
+    axis<span style="color: #555555">.</span>scatter(X[:, <span style="color: #FF6600">0</span>], X[:, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span>y, s<span style="color: #555555">=</span><span style="color: #FF6600">100</span> <span style="color: #555555">*</span> sample_weight, alpha<span style="color: #555555">=</span><span style="color: #FF6600">0.9</span>,
+                 cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>bone)
+
+    axis<span style="color: #555555">.</span>axis(<span style="color: #CC3300">&#39;off&#39;</span>)
+    axis<span style="color: #555555">.</span>set_title(title)
+</pre></div>
+
+
+<ul>
+<li>Data</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># we create 20 points</span>
+np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>seed(<span style="color: #FF6600">0</span>)
+X <span style="color: #555555">=</span> np<span style="color: #555555">.</span>r_[np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randn(<span style="color: #FF6600">10</span>, <span style="color: #FF6600">2</span>) <span style="color: #555555">+</span> [<span style="color: #FF6600">1</span>, <span style="color: #FF6600">1</span>], np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randn(<span style="color: #FF6600">10</span>, <span style="color: #FF6600">2</span>)]
+y <span style="color: #555555">=</span> [<span style="color: #FF6600">1</span>] <span style="color: #555555">*</span> <span style="color: #FF6600">10</span> <span style="color: #555555">+</span> [<span style="color: #555555">-</span><span style="color: #FF6600">1</span>] <span style="color: #555555">*</span> <span style="color: #FF6600">10</span>
+sample_weight_last_ten <span style="color: #555555">=</span> <span style="color: #336666">abs</span>(np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randn(<span style="color: #336666">len</span>(X)))
+sample_weight_constant <span style="color: #555555">=</span> np<span style="color: #555555">.</span>ones(<span style="color: #336666">len</span>(X))
+<span style="color: #0099FF; font-style: italic"># and bigger weights to some outliers</span>
+sample_weight_last_ten[<span style="color: #FF6600">15</span>:] <span style="color: #555555">*=</span> <span style="color: #FF6600">5</span>
+sample_weight_last_ten[<span style="color: #FF6600">9</span>] <span style="color: #555555">*=</span> <span style="color: #FF6600">15</span>
+</pre></div>
+
+
+<ul>
+<li>Model</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># for reference, first fit without class weights</span>
+<span style="color: #0099FF; font-style: italic"># fit the model</span>
+clf_weights <span style="color: #555555">=</span> svm<span style="color: #555555">.</span>SVC()
+clf_weights<span style="color: #555555">.</span>fit(X, y, sample_weight<span style="color: #555555">=</span>sample_weight_last_ten)
+
+clf_no_weights <span style="color: #555555">=</span> svm<span style="color: #555555">.</span>SVC()
+clf_no_weights<span style="color: #555555">.</span>fit(X, y)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma=&#39;auto&#39;, kernel=&#39;rbf&#39;,
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+</pre></div>
+
+
+<ul>
+<li>Plot</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>fig, axes <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>subplots(<span style="color: #FF6600">1</span>, <span style="color: #FF6600">2</span>, figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">14</span>, <span style="color: #FF6600">6</span>))
+plot_decision_function(clf_no_weights, sample_weight_constant, axes[<span style="color: #FF6600">0</span>],
+                       <span style="color: #CC3300">&quot;Constant weights&quot;</span>)
+plot_decision_function(clf_weights, sample_weight_last_ten, axes[<span style="color: #FF6600">1</span>],
+                       <span style="color: #CC3300">&quot;Modified weights&quot;</span>)
+
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&lt;matplotlib.figure.Figure at 0x114969e80&gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_179_1.png" /></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../../Clustering/Kmeans/Kmeans/" class="btn btn-neutral float-right" title="Kmeans Clustering">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../Ensamble/ensamble/" class="btn btn-neutral" title="Ensamble Methods"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../Ensamble/ensamble/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../../Clustering/Kmeans/Kmeans/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../../../..';</script>
+    <script src="../../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../../../search/main.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../../../img/favicon.ico">
+  <title>Kmeans Clustering - Machine Learning</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Kmeans Clustering";
+    var mkdocs_page_input_path = "ml/Clustering/Kmeans/Kmeans.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../../.." class="icon icon-home"> Machine Learning</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="tocbase current">
+    
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../..">Home</a>
+  </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Machine Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../LinearModels/Linear-models/">Linear Regression</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Classifiers/Logistic/Logistic/">Logistic Regression</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Classifiers/Tree/Tree/">Decision Tree</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Classifiers/Ensamble/ensamble/">Ensamble Methods</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Classifiers/SVM/svm/">Support Vector Machine</a>
+  </li>
+        
+          
+
+
+  
+    
+    <li class="navtree toctree-l2 page current">
+      <a class="current" href="./">
+        Kmeans Clustering
+          <span class="toctree-expand"></span>
+      </a>
+    </li>
+    
+      
+
+  <li class="toctree-l2 current with-children">
+    <a href="#k-means-clustering">
+      K-Means Clustering
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2 current">
+    <ul class="subnav-l2 current">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#1-k-means-clustering">1. K-means Clustering</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#2-demonstration-of-k-means-assumptions">2. Demonstration of k-means assumptions</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#3-a-demo-of-k-means-clustering-on-the-handwritten-digits-data">3. A demo of K-Means clustering on the handwritten digits data</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#7-selecting-the-number-of-clusters-with-silhouette-analysis-on-kmeans-clustering">7. Selecting the number of clusters with silhouette analysis on KMeans clustering</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#8-empirical-evaluation-of-the-impact-of-k-means-initialization">8. Empirical evaluation of the impact of k-means initialization</a>
+        </li>
+    
+    </ul>
+  </li>
+
+
+  
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Agglomerative/Agglomerative/">Agglomerative Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../AffinityPropagation/Affinity-Propagation/">Affinity Propagation</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Spectral/Spectral/">Spectral Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../DBSCAN/DBSCAN/">DBSCAN Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../MeanShift/Mean-shift/">Mean Shift Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Comparison/Comparison/">Cluster Comparison</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">ML Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/boston_housing/boston_housing/">Boston Housing</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/Customer_segments/customer_segments/">Customer Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/finding_donors/finding_donors/">Finding Donors</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/vehicle-detection/CARND-Project-5/">Vehicle Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/perceptron/dlnd-your-first-neural-network/">Perceptron</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Deep Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/Vanila/1.Vanila-LSTM/">Vanila LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/stacked/2.Stacked-LSTM/">Stacked LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/bidirectional/5. BiDirectional-LSTM/">Bidirectional LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/rnn/RNN_project/">Recurrent Neural Network</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">DL Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/NMIST/NMIST/">Digit Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/CIFRT10/CIFR10/">Image Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/traffic-sign/Traffic_Sign_Classifier/">Traffic Sign Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/translator/dlnd_language_translation/">Language Translator</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Rinforcement Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../rl/smartcab/smartcab/">SmartCab</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">GAN Project</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/gan/dlnd_face_generation/">Face Generation</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../../References/ref.md">References</a>
+  </li>
+    
+  </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../..">Machine Learning</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Machine Learning &raquo;</li>
+        
+      
+    
+    <li>Kmeans Clustering</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="k-means-clustering">K-Means Clustering</h2>
+<hr />
+<p><strong><em>These codes are imported from Scikit-Learn python package for learning purpose</em></strong></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">seaborn</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">sns</span>
+<span style="color: #555555">%</span>matplotlib inline
+sns<span style="color: #555555">.</span>set()
+</pre></div>
+
+
+<h3 id="1-k-means-clustering">1. K-means Clustering</h3>
+<p>The plots display firstly what a <code>K-means algorithm</code> would yield
+using three clusters. It is then shown what the effect of a bad
+initialization is on the classification process:</p>
+<ul>
+<li>
+<p>By setting <code>n_init</code> to only 1 (default is 10), the amount oftimes that the algorithm will be run with different centroid seeds is reduced.</p>
+</li>
+<li>
+<p>The next plot displays what using eight clusters would deliver and finally the ground truth.</p>
+</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">mpl_toolkits.mplot3d</span> <span style="color: #006699; font-weight: bold">import</span> Axes3D
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.cluster</span> <span style="color: #006699; font-weight: bold">import</span> KMeans
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn</span> <span style="color: #006699; font-weight: bold">import</span> datasets
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>seed(<span style="color: #FF6600">5</span>)
+centers <span style="color: #555555">=</span> [[<span style="color: #FF6600">1</span>, <span style="color: #FF6600">1</span>], [<span style="color: #555555">-</span><span style="color: #FF6600">1</span>, <span style="color: #555555">-</span><span style="color: #FF6600">1</span>], [<span style="color: #FF6600">1</span>, <span style="color: #555555">-</span><span style="color: #FF6600">1</span>]]
+iris <span style="color: #555555">=</span> datasets<span style="color: #555555">.</span>load_iris()
+X <span style="color: #555555">=</span> iris<span style="color: #555555">.</span>data
+y <span style="color: #555555">=</span> iris<span style="color: #555555">.</span>target
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>estimators <span style="color: #555555">=</span> {<span style="color: #CC3300">&#39;k_means_iris_3&#39;</span>: KMeans(n_clusters<span style="color: #555555">=</span><span style="color: #FF6600">3</span>),
+              <span style="color: #CC3300">&#39;k_means_iris_8&#39;</span>: KMeans(n_clusters<span style="color: #555555">=</span><span style="color: #FF6600">8</span>),
+              <span style="color: #CC3300">&#39;k_means_iris_bad_init&#39;</span>: KMeans(n_clusters<span style="color: #555555">=</span><span style="color: #FF6600">3</span>, n_init<span style="color: #555555">=</span><span style="color: #FF6600">1</span>,
+                                              init<span style="color: #555555">=</span><span style="color: #CC3300">&#39;random&#39;</span>)}
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>fignum <span style="color: #555555">=</span> <span style="color: #FF6600">1</span>
+<span style="color: #006699; font-weight: bold">for</span> name, est <span style="color: #000000; font-weight: bold">in</span> estimators<span style="color: #555555">.</span>items():
+    fig <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>figure(fignum, figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">8</span>, <span style="color: #FF6600">6</span>))
+    plt<span style="color: #555555">.</span>clf()
+    ax <span style="color: #555555">=</span> Axes3D(fig, rect<span style="color: #555555">=</span>[<span style="color: #FF6600">0</span>, <span style="color: #FF6600">0</span>, <span style="color: #555555">.</span><span style="color: #FF6600">95</span>, <span style="color: #FF6600">1</span>], elev<span style="color: #555555">=</span><span style="color: #FF6600">48</span>, azim<span style="color: #555555">=</span><span style="color: #FF6600">134</span>)
+
+    plt<span style="color: #555555">.</span>cla()
+    est<span style="color: #555555">.</span>fit(X)
+    labels <span style="color: #555555">=</span> est<span style="color: #555555">.</span>labels_
+
+    ax<span style="color: #555555">.</span>scatter(X[:, <span style="color: #FF6600">3</span>], X[:, <span style="color: #FF6600">0</span>], X[:, <span style="color: #FF6600">2</span>], c<span style="color: #555555">=</span>labels<span style="color: #555555">.</span>astype(np<span style="color: #555555">.</span>float))
+
+    ax<span style="color: #555555">.</span>w_xaxis<span style="color: #555555">.</span>set_ticklabels([])
+    ax<span style="color: #555555">.</span>w_yaxis<span style="color: #555555">.</span>set_ticklabels([])
+    ax<span style="color: #555555">.</span>w_zaxis<span style="color: #555555">.</span>set_ticklabels([])
+    ax<span style="color: #555555">.</span>set_xlabel(<span style="color: #CC3300">&#39;Petal width&#39;</span>)
+    ax<span style="color: #555555">.</span>set_ylabel(<span style="color: #CC3300">&#39;Sepal length&#39;</span>)
+    ax<span style="color: #555555">.</span>set_zlabel(<span style="color: #CC3300">&#39;Petal length&#39;</span>)
+    fignum <span style="color: #555555">=</span> fignum <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>
+
+
+<span style="color: #0099FF; font-style: italic"># Plot the ground truth</span>
+fig <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>figure(fignum, figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">8</span>, <span style="color: #FF6600">6</span>))
+plt<span style="color: #555555">.</span>clf()
+ax <span style="color: #555555">=</span> Axes3D(fig, rect<span style="color: #555555">=</span>[<span style="color: #FF6600">0</span>, <span style="color: #FF6600">0</span>, <span style="color: #555555">.</span><span style="color: #FF6600">95</span>, <span style="color: #FF6600">1</span>], elev<span style="color: #555555">=</span><span style="color: #FF6600">48</span>, azim<span style="color: #555555">=</span><span style="color: #FF6600">134</span>)
+
+plt<span style="color: #555555">.</span>cla()
+
+<span style="color: #006699; font-weight: bold">for</span> name, label <span style="color: #000000; font-weight: bold">in</span> [(<span style="color: #CC3300">&#39;Setosa&#39;</span>, <span style="color: #FF6600">0</span>),
+                    (<span style="color: #CC3300">&#39;Versicolour&#39;</span>, <span style="color: #FF6600">1</span>),
+                    (<span style="color: #CC3300">&#39;Virginica&#39;</span>, <span style="color: #FF6600">2</span>)]:
+
+    ax<span style="color: #555555">.</span>text3D(X[y <span style="color: #555555">==</span> label, <span style="color: #FF6600">3</span>]<span style="color: #555555">.</span>mean(),
+              X[y <span style="color: #555555">==</span> label, <span style="color: #FF6600">0</span>]<span style="color: #555555">.</span>mean() <span style="color: #555555">+</span> <span style="color: #FF6600">1.5</span>,
+              X[y <span style="color: #555555">==</span> label, <span style="color: #FF6600">2</span>]<span style="color: #555555">.</span>mean(), name,
+              horizontalalignment<span style="color: #555555">=</span><span style="color: #CC3300">&#39;center&#39;</span>,
+              bbox<span style="color: #555555">=</span><span style="color: #336666">dict</span>(alpha<span style="color: #555555">=.</span><span style="color: #FF6600">5</span>, edgecolor<span style="color: #555555">=</span><span style="color: #CC3300">&#39;w&#39;</span>, facecolor<span style="color: #555555">=</span><span style="color: #CC3300">&#39;w&#39;</span>))
+
+
+<span style="color: #0099FF; font-style: italic"># Reorder the labels to have colors matching the cluster results</span>
+y <span style="color: #555555">=</span> np<span style="color: #555555">.</span>choose(y, [<span style="color: #FF6600">1</span>, <span style="color: #FF6600">2</span>, <span style="color: #FF6600">0</span>])<span style="color: #555555">.</span>astype(np<span style="color: #555555">.</span>float)
+ax<span style="color: #555555">.</span>scatter(X[:, <span style="color: #FF6600">3</span>], X[:, <span style="color: #FF6600">0</span>], X[:, <span style="color: #FF6600">2</span>], c<span style="color: #555555">=</span>y)
+
+ax<span style="color: #555555">.</span>w_xaxis<span style="color: #555555">.</span>set_ticklabels([])
+ax<span style="color: #555555">.</span>w_yaxis<span style="color: #555555">.</span>set_ticklabels([])
+ax<span style="color: #555555">.</span>w_zaxis<span style="color: #555555">.</span>set_ticklabels([])
+ax<span style="color: #555555">.</span>set_xlabel(<span style="color: #CC3300">&#39;Petal width&#39;</span>)
+ax<span style="color: #555555">.</span>set_ylabel(<span style="color: #CC3300">&#39;Sepal length&#39;</span>)
+ax<span style="color: #555555">.</span>set_zlabel(<span style="color: #CC3300">&#39;Petal length&#39;</span>)
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_9_0.png" /></p>
+<p><img alt="png" src="../output_9_1.png" /></p>
+<p><img alt="png" src="../output_9_2.png" /></p>
+<p><img alt="png" src="../output_9_3.png" /></p>
+<hr />
+<h3 id="2-demonstration-of-k-means-assumptions">2. Demonstration of k-means assumptions</h3>
+<p>This example is meant to illustrate situations where <code>k-means</code> will produce
+unintuitive and possibly unexpected clusters. In the first three plots, the
+input data does not conform to some implicit assumption that <code>k-means</code> makes and
+undesirable clusters are produced as a result. In the last plot, <code>k-means</code>
+returns intuitive clusters despite unevenly sized blobs.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.cluster</span> <span style="color: #006699; font-weight: bold">import</span> KMeans
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.datasets</span> <span style="color: #006699; font-weight: bold">import</span> make_blobs
+</pre></div>
+
+
+<p>#### Model and Plot</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>plt<span style="color: #555555">.</span>figure(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">15</span>, <span style="color: #FF6600">12</span>))
+
+n_samples <span style="color: #555555">=</span> <span style="color: #FF6600">1500</span>
+random_state <span style="color: #555555">=</span> <span style="color: #FF6600">170</span>
+X, y <span style="color: #555555">=</span> make_blobs(n_samples<span style="color: #555555">=</span>n_samples, random_state<span style="color: #555555">=</span>random_state)
+
+<span style="color: #0099FF; font-style: italic"># Incorrect number of clusters</span>
+y_pred <span style="color: #555555">=</span> KMeans(n_clusters<span style="color: #555555">=</span><span style="color: #FF6600">2</span>, random_state<span style="color: #555555">=</span>random_state)<span style="color: #555555">.</span>fit_predict(X)
+
+plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">221</span>)
+plt<span style="color: #555555">.</span>scatter(X[:, <span style="color: #FF6600">0</span>], X[:, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span>y_pred)
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&quot;Incorrect Number of Blobs&quot;</span>)
+
+<span style="color: #0099FF; font-style: italic"># Anisotropicly distributed data</span>
+transformation <span style="color: #555555">=</span> [[ <span style="color: #FF6600">0.60834549</span>, <span style="color: #555555">-</span><span style="color: #FF6600">0.63667341</span>], [<span style="color: #555555">-</span><span style="color: #FF6600">0.40887718</span>, <span style="color: #FF6600">0.85253229</span>]]
+X_aniso <span style="color: #555555">=</span> np<span style="color: #555555">.</span>dot(X, transformation)
+y_pred <span style="color: #555555">=</span> KMeans(n_clusters<span style="color: #555555">=</span><span style="color: #FF6600">3</span>, random_state<span style="color: #555555">=</span>random_state)<span style="color: #555555">.</span>fit_predict(X_aniso)
+
+plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">222</span>)
+plt<span style="color: #555555">.</span>scatter(X_aniso[:, <span style="color: #FF6600">0</span>], X_aniso[:, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span>y_pred)
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&quot;Anisotropicly Distributed Blobs&quot;</span>)
+
+<span style="color: #0099FF; font-style: italic"># Different variance</span>
+X_varied, y_varied <span style="color: #555555">=</span> make_blobs(n_samples<span style="color: #555555">=</span>n_samples,
+                                cluster_std<span style="color: #555555">=</span>[<span style="color: #FF6600">1.0</span>, <span style="color: #FF6600">2.5</span>, <span style="color: #FF6600">0.5</span>],
+                                random_state<span style="color: #555555">=</span>random_state)
+y_pred <span style="color: #555555">=</span> KMeans(n_clusters<span style="color: #555555">=</span><span style="color: #FF6600">3</span>, random_state<span style="color: #555555">=</span>random_state)<span style="color: #555555">.</span>fit_predict(X_varied)
+
+plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">223</span>)
+plt<span style="color: #555555">.</span>scatter(X_varied[:, <span style="color: #FF6600">0</span>], X_varied[:, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span>y_pred)
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&quot;Unequal Variance&quot;</span>)
+
+<span style="color: #0099FF; font-style: italic"># Unevenly sized blobs</span>
+X_filtered <span style="color: #555555">=</span> np<span style="color: #555555">.</span>vstack((X[y <span style="color: #555555">==</span> <span style="color: #FF6600">0</span>][:<span style="color: #FF6600">500</span>], X[y <span style="color: #555555">==</span> <span style="color: #FF6600">1</span>][:<span style="color: #FF6600">100</span>], X[y <span style="color: #555555">==</span> <span style="color: #FF6600">2</span>][:<span style="color: #FF6600">10</span>]))
+y_pred <span style="color: #555555">=</span> KMeans(n_clusters<span style="color: #555555">=</span><span style="color: #FF6600">3</span>, random_state<span style="color: #555555">=</span>random_state)<span style="color: #555555">.</span>fit_predict(X_filtered)
+
+plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">224</span>)
+plt<span style="color: #555555">.</span>scatter(X_filtered[:, <span style="color: #FF6600">0</span>], X_filtered[:, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span>y_pred)
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&quot;Unevenly Sized Blobs&quot;</span>)
+
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_15_0.png" /></p>
+<h3 id="3-a-demo-of-k-means-clustering-on-the-handwritten-digits-data">3. A demo of K-Means clustering on the handwritten digits data</h3>
+<p>In this example we compare the various initialization strategies for
+<code>K-means</code> in terms of runtime and quality of the results.</p>
+<p>As the ground truth is known here, we also apply different cluster
+quality metrics to judge the goodness of fit of the cluster labels to the
+ground truth.</p>
+<p>Cluster quality metrics evaluated (see :ref:<code>clustering_evaluation</code> for
+definitions and discussions of the metrics):</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>homo         homogeneity score
+compl        completeness score
+v-meas       V measure
+ARI          adjusted Rand index
+AMI          adjusted mutual information
+silhouette   silhouette coefficient
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">time</span> <span style="color: #006699; font-weight: bold">import</span> time
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn</span> <span style="color: #006699; font-weight: bold">import</span> metrics
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.cluster</span> <span style="color: #006699; font-weight: bold">import</span> KMeans
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.datasets</span> <span style="color: #006699; font-weight: bold">import</span> load_digits
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.decomposition</span> <span style="color: #006699; font-weight: bold">import</span> PCA
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.preprocessing</span> <span style="color: #006699; font-weight: bold">import</span> scale
+</pre></div>
+
+
+<p>#### Data</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>seed(<span style="color: #FF6600">42</span>)
+
+digits <span style="color: #555555">=</span> load_digits()
+data <span style="color: #555555">=</span> scale(digits<span style="color: #555555">.</span>data)
+
+n_samples, n_features <span style="color: #555555">=</span> data<span style="color: #555555">.</span>shape
+n_digits <span style="color: #555555">=</span> <span style="color: #336666">len</span>(np<span style="color: #555555">.</span>unique(digits<span style="color: #555555">.</span>target))
+labels <span style="color: #555555">=</span> digits<span style="color: #555555">.</span>target
+
+sample_size <span style="color: #555555">=</span> <span style="color: #FF6600">300</span>
+
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;n_digits: </span><span style="color: #AA0000">%d</span><span style="color: #CC3300">, </span><span style="color: #CC3300; font-weight: bold">\t</span><span style="color: #CC3300"> n_samples </span><span style="color: #AA0000">%d</span><span style="color: #CC3300">, </span><span style="color: #CC3300; font-weight: bold">\t</span><span style="color: #CC3300"> n_features </span><span style="color: #AA0000">%d</span><span style="color: #CC3300">&quot;</span>
+      <span style="color: #555555">%</span> (n_digits, n_samples, n_features))
+
+
+<span style="color: #336666">print</span>(<span style="color: #FF6600">79</span> <span style="color: #555555">*</span> <span style="color: #CC3300">&#39;_&#39;</span>)
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&#39;</span><span style="color: #AA0000">% 9s</span><span style="color: #CC3300">&#39;</span> <span style="color: #555555">%</span> <span style="color: #CC3300">&#39;init&#39;</span>
+      <span style="color: #CC3300">&#39;    time  inertia    homo   compl  v-meas     ARI AMI  silhouette&#39;</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>n_digits: 10,    n_samples 1797,     n_features 64
+_______________________________________________________________________________
+init    time  inertia    homo   compl  v-meas     ARI AMI  silhouette
+</pre></div>
+
+
+<p>#### Model</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">bench_k_means</span>(estimator, name, data):
+    t0 <span style="color: #555555">=</span> time()
+    estimator<span style="color: #555555">.</span>fit(data)
+    <span style="color: #336666">print</span>(<span style="color: #CC3300">&#39;</span><span style="color: #AA0000">% 9s</span><span style="color: #CC3300">   </span><span style="color: #AA0000">%.2f</span><span style="color: #CC3300">s    </span><span style="color: #AA0000">%i</span><span style="color: #CC3300">   </span><span style="color: #AA0000">%.3f</span><span style="color: #CC3300">   </span><span style="color: #AA0000">%.3f</span><span style="color: #CC3300">   </span><span style="color: #AA0000">%.3f</span><span style="color: #CC3300">   </span><span style="color: #AA0000">%.3f</span><span style="color: #CC3300">   </span><span style="color: #AA0000">%.3f</span><span style="color: #CC3300">    </span><span style="color: #AA0000">%.3f</span><span style="color: #CC3300">&#39;</span>
+          <span style="color: #555555">%</span> (name, (time() <span style="color: #555555">-</span> t0), estimator<span style="color: #555555">.</span>inertia_,
+             metrics<span style="color: #555555">.</span>homogeneity_score(labels, estimator<span style="color: #555555">.</span>labels_),
+             metrics<span style="color: #555555">.</span>completeness_score(labels, estimator<span style="color: #555555">.</span>labels_),
+             metrics<span style="color: #555555">.</span>v_measure_score(labels, estimator<span style="color: #555555">.</span>labels_),
+             metrics<span style="color: #555555">.</span>adjusted_rand_score(labels, estimator<span style="color: #555555">.</span>labels_),
+             metrics<span style="color: #555555">.</span>adjusted_mutual_info_score(labels,  estimator<span style="color: #555555">.</span>labels_),
+             metrics<span style="color: #555555">.</span>silhouette_score(data, estimator<span style="color: #555555">.</span>labels_,
+                                      metric<span style="color: #555555">=</span><span style="color: #CC3300">&#39;euclidean&#39;</span>,
+                                      sample_size<span style="color: #555555">=</span>sample_size)))
+
+bench_k_means(KMeans(init<span style="color: #555555">=</span><span style="color: #CC3300">&#39;k-means++&#39;</span>, n_clusters<span style="color: #555555">=</span>n_digits, n_init<span style="color: #555555">=</span><span style="color: #FF6600">10</span>),
+              name<span style="color: #555555">=</span><span style="color: #CC3300">&quot;k-means++&quot;</span>, data<span style="color: #555555">=</span>data)
+
+bench_k_means(KMeans(init<span style="color: #555555">=</span><span style="color: #CC3300">&#39;random&#39;</span>, n_clusters<span style="color: #555555">=</span>n_digits, n_init<span style="color: #555555">=</span><span style="color: #FF6600">10</span>),
+              name<span style="color: #555555">=</span><span style="color: #CC3300">&quot;random&quot;</span>, data<span style="color: #555555">=</span>data)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>k-means++   0.27s    69510   0.610   0.657   0.633   0.481   0.629    0.129
+   random   0.24s    69907   0.633   0.674   0.653   0.518   0.649    0.131
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># in this case the seeding of the centers is deterministic, hence we run the</span>
+<span style="color: #0099FF; font-style: italic"># kmeans algorithm only once with n_init=1</span>
+pca <span style="color: #555555">=</span> PCA(n_components<span style="color: #555555">=</span>n_digits)<span style="color: #555555">.</span>fit(data)
+bench_k_means(KMeans(init<span style="color: #555555">=</span>pca<span style="color: #555555">.</span>components_, n_clusters<span style="color: #555555">=</span>n_digits, n_init<span style="color: #555555">=</span><span style="color: #FF6600">1</span>),
+              name<span style="color: #555555">=</span><span style="color: #CC3300">&quot;PCA-based&quot;</span>,
+              data<span style="color: #555555">=</span>data)
+<span style="color: #336666">print</span>(<span style="color: #FF6600">79</span> <span style="color: #555555">*</span> <span style="color: #CC3300">&#39;_&#39;</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>PCA-based   0.04s    70768   0.668   0.695   0.681   0.558   0.678    0.142
+_______________________________________________________________________________
+</pre></div>
+
+
+<p>#### Plot</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Visualize the results on PCA-reduced data</span>
+
+reduced_data <span style="color: #555555">=</span> PCA(n_components<span style="color: #555555">=</span><span style="color: #FF6600">2</span>)<span style="color: #555555">.</span>fit_transform(data)
+kmeans <span style="color: #555555">=</span> KMeans(init<span style="color: #555555">=</span><span style="color: #CC3300">&#39;k-means++&#39;</span>, n_clusters<span style="color: #555555">=</span>n_digits, n_init<span style="color: #555555">=</span><span style="color: #FF6600">10</span>)
+kmeans<span style="color: #555555">.</span>fit(reduced_data)
+
+<span style="color: #0099FF; font-style: italic"># Step size of the mesh. Decrease to increase the quality of the VQ.</span>
+h <span style="color: #555555">=</span> <span style="color: #555555">.</span><span style="color: #FF6600">02</span>     <span style="color: #0099FF; font-style: italic"># point in the mesh [x_min, m_max]x[y_min, y_max].</span>
+
+<span style="color: #0099FF; font-style: italic"># Plot the decision boundary. For that, we will assign a color to each</span>
+x_min, x_max <span style="color: #555555">=</span> reduced_data[:, <span style="color: #FF6600">0</span>]<span style="color: #555555">.</span>min() <span style="color: #555555">-</span> <span style="color: #FF6600">1</span>, reduced_data[:, <span style="color: #FF6600">0</span>]<span style="color: #555555">.</span>max() <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>
+y_min, y_max <span style="color: #555555">=</span> reduced_data[:, <span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>min() <span style="color: #555555">-</span> <span style="color: #FF6600">1</span>, reduced_data[:, <span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>max() <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>
+xx, yy <span style="color: #555555">=</span> np<span style="color: #555555">.</span>meshgrid(np<span style="color: #555555">.</span>arange(x_min, x_max, h), np<span style="color: #555555">.</span>arange(y_min, y_max, h))
+
+<span style="color: #0099FF; font-style: italic"># Obtain labels for each point in mesh. Use last trained model.</span>
+Z <span style="color: #555555">=</span> kmeans<span style="color: #555555">.</span>predict(np<span style="color: #555555">.</span>c_[xx<span style="color: #555555">.</span>ravel(), yy<span style="color: #555555">.</span>ravel()])
+
+<span style="color: #0099FF; font-style: italic"># Put the result into a color plot</span>
+Z <span style="color: #555555">=</span> Z<span style="color: #555555">.</span>reshape(xx<span style="color: #555555">.</span>shape)
+plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> [<span style="color: #FF6600">10</span>,<span style="color: #FF6600">8</span>])
+plt<span style="color: #555555">.</span>clf()
+plt<span style="color: #555555">.</span>imshow(Z, interpolation<span style="color: #555555">=</span><span style="color: #CC3300">&#39;nearest&#39;</span>,
+           extent<span style="color: #555555">=</span>(xx<span style="color: #555555">.</span>min(), xx<span style="color: #555555">.</span>max(), yy<span style="color: #555555">.</span>min(), yy<span style="color: #555555">.</span>max()),
+           cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>Paired,
+           aspect<span style="color: #555555">=</span><span style="color: #CC3300">&#39;auto&#39;</span>, origin<span style="color: #555555">=</span><span style="color: #CC3300">&#39;lower&#39;</span>)
+
+plt<span style="color: #555555">.</span>plot(reduced_data[:, <span style="color: #FF6600">0</span>], reduced_data[:, <span style="color: #FF6600">1</span>], <span style="color: #CC3300">&#39;k.&#39;</span>, markersize<span style="color: #555555">=</span><span style="color: #FF6600">2</span>)
+<span style="color: #0099FF; font-style: italic"># Plot the centroids as a white X</span>
+centroids <span style="color: #555555">=</span> kmeans<span style="color: #555555">.</span>cluster_centers_
+plt<span style="color: #555555">.</span>scatter(centroids[:, <span style="color: #FF6600">0</span>], centroids[:, <span style="color: #FF6600">1</span>],
+            marker<span style="color: #555555">=</span><span style="color: #CC3300">&#39;x&#39;</span>, s<span style="color: #555555">=</span><span style="color: #FF6600">169</span>, linewidths<span style="color: #555555">=</span><span style="color: #FF6600">3</span>,
+            color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;w&#39;</span>, zorder<span style="color: #555555">=</span><span style="color: #FF6600">10</span>)
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&#39;K-means clustering on the digits dataset (PCA-reduced data)</span><span style="color: #CC3300; font-weight: bold">\n</span><span style="color: #CC3300">&#39;</span>
+          <span style="color: #CC3300">&#39;Centroids are marked with white cross&#39;</span>)
+plt<span style="color: #555555">.</span>xlim(x_min, x_max)
+plt<span style="color: #555555">.</span>ylim(y_min, y_max)
+plt<span style="color: #555555">.</span>xticks(())
+plt<span style="color: #555555">.</span>yticks(())
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_25_0.png" /></p>
+<hr />
+<h3 id="7-selecting-the-number-of-clusters-with-silhouette-analysis-on-kmeans-clustering">7. Selecting the number of clusters with silhouette analysis on KMeans clustering</h3>
+<hr />
+<p>Silhouette analysis can be used to study the separation distance between the
+resulting clusters. The silhouette plot displays a measure of how close each
+point in one cluster is to points in the neighboring clusters and thus provides
+a way to assess parameters like number of clusters visually. This measure has a
+range of [-1, 1].</p>
+<p>Silhouette coefficients (as these values are referred to as) near +1 indicate
+that the sample is far away from the neighboring clusters. A value of 0
+indicates that the sample is on or very close to the decision boundary between
+two neighboring clusters and negative values indicate that those samples might
+have been assigned to the wrong cluster.</p>
+<p>In this example the silhouette analysis is used to choose an optimal value for
+<code>n_clusters</code>. The silhouette plot shows that the <code>n_clusters</code> value of 3, 5
+and 6 are a bad pick for the given data due to the presence of clusters with
+below average silhouette scores and also due to wide fluctuations in the size
+of the silhouette plots. Silhouette analysis is more ambivalent in deciding
+between 2 and 4.</p>
+<p>Also from the thickness of the silhouette plot the cluster size can be
+visualized. The silhouette plot for cluster 0 when <code>n_clusters</code> is equal to
+2, is bigger in size owing to the grouping of the 3 sub clusters into one big
+cluster. However when the <code>n_clusters</code> is equal to 4, all the plots are more
+or less of similar thickness and hence are of similar sizes as can be also
+verified from the labelled scatter plot on the right.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">__future__</span> <span style="color: #006699; font-weight: bold">import</span> print_function
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.datasets</span> <span style="color: #006699; font-weight: bold">import</span> make_blobs
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.cluster</span> <span style="color: #006699; font-weight: bold">import</span> KMeans
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.metrics</span> <span style="color: #006699; font-weight: bold">import</span> silhouette_samples, silhouette_score
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.cm</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">cm</span>
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Generating the sample data from make_blobs</span>
+<span style="color: #0099FF; font-style: italic"># This particular setting has one distinct cluster and 3 clusters placed close</span>
+<span style="color: #0099FF; font-style: italic"># together.</span>
+X, y <span style="color: #555555">=</span> make_blobs(n_samples<span style="color: #555555">=</span><span style="color: #FF6600">500</span>,
+                  n_features<span style="color: #555555">=</span><span style="color: #FF6600">2</span>,
+                  centers<span style="color: #555555">=</span><span style="color: #FF6600">4</span>,
+                  cluster_std<span style="color: #555555">=</span><span style="color: #FF6600">1</span>,
+                  center_box<span style="color: #555555">=</span>(<span style="color: #555555">-</span><span style="color: #FF6600">10.0</span>, <span style="color: #FF6600">10.0</span>),
+                  shuffle<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>,
+                  random_state<span style="color: #555555">=</span><span style="color: #FF6600">1</span>)  <span style="color: #0099FF; font-style: italic"># For reproducibility</span>
+
+range_n_clusters <span style="color: #555555">=</span> [<span style="color: #FF6600">2</span>, <span style="color: #FF6600">3</span>, <span style="color: #FF6600">4</span>, <span style="color: #FF6600">5</span>, <span style="color: #FF6600">6</span>]
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>cmap <span style="color: #555555">=</span> cm<span style="color: #555555">.</span>get_cmap(<span style="color: #CC3300">&quot;Spectral&quot;</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">for</span> n_clusters <span style="color: #000000; font-weight: bold">in</span> range_n_clusters:
+    <span style="color: #0099FF; font-style: italic"># Create a subplot with 1 row and 2 columns</span>
+    fig, (ax1, ax2) <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>subplots(<span style="color: #FF6600">1</span>, <span style="color: #FF6600">2</span>)
+    fig<span style="color: #555555">.</span>set_size_inches(<span style="color: #FF6600">18</span>, <span style="color: #FF6600">7</span>)
+
+    <span style="color: #0099FF; font-style: italic"># The 1st subplot is the silhouette plot</span>
+    <span style="color: #0099FF; font-style: italic"># The silhouette coefficient can range from -1, 1 but in this example all</span>
+    <span style="color: #0099FF; font-style: italic"># lie within [-0.1, 1]</span>
+    ax1<span style="color: #555555">.</span>set_xlim([<span style="color: #555555">-</span><span style="color: #FF6600">0.1</span>, <span style="color: #FF6600">1</span>])
+    <span style="color: #0099FF; font-style: italic"># The (n_clusters+1)*10 is for inserting blank space between silhouette</span>
+    <span style="color: #0099FF; font-style: italic"># plots of individual clusters, to demarcate them clearly.</span>
+    ax1<span style="color: #555555">.</span>set_ylim([<span style="color: #FF6600">0</span>, <span style="color: #336666">len</span>(X) <span style="color: #555555">+</span> (n_clusters <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>) <span style="color: #555555">*</span> <span style="color: #FF6600">10</span>])
+
+    <span style="color: #0099FF; font-style: italic"># Initialize the clusterer with n_clusters value and a random generator</span>
+    <span style="color: #0099FF; font-style: italic"># seed of 10 for reproducibility.</span>
+    clusterer <span style="color: #555555">=</span> KMeans(n_clusters<span style="color: #555555">=</span>n_clusters, random_state<span style="color: #555555">=</span><span style="color: #FF6600">10</span>)
+    cluster_labels <span style="color: #555555">=</span> clusterer<span style="color: #555555">.</span>fit_predict(X)
+
+    <span style="color: #0099FF; font-style: italic"># The silhouette_score gives the average value for all the samples.</span>
+    <span style="color: #0099FF; font-style: italic"># This gives a perspective into the density and separation of the formed</span>
+    <span style="color: #0099FF; font-style: italic"># clusters</span>
+    silhouette_avg <span style="color: #555555">=</span> silhouette_score(X, cluster_labels)
+    <span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;For n_clusters =&quot;</span>, n_clusters,
+          <span style="color: #CC3300">&quot;The average silhouette_score is :&quot;</span>, silhouette_avg)
+
+    <span style="color: #0099FF; font-style: italic"># Compute the silhouette scores for each sample</span>
+    sample_silhouette_values <span style="color: #555555">=</span> silhouette_samples(X, cluster_labels)
+
+    y_lower <span style="color: #555555">=</span> <span style="color: #FF6600">10</span>
+    <span style="color: #006699; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(n_clusters):
+        <span style="color: #0099FF; font-style: italic"># Aggregate the silhouette scores for samples belonging to</span>
+        <span style="color: #0099FF; font-style: italic"># cluster i, and sort them</span>
+        ith_cluster_silhouette_values <span style="color: #555555">=</span> \
+            sample_silhouette_values[cluster_labels <span style="color: #555555">==</span> i]
+
+        ith_cluster_silhouette_values<span style="color: #555555">.</span>sort()
+
+        size_cluster_i <span style="color: #555555">=</span> ith_cluster_silhouette_values<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>]
+        y_upper <span style="color: #555555">=</span> y_lower <span style="color: #555555">+</span> size_cluster_i
+        color <span style="color: #555555">=</span> cmap(<span style="color: #336666">float</span>(i) <span style="color: #555555">/</span> n_clusters)
+        ax1<span style="color: #555555">.</span>fill_betweenx(np<span style="color: #555555">.</span>arange(y_lower, y_upper),
+                          <span style="color: #FF6600">0</span>, ith_cluster_silhouette_values,
+                          facecolor<span style="color: #555555">=</span>color, edgecolor<span style="color: #555555">=</span>color, alpha<span style="color: #555555">=</span><span style="color: #FF6600">0.7</span>)
+
+        <span style="color: #0099FF; font-style: italic"># Label the silhouette plots with their cluster numbers at the middle</span>
+        ax1<span style="color: #555555">.</span>text(<span style="color: #555555">-</span><span style="color: #FF6600">0.05</span>, y_lower <span style="color: #555555">+</span> <span style="color: #FF6600">0.5</span> <span style="color: #555555">*</span> size_cluster_i, <span style="color: #336666">str</span>(i))
+
+        <span style="color: #0099FF; font-style: italic"># Compute the new y_lower for next plot</span>
+        y_lower <span style="color: #555555">=</span> y_upper <span style="color: #555555">+</span> <span style="color: #FF6600">10</span>  <span style="color: #0099FF; font-style: italic"># 10 for the 0 samples</span>
+
+    ax1<span style="color: #555555">.</span>set_title(<span style="color: #CC3300">&quot;The silhouette plot for the various clusters.&quot;</span>)
+    ax1<span style="color: #555555">.</span>set_xlabel(<span style="color: #CC3300">&quot;The silhouette coefficient values&quot;</span>)
+    ax1<span style="color: #555555">.</span>set_ylabel(<span style="color: #CC3300">&quot;Cluster label&quot;</span>)
+
+    <span style="color: #0099FF; font-style: italic"># The vertical line for average silhouette score of all the values</span>
+    ax1<span style="color: #555555">.</span>axvline(x<span style="color: #555555">=</span>silhouette_avg, color<span style="color: #555555">=</span><span style="color: #CC3300">&quot;red&quot;</span>, linestyle<span style="color: #555555">=</span><span style="color: #CC3300">&quot;--&quot;</span>)
+
+    ax1<span style="color: #555555">.</span>set_yticks([])  <span style="color: #0099FF; font-style: italic"># Clear the yaxis labels / ticks</span>
+    ax1<span style="color: #555555">.</span>set_xticks([<span style="color: #555555">-</span><span style="color: #FF6600">0.1</span>, <span style="color: #FF6600">0</span>, <span style="color: #FF6600">0.2</span>, <span style="color: #FF6600">0.4</span>, <span style="color: #FF6600">0.6</span>, <span style="color: #FF6600">0.8</span>, <span style="color: #FF6600">1</span>])
+
+    <span style="color: #0099FF; font-style: italic"># 2nd Plot showing the actual clusters formed</span>
+    colors <span style="color: #555555">=</span> cmap(cluster_labels<span style="color: #555555">.</span>astype(<span style="color: #336666">float</span>) <span style="color: #555555">/</span> n_clusters)
+    ax2<span style="color: #555555">.</span>scatter(X[:, <span style="color: #FF6600">0</span>], X[:, <span style="color: #FF6600">1</span>], marker<span style="color: #555555">=</span><span style="color: #CC3300">&#39;.&#39;</span>, s<span style="color: #555555">=</span><span style="color: #FF6600">30</span>, lw<span style="color: #555555">=</span><span style="color: #FF6600">0</span>, alpha<span style="color: #555555">=</span><span style="color: #FF6600">0.7</span>,
+                c<span style="color: #555555">=</span>colors)
+
+    <span style="color: #0099FF; font-style: italic"># Labeling the clusters</span>
+    centers <span style="color: #555555">=</span> clusterer<span style="color: #555555">.</span>cluster_centers_
+    <span style="color: #0099FF; font-style: italic"># Draw white circles at cluster centers</span>
+    ax2<span style="color: #555555">.</span>scatter(centers[:, <span style="color: #FF6600">0</span>], centers[:, <span style="color: #FF6600">1</span>],
+                marker<span style="color: #555555">=</span><span style="color: #CC3300">&#39;o&#39;</span>, c<span style="color: #555555">=</span><span style="color: #CC3300">&quot;white&quot;</span>, alpha<span style="color: #555555">=</span><span style="color: #FF6600">1</span>, s<span style="color: #555555">=</span><span style="color: #FF6600">200</span>)
+
+    <span style="color: #006699; font-weight: bold">for</span> i, c <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>(centers):
+        ax2<span style="color: #555555">.</span>scatter(c[<span style="color: #FF6600">0</span>], c[<span style="color: #FF6600">1</span>], marker<span style="color: #555555">=</span><span style="color: #CC3300">&#39;$</span><span style="color: #AA0000">%d</span><span style="color: #CC3300">$&#39;</span> <span style="color: #555555">%</span> i, alpha<span style="color: #555555">=</span><span style="color: #FF6600">1</span>, s<span style="color: #555555">=</span><span style="color: #FF6600">50</span>)
+
+    ax2<span style="color: #555555">.</span>set_title(<span style="color: #CC3300">&quot;The visualization of the clustered data.&quot;</span>)
+    ax2<span style="color: #555555">.</span>set_xlabel(<span style="color: #CC3300">&quot;Feature space for the 1st feature&quot;</span>)
+    ax2<span style="color: #555555">.</span>set_ylabel(<span style="color: #CC3300">&quot;Feature space for the 2nd feature&quot;</span>)
+
+    plt<span style="color: #555555">.</span>suptitle((<span style="color: #CC3300">&quot;Silhouette analysis for KMeans clustering on sample data &quot;</span>
+                  <span style="color: #CC3300">&quot;with n_clusters = </span><span style="color: #AA0000">%d</span><span style="color: #CC3300">&quot;</span> <span style="color: #555555">%</span> n_clusters),
+                 fontsize<span style="color: #555555">=</span><span style="color: #FF6600">14</span>, fontweight<span style="color: #555555">=</span><span style="color: #CC3300">&#39;bold&#39;</span>)
+
+    plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>For n_clusters = 2 The average silhouette_score is : 0.7049787496083261
+</pre></div>
+
+
+<p><img alt="png" src="../output_33_1.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>For n_clusters = 3 The average silhouette_score is : 0.5882004012129721
+</pre></div>
+
+
+<p><img alt="png" src="../output_33_3.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>For n_clusters = 4 The average silhouette_score is : 0.6505186632729437
+</pre></div>
+
+
+<p><img alt="png" src="../output_33_5.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>For n_clusters = 5 The average silhouette_score is : 0.5745566973301872
+</pre></div>
+
+
+<p><img alt="png" src="../output_33_7.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>For n_clusters = 6 The average silhouette_score is : 0.4390271118313242
+</pre></div>
+
+
+<p><img alt="png" src="../output_33_9.png" /></p>
+<hr />
+<h3 id="8-empirical-evaluation-of-the-impact-of-k-means-initialization">8. Empirical evaluation of the impact of k-means initialization</h3>
+<hr />
+<p>Evaluate the ability of k-means initializations strategies to make
+the algorithm convergence robust as measured by the relative standard
+deviation of the inertia of the clustering (i.e. the sum of distances
+to the nearest cluster center).</p>
+<p>The first plot shows the best inertia reached for each combination
+of the model (<code>KMeans</code> or <code>MiniBatchKMeans</code>) and the init method
+(<code>init="random"</code> or <code>init="kmeans++"</code>) for increasing values of the
+<code>n_init</code> parameter that controls the number of initializations.</p>
+<p>The second plot demonstrate one single run of the <code>MiniBatchKMeans</code>
+estimator using a <code>init="random"</code> and <code>n_init=1</code>. This run leads to
+a bad convergence (local optimum) with estimated centers stuck
+between ground truth clusters.</p>
+<p>The dataset used for evaluation is a 2D grid of isotropic Gaussian
+clusters widely spaced.</p>
+<ul>
+<li>Author: Olivier Grisel <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#111;&#108;&#105;&#118;&#105;&#101;&#114;&#46;&#103;&#114;&#105;&#115;&#101;&#108;&#64;&#101;&#110;&#115;&#116;&#97;&#46;&#111;&#114;&#103;">&#111;&#108;&#105;&#118;&#105;&#101;&#114;&#46;&#103;&#114;&#105;&#115;&#101;&#108;&#64;&#101;&#110;&#115;&#116;&#97;&#46;&#111;&#114;&#103;</a></li>
+<li>License: BSD 3 clause</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.cm</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">cm</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.utils</span> <span style="color: #006699; font-weight: bold">import</span> shuffle
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.utils</span> <span style="color: #006699; font-weight: bold">import</span> check_random_state
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.cluster</span> <span style="color: #006699; font-weight: bold">import</span> MiniBatchKMeans
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.cluster</span> <span style="color: #006699; font-weight: bold">import</span> KMeans
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>random_state <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>RandomState(<span style="color: #FF6600">0</span>)
+
+<span style="color: #0099FF; font-style: italic"># Number of run (with randomly generated dataset) for each strategy so as</span>
+<span style="color: #0099FF; font-style: italic"># to be able to compute an estimate of the standard deviation</span>
+n_runs <span style="color: #555555">=</span> <span style="color: #FF6600">5</span>
+
+<span style="color: #0099FF; font-style: italic"># k-means models can do several random inits so as to be able to trade</span>
+<span style="color: #0099FF; font-style: italic"># CPU time for convergence robustness</span>
+n_init_range <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array([<span style="color: #FF6600">1</span>, <span style="color: #FF6600">5</span>, <span style="color: #FF6600">10</span>, <span style="color: #FF6600">15</span>, <span style="color: #FF6600">20</span>])
+
+<span style="color: #0099FF; font-style: italic"># Datasets generation parameters</span>
+n_samples_per_center <span style="color: #555555">=</span> <span style="color: #FF6600">100</span>
+grid_size <span style="color: #555555">=</span> <span style="color: #FF6600">3</span>
+scale <span style="color: #555555">=</span> <span style="color: #FF6600">0.1</span>
+n_clusters <span style="color: #555555">=</span> grid_size <span style="color: #555555">**</span> <span style="color: #FF6600">2</span>
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">make_data</span>(random_state, n_samples_per_center, grid_size, scale):
+    random_state <span style="color: #555555">=</span> check_random_state(random_state)
+    centers <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array([[i, j]
+                        <span style="color: #006699; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(grid_size)
+                        <span style="color: #006699; font-weight: bold">for</span> j <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(grid_size)])
+    n_clusters_true, n_features <span style="color: #555555">=</span> centers<span style="color: #555555">.</span>shape
+
+    noise <span style="color: #555555">=</span> random_state<span style="color: #555555">.</span>normal(
+        scale<span style="color: #555555">=</span>scale, size<span style="color: #555555">=</span>(n_samples_per_center, centers<span style="color: #555555">.</span>shape[<span style="color: #FF6600">1</span>]))
+
+    X <span style="color: #555555">=</span> np<span style="color: #555555">.</span>concatenate([c <span style="color: #555555">+</span> noise <span style="color: #006699; font-weight: bold">for</span> c <span style="color: #000000; font-weight: bold">in</span> centers])
+    y <span style="color: #555555">=</span> np<span style="color: #555555">.</span>concatenate([[i] <span style="color: #555555">*</span> n_samples_per_center
+                        <span style="color: #006699; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(n_clusters_true)])
+    <span style="color: #006699; font-weight: bold">return</span> shuffle(X, y, random_state<span style="color: #555555">=</span>random_state)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Part 1: Quantitative evaluation of various init methods</span>
+
+fig <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> [<span style="color: #FF6600">12</span>,<span style="color: #FF6600">10</span>])
+plots <span style="color: #555555">=</span> []
+legends <span style="color: #555555">=</span> []
+
+cases <span style="color: #555555">=</span> [
+    (KMeans, <span style="color: #CC3300">&#39;k-means++&#39;</span>, {}),
+    (KMeans, <span style="color: #CC3300">&#39;random&#39;</span>, {}),
+    (MiniBatchKMeans, <span style="color: #CC3300">&#39;k-means++&#39;</span>, {<span style="color: #CC3300">&#39;max_no_improvement&#39;</span>: <span style="color: #FF6600">3</span>}),
+    (MiniBatchKMeans, <span style="color: #CC3300">&#39;random&#39;</span>, {<span style="color: #CC3300">&#39;max_no_improvement&#39;</span>: <span style="color: #FF6600">3</span>, <span style="color: #CC3300">&#39;init_size&#39;</span>: <span style="color: #FF6600">500</span>}),
+]
+
+<span style="color: #006699; font-weight: bold">for</span> factory, init, params <span style="color: #000000; font-weight: bold">in</span> cases:
+    <span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;Evaluation of </span><span style="color: #AA0000">%s</span><span style="color: #CC3300"> with </span><span style="color: #AA0000">%s</span><span style="color: #CC3300"> init&quot;</span> <span style="color: #555555">%</span> (factory<span style="color: #555555">.</span><span style="color: #003333">__name__</span>, init))
+    inertia <span style="color: #555555">=</span> np<span style="color: #555555">.</span>empty((<span style="color: #336666">len</span>(n_init_range), n_runs))
+
+    <span style="color: #006699; font-weight: bold">for</span> run_id <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(n_runs):
+        X, y <span style="color: #555555">=</span> make_data(run_id, n_samples_per_center, grid_size, scale)
+        <span style="color: #006699; font-weight: bold">for</span> i, n_init <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>(n_init_range):
+            km <span style="color: #555555">=</span> factory(n_clusters<span style="color: #555555">=</span>n_clusters, init<span style="color: #555555">=</span>init, random_state<span style="color: #555555">=</span>run_id,
+                         n_init<span style="color: #555555">=</span>n_init, <span style="color: #555555">**</span>params)<span style="color: #555555">.</span>fit(X)
+            inertia[i, run_id] <span style="color: #555555">=</span> km<span style="color: #555555">.</span>inertia_
+    p <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>errorbar(n_init_range, inertia<span style="color: #555555">.</span>mean(axis<span style="color: #555555">=</span><span style="color: #FF6600">1</span>), inertia<span style="color: #555555">.</span>std(axis<span style="color: #555555">=</span><span style="color: #FF6600">1</span>))
+    plots<span style="color: #555555">.</span>append(p[<span style="color: #FF6600">0</span>])
+    legends<span style="color: #555555">.</span>append(<span style="color: #CC3300">&quot;</span><span style="color: #AA0000">%s</span><span style="color: #CC3300"> with </span><span style="color: #AA0000">%s</span><span style="color: #CC3300"> init&quot;</span> <span style="color: #555555">%</span> (factory<span style="color: #555555">.</span><span style="color: #003333">__name__</span>, init))
+
+plt<span style="color: #555555">.</span>xlabel(<span style="color: #CC3300">&#39;n_init&#39;</span>)
+plt<span style="color: #555555">.</span>ylabel(<span style="color: #CC3300">&#39;inertia&#39;</span>)
+plt<span style="color: #555555">.</span>legend(plots, legends)
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&quot;Mean inertia for various k-means init across </span><span style="color: #AA0000">%d</span><span style="color: #CC3300"> runs&quot;</span> <span style="color: #555555">%</span> n_runs)
+
+<span style="color: #0099FF; font-style: italic"># Part 2: Qualitative visual inspection of the convergence</span>
+
+X, y <span style="color: #555555">=</span> make_data(random_state, n_samples_per_center, grid_size, scale)
+km <span style="color: #555555">=</span> MiniBatchKMeans(n_clusters<span style="color: #555555">=</span>n_clusters, init<span style="color: #555555">=</span><span style="color: #CC3300">&#39;random&#39;</span>, n_init<span style="color: #555555">=</span><span style="color: #FF6600">1</span>,
+                     random_state<span style="color: #555555">=</span>random_state)<span style="color: #555555">.</span>fit(X)
+
+fig <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> [<span style="color: #FF6600">12</span>,<span style="color: #FF6600">10</span>])
+<span style="color: #006699; font-weight: bold">for</span> k <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(n_clusters):
+    my_members <span style="color: #555555">=</span> km<span style="color: #555555">.</span>labels_ <span style="color: #555555">==</span> k
+    cmap <span style="color: #555555">=</span> cm<span style="color: #555555">.</span>get_cmap(<span style="color: #CC3300">&quot;Spectral&quot;</span>)
+    color <span style="color: #555555">=</span> cmap(<span style="color: #336666">float</span>(k) <span style="color: #555555">/</span> n_clusters, <span style="color: #FF6600">1</span>)
+    plt<span style="color: #555555">.</span>plot(X[my_members, <span style="color: #FF6600">0</span>], X[my_members, <span style="color: #FF6600">1</span>], <span style="color: #CC3300">&#39;o&#39;</span>, marker<span style="color: #555555">=</span><span style="color: #CC3300">&#39;.&#39;</span>, c<span style="color: #555555">=</span>color)
+    cluster_center <span style="color: #555555">=</span> km<span style="color: #555555">.</span>cluster_centers_[k]
+    plt<span style="color: #555555">.</span>plot(cluster_center[<span style="color: #FF6600">0</span>], cluster_center[<span style="color: #FF6600">1</span>], <span style="color: #CC3300">&#39;o&#39;</span>,
+             markerfacecolor<span style="color: #555555">=</span>color, markeredgecolor<span style="color: #555555">=</span><span style="color: #CC3300">&#39;k&#39;</span>, markersize<span style="color: #555555">=</span><span style="color: #FF6600">6</span>)
+    plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&quot;Example cluster allocation with a single random init</span><span style="color: #CC3300; font-weight: bold">\n</span><span style="color: #CC3300">&quot;</span>
+              <span style="color: #CC3300">&quot;with MiniBatchKMeans&quot;</span>)
+
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Evaluation of KMeans with k-means++ init
+Evaluation of KMeans with random init
+Evaluation of MiniBatchKMeans with k-means++ init
+Evaluation of MiniBatchKMeans with random init
+</pre></div>
+
+
+<p><img alt="png" src="../output_41_1.png" /></p>
+<p><img alt="png" src="../output_41_2.png" /></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../Agglomerative/Agglomerative/" class="btn btn-neutral float-right" title="Agglomerative Clustering">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../../Classifiers/SVM/svm/" class="btn btn-neutral" title="Support Vector Machine"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../../Classifiers/SVM/svm/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../Agglomerative/Agglomerative/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../../../..';</script>
+    <script src="../../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../../../search/main.js" defer></script>
+
+</body>
+</html>

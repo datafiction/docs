@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../../../img/favicon.ico">
+  <title>Decision Tree - Machine Learning</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Decision Tree";
+    var mkdocs_page_input_path = "ml/Classifiers/Tree/Tree.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../../.." class="icon icon-home"> Machine Learning</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="tocbase current">
+    
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../..">Home</a>
+  </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Machine Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../LinearModels/Linear-models/">Linear Regression</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Logistic/Logistic/">Logistic Regression</a>
+  </li>
+        
+          
+
+
+  
+    
+    <li class="navtree toctree-l2 page current">
+      <a class="current" href="./">
+        Decision Tree
+          <span class="toctree-expand"></span>
+      </a>
+    </li>
+    
+      
+
+
+
+  <li class="toctree-l2 current">
+    <ul class="subnav-l2 current">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#introduction">Introduction</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#iris-tree">Iris Tree</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+
+  <li class="toctree-l2">
+    <a href="#examples">
+      Examples
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2">
+    <ul class="subnav-l2 toc-hidden">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#1-plot-the-decision-surface-of-a-decision-tree-on-the-iris-dataset-source">1. Plot the decision surface of a decision tree on the iris dataset (source)</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#2-understanding-the-decision-tree-structure-source">2. Understanding the decision tree structure (source)</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#3-decision-tree-regression-source">3. Decision Tree Regression (source)</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#4-multi-output-decision-tree-regression-source">4. Multi-output Decision Tree Regression (source)</a>
+        </li>
+    
+    </ul>
+  </li>
+
+
+  
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Ensamble/ensamble/">Ensamble Methods</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../SVM/svm/">Support Vector Machine</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Clustering/Kmeans/Kmeans/">Kmeans Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Clustering/Agglomerative/Agglomerative/">Agglomerative Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Clustering/AffinityPropagation/Affinity-Propagation/">Affinity Propagation</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Clustering/Spectral/Spectral/">Spectral Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Clustering/DBSCAN/DBSCAN/">DBSCAN Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Clustering/MeanShift/Mean-shift/">Mean Shift Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Clustering/Comparison/Comparison/">Cluster Comparison</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">ML Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/boston_housing/boston_housing/">Boston Housing</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/Customer_segments/customer_segments/">Customer Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/finding_donors/finding_donors/">Finding Donors</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/vehicle-detection/CARND-Project-5/">Vehicle Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/perceptron/dlnd-your-first-neural-network/">Perceptron</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Deep Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/Vanila/1.Vanila-LSTM/">Vanila LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/stacked/2.Stacked-LSTM/">Stacked LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/bidirectional/5. BiDirectional-LSTM/">Bidirectional LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/rnn/RNN_project/">Recurrent Neural Network</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">DL Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/NMIST/NMIST/">Digit Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/CIFRT10/CIFR10/">Image Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/traffic-sign/Traffic_Sign_Classifier/">Traffic Sign Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/translator/dlnd_language_translation/">Language Translator</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Rinforcement Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../rl/smartcab/smartcab/">SmartCab</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">GAN Project</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/gan/dlnd_face_generation/">Face Generation</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../../References/ref.md">References</a>
+  </li>
+    
+  </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../..">Machine Learning</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Machine Learning &raquo;</li>
+        
+      
+    
+    <li>Decision Tree</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="decision-tree">Decision Tree</h1>
+<hr />
+<h3 id="introduction">Introduction</h3>
+<p>Decision Trees (DTs) are a non-parametric supervised learning method used for classification and regression. The goal is to create a model that predicts the value of a target variable by learning simple decision rules inferred from the data features.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn</span> <span style="color: #006699; font-weight: bold">import</span> tree
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #555555">%</span>matplotlib inline
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>X <span style="color: #555555">=</span> [[<span style="color: #FF6600">0</span>, <span style="color: #FF6600">0</span>], [<span style="color: #FF6600">1</span>, <span style="color: #FF6600">1</span>]]
+Y <span style="color: #555555">=</span> [<span style="color: #FF6600">0</span>, <span style="color: #FF6600">1</span>]
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>clf <span style="color: #555555">=</span> tree<span style="color: #555555">.</span>DecisionTreeClassifier()
+clf <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>fit(X, Y)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>clf<span style="color: #555555">.</span>predict([[<span style="color: #FF6600">2.</span>, <span style="color: #FF6600">2.</span>]])
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>array([1])
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>clf<span style="color: #555555">.</span>predict_proba([[<span style="color: #FF6600">2.</span>, <span style="color: #FF6600">2.</span>]])
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>array([[0., 1.]])
+</pre></div>
+
+
+<p>DecisionTreeClassifier is capable of both binary (where the labels are [-1, 1]) classification and multiclass (where the labels are [0, ..., K-1]) classification.</p>
+<h3 id="iris-tree">Iris Tree</h3>
+<p>Using the Iris dataset, we can construct a tree as follows:</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.datasets</span> <span style="color: #006699; font-weight: bold">import</span> load_iris
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn</span> <span style="color: #006699; font-weight: bold">import</span> tree
+iris <span style="color: #555555">=</span> load_iris()
+clf <span style="color: #555555">=</span> tree<span style="color: #555555">.</span>DecisionTreeClassifier()
+clf <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>fit(iris<span style="color: #555555">.</span>data, iris<span style="color: #555555">.</span>target)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.externals.six</span> <span style="color: #006699; font-weight: bold">import</span> StringIO 
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">with</span> <span style="color: #336666">open</span>(<span style="color: #CC3300">&quot;iris.dot&quot;</span>, <span style="color: #CC3300">&#39;w&#39;</span>) <span style="color: #006699; font-weight: bold">as</span> f:
+    f <span style="color: #555555">=</span> tree<span style="color: #555555">.</span>export_graphviz(clf, out_file<span style="color: #555555">=</span>f)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">os</span>
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>os<span style="color: #555555">.</span>unlink(<span style="color: #CC3300">&#39;iris.dot&#39;</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.externals.six</span> <span style="color: #006699; font-weight: bold">import</span> StringIO  
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">pydot</span> 
+dot_data <span style="color: #555555">=</span> StringIO() 
+tree<span style="color: #555555">.</span>export_graphviz(clf, out_file<span style="color: #555555">=</span>dot_data) 
+graph <span style="color: #555555">=</span> pydot<span style="color: #555555">.</span>graph_from_dot_data(dot_data<span style="color: #555555">.</span>getvalue()) 
+graph<span style="color: #555555">.</span>write_pdf(<span style="color: #CC3300">&quot;iris.pdf&quot;</span>) 
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">IPython.display</span> <span style="color: #006699; font-weight: bold">import</span> Image  
+dot_data <span style="color: #555555">=</span> StringIO()  
+tree<span style="color: #555555">.</span>export_graphviz(clf, out_file<span style="color: #555555">=</span>dot_data,  
+                         feature_names<span style="color: #555555">=</span>iris<span style="color: #555555">.</span>feature_names,  
+                         class_names<span style="color: #555555">=</span>iris<span style="color: #555555">.</span>target_names,  
+                         filled<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>, rounded<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>,  
+                         special_characters<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>)  
+graph <span style="color: #555555">=</span> pydot<span style="color: #555555">.</span>graph_from_dot_data(dot_data<span style="color: #555555">.</span>getvalue())  
+Image(graph<span style="color: #555555">.</span>create_png())  
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">IPython.display</span> <span style="color: #006699; font-weight: bold">import</span> Image
+Image(filename<span style="color: #555555">=</span><span style="color: #CC3300">&#39;iris.png&#39;</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>clf<span style="color: #555555">.</span>predict(iris<span style="color: #555555">.</span>data[:<span style="color: #FF6600">1</span>, :])
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>array([0])
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>clf<span style="color: #555555">.</span>predict_proba(iris<span style="color: #555555">.</span>data[:<span style="color: #FF6600">1</span>, :])
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>array([[1., 0., 0.]])
+</pre></div>
+
+
+<hr />
+<h1 id="examples">Examples</h1>
+<h3 id="1-plot-the-decision-surface-of-a-decision-tree-on-the-iris-dataset-source">1. Plot the decision surface of a decision tree on the iris dataset (<a href="https://github.com/scikit-learn/scikit-learn/tree/master/examples/tree">source</a>)</h3>
+<hr />
+<p>Plot the decision surface of a decision tree trained on pairs
+of features of the iris dataset.</p>
+<p>For each pair of iris features, the decision tree learns decision
+boundaries made of combinations of simple thresholding rules inferred from
+the training samples.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+
+<span style="color: #0099FF; font-style: italic">#=======model================</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.tree</span> <span style="color: #006699; font-weight: bold">import</span> DecisionTreeClassifier
+<span style="color: #0099FF; font-style: italic">#======= data =================================</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.datasets</span> <span style="color: #006699; font-weight: bold">import</span> load_iris
+</pre></div>
+
+
+<ul>
+<li>Data and Parameter</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Parameters</span>
+n_classes <span style="color: #555555">=</span> <span style="color: #FF6600">3</span>
+plot_colors <span style="color: #555555">=</span> <span style="color: #CC3300">&quot;bry&quot;</span>
+plot_step <span style="color: #555555">=</span> <span style="color: #FF6600">0.02</span>
+
+<span style="color: #0099FF; font-style: italic"># Load data</span>
+iris <span style="color: #555555">=</span> load_iris()
+</pre></div>
+
+
+<ul>
+<li>Plot</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">for</span> pairidx, pair <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>([[<span style="color: #FF6600">0</span>, <span style="color: #FF6600">1</span>], [<span style="color: #FF6600">0</span>, <span style="color: #FF6600">2</span>], [<span style="color: #FF6600">0</span>, <span style="color: #FF6600">3</span>],
+                                [<span style="color: #FF6600">1</span>, <span style="color: #FF6600">2</span>], [<span style="color: #FF6600">1</span>, <span style="color: #FF6600">3</span>], [<span style="color: #FF6600">2</span>, <span style="color: #FF6600">3</span>]]):
+    <span style="color: #0099FF; font-style: italic"># We only take the two corresponding features</span>
+    X <span style="color: #555555">=</span> iris<span style="color: #555555">.</span>data[:, pair]
+    y <span style="color: #555555">=</span> iris<span style="color: #555555">.</span>target
+
+    <span style="color: #0099FF; font-style: italic"># Train</span>
+    clf <span style="color: #555555">=</span> DecisionTreeClassifier()<span style="color: #555555">.</span>fit(X, y)
+
+    <span style="color: #0099FF; font-style: italic"># Plot the decision boundary</span>
+    plt<span style="color: #555555">.</span>subplot(<span style="color: #FF6600">2</span>, <span style="color: #FF6600">3</span>, pairidx <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>)
+
+    x_min, x_max <span style="color: #555555">=</span> X[:, <span style="color: #FF6600">0</span>]<span style="color: #555555">.</span>min() <span style="color: #555555">-</span> <span style="color: #FF6600">1</span>, X[:, <span style="color: #FF6600">0</span>]<span style="color: #555555">.</span>max() <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>
+    y_min, y_max <span style="color: #555555">=</span> X[:, <span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>min() <span style="color: #555555">-</span> <span style="color: #FF6600">1</span>, X[:, <span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>max() <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>
+    xx, yy <span style="color: #555555">=</span> np<span style="color: #555555">.</span>meshgrid(np<span style="color: #555555">.</span>arange(x_min, x_max, plot_step),
+                         np<span style="color: #555555">.</span>arange(y_min, y_max, plot_step))
+
+    Z <span style="color: #555555">=</span> clf<span style="color: #555555">.</span>predict(np<span style="color: #555555">.</span>c_[xx<span style="color: #555555">.</span>ravel(), yy<span style="color: #555555">.</span>ravel()])
+    Z <span style="color: #555555">=</span> Z<span style="color: #555555">.</span>reshape(xx<span style="color: #555555">.</span>shape)
+    cs <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>contourf(xx, yy, Z, cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>Paired)
+
+    plt<span style="color: #555555">.</span>xlabel(iris<span style="color: #555555">.</span>feature_names[pair[<span style="color: #FF6600">0</span>]])
+    plt<span style="color: #555555">.</span>ylabel(iris<span style="color: #555555">.</span>feature_names[pair[<span style="color: #FF6600">1</span>]])
+    plt<span style="color: #555555">.</span>axis(<span style="color: #CC3300">&quot;tight&quot;</span>)
+
+    <span style="color: #0099FF; font-style: italic"># Plot the training points</span>
+    <span style="color: #006699; font-weight: bold">for</span> i, color <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">zip</span>(<span style="color: #336666">range</span>(n_classes), plot_colors):
+        idx <span style="color: #555555">=</span> np<span style="color: #555555">.</span>where(y <span style="color: #555555">==</span> i)
+        plt<span style="color: #555555">.</span>scatter(X[idx, <span style="color: #FF6600">0</span>], X[idx, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span>color, label<span style="color: #555555">=</span>iris<span style="color: #555555">.</span>target_names[i],
+                    cmap<span style="color: #555555">=</span>plt<span style="color: #555555">.</span>cm<span style="color: #555555">.</span>Paired)
+
+    plt<span style="color: #555555">.</span>axis(<span style="color: #CC3300">&quot;tight&quot;</span>)
+
+plt<span style="color: #555555">.</span>suptitle(<span style="color: #CC3300">&quot;Decision surface of a decision tree using paired features&quot;</span>)
+plt<span style="color: #555555">.</span>legend()
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_32_0.png" /></p>
+<hr />
+<h3 id="2-understanding-the-decision-tree-structure-source">2. Understanding the decision tree structure (<a href="https://github.com/scikit-learn/scikit-learn/tree/master/examples/tree">source</a>)</h3>
+<hr />
+<p>The decision tree structure can be analysed to gain further insight on the
+relation between the features and the target to predict. In this example, we
+show how to retrieve:</p>
+<ul>
+<li>the binary tree structure;</li>
+<li>the depth of each node and whether or not it's a leaf;</li>
+<li>the nodes that were reached by a sample using the <code>decision_path</code> method;</li>
+<li>the leaf that was reached by a sample using the apply method;</li>
+<li>the rules that were used to predict a sample;</li>
+<li>the decision path shared by a group of samples.</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+
+<span style="color: #0099FF; font-style: italic">#======= preprocessing&amp; model selection============</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.model_selection</span> <span style="color: #006699; font-weight: bold">import</span> train_test_split
+
+<span style="color: #0099FF; font-style: italic">#======== model ================</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.tree</span> <span style="color: #006699; font-weight: bold">import</span> DecisionTreeClassifier
+
+<span style="color: #0099FF; font-style: italic">#========= data ==============</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.datasets</span> <span style="color: #006699; font-weight: bold">import</span> load_iris
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>iris <span style="color: #555555">=</span> load_iris()
+X <span style="color: #555555">=</span> iris<span style="color: #555555">.</span>data
+y <span style="color: #555555">=</span> iris<span style="color: #555555">.</span>target
+X_train, X_test, y_train, y_test <span style="color: #555555">=</span> train_test_split(X, y, random_state<span style="color: #555555">=</span><span style="color: #FF6600">0</span>)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>estimator <span style="color: #555555">=</span> DecisionTreeClassifier(max_leaf_nodes<span style="color: #555555">=</span><span style="color: #FF6600">3</span>, random_state<span style="color: #555555">=</span><span style="color: #FF6600">0</span>)
+estimator<span style="color: #555555">.</span>fit(X_train, y_train)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>DecisionTreeClassifier(class_weight=None, criterion=&#39;gini&#39;, max_depth=None,
+            max_features=None, max_leaf_nodes=3, min_impurity_split=1e-07,
+            min_samples_leaf=1, min_samples_split=2,
+            min_weight_fraction_leaf=0.0, presort=False, random_state=0,
+            splitter=&#39;best&#39;)
+</pre></div>
+
+
+<ul>
+<li>The decision estimator has an attribute called tree_  which stores the entire
+tree structure and allows access to low level attributes. The binary tree
+tree_ is represented as a number of parallel arrays. The i-th element of each
+array holds information about the node <code>i</code>. Node 0 is the tree's root. NOTE:
+Some of the arrays only apply to either leaves or split nodes, resp. In this
+case the values of nodes of the other type are arbitrary!*</li>
+</ul>
+<p>Among those arrays, we have:
+   - left_child, id of the left child of the node
+   - right_child, id of the right child of the node
+   - feature, feature used for splitting the node
+   - threshold, threshold value at the node</p>
+<p>Using those arrays, we can parse the tree structure:</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>n_nodes <span style="color: #555555">=</span> estimator<span style="color: #555555">.</span>tree_<span style="color: #555555">.</span>node_count
+children_left <span style="color: #555555">=</span> estimator<span style="color: #555555">.</span>tree_<span style="color: #555555">.</span>children_left
+children_right <span style="color: #555555">=</span> estimator<span style="color: #555555">.</span>tree_<span style="color: #555555">.</span>children_right
+feature <span style="color: #555555">=</span> estimator<span style="color: #555555">.</span>tree_<span style="color: #555555">.</span>feature
+threshold <span style="color: #555555">=</span> estimator<span style="color: #555555">.</span>tree_<span style="color: #555555">.</span>threshold
+</pre></div>
+
+
+<p>The tree structure can be traversed to compute various properties such
+as the depth of each node and whether or not it is a leaf.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>node_depth <span style="color: #555555">=</span> np<span style="color: #555555">.</span>zeros(shape<span style="color: #555555">=</span>n_nodes)
+is_leaves <span style="color: #555555">=</span> np<span style="color: #555555">.</span>zeros(shape<span style="color: #555555">=</span>n_nodes, dtype<span style="color: #555555">=</span><span style="color: #336666">bool</span>)
+stack <span style="color: #555555">=</span> [(<span style="color: #FF6600">0</span>, <span style="color: #555555">-</span><span style="color: #FF6600">1</span>)]  <span style="color: #0099FF; font-style: italic"># seed is the root node id and its parent depth</span>
+<span style="color: #006699; font-weight: bold">while</span> <span style="color: #336666">len</span>(stack) <span style="color: #555555">&gt;</span> <span style="color: #FF6600">0</span>:
+    node_id, parent_depth <span style="color: #555555">=</span> stack<span style="color: #555555">.</span>pop()
+    node_depth[node_id] <span style="color: #555555">=</span> parent_depth <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>
+
+    <span style="color: #0099FF; font-style: italic"># If we have a test node</span>
+    <span style="color: #006699; font-weight: bold">if</span> (children_left[node_id] <span style="color: #555555">!=</span> children_right[node_id]):
+        stack<span style="color: #555555">.</span>append((children_left[node_id], parent_depth <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>))
+        stack<span style="color: #555555">.</span>append((children_right[node_id], parent_depth <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>))
+    <span style="color: #006699; font-weight: bold">else</span>:
+        is_leaves[node_id] <span style="color: #555555">=</span> <span style="color: #006699; font-weight: bold">True</span>
+
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;The binary tree structure has </span><span style="color: #AA0000">%s</span><span style="color: #CC3300"> nodes and has &quot;</span>
+      <span style="color: #CC3300">&quot;the following tree structure:&quot;</span>
+      <span style="color: #555555">%</span> n_nodes)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>The binary tree structure has 5 nodes and has the following tree structure:
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(n_nodes):
+    <span style="color: #006699; font-weight: bold">if</span> is_leaves[i]:
+        <span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;</span><span style="color: #AA0000">%s</span><span style="color: #CC3300">node=</span><span style="color: #AA0000">%s</span><span style="color: #CC3300"> leaf node.&quot;</span> <span style="color: #555555">%</span> (node_depth[i] <span style="color: #555555">*</span> <span style="color: #CC3300">&quot;</span><span style="color: #CC3300; font-weight: bold">\t</span><span style="color: #CC3300">&quot;</span>, i))
+    <span style="color: #006699; font-weight: bold">else</span>:
+        <span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;</span><span style="color: #AA0000">%s</span><span style="color: #CC3300">node=</span><span style="color: #AA0000">%s</span><span style="color: #CC3300"> test node: go to node </span><span style="color: #AA0000">%s</span><span style="color: #CC3300"> if X[:, </span><span style="color: #AA0000">%s</span><span style="color: #CC3300">] &lt;= </span><span style="color: #AA0000">%s</span><span style="color: #CC3300">s else to &quot;</span>
+              <span style="color: #CC3300">&quot;node </span><span style="color: #AA0000">%s</span><span style="color: #CC3300">.&quot;</span>
+              <span style="color: #555555">%</span> (node_depth[i] <span style="color: #555555">*</span> <span style="color: #CC3300">&quot;</span><span style="color: #CC3300; font-weight: bold">\t</span><span style="color: #CC3300">&quot;</span>,
+                 i,
+                 children_left[i],
+                 feature[i],
+                 threshold[i],
+                 children_right[i],
+                 ))
+<span style="color: #336666">print</span>()
+</pre></div>
+
+
+<ul>
+<li>First let's retrieve the decision path of each sample. The decision_path
+method allows to retrieve the node indicator functions. A non zero element of
+indicator matrix at the position (i, j) indicates that the sample i goes
+through the node j.</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>node_indicator <span style="color: #555555">=</span> estimator<span style="color: #555555">.</span>decision_path(X_test)
+</pre></div>
+
+
+<ul>
+<li>Similarly, we can also have the leaves ids reached by each sample.</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>leave_id <span style="color: #555555">=</span> estimator<span style="color: #555555">.</span>apply(X_test)
+</pre></div>
+
+
+<ul>
+<li>Now, it's possible to get the tests that were used to predict a sample or
+a group of samples. First, let's make it for the sample.</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>sample_id <span style="color: #555555">=</span> <span style="color: #FF6600">0</span>
+node_index <span style="color: #555555">=</span> node_indicator<span style="color: #555555">.</span>indices[node_indicator<span style="color: #555555">.</span>indptr[sample_id]:
+                                    node_indicator<span style="color: #555555">.</span>indptr[sample_id <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>]]
+
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&#39;Rules used to predict sample </span><span style="color: #AA0000">%s</span><span style="color: #CC3300">: &#39;</span> <span style="color: #555555">%</span> sample_id)
+<span style="color: #006699; font-weight: bold">for</span> node_id <span style="color: #000000; font-weight: bold">in</span> node_index:
+    <span style="color: #006699; font-weight: bold">if</span> leave_id[sample_id] <span style="color: #555555">!=</span> node_id:
+        <span style="color: #006699; font-weight: bold">continue</span>
+
+    <span style="color: #006699; font-weight: bold">if</span> (X_test[sample_id, feature[node_id]] <span style="color: #555555">&lt;=</span> threshold[node_id]):
+        threshold_sign <span style="color: #555555">=</span> <span style="color: #CC3300">&quot;&lt;=&quot;</span>
+    <span style="color: #006699; font-weight: bold">else</span>:
+        threshold_sign <span style="color: #555555">=</span> <span style="color: #CC3300">&quot;&gt;&quot;</span>
+
+    <span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;decision id node </span><span style="color: #AA0000">%s</span><span style="color: #CC3300"> : (X[</span><span style="color: #AA0000">%s</span><span style="color: #CC3300">, </span><span style="color: #AA0000">%s</span><span style="color: #CC3300">] (= </span><span style="color: #AA0000">%s</span><span style="color: #CC3300">) </span><span style="color: #AA0000">%s</span><span style="color: #CC3300"> </span><span style="color: #AA0000">%s</span><span style="color: #CC3300">)&quot;</span>
+          <span style="color: #555555">%</span> (node_id,
+             sample_id,
+             feature[node_id],
+             X_test[i, feature[node_id]],
+             threshold_sign,
+             threshold[node_id]))
+
+<span style="color: #0099FF; font-style: italic"># For a group of samples, we have the following common node.</span>
+sample_ids <span style="color: #555555">=</span> [<span style="color: #FF6600">0</span>, <span style="color: #FF6600">1</span>]
+common_nodes <span style="color: #555555">=</span> (node_indicator<span style="color: #555555">.</span>toarray()[sample_ids]<span style="color: #555555">.</span>sum(axis<span style="color: #555555">=</span><span style="color: #FF6600">0</span>) <span style="color: #555555">==</span>
+                <span style="color: #336666">len</span>(sample_ids))
+
+common_node_id <span style="color: #555555">=</span> np<span style="color: #555555">.</span>arange(n_nodes)[common_nodes]
+
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;</span><span style="color: #CC3300; font-weight: bold">\n</span><span style="color: #CC3300">The following samples </span><span style="color: #AA0000">%s</span><span style="color: #CC3300"> share the node </span><span style="color: #AA0000">%s</span><span style="color: #CC3300"> in the tree&quot;</span>
+      <span style="color: #555555">%</span> (sample_ids, common_node_id))
+<span style="color: #336666">print</span>(<span style="color: #CC3300">&quot;It is </span><span style="color: #AA0000">%s</span><span style="color: #CC3300"> </span><span style="color: #AA0000">%%</span><span style="color: #CC3300"> of all nodes.&quot;</span> <span style="color: #555555">%</span> (<span style="color: #FF6600">100</span> <span style="color: #555555">*</span> <span style="color: #336666">len</span>(common_node_id) <span style="color: #555555">/</span> n_nodes,))
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>Rules used to predict sample 0: 
+decision id node 4 : (X[0, -2] (= 1.5) &gt; -2.0)
+
+The following samples [0, 1] share the node [0 2] in the tree
+It is 40.0 % of all nodes.
+</pre></div>
+
+
+<hr />
+<h3 id="3-decision-tree-regression-source">3. Decision Tree Regression (<a href="https://github.com/scikit-learn/scikit-learn/tree/master/examples/tree">source</a>)</h3>
+<hr />
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #CC3300; font-style: italic">===================================================================</span>
+<span style="color: #CC3300; font-style: italic">Decision Tree Regression</span>
+<span style="color: #CC3300; font-style: italic">===================================================================</span>
+
+<span style="color: #CC3300; font-style: italic">A 1D regression with decision tree.</span>
+
+<span style="color: #CC3300; font-style: italic">The :ref:`decision trees &lt;tree&gt;` is</span>
+<span style="color: #CC3300; font-style: italic">used to fit a sine curve with addition noisy observation. As a result, it</span>
+<span style="color: #CC3300; font-style: italic">learns local linear regressions approximating the sine curve.</span>
+
+<span style="color: #CC3300; font-style: italic">We can see that if the maximum depth of the tree (controlled by the</span>
+<span style="color: #CC3300; font-style: italic">`max_depth` parameter) is set too high, the decision trees learn too fine</span>
+<span style="color: #CC3300; font-style: italic">details of the training data and learn from the noise, i.e. they overfit.</span>
+<span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #0099FF; font-style: italic"># print(__doc__)</span>
+
+<span style="color: #0099FF; font-style: italic"># Import the necessary modules and libraries</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.tree</span> <span style="color: #006699; font-weight: bold">import</span> DecisionTreeRegressor
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+</pre></div>
+
+
+<ul>
+<li>Data</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Create a random dataset</span>
+rng <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>RandomState(<span style="color: #FF6600">1</span>)
+X <span style="color: #555555">=</span> np<span style="color: #555555">.</span>sort(<span style="color: #FF6600">5</span> <span style="color: #555555">*</span> rng<span style="color: #555555">.</span>rand(<span style="color: #FF6600">80</span>, <span style="color: #FF6600">1</span>), axis<span style="color: #555555">=</span><span style="color: #FF6600">0</span>)
+y <span style="color: #555555">=</span> np<span style="color: #555555">.</span>sin(X)<span style="color: #555555">.</span>ravel()
+y[::<span style="color: #FF6600">5</span>] <span style="color: #555555">+=</span> <span style="color: #FF6600">3</span> <span style="color: #555555">*</span> (<span style="color: #FF6600">0.5</span> <span style="color: #555555">-</span> rng<span style="color: #555555">.</span>rand(<span style="color: #FF6600">16</span>))
+</pre></div>
+
+
+<ul>
+<li>Model</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Fit regression model</span>
+regr_1 <span style="color: #555555">=</span> DecisionTreeRegressor(max_depth<span style="color: #555555">=</span><span style="color: #FF6600">2</span>)
+regr_2 <span style="color: #555555">=</span> DecisionTreeRegressor(max_depth<span style="color: #555555">=</span><span style="color: #FF6600">5</span>)
+regr_1<span style="color: #555555">.</span>fit(X, y)
+regr_2<span style="color: #555555">.</span>fit(X, y)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>DecisionTreeRegressor(criterion=&#39;mse&#39;, max_depth=5, max_features=None,
+           max_leaf_nodes=None, min_samples_leaf=1, min_samples_split=2,
+           min_weight_fraction_leaf=0.0, presort=False, random_state=None,
+           splitter=&#39;best&#39;)
+</pre></div>
+
+
+<ul>
+<li>Predict</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Predict</span>
+X_test <span style="color: #555555">=</span> np<span style="color: #555555">.</span>arange(<span style="color: #FF6600">0.0</span>, <span style="color: #FF6600">5.0</span>, <span style="color: #FF6600">0.01</span>)[:, np<span style="color: #555555">.</span>newaxis]
+y_1 <span style="color: #555555">=</span> regr_1<span style="color: #555555">.</span>predict(X_test)
+y_2 <span style="color: #555555">=</span> regr_2<span style="color: #555555">.</span>predict(X_test)
+</pre></div>
+
+
+<ul>
+<li>Plot</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Plot the results</span>
+plt<span style="color: #555555">.</span>figure()
+plt<span style="color: #555555">.</span>scatter(X, y, c<span style="color: #555555">=</span><span style="color: #CC3300">&quot;darkorange&quot;</span>, label<span style="color: #555555">=</span><span style="color: #CC3300">&quot;data&quot;</span>)
+plt<span style="color: #555555">.</span>plot(X_test, y_1, color<span style="color: #555555">=</span><span style="color: #CC3300">&quot;cornflowerblue&quot;</span>, label<span style="color: #555555">=</span><span style="color: #CC3300">&quot;max_depth=2&quot;</span>, linewidth<span style="color: #555555">=</span><span style="color: #FF6600">2</span>)
+plt<span style="color: #555555">.</span>plot(X_test, y_2, color<span style="color: #555555">=</span><span style="color: #CC3300">&quot;yellowgreen&quot;</span>, label<span style="color: #555555">=</span><span style="color: #CC3300">&quot;max_depth=5&quot;</span>, linewidth<span style="color: #555555">=</span><span style="color: #FF6600">2</span>)
+plt<span style="color: #555555">.</span>xlabel(<span style="color: #CC3300">&quot;data&quot;</span>)
+plt<span style="color: #555555">.</span>ylabel(<span style="color: #CC3300">&quot;target&quot;</span>)
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&quot;Decision Tree Regression&quot;</span>)
+plt<span style="color: #555555">.</span>legend()
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_63_0.png" /></p>
+<hr />
+<h3 id="4-multi-output-decision-tree-regression-source">4. Multi-output Decision Tree Regression (<a href="https://github.com/scikit-learn/scikit-learn/tree/master/examples/tree">source</a>)</h3>
+<hr />
+<p>An example to illustrate multi-output regression with decision tree.</p>
+<p>The decision trees is used to predict simultaneously the noisy x and y observations of a circle
+given a single underlying feature. As a result, it learns local linear
+regressions approximating the circle.</p>
+<p>We can see that if the maximum depth of the tree (controlled by the
+<code>max_depth</code> parameter) is set too high, the decision trees learn too fine
+details of the training data and learn from the noise, i.e. they overfit.</p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.tree</span> <span style="color: #006699; font-weight: bold">import</span> DecisionTreeRegressor
+</pre></div>
+
+
+<ul>
+<li>Data: Create a random dataset</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>rng <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>RandomState(<span style="color: #FF6600">1</span>)
+X <span style="color: #555555">=</span> np<span style="color: #555555">.</span>sort(<span style="color: #FF6600">200</span> <span style="color: #555555">*</span> rng<span style="color: #555555">.</span>rand(<span style="color: #FF6600">100</span>, <span style="color: #FF6600">1</span>) <span style="color: #555555">-</span> <span style="color: #FF6600">100</span>, axis<span style="color: #555555">=</span><span style="color: #FF6600">0</span>)
+y <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array([np<span style="color: #555555">.</span>pi <span style="color: #555555">*</span> np<span style="color: #555555">.</span>sin(X)<span style="color: #555555">.</span>ravel(), np<span style="color: #555555">.</span>pi <span style="color: #555555">*</span> np<span style="color: #555555">.</span>cos(X)<span style="color: #555555">.</span>ravel()])<span style="color: #555555">.</span>T
+y[::<span style="color: #FF6600">5</span>, :] <span style="color: #555555">+=</span> (<span style="color: #FF6600">0.5</span> <span style="color: #555555">-</span> rng<span style="color: #555555">.</span>rand(<span style="color: #FF6600">20</span>, <span style="color: #FF6600">2</span>))
+</pre></div>
+
+
+<ul>
+<li>Model: Fit regression model</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>regr_1 <span style="color: #555555">=</span> DecisionTreeRegressor(max_depth<span style="color: #555555">=</span><span style="color: #FF6600">2</span>)
+regr_2 <span style="color: #555555">=</span> DecisionTreeRegressor(max_depth<span style="color: #555555">=</span><span style="color: #FF6600">5</span>)
+regr_3 <span style="color: #555555">=</span> DecisionTreeRegressor(max_depth<span style="color: #555555">=</span><span style="color: #FF6600">8</span>)
+regr_1<span style="color: #555555">.</span>fit(X, y)
+regr_2<span style="color: #555555">.</span>fit(X, y)
+regr_3<span style="color: #555555">.</span>fit(X, y)
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>DecisionTreeRegressor(criterion=&#39;mse&#39;, max_depth=8, max_features=None,
+           max_leaf_nodes=None, min_impurity_split=1e-07,
+           min_samples_leaf=1, min_samples_split=2,
+           min_weight_fraction_leaf=0.0, presort=False, random_state=None,
+           splitter=&#39;best&#39;)
+</pre></div>
+
+
+<ul>
+<li>Predict</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>X_test <span style="color: #555555">=</span> np<span style="color: #555555">.</span>arange(<span style="color: #555555">-</span><span style="color: #FF6600">100.0</span>, <span style="color: #FF6600">100.0</span>, <span style="color: #FF6600">0.01</span>)[:, np<span style="color: #555555">.</span>newaxis]
+y_1 <span style="color: #555555">=</span> regr_1<span style="color: #555555">.</span>predict(X_test)
+y_2 <span style="color: #555555">=</span> regr_2<span style="color: #555555">.</span>predict(X_test)
+y_3 <span style="color: #555555">=</span> regr_3<span style="color: #555555">.</span>predict(X_test)
+</pre></div>
+
+
+<ul>
+<li>Plot</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>plt<span style="color: #555555">.</span>figure()
+s <span style="color: #555555">=</span> <span style="color: #FF6600">50</span>
+plt<span style="color: #555555">.</span>scatter(y[:, <span style="color: #FF6600">0</span>], y[:, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span><span style="color: #CC3300">&quot;navy&quot;</span>, s<span style="color: #555555">=</span>s, label<span style="color: #555555">=</span><span style="color: #CC3300">&quot;data&quot;</span>)
+plt<span style="color: #555555">.</span>scatter(y_1[:, <span style="color: #FF6600">0</span>], y_1[:, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span><span style="color: #CC3300">&quot;cornflowerblue&quot;</span>, s<span style="color: #555555">=</span>s, label<span style="color: #555555">=</span><span style="color: #CC3300">&quot;max_depth=2&quot;</span>)
+plt<span style="color: #555555">.</span>scatter(y_2[:, <span style="color: #FF6600">0</span>], y_2[:, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span><span style="color: #CC3300">&quot;c&quot;</span>, s<span style="color: #555555">=</span>s, label<span style="color: #555555">=</span><span style="color: #CC3300">&quot;max_depth=5&quot;</span>)
+plt<span style="color: #555555">.</span>scatter(y_3[:, <span style="color: #FF6600">0</span>], y_3[:, <span style="color: #FF6600">1</span>], c<span style="color: #555555">=</span><span style="color: #CC3300">&quot;orange&quot;</span>, s<span style="color: #555555">=</span>s, label<span style="color: #555555">=</span><span style="color: #CC3300">&quot;max_depth=8&quot;</span>)
+plt<span style="color: #555555">.</span>xlim([<span style="color: #555555">-</span><span style="color: #FF6600">6</span>, <span style="color: #FF6600">6</span>])
+plt<span style="color: #555555">.</span>ylim([<span style="color: #555555">-</span><span style="color: #FF6600">6</span>, <span style="color: #FF6600">6</span>])
+plt<span style="color: #555555">.</span>xlabel(<span style="color: #CC3300">&quot;target 1&quot;</span>)
+plt<span style="color: #555555">.</span>ylabel(<span style="color: #CC3300">&quot;target 2&quot;</span>)
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&quot;Multi-output Decision Tree Regression&quot;</span>)
+plt<span style="color: #555555">.</span>legend()
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<p><img alt="png" src="../output_76_0.png" /></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../Ensamble/ensamble/" class="btn btn-neutral float-right" title="Ensamble Methods">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../Logistic/Logistic/" class="btn btn-neutral" title="Logistic Regression"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../Logistic/Logistic/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../Ensamble/ensamble/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../../../..';</script>
+    <script src="../../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../../../search/main.js" defer></script>
+
+</body>
+</html>

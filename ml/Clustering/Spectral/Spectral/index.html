@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../../../img/favicon.ico">
+  <title>Spectral Clustering - Machine Learning</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Spectral Clustering";
+    var mkdocs_page_input_path = "ml/Clustering/Spectral/Spectral.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../../.." class="icon icon-home"> Machine Learning</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="tocbase current">
+    
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../..">Home</a>
+  </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Machine Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../LinearModels/Linear-models/">Linear Regression</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Classifiers/Logistic/Logistic/">Logistic Regression</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Classifiers/Tree/Tree/">Decision Tree</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Classifiers/Ensamble/ensamble/">Ensamble Methods</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../Classifiers/SVM/svm/">Support Vector Machine</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Kmeans/Kmeans/">Kmeans Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Agglomerative/Agglomerative/">Agglomerative Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../AffinityPropagation/Affinity-Propagation/">Affinity Propagation</a>
+  </li>
+        
+          
+
+
+  
+    
+    <li class="navtree toctree-l2 page current">
+      <a class="current" href="./">
+        Spectral Clustering
+          <span class="toctree-expand"></span>
+      </a>
+    </li>
+    
+      
+
+  <li class="toctree-l2 current with-children">
+    <a href="#clustering-spectral">
+      Clustering- Spectral
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2 current">
+    <ul class="subnav-l2 current">
+    
+      
+          
+
+  <li class="toctree-l3 current with-children">
+    <a href="#12-spectral-clustering-for-image-segmentation">
+      12. Spectral clustering for image segmentation
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3 current">
+    <ul class="subnav-l3 current">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#data">Data</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#create-gradients">Create Gradients</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#spectral-clustering">Spectral clustering</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#results">Results</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+
+  
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../DBSCAN/DBSCAN/">DBSCAN Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../MeanShift/Mean-shift/">Mean Shift Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../Comparison/Comparison/">Cluster Comparison</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">ML Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/boston_housing/boston_housing/">Boston Housing</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/Customer_segments/customer_segments/">Customer Clustering</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/finding_donors/finding_donors/">Finding Donors</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/vehicle-detection/CARND-Project-5/">Vehicle Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../mlp/perceptron/dlnd-your-first-neural-network/">Perceptron</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Deep Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/intro/">Introduction</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/Vanila/1.Vanila-LSTM/">Vanila LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/stacked/2.Stacked-LSTM/">Stacked LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/bidirectional/5. BiDirectional-LSTM/">Bidirectional LSTM</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/rnn/RNN_project/">Recurrent Neural Network</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">DL Projects</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/NMIST/NMIST/">Digit Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/CIFRT10/CIFR10/">Image Classifier</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/traffic-sign/Traffic_Sign_Classifier/">Traffic Sign Detection</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/translator/dlnd_language_translation/">Language Translator</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Rinforcement Learning</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../rl/smartcab/smartcab/">SmartCab</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">GAN Project</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../../../dl/gan/dlnd_face_generation/">Face Generation</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../../../References/ref.md">References</a>
+  </li>
+    
+  </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../..">Machine Learning</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Machine Learning &raquo;</li>
+        
+      
+    
+    <li>Spectral Clustering</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="clustering-spectral">Clustering- Spectral</h2>
+<p><strong><em>These codes are imported from Scikit-Learn python package for learning purpose</em></strong></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">plt</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">numpy</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">np</span>
+<span style="color: #006699; font-weight: bold">import</span> <span style="color: #00CCFF; font-weight: bold">seaborn</span> <span style="color: #006699; font-weight: bold">as</span> <span style="color: #00CCFF; font-weight: bold">sns</span>
+<span style="color: #555555">%</span>matplotlib inline
+sns<span style="color: #555555">.</span>set()
+</pre></div>
+
+
+<h3 id="12-spectral-clustering-for-image-segmentation">12. Spectral clustering for image segmentation</h3>
+<p>In this example, an image with connected circles is generated and
+spectral clustering is used to separate the circles.</p>
+<p>In these settings, the :ref:<code>spectral_clustering</code> approach solves the problem
+know as 'normalized graph cuts': the image is seen as a graph of
+connected voxels, and the spectral clustering algorithm amounts to
+choosing graph cuts defining regions while minimizing the ratio of the
+gradient along the cut, and the volume of the region.</p>
+<p>As the algorithm tries to balance the volume (ie balance the region
+sizes), if we take circles with different sizes, the segmentation fails.</p>
+<p>In addition, as there is no useful information in the intensity of the image,
+or its gradient, we choose to perform the spectral clustering on a graph
+that is only weakly informed by the gradient. This is close to performing
+a Voronoi partition of the graph.</p>
+<p>In addition, we use the mask of the objects to restrict the graph to the
+outline of the objects. In this example, we are interested in
+separating the objects one from the other, and not from the background.</p>
+<ul>
+<li>Authors:  Emmanuelle Gouillart <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#101;&#109;&#109;&#97;&#110;&#117;&#101;&#108;&#108;&#101;&#46;&#103;&#111;&#117;&#105;&#108;&#108;&#97;&#114;&#116;&#64;&#110;&#111;&#114;&#109;&#97;&#108;&#101;&#115;&#117;&#112;&#46;&#111;&#114;&#103;">&#101;&#109;&#109;&#97;&#110;&#117;&#101;&#108;&#108;&#101;&#46;&#103;&#111;&#117;&#105;&#108;&#108;&#97;&#114;&#116;&#64;&#110;&#111;&#114;&#109;&#97;&#108;&#101;&#115;&#117;&#112;&#46;&#111;&#114;&#103;</a>
+           Gael Varoquaux <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#103;&#97;&#101;&#108;&#46;&#118;&#97;&#114;&#111;&#113;&#117;&#97;&#117;&#120;&#64;&#110;&#111;&#114;&#109;&#97;&#108;&#101;&#115;&#117;&#112;&#46;&#111;&#114;&#103;">&#103;&#97;&#101;&#108;&#46;&#118;&#97;&#114;&#111;&#113;&#117;&#97;&#117;&#120;&#64;&#110;&#111;&#114;&#109;&#97;&#108;&#101;&#115;&#117;&#112;&#46;&#111;&#114;&#103;</a></li>
+<li>License: BSD 3 clause</li>
+</ul>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.feature_extraction</span> <span style="color: #006699; font-weight: bold">import</span> image
+<span style="color: #006699; font-weight: bold">from</span> <span style="color: #00CCFF; font-weight: bold">sklearn.cluster</span> <span style="color: #006699; font-weight: bold">import</span> spectral_clustering
+</pre></div>
+
+
+<h4 id="data">Data</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>l <span style="color: #555555">=</span> <span style="color: #FF6600">100</span>
+x, y <span style="color: #555555">=</span> np<span style="color: #555555">.</span>indices((l, l))
+
+center1 <span style="color: #555555">=</span> (<span style="color: #FF6600">28</span>, <span style="color: #FF6600">24</span>)
+center2 <span style="color: #555555">=</span> (<span style="color: #FF6600">40</span>, <span style="color: #FF6600">50</span>)
+center3 <span style="color: #555555">=</span> (<span style="color: #FF6600">67</span>, <span style="color: #FF6600">58</span>)
+center4 <span style="color: #555555">=</span> (<span style="color: #FF6600">24</span>, <span style="color: #FF6600">70</span>)
+
+radius1, radius2, radius3, radius4 <span style="color: #555555">=</span> <span style="color: #FF6600">16</span>, <span style="color: #FF6600">14</span>, <span style="color: #FF6600">15</span>, <span style="color: #FF6600">14</span>
+
+circle1 <span style="color: #555555">=</span> (x <span style="color: #555555">-</span> center1[<span style="color: #FF6600">0</span>]) <span style="color: #555555">**</span> <span style="color: #FF6600">2</span> <span style="color: #555555">+</span> (y <span style="color: #555555">-</span> center1[<span style="color: #FF6600">1</span>]) <span style="color: #555555">**</span> <span style="color: #FF6600">2</span> <span style="color: #555555">&lt;</span> radius1 <span style="color: #555555">**</span> <span style="color: #FF6600">2</span>
+circle2 <span style="color: #555555">=</span> (x <span style="color: #555555">-</span> center2[<span style="color: #FF6600">0</span>]) <span style="color: #555555">**</span> <span style="color: #FF6600">2</span> <span style="color: #555555">+</span> (y <span style="color: #555555">-</span> center2[<span style="color: #FF6600">1</span>]) <span style="color: #555555">**</span> <span style="color: #FF6600">2</span> <span style="color: #555555">&lt;</span> radius2 <span style="color: #555555">**</span> <span style="color: #FF6600">2</span>
+circle3 <span style="color: #555555">=</span> (x <span style="color: #555555">-</span> center3[<span style="color: #FF6600">0</span>]) <span style="color: #555555">**</span> <span style="color: #FF6600">2</span> <span style="color: #555555">+</span> (y <span style="color: #555555">-</span> center3[<span style="color: #FF6600">1</span>]) <span style="color: #555555">**</span> <span style="color: #FF6600">2</span> <span style="color: #555555">&lt;</span> radius3 <span style="color: #555555">**</span> <span style="color: #FF6600">2</span>
+circle4 <span style="color: #555555">=</span> (x <span style="color: #555555">-</span> center4[<span style="color: #FF6600">0</span>]) <span style="color: #555555">**</span> <span style="color: #FF6600">2</span> <span style="color: #555555">+</span> (y <span style="color: #555555">-</span> center4[<span style="color: #FF6600">1</span>]) <span style="color: #555555">**</span> <span style="color: #FF6600">2</span> <span style="color: #555555">&lt;</span> radius4 <span style="color: #555555">**</span> <span style="color: #FF6600">2</span>
+
+
+<span style="color: #0099FF; font-style: italic"># 4 circles</span>
+img <span style="color: #555555">=</span> circle1 <span style="color: #555555">+</span> circle2 <span style="color: #555555">+</span> circle3 <span style="color: #555555">+</span> circle4
+</pre></div>
+
+
+<h4 id="create-gradients">Create Gradients</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># We use a mask that limits to the foreground: the problem that we are</span>
+<span style="color: #0099FF; font-style: italic"># interested in here is not separating the objects from the background,</span>
+<span style="color: #0099FF; font-style: italic"># but separating them one from the other.</span>
+mask <span style="color: #555555">=</span> img<span style="color: #555555">.</span>astype(<span style="color: #336666">bool</span>)
+
+img <span style="color: #555555">=</span> img<span style="color: #555555">.</span>astype(<span style="color: #336666">float</span>)
+img <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span> <span style="color: #555555">+</span> <span style="color: #FF6600">0.2</span> <span style="color: #555555">*</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randn(<span style="color: #555555">*</span>img<span style="color: #555555">.</span>shape)
+
+<span style="color: #0099FF; font-style: italic"># Convert the image into a graph with the value of the gradient on the</span>
+<span style="color: #0099FF; font-style: italic"># edges.</span>
+graph <span style="color: #555555">=</span> image<span style="color: #555555">.</span>img_to_graph(img, mask<span style="color: #555555">=</span>mask)
+
+<span style="color: #0099FF; font-style: italic"># Take a decreasing function of the gradient: we take it weakly</span>
+<span style="color: #0099FF; font-style: italic"># dependent from the gradient the segmentation is close to a voronoi</span>
+graph<span style="color: #555555">.</span>data <span style="color: #555555">=</span> np<span style="color: #555555">.</span>exp(<span style="color: #555555">-</span>graph<span style="color: #555555">.</span>data <span style="color: #555555">/</span> graph<span style="color: #555555">.</span>data<span style="color: #555555">.</span>std())
+</pre></div>
+
+
+<h4 id="spectral-clustering">Spectral clustering</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Force the solver to be arpack, since amg is numerically</span>
+<span style="color: #0099FF; font-style: italic"># unstable on this example</span>
+labels <span style="color: #555555">=</span> spectral_clustering(graph, n_clusters<span style="color: #555555">=</span><span style="color: #FF6600">4</span>, eigen_solver<span style="color: #555555">=</span><span style="color: #CC3300">&#39;arpack&#39;</span>)
+label_im <span style="color: #555555">=</span> <span style="color: #555555">-</span>np<span style="color: #555555">.</span>ones(mask<span style="color: #555555">.</span>shape)
+label_im[mask] <span style="color: #555555">=</span> labels
+</pre></div>
+
+
+<h4 id="results">Results</h4>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>plt<span style="color: #555555">.</span>figure(figsize <span style="color: #555555">=</span> [<span style="color: #FF6600">12</span>,<span style="color: #FF6600">10</span>])
+plt<span style="color: #555555">.</span>matshow(img)
+plt<span style="color: #555555">.</span>matshow(label_im)
+
+<span style="color: #0099FF; font-style: italic"># 2 circles</span>
+img <span style="color: #555555">=</span> circle1 <span style="color: #555555">+</span> circle2
+mask <span style="color: #555555">=</span> img<span style="color: #555555">.</span>astype(<span style="color: #336666">bool</span>)
+img <span style="color: #555555">=</span> img<span style="color: #555555">.</span>astype(<span style="color: #336666">float</span>)
+
+img <span style="color: #555555">+=</span> <span style="color: #FF6600">1</span> <span style="color: #555555">+</span> <span style="color: #FF6600">0.2</span> <span style="color: #555555">*</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randn(<span style="color: #555555">*</span>img<span style="color: #555555">.</span>shape)
+
+graph <span style="color: #555555">=</span> image<span style="color: #555555">.</span>img_to_graph(img, mask<span style="color: #555555">=</span>mask)
+graph<span style="color: #555555">.</span>data <span style="color: #555555">=</span> np<span style="color: #555555">.</span>exp(<span style="color: #555555">-</span>graph<span style="color: #555555">.</span>data <span style="color: #555555">/</span> graph<span style="color: #555555">.</span>data<span style="color: #555555">.</span>std())
+
+labels <span style="color: #555555">=</span> spectral_clustering(graph, n_clusters<span style="color: #555555">=</span><span style="color: #FF6600">2</span>, eigen_solver<span style="color: #555555">=</span><span style="color: #CC3300">&#39;arpack&#39;</span>)
+label_im <span style="color: #555555">=</span> <span style="color: #555555">-</span>np<span style="color: #555555">.</span>ones(mask<span style="color: #555555">.</span>shape)
+label_im[mask] <span style="color: #555555">=</span> labels
+
+plt<span style="color: #555555">.</span>matshow(img)
+plt<span style="color: #555555">.</span>matshow(label_im)
+
+plt<span style="color: #555555">.</span>show()
+</pre></div>
+
+
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>&lt;matplotlib.figure.Figure at 0x7f1b70534668&gt;
+</pre></div>
+
+
+<p><img alt="png" src="../output_13_1.png" /></p>
+<p><img alt="png" src="../output_13_2.png" /></p>
+<p><img alt="png" src="../output_13_3.png" /></p>
+<p><img alt="png" src="../output_13_4.png" /></p>
+<div class="codehilite" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>
+</pre></div>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../DBSCAN/DBSCAN/" class="btn btn-neutral float-right" title="DBSCAN Clustering">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../AffinityPropagation/Affinity-Propagation/" class="btn btn-neutral" title="Affinity Propagation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../AffinityPropagation/Affinity-Propagation/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../DBSCAN/DBSCAN/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../../../..';</script>
+    <script src="../../../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="../../../../search/main.js" defer></script>
+
+</body>
+</html>
